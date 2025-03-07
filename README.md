@@ -29,8 +29,6 @@ app/
  ├── api/                         # API routes
  │    ├── auth/
  │    │    ├── route.ts
- │    ├── proposals/
- │    │    ├── route.ts
 
 components/                       # Centralized components
  │    ├── layout/                 # Shared layouts
@@ -50,12 +48,12 @@ lib/                              # Utility functions and API handlers
 config/                           # Configuration files
  │    ├── wagmiConfig.ts
 
-public/                      # Static assets
+public/                           # Static assets
  │    ├── logo.png
  │    ├── background.jpg
  │
 
-middleware.ts                # Middleware configurations
+middleware.ts                     # Middleware configurations
 ```
 
 ## 🛠️ Getting Started
