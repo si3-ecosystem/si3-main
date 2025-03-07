@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Si<3>
 
-## Getting Started
+## 📂 Folder Structure
 
-First, run the development server:
+The project follows a well-organized structure to ensure clarity and scalability:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+app/
+ ├── (main)/                      # Public-facing pages
+ │    ├── home/
+ │    │    ├── page.tsx
+ │    │    ├── layout.tsx
+ │    ├── about/
+ │    │    ├── page.tsx
+ │    ├── community/
+ │    │    ├── page.tsx
+ │
+ │
+ ├── (auth)/                      # Authentication pages
+ │    ├── login/
+ │    │    ├── page.tsx
+ │    ├── onboard/
+ │    │    ├── page.tsx
+ │
+ ├── /explorer                    # Explorer module
+ │    ├── page.tsx
+ │    ├── layout.tsx
+ │
+ ├── api/                         # API routes
+ │    ├── auth/
+ │    │    ├── route.ts
+ │    ├── proposals/
+ │    │    ├── route.ts
+
+components/                       # Centralized components
+ │    ├── layout/                 # Shared layouts
+ │    ├── home/                   # Home page components
+ │    ├── about/                  # About page components
+ │    ├── community/              # Community components
+ │    ├── cms/                    # CMS components
+ │    ├── explorer/               # Explorer components
+ │    ├── ui/                     # Common UI components (Buttons, Cards, Modals, Loaders)
+ │
+
+lib/                              # Utility functions and API handlers
+ │    ├── auth.ts
+ │    ├── api.ts
+ │    ├── utils.ts
+
+config/                           # Configuration files
+ │    ├── wagmiConfig.ts
+
+public/                      # Static assets
+ │    ├── logo.png
+ │    ├── background.jpg
+ │
+
+middleware.ts                # Middleware configurations
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Follow these steps to set up the project on your local machine.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
 
-## Learn More
+Make sure you have the following installed:
 
-To learn more about Next.js, take a look at the following resources:
+- **Node.js** (Latest LTS recommended)
+- **Yarn or npm** (Package manager)
+- **MongoDB Atlas or Convex Database** (Database backend)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Clone the repository
+git clone https://github.com/si3-ecosystem/si3_main
+```
 
-## Deploy on Vercel
+```bash
+# Navigate to the project directory
+cd project-name
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Install dependencies
+npm install  # or yarn install
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Set up environment variables (create a .env file)
+
+- NEXT_PUBLIC_API_URL=[YOUR_API_URL]
+- DATABASE_URL=[YOUR_DATABASE_URL]
+
+```bash
+# Run the development server
+npm run dev  # or yarn dev
+```
+
+```bash
+# Open the app in your browser
+http://localhost:3000
+```
+
+✨ Code of Conduct
+
+All developers must adhere to the project's Code of Conduct to ensure a respectful and productive work environment. Always follow best practices, maintain clean and readable code, and document your changes when necessary.
+
+💻 Need Help?
+
+If you have any issues, reach out to the project lead or team members on Slack/Discord. We’re here to help!
+
+🔒 License & Copyright
+
+This project is proprietary and not open-source. Unauthorized distribution or sharing of the code is strictly prohibited.
