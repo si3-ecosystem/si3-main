@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+
+import "./globals.css";
 
 import WalletProvider from "@/providers/WagmiProvider";
+import ReduxProvider from "@/providers/ReduxProvider";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Si<3>",
@@ -9,7 +23,7 @@ export const metadata: Metadata = {
 
   applicationName: "Si<3>",
   referrer: "origin-when-cross-origin",
-  keywords: ["Si3", "Si<3>", "Si<3>DAO", "SiHer"],
+  keywords: ["Si3", "Si<3>", "Si<3>DAO", "SiHer", "Si/Her"],
 
   metadataBase: new URL("https://www.si3.space/"),
   alternates: {
@@ -41,8 +55,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
-        <WalletProvider>{children}</WalletProvider>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <WalletProvider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </WalletProvider>
       </body>
     </html>
   );
