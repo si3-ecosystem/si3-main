@@ -27,6 +27,10 @@ const Test = () => {
     return <div>Loading...</div>;
   }
 
+  if (!data.length) {
+    return <div>No data</div>;
+  }
+
   return (
     <div>
       <h1>Data from MongoDB</h1>
