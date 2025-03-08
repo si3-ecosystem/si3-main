@@ -1,7 +1,5 @@
-import React from "react";
+import HomeTemplate from "@/components/templates/home";
 
-const HomePage = () => {
-  return <div>HomePage</div>;
-};
-
-export default HomePage;
+export default function page() {
+  return <HomeTemplate />;
+}

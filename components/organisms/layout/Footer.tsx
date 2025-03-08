@@ -6,7 +6,7 @@ import FooterNav from "./footer/FooterNav";
 import FooterSignUp from "./footer/FooterSignUp";
 import FooterLanguage from "./footer/FooterLanguage";
 
-const Footer = () => {
+export function Footer() {
   return (
     <footer>
       <div className="flex">
@@ -22,6 +22,4 @@ const Footer = () => {
       <Copyright />
     </footer>
   );
-};
-
-export default Footer;
+}

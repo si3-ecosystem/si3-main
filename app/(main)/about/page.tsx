@@ -1,7 +1,5 @@
-import React from "react";
+import { AboutTemplate } from "@/components/templates/about/About";
 
-const AboutPage = () => {
-  return <div>AboutPage</div>;
-};
-
-export default AboutPage;
+export default function AboutPage() {
+  return <AboutTemplate />;
+}
