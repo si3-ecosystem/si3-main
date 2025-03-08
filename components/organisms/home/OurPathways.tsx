@@ -1,15 +1,5 @@
-"use client";
-
-import ContentCard from "@/components/molecules/content-grid";
-import { useWindowSize } from "@/hooks/useWindowSize";
+import ContentCard from "@/components/molecules/cards/ContentCard";
 export function OurPathways() {
-  const { width } = useWindowSize();
-
-  const imageSrc =
-    width <= 1024
-      ? "/icons/webp/pathwayMobile.webp"
-      : "/icons/webp/pathwayDesktop.webp";
-
   return (
     <div>
       <ContentCard
@@ -17,7 +7,8 @@ export function OurPathways() {
         description="Discover our three paths to join into our ecosystem and expand your potential."
         isFullScreenView={true}
         image={{
-          src: imageSrc,
+          mobileSrc: "/icons/webp/pathwayMobile.webp",
+          desktopSrc: "/icons/webp/pathwayDesktop.webp",
           alt: "Pathways illustration",
           width: 1532,
           height: 862,

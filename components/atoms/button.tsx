@@ -55,10 +55,9 @@ function Button({
       data-slot="button"
       className={cn(
         buttonVariants({ variant, size }),
-        {
-          "hover:[box-shadow:0px_4px_4px_0px_rgba(255,255,255,0.25)_inset] hover:[background:linear-gradient(266deg,#9F44D3_7.3%,#D939CD_108.02%)]":
-            showGradient,
-        },
+        showGradient
+          ? "transition-background duration-300 ease-in-out hover:bg-[linear-gradient(to_right,#9F44D3,#D939CD)]"
+          : "",
         className,
       )}
       {...props}

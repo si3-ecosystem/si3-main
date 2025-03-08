@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { BellRing } from "lucide-react";
-import { PingIcon } from "@/components/molecules/icons/ping";
+import { PingIcon } from "@/components/molecules/icons/PingIcon";
 
 export function Notification() {
   const [hover, setHovered] = useState(false);
