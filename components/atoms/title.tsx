@@ -16,7 +16,7 @@ export const Title = ({
 }: TitleProps) => {
   const variantStyles = {
     large: " [font-size:clamp(2.5rem,2.5rem+0.43vw,4rem)]",
-    medium: " [font-size:clamp(2rem,2rem+0.07vw,2.25rem)]",
+    medium: " text-2xl lg:text-4xl",
     sm: "[font-size:clamp(1.75rem,1.75rem+0.07vw,2rem)] font-semibold",
   };
 
