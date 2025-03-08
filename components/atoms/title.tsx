@@ -23,7 +23,7 @@ export const Title = ({
   return (
     <Tag
       className={cn(
-        "font-clesmont leading-normal font-normal uppercase",
+        "font-clesmont leading-normal font-normal text-black uppercase",
         variantStyles[variant],
         className,
       )}

@@ -56,7 +56,7 @@ function Button({
       className={cn(
         buttonVariants({ variant, size }),
         showGradient
-          ? "transition-background duration-300 ease-in-out hover:bg-[linear-gradient(to_right,#9F44D3,#D939CD)]"
+          ? "transition-background bg-black duration-300 ease-in-out hover:bg-[linear-gradient(to_right,#9F44D3,#D939CD)]"
           : "",
         className,
       )}

@@ -170,3 +170,7 @@ body {
 .font-clesmont {
   font-family: "Clesmont", monospace;
 }
+
+.gradient {
+  background: linear-gradient(266deg, #9f44d3 7.3%, #d939cd 108.02%);
+}

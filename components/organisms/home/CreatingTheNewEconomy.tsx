@@ -1,4 +1,4 @@
-import ContentCard from "@/components/molecules/cards/ContentCard";
+import { ContentCard } from "@/components/molecules/cards/ContentCard";
 import Link from "next/link";
 
 export function CreatingTheNewEconomy() {

@@ -1,4 +1,5 @@
-import ContentCard from "@/components/molecules/cards/ContentCard";
+import { ContentCard } from "@/components/molecules/cards/ContentCard";
+
 export function OurPathways() {
   return (
     <div>

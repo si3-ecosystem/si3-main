@@ -1,15 +1,17 @@
 import { CreatingTheNewEconomy } from "./CreatingTheNewEconomy";
-import { CtaVideoSection } from "./CtaVideoSection";
 import { OurCommunity } from "./OurCommunity";
 import { OurImpact } from "./OurImpact";
 import { OurPathways } from "./OurPathways";
+import { CtaVideoSection } from "./CtaVideoSection";
+import { FooterBanner } from "./FooterBanner";
 
 const HomeComponents = {
   CreatingTheNewEconomy,
-  CtaVideoSection,
+  FooterBanner,
   OurCommunity,
   OurImpact,
   OurPathways,
+  CtaVideoSection,
 };
 
 export default HomeComponents;

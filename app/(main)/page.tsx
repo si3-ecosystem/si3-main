@@ -1,5 +1,6 @@
 import { CreatingTheNewEconomy } from "@/components/organisms/home/CreatingTheNewEconomy";
-import { CtaVideoSection } from "@/components/organisms/home/CtaVideoSection";
+import { FooterBanner } from "@/components/organisms/home/FooterBanner";
+import { OurCommunity } from "@/components/organisms/home/OurCommunity";
 import { OurImpact } from "@/components/organisms/home/OurImpact";
 import { OurPathways } from "@/components/organisms/home/OurPathways";
 
@@ -8,8 +9,9 @@ export default function page() {
     <section>
       <OurImpact />
       <OurPathways />
+      <OurCommunity />
       <CreatingTheNewEconomy />
-      <CtaVideoSection />
+      <FooterBanner />
     </section>
   );
 }
