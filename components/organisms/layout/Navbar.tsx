@@ -21,8 +21,8 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-white bg-white transition-all duration-300",
-        isScrolled ? "border-b border-gray-200" : "border border-white",
+        "fixed top-0 right-0 left-0 z-50 w-full border-white bg-white transition-all duration-300 outline-none",
+        isScrolled ? "border-b border-gray-200" : "border-b border-white",
       )}
       style={{
         backdropFilter: isScrolled ? "blur(12px)" : "none",
@@ -37,7 +37,9 @@ export function Navbar() {
           <Notification />
           <div className="flex items-center gap-3 max-lg:hidden">
             <Subscribe>
-              <Button showGradient>Subscribe</Button>
+              <Button className="bg-black" showGradient>
+                Subscribe
+              </Button>
             </Subscribe>
             <Profile />
           </div>

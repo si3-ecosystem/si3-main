@@ -1,4 +1,4 @@
-import ContentCard from "@/components/molecules/content-grid";
+import ContentCard from "@/components/molecules/cards/ContentCard";
 import Link from "next/link";
 
 export function CreatingTheNewEconomy() {
@@ -8,7 +8,8 @@ export function CreatingTheNewEconomy() {
         title="CO-CREATING THE NEW ECONOMY"
         description="We are emerging tech professionals aligned on a mission for equitable, accessible and collaborative systems. Our global team and collaborators represents the diversity of experiences and cultures we embrace."
         image={{
-          src: "/icons/webp/neweconomyimage.webp",
+          mobileSrc: "/icons/webp/neweconomyimage.webp",
+          desktopSrc: "/icons/webp/neweconomyimage.webp",
           alt: "Pathways illustration",
           width: 1532,
           height: 862,

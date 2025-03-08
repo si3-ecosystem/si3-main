@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Title } from "@/components/atoms/title";
 import { Text } from "@/components/atoms/text";
@@ -14,16 +13,19 @@ interface ButtonProps {
   showGradient?: boolean;
 }
 
+interface ImageSource {
+  mobileSrc: string;
+  desktopSrc: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  className?: string;
+}
+
 interface ContentCardProps {
   title: string;
   description: string;
-  image: {
-    src: string;
-    alt: string;
-    width?: number;
-    height?: number;
-    className?: string;
-  };
+  image: ImageSource;
   button?: ButtonProps;
   className?: string;
   isFullScreenView?: boolean;
@@ -38,12 +40,14 @@ const ContentCard: React.FC<ContentCardProps> = ({
   isFullScreenView = false,
 }) => {
   const {
-    src,
+    mobileSrc,
+    desktopSrc,
     alt,
     width = 1532,
     height = 862,
     className: imageClassName,
   } = image;
+
   const LinkComponent = button?.as || "a";
 
   return (
@@ -93,18 +97,22 @@ const ContentCard: React.FC<ContentCardProps> = ({
       </div>
 
       <div className="w-full max-w-[513px]">
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          loading="lazy"
-          decoding="async"
-          className={cn(
-            "h-full max-h-[643px] w-full rounded-lg lg:max-h-[500px]",
-            imageClassName,
-          )}
-        />
+        <picture>
+          <source media="(min-width: 1025px)" srcSet={desktopSrc} />
+          <source media="(max-width: 1024px)" srcSet={mobileSrc} />
+          <img
+            src={desktopSrc}
+            alt={alt}
+            width={width}
+            height={height}
+            loading="lazy"
+            decoding="async"
+            className={cn(
+              "h-full max-h-[643px] w-full rounded-lg lg:max-h-[500px]",
+              imageClassName,
+            )}
+          />
+        </picture>
       </div>
     </div>
   );
