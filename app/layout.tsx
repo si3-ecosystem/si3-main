@@ -1,20 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
 import WalletProvider from "@/providers/WagmiProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Si<3>",
@@ -55,9 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`mx-auto w-full max-w-[2560px] bg-white antialiased`}>
         <WalletProvider>
           <ReduxProvider>{children}</ReduxProvider>
         </WalletProvider>

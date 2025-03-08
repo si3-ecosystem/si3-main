@@ -1,7 +1,9 @@
-import React from "react";
+import { Spinner } from "@/components/atoms/Spinner";
 
-const Loading = () => {
-  return <div>Loading</div>;
-};
-
-export default Loading;
+export default function loading() {
+  return (
+    <section className="flex h-screen items-center justify-center">
+      <Spinner />
+    </section>
+  );
+}
