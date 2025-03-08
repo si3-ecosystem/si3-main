@@ -1,13 +1,34 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/atoms/button";
 import { Logo } from "@/components/atoms/Logo";
 import { Profile } from "./navbar/Profile";
 import { Notification } from "./navbar/Notification";
 import Subscribe from "./navbar/Subscribe";
 import { MobileMenu } from "./navbar/MobileMenu";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="w-full border border-white">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full border-white bg-white transition-all duration-300",
+        isScrolled ? "border-b border-gray-200" : "border border-white",
+      )}
+      style={{
+        backdropFilter: isScrolled ? "blur(12px)" : "none",
+        backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.8)" : "white",
+      }}
+    >
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 lg:px-24">
         <div>
           <Logo src="/logo.svg" />

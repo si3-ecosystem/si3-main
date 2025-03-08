@@ -26,6 +26,7 @@ interface ContentCardProps {
   };
   button?: ButtonProps;
   className?: string;
+  isFullScreenView?: boolean;
 }
 
 const ContentCard: React.FC<ContentCardProps> = ({
@@ -34,6 +35,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   image,
   button,
   className,
+  isFullScreenView = false,
 }) => {
   const {
     src,
@@ -47,22 +49,33 @@ const ContentCard: React.FC<ContentCardProps> = ({
   return (
     <div
       className={cn(
-        "relative flex w-full flex-col items-center justify-between gap-10 overflow-hidden rounded-lg bg-white max-lg:px-4 lg:flex-row lg:gap-24 lg:pl-24",
+        "relative flex w-full flex-col items-center justify-between gap-10 overflow-hidden rounded-lg bg-white lg:flex-row lg:gap-24",
+        isFullScreenView ? "max-lg:px-4 lg:pl-24" : "",
         className,
       )}
     >
-      <div className="ml-auto w-full space-y-4 lg:max-w-[1050px] lg:space-y-6">
-        <Title className="text-center lg:max-w-[455px] lg:text-left">
+      <div className="ml-auto w-full space-y-4 lg:max-w-[970px] lg:space-y-6">
+        <Title
+          className={cn(
+            "lg:max-w-[455px] lg:text-left",
+            isFullScreenView ? "text-center" : "",
+          )}
+        >
           {title}
         </Title>
-        <Text className="max-w-[667px] text-center lg:text-left">
+        <Text
+          className={cn(
+            "max-w-[667px] lg:text-left",
+            isFullScreenView ? "text-center" : "",
+          )}
+        >
           {description}
         </Text>
         {button && (
           <Button
             asChild
             showGradient={button.showGradient}
-            className={cn("bg-black", button.className)}
+            className={cn("mt-4 bg-black", button.className)}
           >
             {LinkComponent ? (
               <Link
