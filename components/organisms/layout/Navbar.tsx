@@ -37,7 +37,12 @@ export function Navbar() {
           <Notification />
           <div className="flex items-center gap-3 max-lg:hidden">
             <Subscribe>
-              <Button className="bg-black" showGradient>
+              <Button
+                title="Subscribe"
+                aria-label="Subscribe"
+                className="bg-black"
+                showGradient
+              >
                 Subscribe
               </Button>
             </Subscribe>

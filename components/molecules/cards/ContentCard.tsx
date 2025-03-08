@@ -31,7 +31,7 @@ interface ContentCardProps {
   isFullScreenView?: boolean;
 }
 
-const ContentCard: React.FC<ContentCardProps> = ({
+export const ContentCard: React.FC<ContentCardProps> = ({
   title,
   description,
   image,
@@ -117,5 +117,3 @@ const ContentCard: React.FC<ContentCardProps> = ({
     </div>
   );
 };
-
-export default ContentCard;
