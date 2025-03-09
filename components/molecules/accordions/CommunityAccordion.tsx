@@ -32,7 +32,7 @@ export function CommunityAccordion({
       <Accordion
         type="single"
         collapsible
-        className="w-full"
+        className="animate-out animate-in w-full ease-in-out"
         defaultValue={defaultValue || renderItems[0]?.value}
       >
         {renderItems.map((item) => (
@@ -41,7 +41,7 @@ export function CommunityAccordion({
             key={item.value}
             className="-mt-8 !overflow-hidden rounded-2xl !p-0 shadow-xl transition-all duration-300 ease-in-out md:-mt-16 lg:rounded-[40px] [data-state=open]:z-40 [data-state=open]:mt-8 md:[data-state=open]:mt-16"
           >
-            <AccordionPrimitive.Header className="relative !z-20 flex py-[30px] lg:py-14">
+            <AccordionPrimitive.Header className="relative !z-20 flex !cursor-pointer py-[30px] lg:py-14">
               <AccordionPrimitive.Trigger className="focus-visible:border-ring focus-visible:ring-ring/50 [& flex flex-1 items-center justify-between rounded-md px-5 py-2 text-left text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] lg:px-[90px]">
                 <Image
                   src={item.background || ""}

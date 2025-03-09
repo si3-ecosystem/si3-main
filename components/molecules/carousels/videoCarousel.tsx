@@ -1,15 +1,11 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/atoms/carousel";
+import { useCallback, useEffect } from "react";
 import { Title } from "@/components/atoms/title";
 import { Text } from "@/components/atoms/text";
 import { EducationCard } from "../cards/educationCard";
+import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export interface VideoCardItem {
   title: string;
@@ -28,6 +24,8 @@ export interface VideoCarouselProps {
   description?: string;
   items: VideoCardItem[];
   itemsPerSlide: number;
+  autoplay?: boolean;
+  autoplayInterval?: number;
   renderItem?: RenderItemFunction;
 }
 
@@ -36,19 +34,52 @@ export function VideoCarousel({
   description,
   items,
   itemsPerSlide,
+  autoplay = false,
+  autoplayInterval = 3000,
   renderItem,
 }: VideoCarouselProps) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+  });
+
   const effectiveItemsPerSlide = Math.min(
     Math.max(1, itemsPerSlide),
     items.length,
   );
 
+  // Default render function
   const defaultRenderItem = (item: VideoCardItem, index: number) => (
     <EducationCard item={item} key={index} />
   );
-
-  // Use renderItem if provided, otherwise use defaultRenderItem
   const renderFunction = renderItem || defaultRenderItem;
+
+  // Navigation controls
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  // Autoplay functionality
+  useEffect(() => {
+    if (!emblaApi || !autoplay) return;
+
+    const autoplayTimer = setInterval(() => {
+      if (emblaApi) emblaApi.scrollNext();
+    }, autoplayInterval);
+
+    return () => clearInterval(autoplayTimer);
+  }, [emblaApi, autoplay, autoplayInterval]);
+
+  // Split items into slides
+  const slides = [];
+  for (let i = 0; i < items.length; i += effectiveItemsPerSlide) {
+    slides.push(items.slice(i, i + effectiveItemsPerSlide));
+  }
 
   return (
     <section className="@container w-full bg-white">
@@ -69,38 +100,42 @@ export function VideoCarousel({
               </Text>
             )}
           </div>
-        </div>
-        <Carousel
-          opts={{
-            align: "start",
-            slidesToScroll: effectiveItemsPerSlide,
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {Array.from({
-              length: Math.ceil(items.length / (effectiveItemsPerSlide * 3)),
-            }).map((_, slideIndex) => (
-              <CarouselItem
-                key={slideIndex}
-                className="mt-12 w-full basis-full lg:mt-4"
-              >
-                <div className="grid h-full w-full grid-cols-1 gap-6 @xl:grid-cols-2 @3xl:grid-cols-3">
-                  {items
-                    .slice(
-                      slideIndex * effectiveItemsPerSlide * 3,
-                      (slideIndex + 1) * effectiveItemsPerSlide * 3,
-                    )
-                    .map((item, index) => renderFunction(item, index))}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="absolute top-0 z-20 flex justify-center gap-2 max-lg:left-5 lg:-top-12 lg:right-12">
-            <CarouselPrevious className="hover:gradient ml-6 cursor-pointer border border-gray-300 text-[#020202]" />
-            <CarouselNext className="ml-6 cursor-pointer border border-gray-300 text-[#020202]" />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={scrollPrev}
+              className="cursor-pointer rounded-full border border-gray-300 p-2 text-[#020202] hover:bg-[#e9e3ff] disabled:opacity-50"
+              disabled={!emblaApi?.canScrollPrev()}
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            <button
+              onClick={scrollNext}
+              className="cursor-pointer rounded-full border border-gray-300 p-2 text-[#020202] hover:bg-[#e9e3ff] disabled:opacity-50"
+              disabled={!emblaApi?.canScrollNext()}
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
           </div>
-        </Carousel>
+        </div>
+
+        <div className="relative">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="mt-16 flex lg:mt-8">
+              {slides.map((slideItems, slideIndex) => (
+                <div key={slideIndex} className="min-w-0 flex-[0_0_100%]">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {slideItems.map((item, itemIndex) =>
+                      renderFunction(
+                        item,
+                        slideIndex * effectiveItemsPerSlide + itemIndex,
+                      ),
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
