@@ -1,5 +1,6 @@
 import { CommunityAccordion } from "@/components/molecules/accordions/CommunityAccordion";
-import { SiUScholarsWrapper } from "./siUScholars/SiUScholarsWrapper";
+import { SiUScholarsWrapper } from "./scholars/SiUScholarsWrapper";
+import { SiHerGuidesWrapper } from "./guides/SiHerGuidesWrapper";
 
 const accordionData = [
   {
@@ -14,13 +15,7 @@ const accordionData = [
     value: "si_her_guides",
     sub: "Meet our collaborators",
     background: "/icons/jpg/si_her_guides_background.jpg",
-    section: (
-      <ul className="list-disc pl-5">
-        <li>Partner A: Focused on blockchain education</li>
-        <li>Partner B: Building decentralized apps</li>
-        <li>Partner C: Supporting Web3 startups</li>
-      </ul>
-    ),
+    section: <SiHerGuidesWrapper />,
   },
   {
     title: "SI<3> PARTNERS",
@@ -43,7 +38,7 @@ const accordionData = [
 
 export function OurCommunity() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 py-14 lg:px-24">
+    <section className="mx-auto mt-4 w-full max-w-[1440px] px-4 py-14 lg:px-24">
       <CommunityAccordion
         renderItems={accordionData}
         defaultValue="si_u_scholars"
