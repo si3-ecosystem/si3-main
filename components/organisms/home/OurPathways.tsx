@@ -2,7 +2,7 @@ import { ContentCard } from "@/components/molecules/cards/ContentCard";
 
 export function OurPathways() {
   return (
-    <div>
+    <div className="pb-14 lg:pb-20">
       <ContentCard
         title="Our Pathways"
         description="Discover our three paths to join into our ecosystem and expand your potential."

@@ -48,7 +48,7 @@ export function SiHerKollab() {
         description="Explore our growing collaborative of women & non-binary led Web3 communities."
         itemsPerSlide={3}
         items={carouselItemsV2}
-        renderItem={() => <CollabCard />}
+        renderItem={(_, key) => <CollabCard key={key} />}
       />
     </div>
   );

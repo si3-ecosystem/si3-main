@@ -6,6 +6,7 @@ import { Text } from "@/components/atoms/text";
 import { EducationCard } from "../cards/educationCard";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/button";
 
 export interface VideoCardItem {
@@ -20,43 +21,40 @@ export type RenderItemFunction = (
   index: number,
 ) => React.ReactNode;
 
-export interface VideoCarouselProps {
+export interface PartialContentCarouselProps {
   title?: string;
   description?: string;
   items: VideoCardItem[];
-  itemsPerSlide: number;
   autoplay?: boolean;
   autoplayInterval?: number;
   renderItem?: RenderItemFunction;
+  className?: string;
+  partialLastItem?: boolean;
 }
 
-export function VideoCarousel({
+export function PartialContentCarousel({
   title,
   description,
   items,
-  itemsPerSlide,
   autoplay = false,
   autoplayInterval = 3000,
   renderItem,
-}: VideoCarouselProps) {
+  className,
+}: PartialContentCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: "start",
     slidesToScroll: 1,
+    align: "start",
+    containScroll: "trimSnaps", // Ensures slides fit within the container
+    breakpoints: {
+      "(max-width: 640px)": { slidesToScroll: 1, align: "start" }, // Small screens
+    },
   });
 
-  const effectiveItemsPerSlide = Math.min(
-    Math.max(1, itemsPerSlide),
-    items.length,
-  );
-
-  // Default render function
   const defaultRenderItem = (item: VideoCardItem, index: number) => (
     <EducationCard item={item} key={index} />
   );
   const renderFunction = renderItem || defaultRenderItem;
 
-  // Navigation controls
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -65,7 +63,6 @@ export function VideoCarousel({
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  // Autoplay functionality
   useEffect(() => {
     if (!emblaApi || !autoplay) return;
 
@@ -76,16 +73,21 @@ export function VideoCarousel({
     return () => clearInterval(autoplayTimer);
   }, [emblaApi, autoplay, autoplayInterval]);
 
-  // Split items into slides
+  // Group items into sets of 3 for small screens
   const slides = [];
-  for (let i = 0; i < items.length; i += effectiveItemsPerSlide) {
-    slides.push(items.slice(i, i + effectiveItemsPerSlide));
+  for (let i = 0; i < items.length; i += 3) {
+    slides.push(items.slice(i, i + 3));
   }
 
   return (
     <section className="@container w-full bg-white">
       <div className="w-full">
-        <div className="flex w-full flex-col justify-between gap-8 lg:flex-row">
+        <div
+          className={cn(
+            "flex w-full flex-col justify-between gap-8 lg:flex-row",
+            className,
+          )}
+        >
           <div className="space-y-2">
             {title && (
               <Title
@@ -96,7 +98,10 @@ export function VideoCarousel({
               </Title>
             )}
             {description && (
-              <Text variant="xl" className="mb-8 max-w-[580px] text-[#454545]">
+              <Text
+                variant="xl"
+                className="max-w-[580px] text-[#454545] lg:mb-8"
+              >
                 {description}
               </Text>
             )}
@@ -123,19 +128,46 @@ export function VideoCarousel({
           </div>
         </div>
 
-        <div className="relative">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="mt-16 flex lg:mt-8">
+        <div className="relative w-full overflow-hidden sm:hidden">
+          <div className="w-full" ref={emblaRef}>
+            <div className="mt-16 flex w-full lg:mt-8">
               {slides.map((slideItems, slideIndex) => (
-                <div key={slideIndex} className="min-w-0 flex-[0_0_100%]">
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {slideItems.map((item, itemIndex) =>
-                      renderFunction(
-                        item,
-                        slideIndex * effectiveItemsPerSlide + itemIndex,
-                      ),
-                    )}
-                  </div>
+                <div
+                  key={slideIndex}
+                  className={cn(
+                    "min-w-0 flex-[0_0_100%] sm:pl-6",
+                    "sm:basis-[100%] sm:flex-col sm:gap-6",
+                    "md:basis-1/4 md:flex-row md:gap-6",
+                  )}
+                >
+                  {slideItems.map((item, itemIndex) => (
+                    <div
+                      key={itemIndex}
+                      className={cn(
+                        "w-full transition-all duration-300 sm:pr-6",
+                        "sm:basis-full",
+                        "max-sm:mb-6 md:basis-1/3 lg:basis-1/3",
+                      )}
+                    >
+                      {renderFunction(item, slideIndex * 3 + itemIndex)}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="relative w-full overflow-hidden max-sm:hidden">
+          <div className="w-full" ref={emblaRef}>
+            <div className="mt-16 flex w-full flex-col gap-6 sm:flex-row sm:gap-0 lg:mt-8">
+              {items.map((slideItems, slideIndex) => (
+                <div
+                  key={slideIndex}
+                  className={cn(
+                    "basis-[100%] pr-6 transition-all duration-300 sm:basis-[85%] md:basis-1/4",
+                  )}
+                >
+                  {renderFunction(slideItems, slideIndex)}
                 </div>
               ))}
             </div>

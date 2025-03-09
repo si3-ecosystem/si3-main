@@ -1,6 +1,8 @@
-import { VideoCarousel } from "@/components/molecules/carousels/videoCarousel";
-import { HeroSection } from "../HeroSection";
-import { SiHerKollab } from "./SiHerKollab";
+"use client";
+
+import { ProgrammingCard } from "@/components/molecules/cards/ProgrammingCard";
+import { PartialContentCarousel } from "@/components/molecules/carousels/PartialContentCarousel";
+import React from "react";
 
 const carouselItems = [
   {
@@ -94,29 +96,16 @@ const carouselItems = [
   },
 ];
 
-const heroData = {
-  title: "SI U Scholars",
-  description:
-    "  A free introductory experience to Web3. Begin your journey into our ecosystem through education and community, with an intention towards leadership and collaboration.",
-  subTitle: "EDUCATION. COMMUNITY. EXPLORATION.",
-  CtaText: "Join Now",
-  CtaLink: "#",
-  image: "/icons/jpg/si_u_scholars_heroimage.jpg",
-};
-
-export function SiUScholarsWrapper() {
+export function Programming() {
   return (
-    <section className="px-4 pb-2 lg:px-[90px] lg:pb-14">
-      <HeroSection data={heroData} />
-      <div className="py-14 lg:py-20">
-        <VideoCarousel
-          title="SI U"
-          description="Discover leading-edge insights and education in our free and open university."
-          itemsPerSlide={6}
-          items={carouselItems}
-        />
-      </div>
-      <SiHerKollab />
-    </section>
+    <div className="w-full py-14 lg:py-20">
+      <PartialContentCarousel
+        title="Si Her Programming"
+        description="Advanced emerging tech & professional development workshops focused on accelerating leadership and collaboration."
+        items={carouselItems}
+        renderItem={(_, key) => <ProgrammingCard key={key} />}
+        className="pr-4 lg:pr-[90px]"
+      />
+    </div>
   );
 }

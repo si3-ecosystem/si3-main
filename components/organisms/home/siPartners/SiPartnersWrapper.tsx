@@ -1,18 +1,15 @@
 import { HeroSection } from "../HeroSection";
-import { Web3Brand } from "./Web3Brand";
-import { SpotlightSection } from "./SpotlightSection";
-import { Programming } from "./Programming";
 import { Testimonials } from "@/components/molecules/carousels/Testimonials";
+import { ExploreSection } from "./ExploreSection";
 
 const heroData = {
-  title: "Si Her Guides",
+  title: "SI<3> Partners",
   description:
-    "Si Her is a global community of women & non-binary emerging tech leaders. In Si Her, we develop our professional and leadership potential as guides in the new economy.",
-  subTitle: "PERSONAL BRAND. PUBLIC SPEAKING. LEADERSHIP.",
-  CtaText: "Apply Now",
+    "Supporting aligned organizations in creating healthy, inclusive teams and offerings.",
+  subTitle: "CAMPAIGNS. RESEARCH. TRAINING.",
+  CtaText: "Inquire",
   CtaLink: "#",
-  image: "/icons/jpg/si_her_guides_heroimage.jpg",
-  memberShipFee: " *$300 one-time membership fee",
+  image: "/icons/jpg/partners.jpg",
 };
 
 const testimonials = [
@@ -50,20 +47,14 @@ const testimonials = [
   },
 ];
 
-export function SiHerGuidesWrapper() {
+export function SiPartnersWrapper() {
   return (
     <section className="pb-2 lg:pb-14">
       <div className="px-4 lg:px-[90px]">
         <HeroSection data={heroData} />
       </div>
-      <div className="px-4 lg:px-[90px]">
-        <Web3Brand />
-      </div>
-      <div className="px-4 sm:pl-4 lg:pl-[90px]">
-        <SpotlightSection />
-      </div>
-      <div className="px-4 sm:pl-4 lg:pl-[90px]">
-        <Programming />
+      <div className="px-4 py-14 lg:px-[90px] lg:py-20">
+        <ExploreSection />
       </div>
       <div className="px-4 pb-10 lg:px-[90px]">
         <Testimonials items={testimonials} title="Si Her Testimonials" />

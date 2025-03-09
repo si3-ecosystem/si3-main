@@ -44,7 +44,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`mx-auto w-full max-w-[2560px] bg-white antialiased`}>
+      <body
+        className={`mx-auto w-full max-w-[2560px] overflow-x-hidden bg-white antialiased`}
+      >
         <WalletProvider>
           <ReduxProvider>{children}</ReduxProvider>
         </WalletProvider>
