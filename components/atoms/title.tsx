@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface TitleProps {
-  variant?: "large" | "medium" | "sm";
+  variant?: "huge" | "large" | "medium" | "sm";
   as?: "h1" | "h2" | "h3" | "h4";
   children: ReactNode;
   className?: string;
@@ -15,6 +15,7 @@ export const Title = ({
   className,
 }: TitleProps) => {
   const variantStyles = {
+    huge: "text-6xl",
     large: " [font-size:clamp(2.5rem,2.5rem+0.43vw,4rem)]",
     medium: " text-2xl lg:text-4xl",
     sm: "[font-size:clamp(1.75rem,1.75rem+0.07vw,2rem)] font-semibold",
