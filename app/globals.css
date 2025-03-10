@@ -174,3 +174,12 @@ body {
 .gradient {
   background: linear-gradient(266deg, #9f44d3 7.3%, #d939cd 108.02%);
 }
+
+.about_gradient {
+  border-bottom: 1px solid #fff;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 58.7%,
+    #fff 88.49%
+  );
+}
