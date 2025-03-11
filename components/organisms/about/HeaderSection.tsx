@@ -9,7 +9,7 @@ export function HeaderSection() {
         src={"/about/hero/about_herobg.jpg"}
         fill
         alt="about_hero"
-        className="-z-10 h-full w-full object-cover"
+        className="object- -z-10 h-full w-full object-top pt-16"
       />
       <div className="flex h-full min-h-[70vh] w-full max-w-[1440px] flex-col justify-center gap-3 px-4 lg:min-h-[80vh] lg:px-[90px]">
         <Title

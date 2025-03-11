@@ -6,7 +6,7 @@ import Partners from "../partners/Partners";
 
 const HeaderContainer = () => {
   return (
-    <div className="relative space-y-36">
+    <div className="relative space-y-16 lg:space-y-36">
       <Image
         src="/home/heroBg.png"
         alt=""
