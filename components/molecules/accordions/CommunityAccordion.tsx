@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -6,9 +8,11 @@ import {
 import { Title } from "@/components/atoms/title";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { AccordionDownIcon } from "../icons/AccordionDownIcon";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { setActiveAccordionValue } from "@/redux/slice/communitySlice";
 
 export interface AccordionRenderItem {
   title: string;
@@ -27,12 +31,40 @@ export function CommunityAccordion({
   renderItems,
   defaultValue,
 }: DynamicAccordionProps) {
+  const dispatch = useAppDispatch();
+  const activeAccordionValue = useAppSelector(
+    (state) => state.community.activeAccordionValue,
+  );
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!activeAccordionValue && defaultValue) {
+      dispatch(setActiveAccordionValue(defaultValue));
+    }
+  }, [activeAccordionValue, defaultValue, dispatch]);
+
+  const handleValueChange = (value: string) => {
+    dispatch(setActiveAccordionValue(value));
+
+    if (sectionRef.current) {
+      const sectionTop =
+        sectionRef.current.getBoundingClientRect().top + window.scrollY;
+      const offset = 50;
+      window.scrollTo({
+        top: sectionTop - offset,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
-    <div className="space-y-4">
+    <div ref={sectionRef} className="space-y-4">
       <Accordion
         type="single"
         collapsible
-        className="animate-out animate-in w-full ease-in-out"
+        className="animate-out animate-in w-full"
+        value={activeAccordionValue}
+        onValueChange={handleValueChange}
         defaultValue={defaultValue || renderItems[0]?.value}
       >
         {renderItems.map((item) => (
@@ -64,7 +96,7 @@ export function CommunityAccordion({
                 <AccordionDownIcon className="pointer-events-non z-10 size-8 shrink-0 transition-transform duration-200 lg:size-16" />
               </AccordionPrimitive.Trigger>
             </AccordionPrimitive.Header>
-            <AccordionContent className="text-muted-foreground !z-0">
+            <AccordionContent className="text-muted-foreground !z-0 bg-white ease-in-out">
               {item.section}
             </AccordionContent>
           </AccordionItem>

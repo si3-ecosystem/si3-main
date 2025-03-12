@@ -1,6 +1,5 @@
-import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
-import { formatCount } from "@/utils/formate";
+import { ImpactCard } from "@/components/molecules/cards/ImpactCard";
 
 const cardItems = [
   {
@@ -16,25 +15,6 @@ const cardItems = [
     description: "Web3 Community Partners",
   },
 ];
-
-type Props = {
-  item: {
-    count: number;
-    description: string;
-  };
-};
-
-function ImpactCard({ item }: Props) {
-  return (
-    <li className="flex flex-col items-center justify-center gap-2.5 rounded-2xl bg-[#F4F4F4] p-3.5">
-      <p className="text-[40px] leading-none font-semibold">
-        {formatCount(item.count)}
-      </p>
-      <div className="bg-primary h-0.5 w-7"></div>
-      <Text className="leading- text-center">{item.description}</Text>
-    </li>
-  );
-}
 
 export function OurImpact() {
   return (

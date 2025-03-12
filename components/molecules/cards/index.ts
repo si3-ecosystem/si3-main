@@ -5,6 +5,7 @@ import { SpotlightCard } from "./SpotlightCard";
 import { TestimonialsCard } from "./TestimonialsCard";
 import { ProgrammingCard } from "./ProgrammingCard";
 import { ExplorePartnersCard } from "./ExplorePartnersCard";
+import { ImpactCard } from "./ImpactCard";
 
 const cards = {
   ContentCard,
@@ -14,6 +15,7 @@ const cards = {
   TestimonialsCard,
   ProgrammingCard,
   ExplorePartnersCard,
+  ImpactCard,
 };
 
 export default cards;

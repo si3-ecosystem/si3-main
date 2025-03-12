@@ -183,3 +183,15 @@ body {
     #fff 88.49%
   );
 }
+
+.communitytop {
+  border-radius: 13.15px;
+  background: linear-gradient(118deg, #fcc6e9 2.2%, #ffedcf 94.23%);
+  filter: blur(89.99644470214844px);
+}
+
+.communityBottom {
+  border-radius: 13.15px;
+  background: linear-gradient(118deg, #fcc6e9 2.2%, #ffedcf 94.23%);
+  filter: blur(135.5288848876953px);
+}
