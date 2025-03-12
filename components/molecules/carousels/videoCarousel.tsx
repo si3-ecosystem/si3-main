@@ -76,10 +76,9 @@ export function VideoCarousel({
     return () => clearInterval(autoplayTimer);
   }, [emblaApi, autoplay, autoplayInterval]);
 
-  // Split items into slides
-  const slides = [];
-  for (let i = 0; i < items.length; i += effectiveItemsPerSlide) {
-    slides.push(items.slice(i, i + effectiveItemsPerSlide));
+  const slides: VideoCardItem[][] = [];
+  for (let i = 0; i < items.length; i += 3) {
+    slides.push(items.slice(i, i + 3));
   }
 
   return (

@@ -1,7 +1,3 @@
-import React from "react";
-
-const OnBoardPage = () => {
-  return <div>OnBoardPage</div>;
-};
-
-export default OnBoardPage;
+export default function page() {
+  return <div>page</div>;
+}
