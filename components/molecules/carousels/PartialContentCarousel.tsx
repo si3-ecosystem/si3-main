@@ -73,8 +73,7 @@ export function PartialContentCarousel({
     return () => clearInterval(autoplayTimer);
   }, [emblaApi, autoplay, autoplayInterval]);
 
-  // Group items into sets of 3 for small screens
-  const slides = [];
+  const slides: VideoCardItem[][] = [];
   for (let i = 0; i < items.length; i += 3) {
     slides.push(items.slice(i, i + 3));
   }
