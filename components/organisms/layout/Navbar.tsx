@@ -8,6 +8,7 @@ import { Notification } from "./navbar/Notification";
 import Subscribe from "./navbar/Subscribe";
 import { MobileMenu } from "./navbar/MobileMenu";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,9 +31,9 @@ export function Navbar() {
       }}
     >
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 lg:px-24">
-        <div>
+        <Link href={"/"}>
           <Logo src="/logo.svg" />
-        </div>
+        </Link>
         <nav className="flex items-center gap-3">
           <Notification />
           <div className="flex items-center gap-3 max-lg:hidden">

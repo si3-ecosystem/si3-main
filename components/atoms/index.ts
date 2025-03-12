@@ -11,6 +11,7 @@ import { Drawer } from "./drawer";
 import { Input } from "./input";
 import { Logo } from "./Logo";
 import { Spinner } from "./Spinner";
+import { Sheet } from "./sheet";
 
 const components = {
   Title,
@@ -26,6 +27,7 @@ const components = {
   Input,
   Logo,
   Spinner,
+  Sheet,
 };
 
 export default components;

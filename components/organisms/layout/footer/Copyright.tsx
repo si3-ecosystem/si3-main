@@ -1,7 +1,8 @@
-import React from "react";
-
-const Copyright = () => {
-  return <div>Copyright</div>;
-};
-
-export default Copyright;
+export function Copyright() {
+  const currentYear = new Date().getFullYear();
+  return (
+    <div className="border-t border-gray-400 p-4 py-8 text-center text-sm md:text-base">
+      Copyright © {currentYear} {"SI<3>"}, Inc. All rights reserved.
+    </div>
+  );
+}

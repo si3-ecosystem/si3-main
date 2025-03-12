@@ -1,8 +1,17 @@
+import Link from "next/link";
 import React from "react";
 
-// Contain the Si3 Logo, a text input field, and a button to sign up for the newsletter
-const FooterSignUp = () => {
-  return <div>FooterSignUp</div>;
+export const FooterSignUp = () => {
+  return (
+    <div className="flex flex-[2] items-center border-b border-gray-400 px-4 lg:border-r lg:py-12">
+      <div className="">
+        <Link href="/" className="text-5xl font-bold uppercase">
+          <span className="font-clesmont text-[40px]">{"SI<3>"}</span>
+        </Link>
+        <p className="my-3">
+          Stay up-to-date with our CurrentSi weekly newsletter.
+        </p>
+      </div>
+    </div>
+  );
 };
-
-export default FooterSignUp;

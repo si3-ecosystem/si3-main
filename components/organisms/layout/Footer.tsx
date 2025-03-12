@@ -1,25 +1,20 @@
-import React from "react";
+import { FooterSignUp } from "./footer/FooterSignUp";
+import { FooterNav } from "./footer/FooterNav";
+import { FollowUs } from "./footer/FollowUs";
+import { Copyright } from "./footer/Copyright";
 
-import FollowUs from "./footer/FollowUs";
-import Copyright from "./footer/Copyright";
-import FooterNav from "./footer/FooterNav";
-import FooterSignUp from "./footer/FooterSignUp";
-import FooterLanguage from "./footer/FooterLanguage";
-
-export function Footer() {
+export const Footer = () => {
   return (
-    <footer>
-      <div className="flex">
-        <div>
-          <FooterSignUp />
-          <FooterLanguage />
-        </div>
-
+    <footer className="relative bg-white max-lg:py-6 lg:-mt-4">
+      <div
+        id="stayConnected"
+        className="mx-auto w-full max-w-[1440px] px-4 lg:flex"
+      >
+        <FooterSignUp />
         <FooterNav />
         <FollowUs />
       </div>
-
       <Copyright />
     </footer>
   );
-}
+};
