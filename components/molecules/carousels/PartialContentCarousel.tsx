@@ -3,28 +3,22 @@
 import { useCallback, useEffect } from "react";
 import { Title } from "@/components/atoms/title";
 import { Text } from "@/components/atoms/text";
-import { EducationCard } from "../cards/educationCard";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/button";
-
-export interface VideoCardItem {
-  title: string;
-  subtitle: string;
-  imageUrl: string;
-  videoUrl?: string;
-}
+import { Member, ProgrammingEvent } from "@/types/home";
+import { SpotlightCard } from "../cards/SpotlightCard";
 
 export type RenderItemFunction = (
-  item: VideoCardItem,
+  item: Member | ProgrammingEvent,
   index: number,
 ) => React.ReactNode;
 
 export interface PartialContentCarouselProps {
   title?: string;
   description?: string;
-  items: VideoCardItem[];
+  items: Member[] | ProgrammingEvent[];
   autoplay?: boolean;
   autoplayInterval?: number;
   renderItem?: RenderItemFunction;
@@ -44,15 +38,29 @@ export function PartialContentCarousel({
   const [emblaRef, emblaApi] = useEmblaCarousel({
     slidesToScroll: 1,
     align: "start",
-    containScroll: "trimSnaps", // Ensures slides fit within the container
+    containScroll: "trimSnaps",
     breakpoints: {
-      "(max-width: 640px)": { slidesToScroll: 1, align: "start" }, // Small screens
+      "(max-width: 640px)": { slidesToScroll: 1, align: "start" },
     },
   });
 
-  const defaultRenderItem = (item: VideoCardItem, index: number) => (
-    <EducationCard item={item} key={index} />
-  );
+  const defaultRenderItem = (
+    item: Member | ProgrammingEvent,
+    index: number,
+  ) => {
+    if ("title" in item) {
+      return (
+        <SpotlightCard
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          item={item}
+          key={index}
+        />
+      );
+    }
+    return null;
+  };
+
   const renderFunction = renderItem || defaultRenderItem;
 
   const scrollPrev = useCallback(() => {
@@ -73,7 +81,7 @@ export function PartialContentCarousel({
     return () => clearInterval(autoplayTimer);
   }, [emblaApi, autoplay, autoplayInterval]);
 
-  const slides: VideoCardItem[][] = [];
+  const slides: (Member | ProgrammingEvent)[][] = [];
   for (let i = 0; i < items.length; i += 3) {
     slides.push(items.slice(i, i + 3));
   }

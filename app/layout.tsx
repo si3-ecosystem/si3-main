@@ -5,6 +5,8 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
 import { processMetadata } from "@/utils/sharedMetadata";
 
+export const revalidate = 2500;
+
 export async function generateMetadata() {
   return await processMetadata();
 }

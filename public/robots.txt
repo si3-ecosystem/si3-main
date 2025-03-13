@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Disallow: /undefined
+Disallow: /*/undefined
+Disallow: /404
+Disallow: /500
+Disallow: /blog/hashtags/*
+
+# Host
+Host: https://www.si3.space
+
+# Sitemaps
+Sitemap: https://www.si3.space/sitemap.xml

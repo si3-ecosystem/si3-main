@@ -1,44 +1,65 @@
 import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
+import { urlForImage } from "@/lib/sanity/image";
+import { Member } from "@/types/home";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-export function SpotlightCard() {
+type Props = {
+  item: Member;
+};
+
+export function SpotlightCard({ item }: Props) {
+  const imageUrl = item?.image
+    ? urlForImage(item.image)?.src
+    : "/icons/jpg/pink-beauty.jpg";
+
   return (
-    <Card className="flex h-auto w-full cursor-pointer flex-col justify-between gap-8 overflow-hidden rounded-2xl border border-[#D1D1D1] p-6 transition-all duration-300 !ease-in-out hover:shadow-lg sm:!w-[391px]">
+    <Card className="flex h-full w-full cursor-pointer flex-col justify-between gap-8 overflow-hidden rounded-2xl border border-[#D1D1D1] p-6 transition-all duration-300 !ease-in-out hover:shadow-lg sm:!w-[391px]">
       <div className="flex flex-col gap-4">
         <div className="group relative h-[303.924px] w-full overflow-hidden rounded-lg">
           <Image
-            src={"/icons/jpg/pink-beauty.jpg"}
+            src={imageUrl || "/icons/jpg/pink-beauty.jpg"}
+            {...(item?.image?.blurDataURL && {
+              placeholder: "blur",
+              blurDataURL: item?.image?.blurDataURL,
+            })}
             alt={"alt"}
             width={600}
             height={400}
             className="z-0 h-full w-full object-cover transition-all duration-300 ease-in group-hover:scale-[1.02]"
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-3">
           <Text variant="2xl" className="font-semibold">
-            Kara Howard
+            {item.name}
           </Text>
           <div className="mb-4 flex items-center gap-5">
-            <Text className="flex items-center gap-2 text-[#696969]">
+            <Text className="flex items-center gap-2 text-base tracking-[1.73px] text-[#696969]">
               <MapPin className="size-6" />
-              MEXICO
+              <span>{item.country}</span>
             </Text>
-            <Text className="flex items-center gap-2 text-[#696969]">
+            <Text className="flex items-center gap-2 text-base tracking-[1.73px] text-[#696969]">
               <MapPin className="size-6" />
-              Developer
+              <span>{item.position}</span>
             </Text>
           </div>
           <Text className="font-normal tracking-[1.7px]">
-            Lorem ipsum dolor sit amet consectetur.
+            {item.hobbies?.join(", ")}
           </Text>
         </div>
       </div>
       <div className="w-full">
-        <Button variant={"outline"} className="w-full border-2 border-black">
-          kara.siher.eth
+        <Button
+          asChild
+          variant={"outline"}
+          className="w-full border-2 border-black"
+        >
+          <Link href={`${item?.link || "#"}`} target="_blank">
+            {item.email}
+          </Link>
         </Button>
       </div>
     </Card>

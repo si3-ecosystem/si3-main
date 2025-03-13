@@ -5,16 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@/components/atoms/button";
 import { TestimonialsCard } from "../cards/TestimonialsCard";
-
-export interface Testimonial {
-  id: string;
-  image: string;
-  quote: string;
-  author: string;
-  role: string;
-  companyName: string;
-  companyLogo: string;
-}
+import { Testimonial } from "@/types/home";
 
 interface TestimonialsProps {
   title: string;

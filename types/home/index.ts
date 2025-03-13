@@ -1,0 +1,168 @@
+// Common types
+export interface SanityImage {
+  _type: string;
+  asset: {
+    _ref: string;
+    _type: string;
+  };
+  blurDataURL?: string;
+  ImageColor?: string;
+  alt?: string;
+}
+
+export interface SanityVideo {
+  videoUrl: string;
+  title: string;
+  ctaLink: string;
+  ctaTitle: string;
+}
+
+// Scholars Data Types
+export interface Community {
+  _id: string;
+  published: boolean;
+  order: number;
+  communityLogo: SanityImage;
+  communityName: string;
+  communityLocation: string;
+  communityType: string;
+  communityDescription: string;
+  communityWebsite: string;
+  communityLeaderName: string;
+  communityLeaderEmail: string;
+  xHandle: string;
+  warpastHandle: string;
+  discover: string;
+}
+
+export interface Introduction {
+  _id: string;
+  title: string;
+  description: string;
+  subtitle: string;
+  thumbnail: SanityImage;
+  ctaText: string;
+  ctaLink: string;
+  memberShip?: string;
+}
+
+export interface Web3Brand {
+  _id: string;
+  title: string;
+  description?: string;
+  gallery?: {
+    galleryTitle: string;
+    images?: SanityImage[];
+  }[];
+  video?: {
+    _type: "file";
+    asset: {
+      _ref: string;
+      _type: "reference";
+    };
+  };
+}
+
+export interface Presenter {
+  _id: string;
+  name: string;
+  image: SanityImage;
+  position?: string;
+  logo?: SanityImage;
+}
+
+export interface Company {
+  _id: string;
+  name: string;
+  logo: SanityImage;
+}
+
+export interface Course {
+  _id: string;
+  title: string;
+  description: string;
+  thumbnail: SanityImage;
+  video: {
+    url: string;
+  };
+  company: Company;
+  presenters: Presenter[];
+}
+
+export interface ScholarsData {
+  _id: string;
+  introduction: Introduction;
+  title: string;
+  description: string;
+  courses: Course[];
+  community_title: string;
+  community_description: string;
+  communities: Community[];
+  video: SanityVideo;
+}
+
+// Guides Data Types
+export interface Member {
+  _id: string;
+  name: string;
+  country: string;
+  position: string;
+  hobbies: string[];
+  image: SanityImage;
+  email: string;
+  link: string;
+}
+
+export interface ProgrammingEvent {
+  _id: string;
+  date: string;
+  image: SanityImage;
+  title: string;
+  description: string;
+  presenters: Presenter[];
+}
+
+export interface Testimonial {
+  _id: string;
+  description: string;
+  image: SanityImage;
+  name?: string;
+  title?: string;
+  companyName: string;
+  link: string;
+  companyLogo?: SanityImage;
+}
+
+export interface GuidesData {
+  _id: string;
+  introduction: Introduction;
+  web3brands: Web3Brand;
+  members_title: string;
+  members_description: string;
+  members: Member[];
+  programming_title: string;
+  programming_description: string;
+  programming: ProgrammingEvent[];
+  testimonials: Testimonial[];
+  video: SanityVideo;
+}
+
+// Partners Data Types
+export interface ExploreItem {
+  _id: string;
+  title: string;
+  description: string;
+  subTitle: string;
+  ctaText: string;
+  ctaLink: string;
+  image: SanityImage;
+}
+
+export interface PartnersData {
+  _id: string;
+  introduction: Introduction;
+  title: string;
+  explore: ExploreItem[];
+  testimonials: Testimonial[];
+  video: SanityVideo;
+}

@@ -2,39 +2,20 @@
 
 import { useAppSelector } from "@/redux/store";
 import { CtaVideoSection } from "./CtaVideoSection";
+import { useQuery } from "@tanstack/react-query";
+import {
+  getGuidesData,
+  getPartnersData,
+  getScholarsData,
+} from "@/lib/sanity/client";
 
-const contentMapping: Record<
-  string,
-  {
-    videoSrc: string;
-    title: string;
-    ctaLink: string;
-    ctaTitle: string;
-    showGradient?: boolean;
-  }
-> = {
-  si_u_scholars: {
-    videoSrc: "/videos/SiUScholars.mp4",
-    title: "Explore & Expand",
-    ctaLink: "/scholars",
-    ctaTitle: "Join Scholars",
-    showGradient: true,
-  },
-  si_her_guides: {
-    videoSrc: "/videos/SiHerGuides.mp4",
-    title: "CO-CREATE & LEAD",
-    ctaLink: "/co-active",
-    ctaTitle: "Apply Now",
-    showGradient: true,
-  },
-  si_partners: {
-    videoSrc: "/videos/SiPartners.mp4",
-    title: "INQUIRE WITHIN",
-    ctaLink: "/diversity-tracker",
-    ctaTitle: "Submit Inquiry",
-    showGradient: true,
-  },
-};
+interface VideoContent {
+  videoSrc: string;
+  title: string;
+  ctaLink: string;
+  ctaTitle: string;
+  showGradient?: boolean;
+}
 
 const defaultContent = {
   videoSrc: "/videos/SiUScholars.mp4",
@@ -49,7 +30,62 @@ export function FooterBanner() {
     (state) => state.community.activeAccordionValue,
   );
 
-  const content = contentMapping[activeValue] || defaultContent;
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["footer-video", activeValue],
+    queryFn: async () => {
+      const [scholarsData, guidesData, partnersData] = await Promise.all([
+        getScholarsData(),
+        getGuidesData(),
+        getPartnersData(),
+      ]);
+      return { scholarsData, guidesData, partnersData };
+    },
+  });
+
+  let content: VideoContent = defaultContent;
+
+  if (data) {
+    switch (activeValue) {
+      case "si_u_scholars":
+        content = {
+          videoSrc: data.scholarsData.video.videoUrl,
+          title: data.scholarsData.video.title,
+          ctaLink: data.scholarsData.video.ctaLink,
+          ctaTitle: data.scholarsData.video.ctaTitle,
+          showGradient: true,
+        };
+        break;
+      case "si_her_guides":
+        content = {
+          videoSrc: data.guidesData.video.videoUrl,
+          title: data.guidesData.video.title,
+          ctaLink: data.guidesData.video.ctaLink,
+          ctaTitle: data.guidesData.video.ctaTitle,
+          showGradient: true,
+        };
+        break;
+      case "si_partners":
+        content = {
+          videoSrc: data.partnersData.video.videoUrl,
+          title: data.partnersData.video.title,
+          ctaLink: data.partnersData.video.ctaLink,
+          ctaTitle: data.partnersData.video.ctaTitle,
+          showGradient: true,
+        };
+        break;
+      default:
+        content = defaultContent;
+    }
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.error("Error fetching footer video data:", error);
+    return <div>Error loading video content</div>;
+  }
 
   return (
     <div>

@@ -3,70 +3,29 @@ import { Web3Brand } from "./Web3Brand";
 import { SpotlightSection } from "./SpotlightSection";
 import { Programming } from "./Programming";
 import { Testimonials } from "@/components/molecules/carousels/Testimonials";
+import { GuidesData } from "@/types/home";
 
-const heroData = {
-  title: "Si Her Guides",
-  description:
-    "Si Her is a global community of women & non-binary emerging tech leaders. In Si Her, we develop our professional and leadership potential as guides in the new economy.",
-  subTitle: "PERSONAL BRAND. PUBLIC SPEAKING. LEADERSHIP.",
-  CtaText: "Apply Now",
-  CtaLink: "#",
-  image: "/icons/jpg/si_her_guides_heroimage.jpg",
-  memberShipFee: " *$300 one-time membership fee",
+type Props = {
+  data: GuidesData;
 };
 
-const testimonials = [
-  {
-    id: "1",
-    image: "/icons/jpg/testimonial.jpg",
-    quote:
-      "Love my decentralized website. I absolutely love my personal decentralised website (and so do event organizers!) and I wholeheartedly recommend all other womxn in the space to explore creating their own.",
-    author: "Alexandra Overgaag",
-    role: "Founder of Thrilld Labs",
-    companyName: "Thrilld",
-    companyLogo: "/icons/jpg/push.jpg",
-  },
-  {
-    id: "2",
-    image: "/icons/jpg/testimonial.jpg",
-
-    quote:
-      "The platform has transformed how we approach digital presence. It's intuitive, powerful, and exactly what we needed.",
-    author: "Sarah Chen",
-    role: "CEO at TechForward",
-    companyName: "TechForward",
-    companyLogo: "/icons/jpg/push.jpg",
-  },
-  {
-    id: "3",
-    image: "/icons/jpg/testimonial.jpg",
-
-    quote:
-      "The support and flexibility we've experienced have been outstanding. This is a game-changer for our business.",
-    author: "Michael Rodriguez",
-    role: "CTO of InnovateLabs",
-    companyName: "InnovateLabs",
-    companyLogo: "/icons/jpg/push.jpg",
-  },
-];
-
-export function SiHerGuidesWrapper() {
+export function SiHerGuidesWrapper({ data }: Props) {
   return (
     <section className="pb-2 lg:pb-14">
       <div className="px-4 lg:px-[90px]">
-        <HeroSection data={heroData} />
+        <HeroSection data={data.introduction} />
       </div>
       <div className="px-4 lg:px-[90px]">
-        <Web3Brand />
+        <Web3Brand data={data.web3brands} />
       </div>
       <div className="px-4 sm:pl-4 lg:pl-[90px]">
-        <SpotlightSection />
+        <SpotlightSection data={data} />
       </div>
       <div className="px-4 sm:pl-4 lg:pl-[90px]">
-        <Programming />
+        <Programming data={data} />
       </div>
       <div className="px-4 pb-10 lg:px-[90px]">
-        <Testimonials items={testimonials} title="Si Her Testimonials" />
+        <Testimonials items={data.testimonials} title="Si Her Testimonials" />
       </div>
     </section>
   );

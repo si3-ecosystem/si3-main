@@ -7,23 +7,17 @@ import { EducationCard } from "../cards/educationCard";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/atoms/button";
-
-export interface VideoCardItem {
-  title: string;
-  subtitle: string;
-  imageUrl: string;
-  videoUrl?: string;
-}
+import { Course, Community } from "@/types/home";
 
 export type RenderItemFunction = (
-  item: VideoCardItem,
+  item: Course | Community,
   index: number,
 ) => React.ReactNode;
 
 export interface VideoCarouselProps {
   title?: string;
   description?: string;
-  items: VideoCardItem[];
+  items: Course[] | Community[];
   itemsPerSlide: number;
   autoplay?: boolean;
   autoplayInterval?: number;
@@ -51,9 +45,12 @@ export function VideoCarousel({
   );
 
   // Default render function
-  const defaultRenderItem = (item: VideoCardItem, index: number) => (
-    <EducationCard item={item} key={index} />
-  );
+  const defaultRenderItem = (item: Course | Community, index: number) => {
+    if ("title" in item) {
+      return <EducationCard item={item} key={index} />;
+    }
+    return null;
+  };
   const renderFunction = renderItem || defaultRenderItem;
 
   // Navigation controls
@@ -76,7 +73,7 @@ export function VideoCarousel({
     return () => clearInterval(autoplayTimer);
   }, [emblaApi, autoplay, autoplayInterval]);
 
-  const slides: VideoCardItem[][] = [];
+  const slides: (Course | Community)[][] = [];
   for (let i = 0; i < items.length; i += 3) {
     slides.push(items.slice(i, i + 3));
   }
@@ -124,10 +121,10 @@ export function VideoCarousel({
 
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="mt-16 flex lg:mt-8">
+            <div className="mt-16 -ml-6 flex lg:mt-8">
               {slides.map((slideItems, slideIndex) => (
-                <div key={slideIndex} className="min-w-0 flex-[0_0_100%]">
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div key={slideIndex} className="min-w-0 flex-[0_0_100%] pl-6">
+                  <div className="grid h-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {slideItems.map((item, itemIndex) =>
                       renderFunction(
                         item,

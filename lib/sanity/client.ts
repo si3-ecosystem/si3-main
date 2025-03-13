@@ -5,7 +5,13 @@ import {
   useCdn,
   previewSecretId,
 } from "./config";
-import { postquery, getAll, seoData } from "./groq";
+import {
+  getAll,
+  seoData,
+  scholarsQuery,
+  guidesQuery,
+  partnersQuery,
+} from "./groq";
 import { createClient } from "next-sanity";
 
 if (!projectId) {
@@ -65,9 +71,23 @@ export async function getSeoData() {
   return {};
 }
 
-export async function getAllPosts() {
+export async function getScholarsData() {
   if (client) {
-    return (await client.fetch(postquery)) || [];
+    return (await client.fetch(scholarsQuery)) || {};
   }
-  return [];
+  return {};
+}
+
+export async function getGuidesData() {
+  if (client) {
+    return (await client.fetch(guidesQuery)) || {};
+  }
+  return {};
+}
+
+export async function getPartnersData() {
+  if (client) {
+    return (await client.fetch(partnersQuery)) || {};
+  }
+  return {};
 }
