@@ -2,16 +2,14 @@ import "./globals.css";
 
 import WalletProvider from "@/providers/WagmiProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
-import { sharedMetaData } from "@/utils/sharedMetadata";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
+import { processMetadata } from "@/utils/sharedMetadata";
 
-export const revalidate = 3600;
 export async function generateMetadata() {
-  const metadata = await sharedMetaData();
-  return metadata;
+  return await processMetadata();
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -5,7 +5,7 @@ import { OurCommunity } from "@/components/organisms/home/OurCommunity";
 import HeaderContainer from "@/components/organisms/home/header/HeaderContainer";
 import { CreatingTheNewEconomy } from "@/components/organisms/home/CreatingTheNewEconomy";
 
-export default function page() {
+export default function HomePage() {
   return (
     <section>
       <HeaderContainer />

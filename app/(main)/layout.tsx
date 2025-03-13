@@ -1,9 +1,13 @@
 import { Footer } from "@/components/organisms/layout/Footer";
 import { Navbar } from "@/components/organisms/layout/Navbar";
+import { processMetadata } from "@/utils/sharedMetadata";
 import React, { ReactNode } from "react";
 
 interface MainLayoutProps {
   children: ReactNode;
+}
+export async function generateMetadata() {
+  return await processMetadata();
 }
 
 const MainLayout = ({ children }: MainLayoutProps) => {
