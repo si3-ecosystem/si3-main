@@ -195,3 +195,34 @@ body {
   background: linear-gradient(118deg, #fcc6e9 2.2%, #ffedcf 94.23%);
   filter: blur(135.5288848876953px);
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+}
+
+.dialog-content {
+  -webkit-overflow-scrolling: touch;
+}
+
+html {
+  scroll-behavior: smooth;
+}

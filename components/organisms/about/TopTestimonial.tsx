@@ -1,9 +1,20 @@
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
 import { QuotIcon } from "@/components/molecules/icons/Quot";
+import { urlForImage } from "@/lib/sanity/image";
+import { Testimonial } from "@/types/about";
 import Image from "next/image";
+import Link from "next/link";
 
-export function TopTestimonial() {
+type Props = {
+  data: Testimonial;
+};
+
+export function TopTestimonial({ data }: Props) {
+  const imageUrl = data.image
+    ? urlForImage(data.image)?.src
+    : "/about/kara.jpg";
+
   return (
     <section className="mx-auto w-full max-w-[1440px] px-4 py-14 lg:px-[90px] lg:py-20">
       <div className="@container">
@@ -16,25 +27,30 @@ export function TopTestimonial() {
               variant="2xl"
               className="max-w-[535px] text-2xl leading-[140%] text-black lg:mb-8 lg:text-3xl lg:leading-normal"
             >
-              Web3 is not just about the technology - it&apos;s about creating
-              accessible systems and services. A recent BCG study revealed
-              &quot;major market gaps in women-focused products and services - a
-              $32 Trillion opportunity.” <br /> Let&apos;s design intelligently.{" "}
+              {data.quote}
               <br />
-              <span className="text-lg underline">
+              <Link
+                href={data.sourceUrl || "#"}
+                target="_blank"
+                className="text-lg underline"
+              >
                 {" "}
-                *BCG, December 2024
-              </span>{" "}
+                {data.sourceTitle}
+              </Link>{" "}
               <br />
               <span className="text-lg font-medium text-[#4F4F4F] lg:text-2xl">
-                Kara Howard, Ecosystem Lead
+                {data.author}
               </span>
             </Text>
           </div>
           <div className="h-[384.445px] w-full @3xl:h-full @3xl:max-h-[384.445px] @3xl:max-w-[356.365px]">
             <Image
-              src={"/about/kara.jpg"}
-              alt="si ui scholars image"
+              src={imageUrl || "/about/kara.jpg"}
+              alt={data.author || "si ui scholars image"}
+              {...(data.image?.blurDataURL && {
+                placeholder: "blur",
+                blurDataURL: data.image?.blurDataURL,
+              })}
               width={600}
               height={328}
               decoding="async"

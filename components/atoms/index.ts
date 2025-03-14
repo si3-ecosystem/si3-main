@@ -12,6 +12,8 @@ import { Input } from "./input";
 import { Logo } from "./Logo";
 import { Spinner } from "./Spinner";
 import { Sheet } from "./sheet";
+import { Textarea } from "./textarea";
+import { RadioGroup } from "./radio-group";
 
 const components = {
   Title,
@@ -28,6 +30,8 @@ const components = {
   Logo,
   Spinner,
   Sheet,
+  Textarea,
+  RadioGroup,
 };
 
 export default components;

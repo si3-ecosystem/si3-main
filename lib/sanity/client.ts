@@ -11,6 +11,7 @@ import {
   scholarsQuery,
   guidesQuery,
   partnersQuery,
+  aboutQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -88,6 +89,13 @@ export async function getGuidesData() {
 export async function getPartnersData() {
   if (client) {
     return (await client.fetch(partnersQuery)) || {};
+  }
+  return {};
+}
+
+export async function getAboutPageData() {
+  if (client) {
+    return (await client.fetch(aboutQuery)) || {};
   }
   return {};
 }

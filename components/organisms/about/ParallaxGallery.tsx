@@ -2,19 +2,14 @@
 
 import { AspectRatio } from "@/components/atoms/aspect-ratio";
 import { Card } from "@/components/atoms/card";
+import { urlForImage } from "@/lib/sanity/image";
+import { Presenter } from "@/types/about";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
-interface TeamMember {
-  id: string | number;
-  name: string;
-  role: string;
-  image: string;
-}
-
 interface ParallaxGalleryProps {
-  teamMembers: TeamMember[];
+  teamMembers: Presenter[];
 }
 
 function TeamMemberCard({
@@ -22,36 +17,44 @@ function TeamMemberCard({
   index,
   scrollYProgress,
 }: {
-  member: TeamMember;
+  member: Presenter;
   index: number;
   scrollYProgress: MotionValue<number>;
 }) {
   const y = useTransform(
     scrollYProgress,
     [0, 1],
-    [0, index % 2 === 0 ? 100 : -100],
+    [0, index % 2 === 0 ? 200 : -200],
   );
+
+  const imageUrl = member.image
+    ? urlForImage(member.image)?.src
+    : "/about/kara.jpg";
 
   return (
     <motion.div
       style={{ y }}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
     >
       <Card className="bg-card/50 overflow-hidden rounded-2xl border-2 px-3 py-4 backdrop-blur-sm transition-all duration-300 hover:shadow-md">
         <AspectRatio ratio={9 / 10}>
           <Image
             fill
-            src={member.image}
+            {...(member.image?.blurDataURL && {
+              placeholder: "blur",
+              blurDataURL: member.image?.blurDataURL,
+            })}
+            src={imageUrl || "/about/kara.jpg"}
             alt={member.name}
             className="h-full w-full rounded-md object-cover transition-transform duration-300"
           />
         </AspectRatio>
         <div className="">
           <h3 className="text-lg font-medium">{member.name}</h3>
-          <p className="text-primary text-sm">{member.role}</p>
+          <p className="text-primary text-sm">{member.position}</p>
         </div>
       </Card>
     </motion.div>
@@ -68,8 +71,14 @@ export function ParallaxGallery({ teamMembers }: ParallaxGalleryProps) {
   return (
     <div
       ref={containerRef}
-      className="from-background to-accent min-h-screen bg-gradient-to-b py-20"
+      className="from-background to-accent relative min-h-screen overflow-hidden bg-gradient-to-b py-20"
     >
+      <Image
+        src={"/about/abougbackgroundbg.png"}
+        fill
+        alt="about team section bg"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -85,10 +94,10 @@ export function ParallaxGallery({ teamMembers }: ParallaxGalleryProps) {
           emotional intelligence as we align with talent from around the world.
         </motion.p>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-32 grid grid-cols-2 gap-8 lg:mb-32 lg:grid-cols-4 lg:py-20">
           {teamMembers.map((member, index) => (
             <TeamMemberCard
-              key={member.id}
+              key={member._id}
               member={member}
               index={index}
               scrollYProgress={scrollYProgress}

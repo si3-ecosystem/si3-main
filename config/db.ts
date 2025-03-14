@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose, { Mongoose, ConnectOptions } from "mongoose";
 
 const MONGODB_URI: string = process.env.MONGO_URI as string;
 
@@ -14,38 +14,41 @@ interface MongooseCache {
 }
 
 declare global {
-  // eslint-disable-next-line no-var
-  var mongoose: MongooseCache;
+  // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
+  var mongoose: MongooseCache | undefined;
 }
 
-let cached: MongooseCache = global.mongoose;
+const cached: MongooseCache = global.mongoose ?? { conn: null, promise: null };
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+global.mongoose = cached;
 
-async function dbConnect(): Promise<Mongoose> {
+const dbConnect = async (): Promise<Mongoose> => {
   if (cached.conn) {
+    console.log("Using cached MongoDB connection");
     return cached.conn;
   }
 
   if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log("Db connected");
-      return mongoose;
-    });
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        bufferCommands: false,
+        dbName: "partner_programs",
+      } as ConnectOptions)
+      .then((mongoose) => {
+        console.log("MongoDB connected successfully");
+        return mongoose;
+      });
   }
+
   try {
     cached.conn = await cached.promise;
-  } catch (e) {
+  } catch (err) {
+    console.error("MongoDB Connection Error:", err);
     cached.promise = null;
-    throw e;
+    throw err;
   }
 
   return cached.conn;
-}
+};
 
 export default dbConnect;

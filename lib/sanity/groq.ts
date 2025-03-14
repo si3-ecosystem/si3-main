@@ -195,3 +195,74 @@ export const partnersQuery = groq`
   }
 }
 `;
+
+export const aboutQuery = groq`
+*[_type == "aboutSchema"][0] {
+  _id,
+   about_hero-> {
+  title,
+  description,
+ image {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
+  },
+  our_purpose_title,
+  our_purpose_description,
+  purposes[]-> {
+    _id,
+    title,
+    description, 
+    image {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
+  },
+  testimonial {
+    quote,
+    sourceUrl,
+    sourceTitle,
+    author,
+    image {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
+  },
+  members[]-> {
+    _id,
+    name, 
+    position,
+    hobbies,
+    image {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
+    email,
+    link
+  },
+  timeline-> {
+    _id,
+    title,
+    timelineItems[] {
+      year,
+      subtitle,
+      content,
+      isActive
+    }
+  },
+  video {
+    "videoUrl": videoFile.asset->url,
+    title,
+    ctaLink,
+    ctaTitle
+  }
+}
+`;

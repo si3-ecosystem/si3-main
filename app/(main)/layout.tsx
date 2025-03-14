@@ -1,5 +1,6 @@
 import { Footer } from "@/components/organisms/layout/Footer";
 import { Navbar } from "@/components/organisms/layout/Navbar";
+import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 import { processMetadata } from "@/utils/sharedMetadata";
 import React, { ReactNode } from "react";
 
@@ -14,7 +15,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex flex-col justify-between overflow-x-hidden">
       <Navbar />
-      <main className="h-full w-full">{children}</main>
+      <SmoothScrollProvider>
+        <main className="mt-14 h-full w-full flex-1">{children}</main>
+      </SmoothScrollProvider>
       <Footer />
     </div>
   );

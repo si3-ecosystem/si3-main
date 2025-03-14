@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface TitleProps {
   variant?: "huge" | "large" | "medium" | "sm";
-  as?: "h1" | "h2" | "h3" | "h4";
+  as?: "h1" | "h2" | "h3" | "h4" | "span";
   children: ReactNode;
   className?: string;
 }

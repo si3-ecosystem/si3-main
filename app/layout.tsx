@@ -4,6 +4,7 @@ import WalletProvider from "@/providers/WagmiProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
 import { processMetadata } from "@/utils/sharedMetadata";
+import { Toaster } from "sonner";
 
 export const revalidate = 2500;
 
@@ -28,6 +29,7 @@ export default async function RootLayout({
             </TanstackQueryClientProvider>
           </ReduxProvider>
         </WalletProvider>
+        <Toaster />
       </body>
     </html>
   );

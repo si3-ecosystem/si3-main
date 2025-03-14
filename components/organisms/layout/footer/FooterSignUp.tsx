@@ -3,7 +3,7 @@ import React from "react";
 
 export const FooterSignUp = () => {
   return (
-    <div className="flex flex-[2] items-center border-b border-gray-400 px-4 lg:border-r lg:py-12">
+    <div className="flex flex-[2] items-center border-gray-400 px-4 lg:border-r lg:py-12">
       <div className="">
         <Link href="/" className="text-5xl font-bold uppercase">
           <span className="font-clesmont text-[40px]">{"SI<3>"}</span>

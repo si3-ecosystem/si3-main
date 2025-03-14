@@ -2,6 +2,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { LoaderCircleIcon } from "lucide-react";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 ease-in-out disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-black hover:text-white rounded-full cursor-pointer",
@@ -38,6 +39,7 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   showGradient?: boolean;
+  loading?: boolean;
 }
 
 function Button({
@@ -46,6 +48,8 @@ function Button({
   size,
   asChild = false,
   showGradient = false,
+  loading = false,
+  children,
   ...props
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
@@ -59,9 +63,20 @@ function Button({
           ? "transition-background bg-black duration-300 ease-in-out hover:bg-[linear-gradient(to_right,#9F44D3,#D939CD)]"
           : "",
         className,
+        loading && "relative",
       )}
+      disabled={props.disabled || loading}
       {...props}
-    />
+    >
+      {loading && (
+        <LoaderCircleIcon
+          className="mr-2 animate-spin"
+          size={16}
+          aria-hidden="true"
+        />
+      )}
+      {children}
+    </Comp>
   );
 }
 
