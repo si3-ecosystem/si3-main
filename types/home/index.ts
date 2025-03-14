@@ -135,6 +135,8 @@ export interface Testimonial {
 
 export interface GuidesData {
   _id: string;
+  title: string;
+  description: string;
   introduction: Introduction;
   web3brands: Web3Brand;
   members_title: string;
@@ -160,8 +162,9 @@ export interface ExploreItem {
 
 export interface PartnersData {
   _id: string;
-  introduction: Introduction;
   title: string;
+  description: string;
+  introduction: Introduction;
   explore: ExploreItem[];
   testimonials: Testimonial[];
   video: SanityVideo;

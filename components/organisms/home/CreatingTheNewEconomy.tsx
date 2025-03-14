@@ -1,3 +1,5 @@
+import React from "react";
+
 import { ContentCard } from "@/components/molecules/cards/ContentCard";
 import Link from "next/link";
 

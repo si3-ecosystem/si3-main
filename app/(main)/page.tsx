@@ -4,16 +4,41 @@ import { FooterBanner } from "@/components/organisms/home/FooterBanner";
 import { OurCommunity } from "@/components/organisms/home/OurCommunity";
 import HeaderContainer from "@/components/organisms/home/header/HeaderContainer";
 import { CreatingTheNewEconomy } from "@/components/organisms/home/CreatingTheNewEconomy";
+import {
+  getGuidesData,
+  getPartnersData,
+  getScholarsData,
+} from "@/lib/sanity/client";
+import { Suspense } from "react";
+import { Spinner } from "@/components/atoms/Spinner";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [scholarsData, guidesData, partnersData] = await Promise.all([
+    getScholarsData(),
+    getGuidesData(),
+    getPartnersData(),
+  ]);
+
   return (
-    <section>
+    <Suspense
+      fallback={
+        <section className="flex h-screen items-center justify-center">
+          <Spinner />
+        </section>
+      }
+    >
       <HeaderContainer />
       <OurImpact />
       <OurPathways />
-      <OurCommunity />
+      <Suspense fallback={<Spinner />}>
+        <OurCommunity
+          scholarsData={scholarsData}
+          guidesData={guidesData}
+          partnersData={partnersData}
+        />
+      </Suspense>
       <CreatingTheNewEconomy />
       <FooterBanner />
-    </section>
+    </Suspense>
   );
 }

@@ -30,6 +30,7 @@ import { toast } from "sonner";
 import { Title } from "@/components/atoms/title";
 import { Textarea } from "@/components/atoms/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
+import { LoaderCircleIcon } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -263,10 +264,17 @@ export function PartnerProgramForm() {
                 />
                 <Button
                   type="submit"
-                  loading={mutation.isPending}
+                  disabled={mutation.isPending}
                   showGradient
                   className="mt-12 w-full"
                 >
+                  {mutation.isPending && (
+                    <LoaderCircleIcon
+                      className="mr-2 animate-spin"
+                      size={16}
+                      aria-hidden="true"
+                    />
+                  )}
                   {mutation.isPending ? "Submitting..." : "Submit Inquiry"}
                 </Button>
               </form>

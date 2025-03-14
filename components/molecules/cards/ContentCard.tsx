@@ -47,9 +47,6 @@ export const ContentCard: React.FC<ContentCardProps> = ({
     height = 862,
     className: imageClassName,
   } = image;
-
-  const LinkComponent = button?.as || "a";
-
   return (
     <div
       className={cn(
@@ -75,25 +72,13 @@ export const ContentCard: React.FC<ContentCardProps> = ({
         >
           {description}
         </Text>
-        {button && (
-          <Button
-            asChild
-            showGradient={button.showGradient}
-            className={cn("mt-4 bg-black", button.className)}
-          >
-            {LinkComponent ? (
-              <Link
-                href={button.link}
-                scroll={false}
-                aria-label={button.ariaLabel || button.ctaText}
-              >
-                {button.ctaText}
-              </Link>
-            ) : (
-              button.ctaText
-            )}
-          </Button>
-        )}
+        {button ? (
+          <Link href={button?.link || "#"} scroll={false}>
+            <Button showGradient={true} className={cn("mt-4 bg-black")}>
+              {button?.ctaText}
+            </Button>
+          </Link>
+        ) : null}
       </div>
 
       <div className="w-full max-w-[513px]">
