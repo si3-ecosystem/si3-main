@@ -1,9 +1,11 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 
-interface IDiversityTracker extends Document {
+export interface IDiversityTracker extends Document {
   self_identity: string;
+  selfIdentityCustom: string;
   age_range: string;
   ethnicity: string;
+  ethnicityCustom: string;
   disability: string;
   sexual_orientation: string;
   equity_scale: number;
@@ -23,7 +25,7 @@ const DiversityTrackerSchema: Schema = new Schema(
       trim: true,
       default: "",
     },
-
+    selfIdentityCustom: { type: String, trim: true, default: "" },
     ageRange: {
       type: String,
       trim: true,
@@ -35,6 +37,7 @@ const DiversityTrackerSchema: Schema = new Schema(
       trim: true,
       default: "",
     },
+    ethnicityCustom: { type: String, trim: true, default: "" },
 
     disability: {
       type: String,

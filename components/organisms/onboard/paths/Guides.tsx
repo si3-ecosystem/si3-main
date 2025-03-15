@@ -2,15 +2,29 @@ import { AspectRatio } from "@/components/atoms/aspect-ratio";
 import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
+import { urlForImage } from "@/lib/sanity/image";
+import { OnboardMaterial } from "@/types/onboard";
 import Image from "next/image";
+import Link from "next/link";
 
-export function Guides() {
+type Props = {
+  data: OnboardMaterial;
+};
+
+export function Guides({ data }: Props) {
+  const imageUrl = data?.thumbnail
+    ? urlForImage(data.thumbnail)?.src
+    : "/icons/jpg/si_u_scholars_heroimage.jpg";
   return (
     <Card className="hover:border-primary flex h-full w-full flex-col gap-6 border border-[#D1D1D1] p-5">
       <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-2xl">
         <Image
-          src={"/icons/jpg/si_her_guides_heroimage.jpg"}
+          src={imageUrl || "/icons/jpg/si_her_guides_heroimage.jpg"}
           fill
+          {...(data?.thumbnail?.blurDataURL && {
+            placeholder: "blur",
+            blurDataURL: data?.thumbnail?.blurDataURL,
+          })}
           loading="lazy"
           decoding="async"
           alt="scholars"
@@ -19,17 +33,16 @@ export function Guides() {
       </AspectRatio>
       <div className="flex flex-col gap-6">
         <Text as={"h2"} variant="2xl" className="text-black">
-          Si Her Guides
+          {data.title}
         </Text>
         <Text variant="xl" as={"p"} className="tracking-tight">
-          Advanced Web3 education and professional development resources to
-          accelerate women & non-binary leaders as guides.
+          {data.description}
         </Text>
-        <Button variant={"outline"} className="w-full">
-          Join Now
+        <Button asChild variant={"outline"} className="w-full">
+          <Link href={data.ctaLink || "#"}>{data.ctaText} </Link>
         </Button>
         <Text variant="base" as={"p"} className="text-center text-[#585858]">
-          $300 USD one-time fee
+          {data.membership}
         </Text>
       </div>
     </Card>

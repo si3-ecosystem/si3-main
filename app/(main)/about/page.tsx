@@ -1,4 +1,4 @@
-import { Spinner } from "@/components/atoms/Spinner";
+import { Loader } from "@/components/atoms/Loader";
 import { AnimatedHands } from "@/components/organisms/about/AnimatedHands";
 import { HeroSection } from "@/components/organisms/about/HeroSection";
 import { ParallaxGallery } from "@/components/organisms/about/ParallaxGallery";
@@ -13,19 +13,12 @@ export default async function AboutPage() {
   const data: AboutQuery = await getAboutPageData();
 
   return (
-    <Suspense
-      fallback={
-        <section className="flex h-screen items-center justify-center">
-          <Spinner />
-        </section>
-      }
-    >
+    <Suspense fallback={<Loader />}>
       <HeroSection data={data} />
       <TopTestimonial data={data.testimonial} />
       <AnimatedHands />
       <ParallaxGallery teamMembers={data.members || []} />
       <Timeline items={data.timeline} />
-
       <CtaVideoSection
         videoSrc={data.video.videoUrl}
         title={data.video.title || ""}

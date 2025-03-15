@@ -12,6 +12,7 @@ import {
   guidesQuery,
   partnersQuery,
   aboutQuery,
+  onboardQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -96,6 +97,12 @@ export async function getPartnersData() {
 export async function getAboutPageData() {
   if (client) {
     return (await client.fetch(aboutQuery)) || {};
+  }
+  return {};
+}
+export async function getOnboardPageData() {
+  if (client) {
+    return (await client.fetch(onboardQuery)) || {};
   }
   return {};
 }

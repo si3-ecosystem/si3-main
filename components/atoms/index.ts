@@ -14,6 +14,8 @@ import { Spinner } from "./Spinner";
 import { Sheet } from "./sheet";
 import { Textarea } from "./textarea";
 import { RadioGroup } from "./radio-group";
+import { Loader } from "./Loader";
+import { Slider } from "./slider";
 
 const components = {
   Title,
@@ -32,6 +34,8 @@ const components = {
   Sheet,
   Textarea,
   RadioGroup,
+  Loader,
+  Slider,
 };
 
 export default components;

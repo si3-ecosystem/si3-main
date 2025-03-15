@@ -31,6 +31,7 @@ import { Title } from "@/components/atoms/title";
 import { Textarea } from "@/components/atoms/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { LoaderCircleIcon } from "lucide-react";
+import { SuccessDialog } from "../dialogs/SuccessDialog";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -45,6 +46,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export function PartnerProgramForm() {
   const [open, setOpen] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -93,6 +95,7 @@ export function PartnerProgramForm() {
       toast.success("Inquiry submitted successfully!");
       form.reset();
       setOpen(false);
+      setShowSuccess(true);
     },
     onError: (error: Error) => {
       toast.error(error.message || "Something went wrong");
@@ -282,6 +285,17 @@ export function PartnerProgramForm() {
           </div>
         </DialogContent>
       </Dialog>
+      {showSuccess && (
+        <SuccessDialog
+          open={showSuccess}
+          onOpenChange={setShowSuccess}
+          imageSrc="/icons/jpg/successGreen.jpg"
+          title="Inquiry Submitted Successfully"
+          description="Thank you for your partnership inquiry. A member of our team will be in touch soon!"
+          ctaLink="/"
+          ctaTitle="Get Back to Home Page"
+        />
+      )}
     </div>
   );
 }

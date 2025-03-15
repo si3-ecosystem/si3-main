@@ -266,3 +266,30 @@ export const aboutQuery = groq`
   }
 }
 `;
+
+export const onboardQuery = groq`
+  *[_type == "onboardSchema"][0] {
+  ...,
+    _id,
+    title,
+    "onboard_materials": onboard_materials[]-> {
+      _id,
+      title,
+      description,
+      membership,
+      ctaText,
+      ctaLink,
+      isButton,
+      buttonModeFields {
+        buttonText,
+        buttonUrl,
+      },
+      thumbnail {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
+    },
+  }
+`;

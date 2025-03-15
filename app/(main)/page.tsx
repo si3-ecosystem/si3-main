@@ -11,6 +11,7 @@ import {
 } from "@/lib/sanity/client";
 import { Suspense } from "react";
 import { Spinner } from "@/components/atoms/Spinner";
+import { Loader } from "@/components/atoms/Loader";
 
 export default async function HomePage() {
   const [scholarsData, guidesData, partnersData] = await Promise.all([
@@ -20,13 +21,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <Suspense
-      fallback={
-        <section className="flex h-screen items-center justify-center">
-          <Spinner />
-        </section>
-      }
-    >
+    <Suspense fallback={<Loader />}>
       <HeaderContainer />
       <OurImpact />
       <OurPathways />
