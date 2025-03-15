@@ -56,6 +56,7 @@ const EducationPartner = ({ data }: Props) => {
               <PartnersCard
                 key={`${partner._id}-${index}`}
                 alt={partner._id}
+                type={partner.type}
                 src={
                   imageUrl || "/home/partners/community-partner/livepeer.png"
                 }

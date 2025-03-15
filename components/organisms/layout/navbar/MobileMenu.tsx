@@ -1,12 +1,15 @@
-import { Button } from "@/components/atoms/button";
+import { CircleUserRound } from "lucide-react";
 import Logo from "@/components/atoms/Logo";
+import Link from "next/link";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/atoms/sheet";
+import React from "react";
 
 export function MobileMenu() {
   return (
@@ -40,45 +43,146 @@ export function MobileMenu() {
           </svg>
         </div>
       </SheetTrigger>
-      <SheetContent side="left" className="h-full w-[400px] sm:w-[540px]">
-        <SheetHeader>
+      <SheetContent side="left" className="h-[100vh] w-full bg-white p-0">
+        <SheetHeader className="border-b p-4">
           <SheetTitle className="!p-6">
-            <Logo src="/logo.svg" />
+            <Logo src="/logo.svg" alt="SI3 Logo" />
           </SheetTitle>
         </SheetHeader>
-        <div className="flex h-full flex-col justify-between space-y-4 p-6">
-          <div className="h-full flex-1 space-y-4">
-            <Button
-              variant="outline"
-              className="w-full justify-start rounded-lg"
-              onClick={() => alert("Explore Web3 clicked")}
-            >
-              Explore Web3
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full justify-start rounded-lg"
-              onClick={() => alert("Build Web3 clicked")}
-            >
-              Build Web3
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full justify-start rounded-lg"
-              onClick={() => alert("Lead Web3 clicked")}
-            >
-              Lead Web3
-            </Button>
+        <div className="-mt-3 flex h-[100vh] flex-col justify-between overflow-y-scroll">
+          <div className="px-4">
+            <div className="mb-8 divide-y divide-gray-300 border-r border-b border-l border-gray-300">
+              <div className="grid w-full grid-cols-2 divide-x divide-y divide-gray-300">
+                <SheetClose asChild>
+                  <Link
+                    href="/#pathways"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">SI U Scholars</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">SI U</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+              </div>
+
+              <div className="grid grid-cols-2 divide-x divide-y divide-gray-300">
+                <SheetClose asChild>
+                  <Link
+                    href="/#pathways"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">Si Her Kollab</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/#pathways"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">Si Her Guides</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/#pathways"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">SiHerEth</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/#pathways"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">Si Her Programming</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/#pathways"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">{"SI<3>Partners"}</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/#pathways"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">
+                      {"SI<3>Partner Workshops"}
+                    </p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/onboard"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">DEAI Training</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/diversity-tracker"
+                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                  >
+                    <p className="text-lg font-bold">Diversity Tracker</p>
+                    <span className="hidden text-sm group-hover:block">→</span>
+                  </Link>
+                </SheetClose>
+              </div>
+
+              <SheetClose asChild>
+                <Link
+                  href="/about"
+                  className="hover:bg-primary group w-full p-8 text-center text-black hover:text-white"
+                >
+                  <p className="text-lg font-bold">About Us</p>
+                </Link>
+              </SheetClose>
+            </div>
           </div>
-          <div>
-            <Button
-              variant="outline"
-              className="mt-6 w-full rounded-md bg-black text-white"
-              onClick={() => alert("Get Started clicked")}
-            >
-              Get Started
-            </Button>
-            <div className="mt-6 rounded-lg bg-gray-200 p-4 text-black">
+
+          <div className="space-y-4 px-4">
+            <SheetClose asChild>
+              <Link
+                href="/onboard"
+                className="block w-full rounded-md bg-black py-2 text-center text-white"
+              >
+                Get Started
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link
+                href="/login"
+                className="hover:bg-primary flex w-full items-center justify-center rounded-md border border-gray-300 py-2 text-center text-gray-700"
+              >
+                <span className="mr-2">
+                  <CircleUserRound />
+                </span>{" "}
+                Member Login
+              </Link>
+            </SheetClose>
+
+            <div className="mb-4 rounded-lg bg-gray-200 p-4 text-black">
               <p className="text-base font-medium">
                 Help us build a more inclusive Web3!
               </p>
@@ -86,13 +190,14 @@ export function MobileMenu() {
                 Share your unique perspective by filling out our Diversity
                 Tracker—your voice matters.
               </p>
-              <Button
-                variant="link"
-                className="mt-6 rounded-full bg-white text-black"
-                onClick={() => alert("Learn More clicked")}
-              >
-                Learn More
-              </Button>
+              <SheetClose asChild>
+                <Link
+                  href="/about"
+                  className="hover:bg-primary mt-2 block rounded-full bg-white py-1 text-center text-black"
+                >
+                  Learn More
+                </Link>
+              </SheetClose>
             </div>
           </div>
         </div>

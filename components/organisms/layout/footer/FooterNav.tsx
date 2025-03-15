@@ -3,7 +3,7 @@ import React from "react";
 
 export const FooterNav = () => {
   const navItems = [
-    { href: "/privacy-policy", label: "Privacy Policy" },
+    { href: "/privacy", label: "Privacy Policy" },
     { href: "/member-policy", label: "Member Policy" },
     {
       href: "https://app.charmverse.io/si3/welcome-to-si-3-734090998628107",

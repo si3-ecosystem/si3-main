@@ -22,7 +22,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 right-0 left-0 z-50 w-full border-white bg-white transition-all duration-300 outline-none",
+        "fixed top-0 right-0 left-0 z-50 w-full border-white bg-white shadow-sm transition-all duration-300 outline-none",
         isScrolled ? "border-b border-gray-200" : "border-b border-white",
       )}
       style={{

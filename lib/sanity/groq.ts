@@ -156,6 +156,7 @@ export const guidesQuery = groq`
   },
   testimonials[]-> {
     _id,
+    excerpt,
     description,
     image {
       ...,
@@ -212,6 +213,7 @@ export const partnersQuery = groq`
   },
   testimonials[]-> {
     _id,
+    excerpt,
     description,
     image {
       ...,

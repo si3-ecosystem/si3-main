@@ -124,6 +124,7 @@ export interface ProgrammingEvent {
 
 export interface Testimonial {
   _id: string;
+  excerpt?: string;
   description: string;
   image: SanityImage;
   name?: string;
@@ -180,6 +181,7 @@ export interface Partner {
   _id: string;
   name: string;
   logo?: HomepageImage;
+  type?: string;
 }
 
 export interface HomepageSchema {

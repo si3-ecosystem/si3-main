@@ -5,9 +5,15 @@ interface PartnersCardProps {
   src: string;
   alt: string;
   className?: string;
+  type?: string;
 }
 
-const PartnersCard: React.FC<PartnersCardProps> = ({ src, alt, className }) => {
+const PartnersCard: React.FC<PartnersCardProps> = ({
+  src,
+  alt,
+  className,
+  type,
+}) => {
   return (
     <div className="w-40 space-y-2 rounded-2xl border border-gray-100 bg-white p-5 md:w-72 md:p-8">
       <div className="relative h-8 md:h-12">
@@ -23,7 +29,10 @@ const PartnersCard: React.FC<PartnersCardProps> = ({ src, alt, className }) => {
         />
       </div>
 
-      <p className="text-gray-500 max-md:text-[9px]">Business Partner</p>
+      <p className="text-gray-500 max-md:text-[9px]">
+        {" "}
+        {type || "Business Partner"}
+      </p>
     </div>
   );
 };

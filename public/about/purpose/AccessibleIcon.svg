@@ -32,7 +32,7 @@
 <g style="mix-blend-mode:plus-lighter" opacity="0.54" filter="url(#filter9_f_114_30169)">
 <path d="M49.6414 68.8285L39.5391 58.7218L50.1593 48.1016L60.3997 59.7186L49.6414 68.8285Z" fill="url(#paint11_linear_114_30169)"/>
 </g>
-<path d="M67.5373 73.6016C67.5373 84.6074 59.0409 93.5302 48.5636 93.5302C38.0863 93.5302 29.5898 84.6074 29.5898 73.6016" stroke="url(#paint12_linear_114_30169)" stroke-width="0.926557" stroke-miterlimit="10"/>
+<path d="M67.5373 73.6016C67.5373 84.6074 59.0409 93.5302 48.5636 93.5302C38.0863 93.5302 29.5898 84.6074 29.5898 73.6016" stroke="url(#paint12_linear_114_30169)" strokeWidth="0.926557" stroke-miterlimit="10"/>
 <defs>
 <filter id="filter0_f_114_30169" x="24.8858" y="18.6983" width="49.4823" height="68.828" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
