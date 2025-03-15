@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface PushState {
   pushSign: any;
+  isConnected: boolean;
 }
 
 const initialState: PushState = {
   pushSign: {},
+  isConnected: false,
 };
 
 const pushSlice = createSlice({
@@ -18,12 +20,16 @@ const pushSlice = createSlice({
       state.pushSign = action.payload;
     },
 
-    resetPushSign: () => {
+    resetPush: () => {
       initialState;
+    },
+
+    setConnected: (state: PushState, action: PayloadAction<boolean>) => {
+      state.isConnected = action.payload;
     },
   },
 });
 
-export const { setPushSign, resetPushSign } = pushSlice.actions;
+export const { setPushSign, resetPush, setConnected } = pushSlice.actions;
 
 export default pushSlice.reducer;
