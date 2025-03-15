@@ -22,7 +22,13 @@ export const Text = ({
   };
 
   return (
-    <Tag className={cn("font-normal", variantStyles[variant], className)}>
+    <Tag
+      className={cn(
+        "!font-roobert font-normal",
+        variantStyles[variant],
+        className,
+      )}
+    >
       {children}
     </Tag>
   );

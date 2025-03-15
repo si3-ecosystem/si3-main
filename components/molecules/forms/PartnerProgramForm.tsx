@@ -32,6 +32,7 @@ import { Textarea } from "@/components/atoms/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -44,7 +45,15 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function PartnerProgramForm() {
+export function PartnerProgramForm({
+  title,
+  showGradient = false,
+  className,
+}: {
+  title?: string;
+  showGradient?: boolean;
+  className?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const form = useForm<FormValues>({
@@ -110,8 +119,12 @@ export function PartnerProgramForm() {
     <div className="overflow-hidden">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant={"outline"} className="w-full">
-            Inquire Now
+          <Button
+            variant={"outline"}
+            className={cn("w-full", className)}
+            showGradient={showGradient}
+          >
+            {title || "Inquire Now"}
           </Button>
         </DialogTrigger>
         <DialogContent className="mx-auto w-full overflow-y-scroll px-4 py-14 sm:max-w-[924px] sm:px-20">

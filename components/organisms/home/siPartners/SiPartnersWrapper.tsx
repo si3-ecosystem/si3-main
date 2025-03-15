@@ -17,7 +17,7 @@ export function SiPartnersWrapper({ data }: Props) {
         <ExploreSection data={data.explore} />
       </div>
       <div className="px-4 pb-10 lg:px-[90px]">
-        <Testimonials items={data.testimonials} title="Si Her Testimonials" />
+        <Testimonials items={data.testimonials} title="Partner Testimonials" />
       </div>
     </section>
   );

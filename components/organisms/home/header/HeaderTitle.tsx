@@ -50,7 +50,7 @@ export function HeaderTitle() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: direction === 1 ? -10 : 10 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className={`absolute right-0 left-0 bg-gradient-to-r bg-clip-text text-[38px] whitespace-nowrap text-transparent lg:text-[52px] ${words[index]?.gradient ? words[index]?.gradient : "from-[#CE9FFC] to-[#7367F0]"}`}
+            className={`absolute right-0 left-0 bg-gradient-to-r bg-clip-text text-[32px] whitespace-nowrap text-transparent sm:text-[36px] lg:text-[52px] ${words[index]?.gradient ? words[index]?.gradient : "from-[#CE9FFC] to-[#7367F0]"}`}
           >
             {words[index]?.text || "A Collaborative"}
           </motion.span>

@@ -92,7 +92,6 @@ export function FooterBanner() {
       <CtaVideoSection
         videoSrc={content.videoSrc}
         title={content.title}
-        ctaLink={content.ctaLink}
         ctaTitle={content.ctaTitle}
         showGradient={content.showGradient || true}
       />

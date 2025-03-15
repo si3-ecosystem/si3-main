@@ -14,6 +14,7 @@ export function Notification() {
     <div
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
+      className="relative"
     >
       <div className="group rounded-full border border-gray-300 p-2 transition-all duration-300 hover:bg-gray-50">
         {hover ? <PingIcon /> : <BellRing size={24} className="size-6" />}
