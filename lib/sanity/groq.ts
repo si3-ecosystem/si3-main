@@ -4,6 +4,41 @@ export const getAll = groq`*[]`;
 
 export const seoData = groq`*[_type == 'utils'][0]`;
 
+export const homepageQuery = groq`
+  *[_type == "homepageSchema"][0] {
+    _id,
+    title,
+    image {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt,
+    },
+    communityPartners[]-> {
+      _id,
+      name,
+      type,
+      logo {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
+    },
+     educationPartners[]-> {
+      _id,
+      name,
+      type,
+      logo {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
+    },
+  }
+`;
+
 export const scholarsQuery = groq`
 *[_type == "scholarsSchema"][0] {
   _id,

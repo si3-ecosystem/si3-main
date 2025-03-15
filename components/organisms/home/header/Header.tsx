@@ -2,6 +2,8 @@ import React from "react";
 
 import { Title } from "@/components/atoms/title";
 import { Button } from "@/components/atoms/button";
+import Link from "next/link";
+import { HeaderTitle } from "./HeaderTitle";
 
 const Header = () => {
   return (
@@ -12,10 +14,8 @@ const Header = () => {
         className="text-center text-[40px] leading-10 text-white uppercase lg:text-6xl lg:leading-18"
       >
         Entering <br />
-        <span className="bg-gradient-to-r from-[#CE9FFC] to-[#BFB8FF] bg-clip-text text-transparent">
-          a collaborative
-        </span>
-        <br /> web3 era
+        <HeaderTitle />
+        web3 era
       </Title>
 
       <p className="mx-auto max-w-[336.016px] text-center text-lg text-white lg:max-w-[573.807px] lg:text-xl">
@@ -24,8 +24,17 @@ const Header = () => {
       </p>
 
       <div className="flex justify-center space-x-4 max-lg:mt-[41px]">
-        <Button>Get Started</Button>
-        <Button showGradient>Learn More</Button>
+        <Button asChild>
+          <Link href={"/onboard"}>Get Started</Link>
+        </Button>
+        <Button
+          asChild
+          className="bg-white text-black hover:bg-black hover:text-white"
+        >
+          <Link scroll={true} href={"#pathways"}>
+            Learn More
+          </Link>
+        </Button>
       </div>
     </header>
   );

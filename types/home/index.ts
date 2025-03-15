@@ -169,3 +169,23 @@ export interface PartnersData {
   testimonials: Testimonial[];
   video: SanityVideo;
 }
+
+export interface HomepageImage extends SanityImage {
+  blurDataURL?: string;
+  ImageColor?: string;
+  alt?: string;
+}
+
+export interface Partner {
+  _id: string;
+  name: string;
+  logo?: HomepageImage;
+}
+
+export interface HomepageSchema {
+  _id: string;
+  title: string;
+  image: HomepageImage;
+  educationPartners: Partner[];
+  communityPartners: Partner[];
+}

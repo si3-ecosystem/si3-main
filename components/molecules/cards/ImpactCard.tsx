@@ -17,9 +17,9 @@ export function ImpactCard({ item }: Props) {
       <p className="text-[40px] leading-none font-semibold">
         <CountUp
           end={item.count}
-          duration={2}
+          duration={1}
           formattingFn={formatCount}
-          start={0}
+          start={1}
           delay={0.5}
         />
       </p>

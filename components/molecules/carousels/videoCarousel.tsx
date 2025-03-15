@@ -81,7 +81,7 @@ export function VideoCarousel({
   return (
     <section className="@container w-full bg-white">
       <div className="w-full">
-        <div className="flex w-full flex-col justify-between gap-8 lg:flex-row">
+        <div className="flex w-full flex-col justify-between lg:flex-row lg:gap-8">
           <div className="space-y-2">
             {title && (
               <Title
@@ -121,7 +121,7 @@ export function VideoCarousel({
 
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="mt-16 -ml-6 flex lg:mt-8">
+            <div className="mt-8 -ml-6 flex lg:mt-8">
               {slides.map((slideItems, slideIndex) => (
                 <div key={slideIndex} className="min-w-0 flex-[0_0_100%] pl-6">
                   <div className="grid h-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

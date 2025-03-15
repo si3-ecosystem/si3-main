@@ -13,6 +13,7 @@ import {
   partnersQuery,
   aboutQuery,
   onboardQuery,
+  homepageQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -69,6 +70,13 @@ export const fetcher = async <T = unknown>([query, params]: [
 export async function getSeoData() {
   if (client) {
     return (await client.fetch(seoData)) || {};
+  }
+  return {};
+}
+
+export async function getHomePageData() {
+  if (client) {
+    return (await client.fetch(homepageQuery)) || {};
   }
   return {};
 }

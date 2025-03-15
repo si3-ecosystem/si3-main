@@ -1,7 +1,5 @@
 import "./globals.css";
 
-import { Toaster } from "sonner";
-
 import WalletProvider from "@/providers/WagmiProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
