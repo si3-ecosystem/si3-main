@@ -1,6 +1,6 @@
 import { http, createConfig } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
-import { metaMask, coinbaseWallet } from "wagmi/connectors";
+import { metaMask, coinbaseWallet, walletConnect } from "wagmi/connectors";
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
@@ -10,9 +10,9 @@ export const config = createConfig({
   connectors: [
     metaMask(),
     coinbaseWallet(),
-    // walletConnect({
-    //   projectId: "Our ID",
-    // }),
+    walletConnect({
+      projectId: "82b9193221afcff90a3e7b1d94e67505",
+    }),
   ],
 
   transports: {
