@@ -7,12 +7,11 @@ import {
 } from "@/components/atoms/accordion";
 import { Title } from "@/components/atoms/title";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-
 import { ReactNode, useEffect, useRef } from "react";
-import { AccordionDownIcon } from "../icons/AccordionDownIcon";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setActiveAccordionValue } from "@/redux/slice/communitySlice";
+import { PlusIcon, MinusIcon } from "lucide-react";
 
 export interface AccordionRenderItem {
   title: string;
@@ -57,6 +56,7 @@ export function CommunityAccordion({
       });
     }
   };
+
   return (
     <div ref={sectionRef} className="space-y-4">
       <Accordion
@@ -73,15 +73,15 @@ export function CommunityAccordion({
             key={item.value}
             className="-mt-8 !overflow-hidden rounded-2xl !p-0 transition-all duration-300 ease-in-out sm:shadow-xl md:-mt-16 lg:rounded-[40px] [data-state=open]:z-40 [data-state=open]:mt-8 md:[data-state=open]:mt-16"
           >
-            <AccordionPrimitive.Header className="relative !z-20 flex !cursor-pointer py-[30px] lg:py-14">
-              <AccordionPrimitive.Trigger className="focus-visible:border-ring focus-visible:ring-ring/50 [& flex flex-1 items-center justify-between rounded-md px-4 py-2 text-left text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] lg:px-[90px]">
+            <AccordionPrimitive.Header className="group relative !z-20 flex !cursor-pointer py-[30px] lg:py-14">
+              <AccordionPrimitive.Trigger className="focus-visible:ring-ring/50 focus-visible:border-ring flex flex-1 items-center justify-between overflow-hidden rounded-md px-4 py-2 text-left text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] lg:px-[90px] group-hover:[&>img]:scale-110">
                 <Image
                   src={item.background || ""}
-                  alt="somethig"
+                  alt={item.title}
                   fill
-                  objectPosition="cover"
-                  objectFit="center"
-                  className="z-0 w-full"
+                  objectFit="cover"
+                  objectPosition="center"
+                  className="z-0 w-full transition-transform duration-300 ease-in-out"
                 />
                 <span className="z-10 flex flex-col space-y-1">
                   <Title
@@ -92,8 +92,11 @@ export function CommunityAccordion({
                     {item.title}
                   </Title>
                 </span>
-
-                <AccordionDownIcon className="pointer-events-non z-10 size-8 shrink-0 transition-transform duration-200 lg:size-16" />
+                {activeAccordionValue === item.value ? (
+                  <MinusIcon className="pointer-events-none z-10 size-8 shrink-0 text-white lg:size-16" />
+                ) : (
+                  <PlusIcon className="pointer-events-none z-10 size-8 shrink-0 text-white lg:size-16" />
+                )}
               </AccordionPrimitive.Trigger>
             </AccordionPrimitive.Header>
             <AccordionContent className="text-muted-foreground !z-0 bg-white ease-in-out">

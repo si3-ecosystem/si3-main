@@ -3,12 +3,16 @@ import React from "react";
 
 export const FooterNav = () => {
   const navItems = [
-    { href: "/privacy", label: "Privacy Policy" },
-    { href: "/member-policy", label: "Member Policy" },
+    { href: "/privacy", label: "Policies" },
+    { href: "/diversity-tracker", label: "Diversity Tracker" },
     {
       href: "https://app.charmverse.io/si3/welcome-to-si-3-734090998628107",
-      label: "Media Kit",
+      label: "Brand Kit",
       target: "_blank",
+    },
+    {
+      href: "/about",
+      label: "About Us",
     },
   ];
 
@@ -24,7 +28,7 @@ export const FooterNav = () => {
               target={target}
               className="cursor-pointer hover:underline hover:underline-offset-2"
             >
-              <button className="block">{label}</button>
+              <button className="block opacity-80">{label}</button>
             </Link>
           ))}
         </div>

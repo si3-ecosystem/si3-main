@@ -41,7 +41,7 @@ export function HeaderTitle() {
   }, [direction]);
 
   return (
-    <div className="mx-auto max-w-[700px] text-center md:px-4">
+    <div className="mx-auto max-w-[700px] shrink-0 text-center md:px-4">
       <div className="relative h-[50px] overflow-hidden max-md:mt-2 md:mb-2 lg:h-[60px]">
         <AnimatePresence mode="wait">
           <motion.span
@@ -50,7 +50,7 @@ export function HeaderTitle() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: direction === 1 ? -10 : 10 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className={`absolute right-0 left-0 bg-gradient-to-r bg-clip-text text-transparent ${words[index]?.gradient ? words[index]?.gradient : "from-[#CE9FFC] to-[#7367F0]"}`}
+            className={`absolute right-0 left-0 bg-gradient-to-r bg-clip-text text-[38px] whitespace-nowrap text-transparent lg:text-[52px] ${words[index]?.gradient ? words[index]?.gradient : "from-[#CE9FFC] to-[#7367F0]"}`}
           >
             {words[index]?.text || "A Collaborative"}
           </motion.span>

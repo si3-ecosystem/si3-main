@@ -5,6 +5,7 @@ import { OurCommunity } from "@/components/organisms/home/OurCommunity";
 import HeaderContainer from "@/components/organisms/home/header/HeaderContainer";
 import { CreatingTheNewEconomy } from "@/components/organisms/home/CreatingTheNewEconomy";
 import {
+  getAboutIntroData,
   getGuidesData,
   getHomePageData,
   getPartnersData,
@@ -15,12 +16,13 @@ import { Spinner } from "@/components/atoms/Spinner";
 import { Loader } from "@/components/atoms/Loader";
 
 export default async function HomePage() {
-  const [HomePageData, scholarsData, guidesData, partnersData] =
+  const [HomePageData, scholarsData, guidesData, partnersData, aboutIntroData] =
     await Promise.all([
       getHomePageData(),
       getScholarsData(),
       getGuidesData(),
       getPartnersData(),
+      getAboutIntroData(),
     ]);
 
   return (
@@ -35,7 +37,7 @@ export default async function HomePage() {
           partnersData={partnersData}
         />
       </Suspense>
-      <CreatingTheNewEconomy />
+      <CreatingTheNewEconomy aboutIntroData={aboutIntroData} />
       <FooterBanner />
     </Suspense>
   );

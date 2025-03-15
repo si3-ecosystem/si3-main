@@ -14,6 +14,7 @@ import {
   aboutQuery,
   onboardQuery,
   homepageQuery,
+  aboutIntroQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -111,6 +112,12 @@ export async function getAboutPageData() {
 export async function getOnboardPageData() {
   if (client) {
     return (await client.fetch(onboardQuery)) || {};
+  }
+  return {};
+}
+export async function getAboutIntroData() {
+  if (client) {
+    return (await client.fetch(aboutIntroQuery)) || {};
   }
   return {};
 }

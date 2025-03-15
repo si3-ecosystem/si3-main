@@ -118,6 +118,7 @@ export const guidesQuery = groq`
   members[]-> {
     _id,
     name,
+    description,
     country,
     position,
     hobbies,
@@ -328,5 +329,20 @@ export const onboardQuery = groq`
         alt,
       },
     },
+  }
+`;
+export const aboutIntroQuery = groq`
+  *[_type == "aboutPageIntro"][0] {
+    _id,
+    title,
+    description,
+    ctaText,
+    ctaLink,
+    image {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
   }
 `;

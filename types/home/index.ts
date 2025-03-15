@@ -105,6 +105,7 @@ export interface ScholarsData {
 export interface Member {
   _id: string;
   name: string;
+  description?: string;
   country: string;
   position: string;
   hobbies: string[];
@@ -132,6 +133,15 @@ export interface Testimonial {
   companyName: string;
   link: string;
   companyLogo?: SanityImage;
+}
+
+export interface AboutIntroData {
+  _id: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  image: SanityImage;
 }
 
 export interface GuidesData {

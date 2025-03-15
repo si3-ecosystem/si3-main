@@ -193,7 +193,7 @@ export function MobileMenu() {
               <SheetClose asChild>
                 <Link
                   href="/about"
-                  className="hover:bg-primary mt-2 block rounded-full bg-white py-1 text-center text-black"
+                  className="mt-2 block w-fit rounded-full border border-gray-300 bg-white py-1 text-center text-black hover:border-black hover:bg-black hover:text-white"
                 >
                   Learn More
                 </Link>

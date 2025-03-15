@@ -11,7 +11,7 @@ const Header = () => {
       <Title
         as="h1"
         variant="huge"
-        className="text-center text-[40px] leading-10 text-white uppercase lg:text-6xl lg:leading-18"
+        className="text-center text-[28px] leading-10 text-white uppercase max-[410px]:text-[36px] max-sm:tracking-tight lg:text-6xl lg:leading-18"
       >
         Entering <br />
         <HeaderTitle />
@@ -31,7 +31,7 @@ const Header = () => {
           asChild
           className="bg-white text-black hover:bg-black hover:text-white"
         >
-          <Link scroll={true} href={"#pathways"}>
+          <Link scroll={true} href={"/about"}>
             Learn More
           </Link>
         </Button>
