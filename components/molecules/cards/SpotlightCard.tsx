@@ -38,16 +38,22 @@ export function SpotlightCard({ item }: Props) {
           </Text>
           <div className="mb-4 flex items-center gap-5">
             <Text className="flex items-center gap-2 text-base tracking-[1.73px] text-[#696969]">
-              <MapPin className="size-6" />
+              <MapPin className="size-6 shrink-0" />
               <span>{item.country}</span>
             </Text>
             <Text className="flex items-center gap-2 text-base tracking-[1.73px] text-[#696969]">
-              <MapPin className="size-6" />
+              <Image
+                src={"/icons/svg/profile.svg"}
+                alt="profile"
+                className="size-6 h-6 w-6"
+                width={40}
+                height={40}
+              />
               <span>{item.position}</span>
             </Text>
           </div>
           <Text className="font-normal tracking-[1.7px]">
-            {item.hobbies?.join(", ")}
+            {item?.description}
           </Text>
         </div>
       </div>

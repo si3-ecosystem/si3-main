@@ -105,6 +105,8 @@ export interface ScholarsData {
 export interface Member {
   _id: string;
   name: string;
+  date?: string;
+  description?: string;
   country: string;
   position: string;
   hobbies: string[];
@@ -124,6 +126,7 @@ export interface ProgrammingEvent {
 
 export interface Testimonial {
   _id: string;
+  excerpt?: string;
   description: string;
   image: SanityImage;
   name?: string;
@@ -131,6 +134,15 @@ export interface Testimonial {
   companyName: string;
   link: string;
   companyLogo?: SanityImage;
+}
+
+export interface AboutIntroData {
+  _id: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  image: SanityImage;
 }
 
 export interface GuidesData {
@@ -168,4 +180,25 @@ export interface PartnersData {
   explore: ExploreItem[];
   testimonials: Testimonial[];
   video: SanityVideo;
+}
+
+export interface HomepageImage extends SanityImage {
+  blurDataURL?: string;
+  ImageColor?: string;
+  alt?: string;
+}
+
+export interface Partner {
+  _id: string;
+  name: string;
+  logo?: HomepageImage;
+  type?: string;
+}
+
+export interface HomepageSchema {
+  _id: string;
+  title: string;
+  image: HomepageImage;
+  educationPartners: Partner[];
+  communityPartners: Partner[];
 }

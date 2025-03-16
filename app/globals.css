@@ -167,6 +167,10 @@ body {
   font-family: "Roobert", sans-serif;
 }
 
+.font-roobert {
+  font-family: "Roobert", sans-serif;
+}
+
 .font-clesmont {
   font-family: "Clesmont", monospace;
 }
@@ -198,21 +202,17 @@ body {
 
 ::-webkit-scrollbar {
   width: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  height: 182.25px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: black;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgba(159, 68, 211, 1);
 }
 
 .no-scroll {
@@ -236,4 +236,110 @@ html,
 body,
 :root {
   height: 100%;
+}
+
+.scroller {
+  max-width: 100%;
+}
+
+.scroller__inner {
+  display: flex;
+  width: max-content;
+  animation: scroll 60s linear infinite;
+}
+
+.scroller[data-animated="true"] {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.scroller[data-direction="left"] {
+  --_animation-direction: forwards;
+}
+
+.scroller[data-direction="right"] {
+  --_animation-direction: reverse;
+}
+
+.scroller[data-speed="slow"] {
+  --_animation-duration: 60s;
+}
+
+.scroller[data-speed="fast"] {
+  --_animation-duration: 20s;
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-50% - 2rem));
+  }
+}
+
+.partner-scroller {
+  max-width: 100%;
+}
+
+.partner-scroller__inner {
+  display: flex;
+  width: max-content;
+  animation: partner-scroll 60s linear infinite;
+}
+
+.partner-scroller[data-animated="true"] {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.partner-scroller[data-direction="left"] {
+  animation-direction: forwards;
+}
+
+.partner-scroller[data-direction="right"] {
+  animation-direction: forwards;
+}
+
+.partner-scroller[data-speed="slow"] {
+  --_animation-duration: 60s;
+}
+
+.partner-scroller[data-speed="fast"] {
+  --_animation-duration: 20s;
+}
+
+@keyframes partner-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      calc(-50% - 2rem)
+    ); /* Moves left for "left" direction */
+  }
+}
+
+.partner-scroller[data-direction="right"] .partner-scroller__inner {
+  animation: partner-scroll-right 60s linear infinite;
+}
+
+@keyframes partner-scroll-right {
+  0% {
+    transform: translateX(calc(-50% - 2rem));
+  }
+  100% {
+    transform: translateX(0); /* Moves right for "right" direction */
+  }
 }

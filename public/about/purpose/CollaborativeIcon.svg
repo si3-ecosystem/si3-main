@@ -3,8 +3,8 @@
 <g filter="url(#filter0_f_114_30151)">
 <circle cx="49.7876" cy="49.4556" r="32.6783" fill="url(#paint0_linear_114_30151)"/>
 </g>
-<path d="M55.1231 43.0801L64.8538 48.4158L55.1097 53.7247L49.7694 63.4509L44.4606 53.7112L34.7344 48.371L44.4785 43.0621L49.8142 33.3359L55.1231 43.0801Z" stroke="#3C1FEF" stroke-width="0.395157" stroke-miterlimit="10"/>
-<path d="M55.1231 43.0801L64.8538 48.4158L55.1097 53.7247L49.7694 63.4509L44.4606 53.7112L34.7344 48.371L44.4785 43.0621L49.8142 33.3359L55.1231 43.0801Z" stroke="#3C1FEF" stroke-width="0.395157" stroke-miterlimit="10"/>
+<path d="M55.1231 43.0801L64.8538 48.4158L55.1097 53.7247L49.7694 63.4509L44.4606 53.7112L34.7344 48.371L44.4785 43.0621L49.8142 33.3359L55.1231 43.0801Z" stroke="#3C1FEF" strokeWidth="0.395157" stroke-miterlimit="10"/>
+<path d="M55.1231 43.0801L64.8538 48.4158L55.1097 53.7247L49.7694 63.4509L44.4606 53.7112L34.7344 48.371L44.4785 43.0621L49.8142 33.3359L55.1231 43.0801Z" stroke="#3C1FEF" strokeWidth="0.395157" stroke-miterlimit="10"/>
 <g filter="url(#filter1_d_114_30151)">
 <path d="M49.7916 47.847H23.0859L36.441 29.7162L49.7916 11.5898L63.1466 29.7162L76.5017 47.847H49.7916Z" fill="url(#paint1_linear_114_30151)"/>
 </g>
@@ -17,8 +17,8 @@
 <g filter="url(#filter4_i_114_30151)">
 <path d="M49.936 35.8954L47.8125 37.1543L49.5866 15.4395L51.7729 36.8586L49.936 35.8954Z" fill="url(#paint4_radial_114_30151)"/>
 </g>
-<path d="M44.4337 53.7559L34.7344 63.4507" stroke="white" stroke-width="0.790314" stroke-miterlimit="10"/>
-<path d="M55.1523 53.7559L64.8517 63.4507" stroke="white" stroke-width="0.790314" stroke-miterlimit="10"/>
+<path d="M44.4337 53.7559L34.7344 63.4507" stroke="white" strokeWidth="0.790314" stroke-miterlimit="10"/>
+<path d="M55.1523 53.7559L64.8517 63.4507" stroke="white" strokeWidth="0.790314" stroke-miterlimit="10"/>
 <path d="M49.7878 47.9006H44.4297L47.1088 44.2628L49.7878 40.625L52.4714 44.2628L55.1505 47.9006H49.7878Z" fill="url(#paint5_linear_114_30151)"/>
 <g style="mix-blend-mode:plus-lighter" filter="url(#filter5_f_114_30151)">
 <path d="M49.7874 53.7609H35.7969L42.7922 44.2623L49.7874 34.7637L56.7945 44.2623L63.7897 53.7609H49.7874Z" fill="url(#paint6_linear_114_30151)" fill-opacity="0.4"/>
@@ -26,7 +26,7 @@
 <g filter="url(#filter6_i_114_30151)">
 <path d="M49.6538 64.8838L51.7729 63.5039L50.0032 87.3378L47.8125 63.822L49.6538 64.8838Z" fill="url(#paint7_radial_114_30151)"/>
 </g>
-<path d="M68.9299 43.7031C68.9299 54.8047 60.3596 63.8051 49.7911 63.8051C39.2227 63.8051 30.6523 54.8047 30.6523 43.7031" stroke="white" stroke-width="0.790314" stroke-miterlimit="10"/>
+<path d="M68.9299 43.7031C68.9299 54.8047 60.3596 63.8051 49.7911 63.8051C39.2227 63.8051 30.6523 54.8047 30.6523 43.7031" stroke="white" strokeWidth="0.790314" stroke-miterlimit="10"/>
 <defs>
 <filter id="filter0_f_114_30151" x="8.31996" y="7.98793" width="82.9343" height="82.9362" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>

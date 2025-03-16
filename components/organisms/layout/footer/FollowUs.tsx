@@ -1,23 +1,24 @@
-import Image from "next/image";
+import { FooterTwitter } from "@/components/molecules/icons/FooterTwitter";
+import { LinkedIcon } from "@/components/molecules/icons/linkedIn";
 import Link from "next/link";
 import React from "react";
 
 interface SocialItem {
   name: string;
   url: string;
-  icon: string;
+  icon: React.ReactNode;
 }
 
 const socialList: SocialItem[] = [
   {
     name: "Twitter",
-    url: "https://twitter.com",
-    icon: "/social/twitter.svg",
+    url: "http://x.com/si3_ecosystem",
+    icon: <FooterTwitter />,
   },
   {
-    name: "Facebook",
-    url: "https://facebook.com",
-    icon: "/social/facebook.svg",
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/si3ecosystem/",
+    icon: <LinkedIcon />,
   },
 ];
 
@@ -28,17 +29,10 @@ export const FollowUs = () => {
         <p className="font-clesmont text-2xl font-black">Follow Us</p>
         <div className="my-2 flex flex-col gap-2">
           {socialList.map((social) => (
-            <li key={social.name}>
-              <Link href={social.url}>
-                <Image
-                  src={social.icon}
-                  alt={social.name}
-                  width={26}
-                  height={26}
-                  className="size-6 h-6 w-6"
-                />
-
-                {social.name}
+            <li key={social.name} className="list-none">
+              <Link href={social.url} className="flex items-center gap-2">
+                {social.icon}
+                <span>{social.name}</span>
               </Link>
             </li>
           ))}

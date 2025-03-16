@@ -15,7 +15,7 @@ export function CollabCard({ item }: { item: Community }) {
     ? urlForImage(item.communityLogo)?.src
     : "/icons/jpg/sihericon.jpg";
   return (
-    <Card className="!h-full cursor-pointer overflow-hidden rounded-2xl border border-[#D1D1D1] !p-0 transition-all duration-300 !ease-in-out hover:shadow-lg">
+    <Card className="h-fit cursor-pointer overflow-hidden rounded-2xl border border-[#D1D1D1] !p-0 transition-all duration-300 !ease-in-out hover:shadow-lg sm:!h-full">
       <CardContent className="flex h-full flex-col justify-between !p-0">
         <div className="flex h-fit flex-col">
           <div className="relative z-20 flex h-full w-full flex-col gap-6 px-5 pt-5">
@@ -39,7 +39,7 @@ export function CollabCard({ item }: { item: Community }) {
                   loading="lazy"
                   width={56}
                   height={56}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full rounded-sm object-contain"
                 />
               </div>
               <span className="flex items-center gap-2">

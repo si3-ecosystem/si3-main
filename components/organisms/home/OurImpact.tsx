@@ -8,11 +8,11 @@ const cardItems = [
   },
   {
     count: 15,
-    description: "Web3 Community Partners",
+    description: "Emerging Technology Partners",
   },
   {
     count: 10000,
-    description: "Web3 Community Partners",
+    description: "Community Members",
   },
 ];
 

@@ -4,6 +4,41 @@ export const getAll = groq`*[]`;
 
 export const seoData = groq`*[_type == 'utils'][0]`;
 
+export const homepageQuery = groq`
+  *[_type == "homepageSchema"][0] {
+    _id,
+    title,
+    image {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt,
+    },
+    communityPartners[]-> {
+      _id,
+      name,
+      type,
+      logo {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
+    },
+     educationPartners[]-> {
+      _id,
+      name,
+      type,
+      logo {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
+    },
+  }
+`;
+
 export const scholarsQuery = groq`
 *[_type == "scholarsSchema"][0] {
   _id,
@@ -83,6 +118,8 @@ export const guidesQuery = groq`
   members[]-> {
     _id,
     name,
+    date,
+    description,
     country,
     position,
     hobbies,
@@ -121,6 +158,7 @@ export const guidesQuery = groq`
   },
   testimonials[]-> {
     _id,
+    excerpt,
     description,
     image {
       ...,
@@ -177,6 +215,7 @@ export const partnersQuery = groq`
   },
   testimonials[]-> {
     _id,
+    excerpt,
     description,
     image {
       ...,
@@ -291,5 +330,20 @@ export const onboardQuery = groq`
         alt,
       },
     },
+  }
+`;
+export const aboutIntroQuery = groq`
+  *[_type == "aboutPageIntro"][0] {
+    _id,
+    title,
+    description,
+    ctaText,
+    ctaLink,
+    image {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
   }
 `;

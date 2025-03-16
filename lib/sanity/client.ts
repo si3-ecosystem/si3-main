@@ -13,6 +13,8 @@ import {
   partnersQuery,
   aboutQuery,
   onboardQuery,
+  homepageQuery,
+  aboutIntroQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -73,6 +75,13 @@ export async function getSeoData() {
   return {};
 }
 
+export async function getHomePageData() {
+  if (client) {
+    return (await client.fetch(homepageQuery)) || {};
+  }
+  return {};
+}
+
 export async function getScholarsData() {
   if (client) {
     return (await client.fetch(scholarsQuery)) || {};
@@ -103,6 +112,12 @@ export async function getAboutPageData() {
 export async function getOnboardPageData() {
   if (client) {
     return (await client.fetch(onboardQuery)) || {};
+  }
+  return {};
+}
+export async function getAboutIntroData() {
+  if (client) {
+    return (await client.fetch(aboutIntroQuery)) || {};
   }
   return {};
 }

@@ -2,6 +2,7 @@ import { Card } from "@/components/atoms/card";
 import { urlForImage } from "@/lib/sanity/image";
 import { Testimonial } from "@/types/home";
 import Image from "next/image";
+import { QuotIcon } from "../icons/Quot";
 
 type Props = {
   item: Testimonial;
@@ -31,15 +32,20 @@ export function TestimonialsCard({ item }: Props) {
         </div>
         <div className="flex h-full w-full flex-col justify-between @3xl:flex-row">
           <div>
-            <div className="font-serif text-2xl leading-normal lg:text-4xl">
-              {"''"}
+            <div className="mb-2 font-serif text-2xl leading-normal lg:text-4xl">
+              <QuotIcon />
             </div>
-            <blockquote className="mb-6 text-lg lg:mb-7 lg:text-2xl">
+            {item.excerpt && (
+              <h4 className="mb-4 text-[32px] leading-10 font-semibold">
+                {item.excerpt}
+              </h4>
+            )}
+            <blockquote className="mb-6 text-lg lg:text-2xl">
               {item.description}
             </blockquote>
             <div className="flex flex-col items-center justify-between @3xl:flex-row">
               <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-[#454545] lg:text-lg">
-                <div className="">{item.name}</div>,
+                <div className="">{item.name}</div>
                 <div className="">{item.title}</div>
               </div>
               <div className="relative flex h-8 w-full max-w-[148.854px] items-center justify-end">

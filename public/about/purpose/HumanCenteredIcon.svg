@@ -1,5 +1,5 @@
 <svg width="99" height="99" viewBox="0 0 99 99" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_114_30135)">
+<g clipPath="url(#clip0_114_30135)">
 <rect width="98" height="98" transform="translate(0.0390625 0.455078)" fill="white"/>
 <g filter="url(#filter0_f_114_30135)">
 <circle cx="48.3733" cy="52.1448" r="28.6858" fill="url(#paint0_linear_114_30135)"/>
@@ -8,8 +8,8 @@
 <g filter="url(#filter1_di_114_30135)">
 <path d="M49.2074 78.018H22.8945L36.0484 61.9104L49.2074 45.8027L62.3613 61.9104L75.5203 78.018H49.2074Z" fill="url(#paint2_linear_114_30135)"/>
 </g>
-<path d="M22.7422 63.347C22.7422 48.7316 34.5878 36.8809 49.2083 36.8809C63.8238 36.8809 75.6745 48.7316 75.6745 63.347" stroke="url(#paint3_linear_114_30135)" stroke-width="2" stroke-miterlimit="10"/>
-<path d="M5.37891 76.3695C5.37891 51.0429 24.9257 30.5098 49.0412 30.5098C73.1566 30.5098 92.7035 51.0429 92.7035 76.3695" stroke="url(#paint4_linear_114_30135)" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M22.7422 63.347C22.7422 48.7316 34.5878 36.8809 49.2083 36.8809C63.8238 36.8809 75.6745 48.7316 75.6745 63.347" stroke="url(#paint3_linear_114_30135)" strokeWidth="2" stroke-miterlimit="10"/>
+<path d="M5.37891 76.3695C5.37891 51.0429 24.9257 30.5098 49.0412 30.5098C73.1566 30.5098 92.7035 51.0429 92.7035 76.3695" stroke="url(#paint4_linear_114_30135)" strokeWidth="2" stroke-miterlimit="10"/>
 <path d="M40.7109 60.8891L49.3371 45.9824L56.0367 60.8891L49.2093 48.4762L40.7109 60.8891Z" fill="url(#paint5_linear_114_30135)" fill-opacity="0.4"/>
 <g style="mix-blend-mode:plus-lighter" filter="url(#filter2_f_114_30135)">
 <path d="M40.7109 60.8891L49.3371 45.9824L56.0367 60.8891L49.2093 48.4762L40.7109 60.8891Z" fill="url(#paint6_linear_114_30135)"/>
@@ -22,7 +22,7 @@
 <path d="M49.0404 64.9824H60.8553L54.9478 72.9034L49.0404 80.8294L43.1329 72.9034L37.2305 64.9824H49.0404Z" fill="url(#paint9_linear_114_30135)"/>
 </g>
 <path d="M37.8516 51.6629C37.8516 45.3875 42.9363 40.3027 49.2117 40.3027C55.4871 40.3027 60.5719 45.3875 60.5719 51.6629" stroke="url(#paint10_linear_114_30135)" stroke-miterlimit="10"/>
-<path d="M69.592 10.8242C69.592 23.4875 59.816 33.7541 47.7608 33.7541C35.7057 33.7541 25.9297 23.4875 25.9297 10.8242" stroke="url(#paint11_linear_114_30135)" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M69.592 10.8242C69.592 23.4875 59.816 33.7541 47.7608 33.7541C35.7057 33.7541 25.9297 23.4875 25.9297 10.8242" stroke="url(#paint11_linear_114_30135)" strokeWidth="2" stroke-miterlimit="10"/>
 </g>
 <defs>
 <filter id="filter0_f_114_30135" x="-2.55532" y="1.21617" width="101.857" height="101.857" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">

@@ -1,22 +1,14 @@
-import { Button } from "@/components/atoms/button";
 import { Title } from "@/components/atoms/title";
-import Link from "next/link";
+import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 
 interface Props {
   videoSrc: string;
-  showGradient: boolean;
+  showGradient?: boolean;
   title: string;
-  ctaLink: string;
   ctaTitle?: string;
 }
 
-export function CtaVideoSection({
-  videoSrc,
-  showGradient = false,
-  title,
-  ctaLink,
-  ctaTitle,
-}: Props) {
+export function CtaVideoSection({ videoSrc, title, ctaTitle }: Props) {
   return (
     <section className="relative h-[445.62px] w-full overflow-hidden rounded-t-2xl lg:h-[486px] lg:rounded-t-4xl">
       <video
@@ -34,9 +26,14 @@ export function CtaVideoSection({
           {title}
         </Title>
 
-        <Button showGradient={showGradient} asChild>
+        {/* <Button showGradient={showGradient} asChild>
           <Link href={ctaLink}>{ctaTitle || "Join Now"}</Link>
-        </Button>
+        </Button> */}
+        <PartnerProgramForm
+          className="mx-auto w-fit"
+          showGradient
+          title={ctaTitle}
+        />
       </div>
     </section>
   );
