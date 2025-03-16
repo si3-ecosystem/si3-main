@@ -1,14 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/atoms/button";
+
+import { cn } from "@/lib/utils";
+
 import { Logo } from "@/components/atoms/Logo";
-import { Profile } from "./navbar/Profile";
-import { Notification } from "./navbar/Notification";
+import { Button } from "@/components/atoms/button";
+import ProfileMenu from "@/components/molecules/menus/ProfileMenu";
+
 import Subscribe from "./navbar/Subscribe";
 import { MobileMenu } from "./navbar/MobileMenu";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { Notification } from "./navbar/Notification";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,8 +37,10 @@ export function Navbar() {
         <Link href={"/"}>
           <Logo src="/logo.svg" />
         </Link>
+
         <nav className="flex items-center gap-3">
           <Notification />
+
           <div className="flex items-center gap-3 max-lg:hidden">
             <Subscribe>
               <Button
@@ -47,8 +52,9 @@ export function Navbar() {
                 Subscribe
               </Button>
             </Subscribe>
-            <Profile />
+            <ProfileMenu />
           </div>
+
           <div className="lg:hidden">
             <MobileMenu />
           </div>
