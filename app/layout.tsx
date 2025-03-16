@@ -1,11 +1,12 @@
 import "./globals.css";
 
-import WalletProvider from "@/providers/WagmiProvider";
+import { Toaster } from "sonner";
+
 import ReduxProvider from "@/providers/ReduxProvider";
+import WalletProvider from "@/providers/WagmiProvider";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
 
 import { processMetadata } from "@/utils/sharedMetadata";
-import { Toaster } from "@/components/atoms/sonner";
 
 export const revalidate = 2500;
 
@@ -27,10 +28,10 @@ export default async function RootLayout({
           <ReduxProvider>
             <TanstackQueryClientProvider>
               {children}
+              <Toaster />
             </TanstackQueryClientProvider>
           </ReduxProvider>
         </WalletProvider>
-        <Toaster />
       </body>
     </html>
   );

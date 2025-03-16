@@ -27,7 +27,7 @@ export const PrivacySections: Section[] = [
   // { id: "security", title: "How We Secure Your Personal Data" },
 ];
 
-export const PrivacyContent = {
+export const PrivacyContent: Record<string, string> = {
   "privacy-policy": `Welcome to SI<3> and our website at www.si3.space. This Privacy Policy applies to SI<3>, a California based corporation (“SI<3>“, “we”, “us”, or “our”). This Privacy Policy governs the Personal Data we collect from our customers, our website and other online visitors ("you or "your"). For information we automatically collect from your online visits through cookies, please refer to our Cookie Policy.`,
 
   "terms-used": `For the purposes of this Privacy Policy:

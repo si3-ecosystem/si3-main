@@ -1,9 +1,13 @@
-import { PolicyLayout } from "@/components/organisms/home/privacy/PolicyLayout";
+import React from "react";
+
 import {
   PrivacyContent,
   PrivacySections,
 } from "@/components/organisms/home/privacy/Sections";
+import { PolicyLayout } from "@/components/organisms/home/privacy/PolicyLayout";
 
-export default function PrivacyPage() {
+const PrivacyPage: React.FC = () => {
   return <PolicyLayout sections={PrivacySections} content={PrivacyContent} />;
-}
+};
+
+export default PrivacyPage;
