@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/atoms/button";
 import { Dialog, DialogContent, DialogFooter } from "@/components/atoms/dialog";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,6 +14,9 @@ interface SuccessDialogProps {
   description: string;
   ctaLink: string;
   ctaTitle: string;
+  titleClass?: string;
+  descClass?: string;
+  className?: string;
 }
 
 export function SuccessDialog({
@@ -23,19 +27,40 @@ export function SuccessDialog({
   description,
   ctaLink,
   ctaTitle,
+  titleClass,
+  descClass,
+  className,
 }: SuccessDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md rounded-lg p-6">
-        <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center">
-          <Image src={imageSrc} alt="Success Icon" width={96} height={96} />
+      <DialogContent className="mx-auto w-full rounded-lg p-6 py-8 lg:max-w-[731px] lg:py-12">
+        <div
+          className={cn(
+            "mx-auto mb-4 flex h-24 w-24 items-center justify-center",
+            className,
+          )}
+        >
+          <Image
+            src={imageSrc}
+            alt="Success Icon"
+            width={400}
+            height={400}
+            className="h-full w-full max-w-[168.088px] shrink-0 object-cover"
+          />
         </div>
 
-        <h2 className="mb-2 text-center text-xl font-bold text-gray-900">
+        <h2
+          className={cn(
+            "mb-2 text-center text-xl font-bold text-gray-900",
+            titleClass,
+          )}
+        >
           {title}
         </h2>
 
-        <p className="mb-6 text-center text-sm text-gray-600">{description}</p>
+        <p className={cn("mb-6 text-center text-sm text-gray-600", descClass)}>
+          {description}
+        </p>
 
         <DialogFooter className="flex justify-center">
           <Button asChild className="mx-auto w-fit" showGradient>

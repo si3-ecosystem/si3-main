@@ -111,26 +111,22 @@ export function VideoPlayerDialog({
               autoPlay
               muted={!isSignedIn}
             />
-            {!isSignedIn && (
-              <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-sm text-white">
-                  Preview: {TIME_LIMIT} seconds available
-                </p>
-              </div>
-            )}
           </div>
         </DialogContent>
       </Dialog>
 
       {showSuccess && (
         <SuccessDialog
+          titleClass="max-w-[544px] mx-auto w-full text-2xl font-medium mb-0"
+          descClass="text-lg text-[#454545] font-normal leading-6  mx-auto w-full tracking-tight"
+          className="h-[125.571px] w-[188.088px]"
           open={showSuccess}
           onOpenChange={setShowSuccess}
           imageSrc="/icons/jpg/unlockfull.jpg"
-          description="Unlock Full Access full content, please join us as a SI U Scholar"
-          title="To watch the"
-          ctaLink="/login"
-          ctaTitle="Sign Up & Watch"
+          description="To watch this full content, please join us as a SI U Scholar."
+          title="UNLOCK FULL ACCESS"
+          ctaLink="/onboard"
+          ctaTitle="Sign Up & Learn"
         />
       )}
     </>
