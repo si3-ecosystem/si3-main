@@ -61,6 +61,7 @@ export function VideoPlayerDialog({
         videoElement.removeEventListener("seeking", handleSeeking);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn]);
 
   useEffect(() => {
@@ -81,6 +82,7 @@ export function VideoPlayerDialog({
     return () => {
       clearTimeout(timeoutId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVideoOpen, isSignedIn]);
 
   const handleDialogClose = () => {

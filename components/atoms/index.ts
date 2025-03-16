@@ -16,7 +16,6 @@ import { Textarea } from "./textarea";
 import { RadioGroup } from "./radio-group";
 import { Loader } from "./Loader";
 import { Slider } from "./slider";
-import { Toaster } from "./sonner";
 
 const components = {
   Title,
@@ -37,7 +36,6 @@ const components = {
   RadioGroup,
   Loader,
   Slider,
-  Toaster,
 };
 
 export default components;
