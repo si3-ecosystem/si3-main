@@ -22,7 +22,6 @@ export default async function AboutPage() {
       <CtaVideoSection
         videoSrc={data.video.videoUrl}
         title={data.video.title || ""}
-        ctaLink={data.video.ctaLink || "#"}
         ctaTitle={data.video.ctaTitle}
         showGradient={true}
       />

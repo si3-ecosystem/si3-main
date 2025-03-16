@@ -10,10 +10,10 @@ interface LoginButtonProps {
   src: string;
   alt: string;
   label: string;
-  num: number;
+  num?: number;
 }
 
-const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num }) => {
+const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num = 0 }) => {
   const router = useRouter();
   const { status } = useAccount();
   const { connect, connectors } = useConnect();

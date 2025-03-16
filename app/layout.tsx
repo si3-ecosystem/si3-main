@@ -5,6 +5,7 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
 
 import { processMetadata } from "@/utils/sharedMetadata";
+import { Toaster } from "@/components/atoms/sonner";
 
 export const revalidate = 2500;
 
@@ -26,8 +27,6 @@ export default async function RootLayout({
           <ReduxProvider>
             <TanstackQueryClientProvider>
               {children}
-
-              <Toaster />
             </TanstackQueryClientProvider>
           </ReduxProvider>
         </WalletProvider>
