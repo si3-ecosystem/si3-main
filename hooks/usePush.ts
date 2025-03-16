@@ -18,6 +18,7 @@ const usePush = () => {
 
   const initPushStream = async () => {
     try {
+      console.log("Initializing Push stream");
       const signer = await getEthersSigner(config);
 
       const user = await PushAPI.initialize(signer, {

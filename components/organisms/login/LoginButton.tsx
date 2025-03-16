@@ -14,32 +14,34 @@ interface LoginButtonProps {
 }
 
 const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num }) => {
-  const account = useAccount();
-  const { connect, connectors } = useConnect();
-
   const router = useRouter();
+  const { status } = useAccount();
+  const { connect, connectors } = useConnect();
 
   const isValidConnector = num >= 0 && num < connectors.length;
 
   useEffect(() => {
-    if (account) {
+    if (status === "connected") {
       router.push("/");
-      toast.success("Logged in successfully");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleClick = () => {
-    if (isValidConnector) {
-      connect({
-        connector: connectors[num],
-      });
-
-      router.push("/");
-
       toast.success("Wallet connected successfully");
+    }
+  }, [status, router]);
+
+  const handleClick = async () => {
+    if (status === "connected") {
+      router.push("/");
+      return;
+    }
+
+    if (isValidConnector) {
+      try {
+        connect({ connector: connectors[num] });
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to connect wallet");
+      }
     } else {
-      toast.error("Something went wrong");
+      toast.error("Invalid connector");
     }
   };
 

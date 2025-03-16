@@ -7,7 +7,6 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
 
 import { processMetadata } from "@/utils/sharedMetadata";
-import { Toaster } from "sonner";
 
 export const revalidate = 2500;
 
