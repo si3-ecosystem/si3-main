@@ -17,7 +17,7 @@ export const FooterNav = () => {
   ];
 
   return (
-    <div className="flex border-r border-gray-400 p-4 pt-16 lg:justify-center">
+    <div className="flex border-gray-400 p-4 lg:justify-center lg:border-r lg:pt-16">
       <div>
         <p className="font-clesmont text-2xl font-black">SI Things</p>
         <div className="my-2 flex flex-col gap-2">

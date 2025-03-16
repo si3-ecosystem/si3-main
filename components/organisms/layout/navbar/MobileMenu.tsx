@@ -45,18 +45,18 @@ export function MobileMenu() {
       </SheetTrigger>
       <SheetContent side="left" className="h-[100vh] w-full bg-white p-0">
         <SheetHeader className="border-b p-4">
-          <SheetTitle className="!p-6">
+          <SheetTitle className="!p-3">
             <Logo src="/logo.svg" alt="SI3 Logo" />
           </SheetTitle>
         </SheetHeader>
-        <div className="-mt-3 flex h-[100vh] flex-col justify-between overflow-y-scroll">
+        <div className="-mt-4 flex h-[100vh] flex-col justify-between overflow-y-scroll sm:-mt-3">
           <div className="px-4">
             <div className="mb-8 divide-y divide-gray-300 border-r border-b border-l border-gray-300">
               <div className="grid w-full grid-cols-2 divide-x divide-y divide-gray-300">
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">SI U Scholars</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -65,7 +65,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">SI U</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -77,7 +77,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">Si Her Kollab</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -86,7 +86,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">Si Her Guides</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -95,7 +95,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">SiHerEth</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -104,7 +104,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">Si Her Programming</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -113,7 +113,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">{"SI<3>Partners"}</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -122,7 +122,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">
                       {"SI<3>Partner Workshops"}
@@ -133,7 +133,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/onboard"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">DEAI Training</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -142,7 +142,7 @@ export function MobileMenu() {
                 <SheetClose asChild>
                   <Link
                     href="/diversity-tracker"
-                    className="hover:bg-primary group p-8 text-black hover:text-white"
+                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
                   >
                     <p className="text-lg font-bold">Diversity Tracker</p>
                     <span className="hidden text-sm group-hover:block">→</span>
@@ -153,7 +153,7 @@ export function MobileMenu() {
               <SheetClose asChild>
                 <Link
                   href="/about"
-                  className="hover:bg-primary group w-full p-8 text-center text-black hover:text-white"
+                  className="hover:bg-primary group w-full p-4 text-center text-black hover:text-white sm:p-8"
                 >
                   <p className="text-lg font-bold">About Us</p>
                 </Link>
@@ -193,7 +193,7 @@ export function MobileMenu() {
               <SheetClose asChild>
                 <Link
                   href="/about"
-                  className="mt-2 block w-fit rounded-full border border-gray-300 bg-white py-1 text-center text-black hover:border-black hover:bg-black hover:text-white"
+                  className="mt-2 block w-fit rounded-full border border-gray-300 bg-white px-3 py-1 text-center text-black hover:border-black hover:bg-black hover:text-white"
                 >
                   Learn More
                 </Link>
