@@ -16,7 +16,7 @@ const socialList: SocialItem[] = [
     icon: <FooterTwitter />,
   },
   {
-    name: "Facebook",
+    name: "LinkedIn",
     url: "https://www.linkedin.com/company/si3ecosystem/",
     icon: <LinkedIcon />,
   },
