@@ -7,6 +7,7 @@ import { PlayIcon } from "../icons/PlayIcon";
 import { Course, SanityVideo } from "@/types/home";
 import { urlForImage } from "@/lib/sanity/image";
 import Image from "next/image";
+import { VideoPlayerDialog } from "../dialogs/VideoPlayerDialog";
 
 export interface EducationCardItem {
   title: string;
@@ -19,9 +20,13 @@ export interface EducationCardItem {
 export interface EducationCardProps {
   item: Course;
   video?: SanityVideo;
+  isSignedIn?: boolean;
 }
 
-export function EducationCard({ item }: EducationCardProps) {
+export function EducationCard({
+  item,
+  isSignedIn = false,
+}: EducationCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -55,10 +60,6 @@ export function EducationCard({ item }: EducationCardProps) {
     if (item?.video?.url) {
       setIsModalOpen(true);
     }
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   return (
@@ -97,7 +98,6 @@ export function EducationCard({ item }: EducationCardProps) {
                 <PlayCircle className="h-12 w-12 border border-red-500 bg-black fill-black text-black" />
               </div>
             )}
-
             {!isHovered && (
               <div className="absolute bottom-2 left-2">
                 <PlayIcon />
@@ -131,23 +131,13 @@ export function EducationCard({ item }: EducationCardProps) {
         </CardContent>
       </Card>
 
-      {isModalOpen && item.video && (
-        <div className="bg-opacity-80 fixed inset-0 z-50 flex items-center justify-center bg-black">
-          <div className="relative w-full max-w-4xl p-4">
-            <button
-              onClick={closeModal}
-              className="absolute -top-8 -right-8 z-10 text-2xl font-bold text-white"
-            >
-              &times;
-            </button>
-            <video
-              src={item?.video?.url || "/videos/SiUScholars.mp4"}
-              className="h-auto w-full rounded-lg"
-              controls
-              autoPlay
-            />
-          </div>
-        </div>
+      {item.video && (
+        <VideoPlayerDialog
+          video={item.video.url}
+          isVideoOpen={isModalOpen}
+          setIsVideoOpen={setIsModalOpen}
+          isSignedIn={isSignedIn}
+        />
       )}
     </>
   );

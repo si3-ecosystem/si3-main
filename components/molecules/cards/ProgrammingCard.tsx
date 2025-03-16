@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
+import { Badge } from "@/components/atoms/badge";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
 import { urlForImage } from "@/lib/sanity/image";
@@ -59,7 +60,7 @@ export function ProgrammingCard({ item }: Props) {
     : "/icons/jpg/pink-beauty.jpg";
   return (
     <Card className="flex h-full w-full cursor-pointer flex-col justify-between gap-8 overflow-hidden rounded-2xl border border-[#D1D1D1] p-6 transition-all duration-300 !ease-in-out hover:shadow-lg sm:!w-[391px]">
-      <div className="flex flex-col gap-4">
+      <div className="relative flex flex-col gap-4">
         <div className="relative h-[259px] w-full overflow-hidden rounded-lg">
           <Image
             src={imageUrl || "/icons/jpg/pink-beauty.jpg"}
@@ -72,7 +73,14 @@ export function ProgrammingCard({ item }: Props) {
             height={400}
             className="z-0 h-full w-full object-cover"
           />
+          <Badge
+            variant={"default"}
+            className="absolute top-3 left-3 rounded-full bg-white px-2.5 py-1.5 text-sm leading-5 font-medium text-black capitalize"
+          >
+            {item.date}
+          </Badge>
         </div>
+
         <div className="mb-6 flex flex-col gap-1.5">
           <Text variant="2xl" className="font-semibold">
             {item.title}

@@ -105,6 +105,7 @@ export interface ScholarsData {
 export interface Member {
   _id: string;
   name: string;
+  date?: string;
   description?: string;
   country: string;
   position: string;

@@ -118,6 +118,7 @@ export const guidesQuery = groq`
   members[]-> {
     _id,
     name,
+    date,
     description,
     country,
     position,
