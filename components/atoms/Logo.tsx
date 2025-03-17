@@ -11,7 +11,7 @@ interface LogoProps {
 }
 
 export function Logo({
-  src,
+  src = "/logo.svg",
   alt = "Logo",
   title,
   width = 83,

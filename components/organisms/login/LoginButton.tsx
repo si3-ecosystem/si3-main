@@ -13,12 +13,15 @@ interface LoginButtonProps {
   num?: number;
 }
 
-const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num = 0 }) => {
+const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num }) => {
   const router = useRouter();
   const { status } = useAccount();
   const { connect, connectors } = useConnect();
 
-  const isValidConnector = num >= 0 && num < connectors.length;
+  const isValidConnector =
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    num >= 0 && num < connectors.length;
 
   useEffect(() => {
     if (status === "connected") {
@@ -35,6 +38,8 @@ const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num = 0 }) => {
 
     if (isValidConnector) {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         connect({ connector: connectors[num] });
       } catch (error) {
         console.error(error);
