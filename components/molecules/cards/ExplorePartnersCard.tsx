@@ -35,10 +35,6 @@ export function ExplorePartnersCard({ item }: Props) {
             src={imageUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
             alt="si ui scholars image"
             width={600}
-            {...(item?.image?.blurDataURL && {
-              placeholder: "blur",
-              blurDataURL: item?.image?.blurDataURL,
-            })}
             height={328}
             decoding="async"
             loading="lazy"

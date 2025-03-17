@@ -22,10 +22,6 @@ export function TestimonialsCard({ item }: Props) {
           <Image
             src={imageUrl || "/icons/jpg/testimonial.jpg"}
             alt={item.name || "name"}
-            {...(item?.image?.blurDataURL && {
-              placeholder: "blur",
-              blurDataURL: item?.image?.blurDataURL,
-            })}
             fill
             className="h-full max-h-[257.892px] w-full max-w-[257.892px] object-contain"
           />

@@ -64,10 +64,6 @@ export function ProgrammingCard({ item }: Props) {
         <div className="relative h-[259px] w-full overflow-hidden rounded-lg">
           <Image
             src={imageUrl || "/icons/jpg/pink-beauty.jpg"}
-            {...(item?.image?.blurDataURL && {
-              placeholder: "blur",
-              blurDataURL: item?.image?.blurDataURL,
-            })}
             alt={"alt"}
             width={600}
             height={400}

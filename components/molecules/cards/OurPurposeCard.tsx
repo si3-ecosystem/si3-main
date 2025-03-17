@@ -18,10 +18,6 @@ export function OurPurposeCard({ item }: Props) {
         <Image
           src={imageUrl || "/about/purpose/AccessibleIcon.svg"}
           alt={item.title}
-          {...(item.image?.blurDataURL && {
-            placeholder: "blur",
-            blurDataURL: item.image?.blurDataURL,
-          })}
           width={400}
           height={400}
           className="h-24 w-24"

@@ -31,11 +31,11 @@ export function EducationCard({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const image = item.thumbnail
+  const image = item?.thumbnail
     ? urlForImage(item.thumbnail)?.src
     : "/icons/jpg/videotemp.jpg";
 
-  const companyLogo = item.company.logo
+  const companyLogo = item?.company?.logo
     ? urlForImage(item.company.logo)?.src
     : "/icons/jpg/sihericon.jpg";
 
@@ -74,10 +74,6 @@ export function EducationCard({
           <div className="relative h-[196.872px] overflow-hidden !rounded-[9px]">
             {!item?.video?.url || !isHovered ? (
               <Image
-                {...(item.thumbnail?.blurDataURL && {
-                  placeholder: "blur",
-                  blurDataURL: item.thumbnail?.blurDataURL,
-                })}
                 width={600}
                 height={400}
                 src={image || "/icons/jpg/videotemp.jpg"}
@@ -108,7 +104,7 @@ export function EducationCard({
             <div className="flex flex-col items-start justify-start gap-2">
               <Image
                 src={companyLogo || "/icons/jpg/sihericon.jpg"}
-                alt={item.company.name}
+                alt={item?.company?.name}
                 width={600}
                 height={400}
                 loading="lazy"
@@ -116,7 +112,7 @@ export function EducationCard({
                 className="aspect-auto h-auto max-h-[40px] w-full max-w-[170px] object-contain"
               />
               <h3 className="line-clamp-2 h-[50px] overflow-hidden text-base leading-5 whitespace-pre-wrap text-[#4F4F4F]">
-                {item.title}
+                {item?.title}
               </h3>
             </div>
             <div className="flex flex-col">
@@ -133,7 +129,7 @@ export function EducationCard({
 
       {item.video && (
         <VideoPlayerDialog
-          video={item.video.url}
+          video={item?.video?.url}
           isVideoOpen={isModalOpen}
           setIsVideoOpen={setIsModalOpen}
           isSignedIn={isSignedIn}
