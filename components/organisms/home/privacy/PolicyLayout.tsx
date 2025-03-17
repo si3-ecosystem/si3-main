@@ -18,7 +18,9 @@ export const PolicyLayout: React.FC<PolicyLayoutProps> = ({
   sections,
   content,
 }) => {
-  const [activeSection, setActiveSection] = useState<string>(sections[0].id);
+  const [activeSection, setActiveSection] = useState<string>(
+    sections[0]?.id || "",
+  );
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export const PolicyLayout: React.FC<PolicyLayoutProps> = ({
       contentElement.addEventListener("scroll", handleScroll);
       return () => contentElement.removeEventListener("scroll", handleScroll);
     }
-  }, []);
+  }, [sections]);
 
   const scrollToSection = (sectionId: string) => {
     const section = contentRef.current?.querySelector(
