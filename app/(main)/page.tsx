@@ -14,7 +14,6 @@ import {
 import { Suspense } from "react";
 import { Spinner } from "@/components/atoms/Spinner";
 import { Loader } from "@/components/atoms/Loader";
-
 export default async function HomePage() {
   const [HomePageData, scholarsData, guidesData, partnersData, aboutIntroData] =
     await Promise.all([
@@ -24,7 +23,6 @@ export default async function HomePage() {
       getPartnersData(),
       getAboutIntroData(),
     ]);
-
   return (
     <Suspense fallback={<Loader />}>
       <HeaderContainer HomePageData={HomePageData} />

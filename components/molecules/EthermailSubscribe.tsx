@@ -1,10 +1,19 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 "use client";
 
 import { useEffect } from "react";
 
+declare global {
+  interface Window {
+    setStyle: () => void;
+  }
+}
+
 const EthermailSubscribe = () => {
   useEffect(() => {
-    (window as any).setStyle = function () {
+    window.setStyle = function () {
       const element = document.querySelector("ethermail-subscribe");
       if (element && element.shadowRoot) {
         const style = document.createElement("style");
@@ -66,7 +75,7 @@ const EthermailSubscribe = () => {
   useEffect(() => {
     (function ({ ...args }) {
       if (!document.getElementById("ethermail-sdk-script")) {
-        var p = document.createElement("script");
+        const p = document.createElement("script");
         p.id = "ethermail-sdk-script";
         p.src = "https://cdn-email.ethermail.io/sdk/v2/ethermail.js";
         document.body.appendChild(p);
