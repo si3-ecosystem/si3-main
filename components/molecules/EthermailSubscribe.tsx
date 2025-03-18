@@ -84,7 +84,7 @@ const EthermailSubscribe = () => {
         p.setAttribute("c", args.features);
       }
     })({
-      afid: "677f0f8f690e56d4d9800180",
+      afid: "67353ab1f14dc512c8f225ef",
       communityAlias: "si3",
       features: ["subscribe"],
     });
@@ -158,7 +158,7 @@ const EthermailSubscribe = () => {
   return (
     <div className="flex w-full max-w-md items-center overflow-hidden">
       <ethermail-subscribe
-        widget="660289690063bda39760024a"
+        widget="677f0f8f690e56d4d9800180"
         theme="light"
         on-mounted="setStyle"
         input="auto"
