@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import LoginLeft from "@/components/organisms/login/LoginLeft";
+import LoginLeft from "@/components/organisms/auth/login/LoginLeft";
 
 const Login: React.FC = () => {
   return (

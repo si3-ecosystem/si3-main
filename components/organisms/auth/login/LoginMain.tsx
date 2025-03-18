@@ -31,10 +31,17 @@ const LoginMain = () => {
           num={0}
         />
 
-        <LoginButton
+        {/* <LoginButton
           src="/login/coinbase-logo.svg"
           alt="Coinbase"
           label="Coinbase"
+          num={1}
+        /> */}
+
+        <LoginButton
+          src="/login/safe-logo.png"
+          alt="Safe Multisig"
+          label="Safe Multisig"
           num={1}
         />
 
