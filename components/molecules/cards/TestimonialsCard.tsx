@@ -16,8 +16,8 @@ export function TestimonialsCard({ item }: Props) {
     ? urlForImage(item.companyLogo)?.src
     : "/icons/jpg/push.jpg";
   return (
-    <Card className="bg-[#F6F2F2] p-4">
-      <div className="flex flex-col items-start gap-8 @3xl:flex-row">
+    <Card className="!h-full bg-[#F6F2F2] p-4">
+      <div className="flex h-full flex-col items-start gap-8 @3xl:flex-row">
         <div className="relative aspect-square h-full overflow-hidden rounded-lg @3xl:w-full @3xl:max-w-[257.892px]">
           <Image
             src={imageUrl || "/icons/jpg/testimonial.jpg"}

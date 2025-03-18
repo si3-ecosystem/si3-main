@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CommunityState {
-  activeAccordionValue: string | null;
+  activeAccordionValue: string | string[];
 }
 
 const initialState: CommunityState = {
@@ -13,8 +13,8 @@ const communitySlice = createSlice({
   initialState,
   reducers: {
     setActiveAccordionValue: (
-      state: CommunityState,
-      action: PayloadAction<string | null>,
+      state,
+      action: PayloadAction<string | string[]>,
     ) => {
       state.activeAccordionValue = action.payload;
     },

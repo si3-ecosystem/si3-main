@@ -31,6 +31,8 @@ function TeamMemberCard({
     ? urlForImage(member.image)?.src
     : "/about/kara.jpg";
 
+  console.log("imageUrl", member.image);
+
   return (
     <motion.div
       style={{ y }}
@@ -43,10 +45,8 @@ function TeamMemberCard({
         <AspectRatio ratio={9 / 10}>
           <Image
             fill
-            {...(member.image?.blurDataURL && {
-              placeholder: "blur",
-              blurDataURL: member.image?.blurDataURL,
-            })}
+            loading="lazy"
+            decoding="async"
             src={imageUrl || "/about/kara.jpg"}
             alt={member.name}
             className="h-full w-full rounded-md object-cover transition-transform duration-300"

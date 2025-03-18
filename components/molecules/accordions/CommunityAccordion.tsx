@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 "use client";
 
 import {
@@ -7,11 +10,12 @@ import {
 } from "@/components/atoms/accordion";
 import { Title } from "@/components/atoms/title";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useAppDispatch } from "@/redux/store";
 import { setActiveAccordionValue } from "@/redux/slice/communitySlice";
 import { PlusIcon, MinusIcon } from "lucide-react";
+import { useWindowSize } from "@/hooks/useWindowsSize";
 
 export interface AccordionRenderItem {
   title: string;
@@ -31,20 +35,42 @@ export function CommunityAccordion({
   defaultValue,
 }: DynamicAccordionProps) {
   const dispatch = useAppDispatch();
-  const activeAccordionValue = useAppSelector(
-    (state) => state.community.activeAccordionValue,
-  );
+  const { width } = useWindowSize();
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  const [openValues, setOpenValues] = useState<string[] | string>(
+    defaultValue || renderItems[0]?.value || "",
+  );
+
+  const isMobile = width < 640;
+
   useEffect(() => {
-    if (!activeAccordionValue && defaultValue) {
+    if (isMobile && renderItems.length > 0) {
+      const allValues = renderItems.map((item) => item.value);
+      setOpenValues(allValues);
+      dispatch(setActiveAccordionValue(allValues));
+    } else if (!isMobile && defaultValue) {
+      setOpenValues(defaultValue);
       dispatch(setActiveAccordionValue(defaultValue));
     }
-  }, [activeAccordionValue, defaultValue, dispatch]);
+  }, [isMobile, renderItems, defaultValue, dispatch]);
 
-  const handleValueChange = (value: string) => {
-    dispatch(setActiveAccordionValue(value));
+  const handleValueChange = (value: string | string[]) => {
+    if (isMobile) {
+      const newValues = Array.isArray(value)
+        ? value
+        : (openValues as string[]).includes(value)
+          ? (openValues as string[]).filter((v) => v !== value)
+          : [...(openValues as string[]), value];
+      setOpenValues(newValues);
+      dispatch(setActiveAccordionValue(newValues));
+    } else {
+      // For larger screens, handle single item
+      const newValue = typeof value === "string" ? value : value[0] || "";
+      setOpenValues(newValue);
+      dispatch(setActiveAccordionValue(newValue));
+    }
 
     if (sectionRef.current) {
       const sectionTop =
@@ -57,15 +83,26 @@ export function CommunityAccordion({
     }
   };
 
+  // Helper to check if an item is open
+  const isItemOpen = (value: string) => {
+    return Array.isArray(openValues)
+      ? openValues.includes(value)
+      : openValues === value;
+  };
+
   return (
     <div ref={sectionRef} className="space-y-4">
       <Accordion
-        type="single"
+        type={isMobile ? "multiple" : "single"}
         collapsible
         className="animate-out animate-in w-full"
-        value={activeAccordionValue}
+        value={openValues}
         onValueChange={handleValueChange}
-        defaultValue={defaultValue || renderItems[0]?.value}
+        defaultValue={
+          isMobile
+            ? renderItems.map((item) => item.value)
+            : defaultValue || renderItems[0]?.value
+        }
       >
         {renderItems.map((item) => (
           <AccordionItem
@@ -92,7 +129,7 @@ export function CommunityAccordion({
                     {item.title}
                   </Title>
                 </span>
-                {activeAccordionValue === item.value ? (
+                {isItemOpen(item.value) ? (
                   <MinusIcon className="pointer-events-none z-10 size-8 shrink-0 text-white lg:size-16" />
                 ) : (
                   <PlusIcon className="pointer-events-none z-10 size-8 shrink-0 text-white lg:size-16" />

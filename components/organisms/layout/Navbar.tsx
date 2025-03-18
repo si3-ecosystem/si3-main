@@ -46,7 +46,7 @@ export function Navbar() {
               <Button
                 title="Subscribe"
                 aria-label="Subscribe"
-                className="bg-black"
+                className="!h-11 bg-black"
                 showGradient
               >
                 Subscribe

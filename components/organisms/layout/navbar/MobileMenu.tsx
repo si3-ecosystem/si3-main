@@ -1,4 +1,6 @@
-import { CircleUserRound } from "lucide-react";
+"use client";
+
+import { BookText, CircleUserRound, Handshake } from "lucide-react";
 import Logo from "@/components/atoms/Logo";
 import Link from "next/link";
 import {
@@ -10,6 +12,10 @@ import {
   SheetClose,
 } from "@/components/atoms/sheet";
 import React from "react";
+import { ChevronRight, Globe } from "lucide-react";
+import { UserGroup } from "@/components/molecules/icons/UserGroup";
+import { ProgrammingIcon } from "@/components/molecules/icons/ProgrammingIcon";
+import { GroupIcon } from "@/components/molecules/icons/GroupIcon";
 
 export function MobileMenu() {
   return (
@@ -44,128 +50,172 @@ export function MobileMenu() {
         </div>
       </SheetTrigger>
       <SheetContent side="left" className="h-[100vh] w-full bg-white p-0">
-        <SheetHeader className="border-b p-4">
-          <SheetTitle className="!p-3">
+        <SheetHeader className="flex flex-row items-center justify-between border-b border-gray-300 p-4">
+          <SheetTitle className="!p-0">
             <Logo src="/logo.svg" alt="SI3 Logo" />
           </SheetTitle>
         </SheetHeader>
-        <div className="-mt-4 flex h-[100vh] flex-col justify-between overflow-y-scroll sm:-mt-3">
-          <div className="px-4">
-            <div className="mb-8 divide-y divide-gray-300 border-r border-b border-l border-gray-300">
-              <div className="grid w-full grid-cols-2 divide-x divide-y divide-gray-300">
+        <div className="flex h-[calc(100vh-64px)] flex-col justify-between overflow-y-scroll">
+          <div className="px-4 pb-6">
+            {/* Section: SI U Scholars */}
+            <div className="mb-3">
+              <h3 className="mb-3 text-lg font-bold text-black uppercase">
+                SI U Scholars
+              </h3>
+              <div className="space-y-3">
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
+                    className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <p className="text-lg font-bold">SI U Scholars</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                        <BookText className="h-4 w-4 text-[#5D5D5D]" />
+                      </div>
+                      <div>
+                        <p className="text-[15px] font-normal">SI U</p>
+                        <p className="text-sm text-[#5D5D5D]">
+                          Description goes here
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
                   <Link
-                    href="/"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
+                    href="/#pathways"
+                    className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <p className="text-lg font-bold">SI U</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                        <UserGroup />
+                      </div>
+                      <div>
+                        <p className="text-[15px] font-normal">SI Her Kollab</p>
+                        <p className="text-sm text-[#5D5D5D]">
+                          Description goes here
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SheetClose>
               </div>
+            </div>
 
-              <div className="grid grid-cols-2 divide-x divide-y divide-gray-300">
+            {/* Section: SI Her Guides */}
+            <div className="mb-3">
+              <h3 className="mb-3 text-lg font-bold text-black uppercase">
+                SI Her Guides
+              </h3>
+              <div className="space-y-4">
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
+                    className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <p className="text-lg font-bold">Si Her Kollab</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                        <ProgrammingIcon />
+                      </div>
+                      <div>
+                        <p className="text-[15px] font-normal">
+                          SI Her Programming
+                        </p>
+                        <p className="text-sm text-[#5D5D5D]">
+                          Description goes here
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
+                    className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <p className="text-lg font-bold">Si Her Guides</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                        <Globe className="h-6 w-6 text-[#5D5D5D]" />
+                      </div>
+                      <div>
+                        <p className="text-[15px] font-normal">SI Her Eth</p>
+                        <p className="text-sm text-[#5D5D5D]">
+                          Description goes here
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SheetClose>
+              </div>
+            </div>
+
+            {/* Section: SI<3>Partners */}
+            <div className="mb-3">
+              <h3 className="mb-3 text-lg font-bold text-black uppercase">
+                SI&lt;3&gt;Partners
+              </h3>
+              <div className="space-y-4">
                 <SheetClose asChild>
                   <Link
                     href="/#pathways"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
+                    className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <p className="text-lg font-bold">SiHerEth</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link
-                    href="/#pathways"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
-                  >
-                    <p className="text-lg font-bold">Si Her Programming</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link
-                    href="/#pathways"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
-                  >
-                    <p className="text-lg font-bold">{"SI<3>Partners"}</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link
-                    href="/#pathways"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
-                  >
-                    <p className="text-lg font-bold">
-                      {"SI<3>Partner Workshops"}
-                    </p>
-                    <span className="hidden text-sm group-hover:block">→</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                        <Handshake className="h-6 w-6 text-[#5D5D5D]" />
+                      </div>
+                      <div>
+                        <p className="text-[15px] font-normal">
+                          Partner Workshops
+                        </p>
+                        <p className="text-sm text-[#5D5D5D]">
+                          Description goes here
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
                   <Link
                     href="/onboard"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
+                    className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <p className="text-lg font-bold">DEAI Training</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link
-                    href="/diversity-tracker"
-                    className="hover:bg-primary group p-4 text-black hover:text-white sm:p-8"
-                  >
-                    <p className="text-lg font-bold">Diversity Tracker</p>
-                    <span className="hidden text-sm group-hover:block">→</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                        <GroupIcon />
+                      </div>
+                      <div>
+                        <p className="text-[15px] font-normal">DEAI Training</p>
+                        <p className="text-sm text-[#5D5D5D]">
+                          Description goes here
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SheetClose>
               </div>
+            </div>
 
+            {/* About Us */}
+            <div className="mb-3">
               <SheetClose asChild>
                 <Link
                   href="/about"
-                  className="hover:bg-primary group w-full p-4 text-center text-black hover:text-white sm:p-8"
+                  className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                 >
-                  <p className="text-lg font-bold">About Us</p>
+                  <p className="text-lg font-bold text-black">About Us</p>
+                  <ChevronRight className="h-5 w-5 text-[#5D5D5D]" />
                 </Link>
               </SheetClose>
             </div>
           </div>
 
-          <div className="space-y-4 px-4">
+          {/* Footer Section */}
+          <div className="space-y-4 px-4 pb-6">
             <SheetClose asChild>
               <Link
                 href="/onboard"
-                className="block w-full rounded-md bg-black py-2 text-center text-white"
+                className="block w-full rounded-full bg-black py-2.5 text-center text-lg font-semibold text-white"
               >
                 Get Started
               </Link>
@@ -173,16 +223,16 @@ export function MobileMenu() {
             <SheetClose asChild>
               <Link
                 href="/login"
-                className="hover:bg-primary flex w-full items-center justify-center rounded-md border border-gray-300 py-2 text-center text-gray-700"
+                className="h-10text-center flex w-full items-center justify-center rounded-full border border-gray-300 py-2.5 text-lg font-semibold text-gray-700"
               >
                 <span className="mr-2">
-                  <CircleUserRound />
-                </span>{" "}
+                  <CircleUserRound className="h-5 w-5" />
+                </span>
                 Member Login
               </Link>
             </SheetClose>
 
-            <div className="mb-4 rounded-lg bg-gray-200 p-4 text-black">
+            <div className="rounded-lg bg-gray-200 p-4 text-black">
               <p className="text-base font-medium">
                 Help us build a more inclusive Web3!
               </p>
@@ -193,7 +243,7 @@ export function MobileMenu() {
               <SheetClose asChild>
                 <Link
                   href="/about"
-                  className="mt-2 block w-fit rounded-full border border-gray-300 bg-white px-3 py-1 text-center text-black hover:border-black hover:bg-black hover:text-white"
+                  className="mt-2 block w-fit rounded-full border border-black bg-white px-3 py-2.5 text-center text-black hover:border-black hover:bg-black hover:text-white"
                 >
                   Learn More
                 </Link>

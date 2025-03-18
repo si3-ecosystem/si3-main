@@ -48,7 +48,7 @@ export function Testimonials({ title, items }: TestimonialsProps) {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="mx-auto w-full">
+    <div className="mx-auto h-full w-full">
       <div className="mb-12 flex items-center justify-between">
         <h2 className="text-3xl font-bold tracking-tight text-black">
           {title}
@@ -73,12 +73,12 @@ export function Testimonials({ title, items }: TestimonialsProps) {
         </div>
       </div>
 
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="@container flex w-full">
+      <div className="h-full overflow-hidden" ref={emblaRef}>
+        <div className="4 @container -ml-4 flex h-full w-full">
           {items.map((item, index) => (
             <div
               key={index}
-              className="w-full min-w-0 flex-[0_0_100%]"
+              className="h-full w-full min-w-0 flex-[0_0_100%] pl-4"
               style={{ transform: "translateX(0%)" }}
             >
               <TestimonialsCard item={item} />
