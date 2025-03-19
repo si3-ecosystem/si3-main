@@ -121,7 +121,11 @@ export function PartnerProgramForm({
         <DialogTrigger asChild>
           <Button
             variant={"outline"}
-            className={cn("w-full", className)}
+            className={cn(
+              "w-full",
+              className,
+              showGradient && "border border-none",
+            )}
             showGradient={showGradient}
           >
             {title || "Inquire Now"}

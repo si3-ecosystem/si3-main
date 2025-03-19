@@ -1,3 +1,5 @@
+"use client";
+
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
 import { QuotIcon } from "@/components/molecules/icons/Quot";
@@ -5,6 +7,7 @@ import { urlForImage } from "@/lib/sanity/image";
 import { Testimonial } from "@/types/about";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 
 type Props = {
   data: Testimonial;
@@ -14,6 +17,30 @@ export function TopTestimonial({ data }: Props) {
   const imageUrl = data.image
     ? urlForImage(data.image)?.src
     : "/about/kara.jpg";
+
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const card = cardRef.current;
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+
+    const rotateX = -(mouseY / (rect.height / 2)) * 10;
+    const rotateY = (mouseX / (rect.width / 2)) * 10;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+  };
 
   return (
     <section className="mx-auto w-full max-w-[1440px] px-4 py-14 lg:px-[90px] lg:py-20">
@@ -43,7 +70,12 @@ export function TopTestimonial({ data }: Props) {
               </span>
             </Text>
           </div>
-          <div className="h-[384.445px] w-full @3xl:h-full @3xl:max-h-[384.445px] @3xl:max-w-[356.365px]">
+          <div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="h-[384.445px] w-full transition-transform duration-300 ease-out @3xl:h-full @3xl:max-h-[384.445px] @3xl:max-w-[356.365px]"
+          >
             <Image
               src={imageUrl || "/about/kara.jpg"}
               alt={data.author || "si ui scholars image"}
@@ -55,7 +87,7 @@ export function TopTestimonial({ data }: Props) {
               height={328}
               decoding="async"
               loading="lazy"
-              className="h-full w-full rounded-lg object-cover object-center"
+              className="h-full w-full rounded-lg object-cover object-center shadow-lg"
             />
           </div>
         </div>

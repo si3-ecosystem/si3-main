@@ -18,7 +18,7 @@ interface VideoContent {
 }
 
 const defaultContent = {
-  videoSrc: "/videos/SiUScholars.mp4",
+  videoSrc: "/videos/connectionformat.mp4",
   title: "Explore & Expand",
   ctaLink: "/scholars",
   ctaTitle: "Join Scholars",
