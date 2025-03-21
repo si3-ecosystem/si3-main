@@ -68,14 +68,14 @@ export function MobileMenu() {
                     href="/#pathways"
                     className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                    <div className="flex items-start gap-2">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gray-200 p-1.5">
                         <BookText className="h-4 w-4 text-[#5D5D5D]" />
                       </div>
                       <div>
                         <p className="text-[15px] font-normal">SI U</p>
                         <p className="text-sm text-[#5D5D5D]">
-                          Description goes here
+                          Open education system powered by in-the-field experts.
                         </p>
                       </div>
                     </div>
@@ -86,14 +86,14 @@ export function MobileMenu() {
                     href="/#pathways"
                     className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                    <div className="flex items-start gap-2">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gray-200 p-1.5">
                         <UserGroup />
                       </div>
                       <div>
                         <p className="text-[15px] font-normal">SI Her Kollab</p>
                         <p className="text-sm text-[#5D5D5D]">
-                          Description goes here
+                          Collaborative of 30+ communities.
                         </p>
                       </div>
                     </div>
@@ -113,8 +113,8 @@ export function MobileMenu() {
                     href="/#pathways"
                     className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                    <div className="flex items-start gap-2">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gray-200 p-1.5">
                         <ProgrammingIcon />
                       </div>
                       <div>
@@ -122,7 +122,8 @@ export function MobileMenu() {
                           SI Her Programming
                         </p>
                         <p className="text-sm text-[#5D5D5D]">
-                          Description goes here
+                          Advanced professional development and leadership
+                          programs.
                         </p>
                       </div>
                     </div>
@@ -133,14 +134,14 @@ export function MobileMenu() {
                     href="/#pathways"
                     className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                    <div className="flex items-start gap-2">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gray-200 p-1.5">
                         <Globe className="h-6 w-6 text-[#5D5D5D]" />
                       </div>
                       <div>
                         <p className="text-[15px] font-normal">SI Her Eth</p>
                         <p className="text-sm text-[#5D5D5D]">
-                          Description goes here
+                          Web3 personal brand template for our Si Her Guides.
                         </p>
                       </div>
                     </div>
@@ -160,8 +161,8 @@ export function MobileMenu() {
                     href="/#pathways"
                     className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                    <div className="flex items-start gap-2">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gray-200 p-1.5">
                         <Handshake className="h-6 w-6 text-[#5D5D5D]" />
                       </div>
                       <div>
@@ -169,7 +170,8 @@ export function MobileMenu() {
                           Partner Workshops
                         </p>
                         <p className="text-sm text-[#5D5D5D]">
-                          Description goes here
+                          Diversity, Equity, Accessibility and Inclusion
+                          training for aligned organizations.
                         </p>
                       </div>
                     </div>
@@ -180,8 +182,8 @@ export function MobileMenu() {
                     href="/onboard"
                     className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-100"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 p-1.5">
+                    <div className="flex items-start gap-2">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gray-200 p-1.5">
                         <GroupIcon />
                       </div>
                       <div>

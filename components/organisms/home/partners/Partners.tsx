@@ -12,7 +12,7 @@ type Props = {
 
 const Partners = ({ data }: Props) => {
   return (
-    <section className="relative z-10 space-y-4 pb-12 md:space-y-20">
+    <section className="relative z-10 space-y-4 pb-12 md:space-y-12">
       <Title className="text-center text-white">Our Partners</Title>
 
       <div className="space-y-4 md:space-y-8">

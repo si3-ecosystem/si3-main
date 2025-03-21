@@ -46,11 +46,15 @@ export function CommunityAccordion({
   const isMobile = width < 640;
 
   useEffect(() => {
-    if (isMobile && renderItems.length > 0) {
-      const allValues = renderItems.map((item) => item.value);
-      setOpenValues(allValues);
-      dispatch(setActiveAccordionValue(allValues));
-    } else if (!isMobile && defaultValue) {
+    if (renderItems.length === 0) return;
+
+    if (isMobile) {
+      // On mobile, default to only the first item being open
+      const firstItemValue = renderItems[0]?.value;
+      setOpenValues([firstItemValue]);
+      dispatch(setActiveAccordionValue([firstItemValue]));
+    } else if (defaultValue) {
+      // On larger screens, use the provided defaultValue
       setOpenValues(defaultValue);
       dispatch(setActiveAccordionValue(defaultValue));
     }
@@ -72,13 +76,13 @@ export function CommunityAccordion({
       dispatch(setActiveAccordionValue(newValue));
     }
 
-    if (sectionRef.current) {
+    if (sectionRef.current && !isMobile) {
       const sectionTop =
         sectionRef.current.getBoundingClientRect().top + window.scrollY;
       const offset = 50;
       window.scrollTo({
         top: sectionTop - offset,
-        behavior: "smooth",
+        behavior: isMobile ? "auto" : "smooth", // Use "auto" on mobile, "smooth" on larger screens
       });
     }
   };
@@ -100,7 +104,7 @@ export function CommunityAccordion({
         onValueChange={handleValueChange}
         defaultValue={
           isMobile
-            ? renderItems.map((item) => item.value)
+            ? [renderItems[0]?.value] // Only the first item on mobile
             : defaultValue || renderItems[0]?.value
         }
       >

@@ -4,7 +4,7 @@ import LoginMain from "./LoginMain";
 
 const LoginLeft = () => {
   return (
-    <div className="w-1/2 p-10">
+    <div className="w-full px-4 py-10 sm:p-10 lg:w-1/2">
       <LoginMain />
     </div>
   );

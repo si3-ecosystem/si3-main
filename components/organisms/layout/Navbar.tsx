@@ -7,9 +7,7 @@ import { cn } from "@/lib/utils";
 
 import { Logo } from "@/components/atoms/Logo";
 import { Button } from "@/components/atoms/button";
-import ProfileMenu from "@/components/molecules/menus/ProfileMenu";
 
-import Subscribe from "./navbar/Subscribe";
 import { MobileMenu } from "./navbar/MobileMenu";
 import { Notification } from "./navbar/Notification";
 
@@ -33,7 +31,7 @@ export function Navbar() {
         backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.8)" : "white",
       }}
     >
-      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 lg:px-24">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-3 lg:px-24">
         <Link href={"/"}>
           <Logo src="/logo.svg" />
         </Link>
@@ -42,17 +40,22 @@ export function Navbar() {
           <Notification />
 
           <div className="flex items-center gap-3 max-lg:hidden">
-            <Subscribe>
-              <Button
-                title="Subscribe"
-                aria-label="Subscribe"
-                className="!h-11 bg-black"
-                showGradient
-              >
-                Subscribe
-              </Button>
-            </Subscribe>
-            <ProfileMenu />
+            <Button
+              title="Subscribe"
+              aria-label="Subscribe"
+              className="bg-black !py-2"
+              showGradient
+              asChild
+            >
+              <Link href={"/login"}>Sign Up</Link>
+            </Button>
+            <Button
+              title="Subscribe"
+              aria-label="Subscribe"
+              className="border border-gray-400 bg-white !py-2 text-black"
+            >
+              <Link href={"/login"}>Login</Link>
+            </Button>
           </div>
 
           <div className="lg:hidden">

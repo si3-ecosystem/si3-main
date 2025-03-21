@@ -29,7 +29,7 @@ export function Notification() {
 
   return (
     <div
-      className="relative"
+      className="relative h-11"
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
       onClick={() => handleNotification()}

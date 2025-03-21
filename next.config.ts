@@ -9,13 +9,21 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/**",
       },
-      { hostname: "cdn.sanity.io" },
+      {
+        protocol: "https",
+        hostname: "*.sanity.io",
+        pathname: "/images/**",
+      },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    minimumCacheTTL: 60,
+    loader: "default",
   },
+
   typescript: {
     ignoreBuildErrors: process.env.VERCEL_ENV === "production",
   },
@@ -24,6 +32,26 @@ const nextConfig: NextConfig = {
   },
 
   compress: true,
+  async headers() {
+    return [
+      {
+        source: "/_next/image(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=60", // Cache image responses for 60 seconds
+          },
+        ],
+      },
+    ];
+  },
+
+  // New: Logging for better debugging
+  logging: {
+    fetches: {
+      fullUrl: true, // Log full URLs for failed image fetches
+    },
+  },
 };
 
 export default nextConfig;
