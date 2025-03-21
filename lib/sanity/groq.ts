@@ -239,9 +239,15 @@ export const aboutQuery = groq`
 *[_type == "aboutSchema"][0] {
   _id,
    about_hero-> {
+   heroVideo {
+    "videoUrl": videoFile.asset->url,
+    title,
+    ctaLink,
+    ctaTitle
+  },
   title,
   description,
- image {
+  image {
       ...,
       "blurDataURL": asset->metadata.lqip,
       "ImageColor": asset->metadata.palette.dominant.background,

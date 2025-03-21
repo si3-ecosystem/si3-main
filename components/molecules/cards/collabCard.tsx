@@ -33,8 +33,8 @@ export function CollabCard({ item }: { item: Community }) {
               <div className="flex h-[75px] w-[75px] items-center justify-center rounded-[14px] bg-white p-2 shadow-md">
                 <Image
                   src={image || "/icons/jpg/sihericon.jpg"}
-                  alt={item.communityName}
-                  title={item.communityName}
+                  alt={item?.communityName}
+                  title={item?.communityName}
                   decoding="async"
                   loading="lazy"
                   width={56}
@@ -45,15 +45,15 @@ export function CollabCard({ item }: { item: Community }) {
               <span className="flex items-center gap-2">
                 <MapPin className="text-primary size-4" />
                 <p className="text-primary text-base leading-6 font-normal">
-                  {item.communityLocation}
+                  {item?.communityLocation}
                 </p>
               </span>
             </div>
             <div className="flex flex-col gap-2 pb-3">
               <h4 className="line-clamp-2 text-xl leading-normal font-semibold tracking-tight whitespace-pre-wrap text-black uppercase">
-                {item.communityName}
+                {item?.communityName}
               </h4>
-              {item.communityType && (
+              {item?.communityType && (
                 <Badge
                   variant="outline"
                   className="gap-1.5 border-none bg-none outline-none"
@@ -62,7 +62,7 @@ export function CollabCard({ item }: { item: Community }) {
                     className="size-1.5 rounded-full bg-black"
                     aria-hidden="true"
                   ></span>
-                  {item.communityType}
+                  {item?.communityType}
                 </Badge>
               )}
             </div>
@@ -72,10 +72,10 @@ export function CollabCard({ item }: { item: Community }) {
               className="line-clamp-5 break-words whitespace-pre-wrap"
               variant="base"
             >
-              {item.communityDescription}
+              {item?.communityDescription}
             </Text>
             <ul className="flex flex-col gap-2.5">
-              {item.xHandle && (
+              {item?.xHandle && (
                 <li className="flex items-center gap-2">
                   <TwitterIcon />
                   <Link
@@ -87,7 +87,7 @@ export function CollabCard({ item }: { item: Community }) {
                   </Link>
                 </li>
               )}
-              {item.communityWebsite && (
+              {item?.communityWebsite && (
                 <li className="flex items-center gap-2">
                   <WarpcastHandle />
                   <Link
@@ -99,7 +99,7 @@ export function CollabCard({ item }: { item: Community }) {
                   </Link>
                 </li>
               )}
-              {item.warpastHandle && (
+              {item?.warpastHandle && (
                 <li className="flex items-center gap-2">
                   <WarpcastHandle />
                   <Link
@@ -120,7 +120,7 @@ export function CollabCard({ item }: { item: Community }) {
             asChild
             className="w-full border-2 border-black hover:bg-black hover:text-white"
           >
-            <Link href={item.discover}>Discover Now</Link>
+            <Link href={item?.discover || "#"}>Discover Now</Link>
           </Button>
         </div>
       </CardContent>

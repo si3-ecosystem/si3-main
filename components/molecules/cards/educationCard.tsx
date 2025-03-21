@@ -115,14 +115,16 @@ export function EducationCard({
                 {item?.title}
               </h3>
             </div>
-            <div className="flex flex-col">
-              <p className="leading-5 font-semibold text-black">
-                {item?.presenters[0]?.name}
-              </p>
-              <p className="text-black opacity-70">
-                {item?.presenters[0]?.position}
-              </p>
-            </div>
+            {item?.presenters?.length > 0 ? (
+              <div className="flex flex-col">
+                <p className="leading-5 font-semibold text-black">
+                  {item?.presenters[0]?.name}
+                </p>
+                <p className="text-black opacity-70">
+                  {item?.presenters[0]?.position}
+                </p>
+              </div>
+            ) : null}
           </div>
         </CardContent>
       </Card>

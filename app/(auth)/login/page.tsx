@@ -5,10 +5,10 @@ import LoginLeft from "@/components/organisms/auth/login/LoginLeft";
 
 const Login: React.FC = () => {
   return (
-    <main className="flex h-screen">
+    <main className="flex flex-col md:h-screen md:flex-row">
       <LoginLeft />
 
-      <div className="relative w-1/2">
+      <div className="relative min-h-96 w-full md:block md:w-1/2">
         <Image
           src="/login/login-bg.png"
           alt=""

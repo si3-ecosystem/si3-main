@@ -14,7 +14,7 @@ export function CreatingTheNewEconomy({ aboutIntroData }: Props) {
     ? urlForImage(aboutIntroData.image)?.src
     : "/icons/webp/neweconomyimage.webp";
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 py-16 lg:px-24 lg:py-24">
+    <section className="mx-auto w-full max-w-[1440px] px-4 pb-16 lg:px-24 lg:py-24">
       <ContentCard
         title={aboutIntroData.title}
         description={aboutIntroData.description}

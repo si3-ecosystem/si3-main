@@ -58,6 +58,7 @@ interface Hero {
   title: string;
   description: string;
   image: Image;
+  heroVideo?: Video;
 }
 
 interface AboutQuery {
