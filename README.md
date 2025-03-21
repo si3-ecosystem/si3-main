@@ -100,11 +100,11 @@ npm run dev  # or yarn dev
 http://localhost:3000
 ```
 
-✨ Code of Conduct
+### ✨ Code of Conduct
 
 All developers must adhere to the project's Code of Conduct to ensure a respectful and productive work environment. Always follow best practices, maintain clean and readable code, and document your changes when necessary.
 
-💻 Need Help?
+### 💻 Need Help?
 
 If you have any issues, reach out to the project lead or team members on Slack/Discord. We’re here to help!
 
