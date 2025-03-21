@@ -61,13 +61,16 @@ const EtherMail = () => {
   useEffect(() => {
     (function ({ ...args }) {
       const p = document.createElement("script");
+
       p.src = "https://cdn-email.ethermail.io/sdk/v2/ethermail.js";
+
       document.body.appendChild(p);
+
       p.setAttribute("a", args.afid);
       p.setAttribute("b", args.communityAlias);
       p.setAttribute("c", args.features);
     })({
-      afid: "677f0f8f690e56d4d9800180",
+      afid: "67353ab1f14dc512c8f225ef",
       communityAlias: "si3",
       features: ["login"],
     });
@@ -76,7 +79,7 @@ const EtherMail = () => {
   return (
     <div className="w-full max-w-md overflow-hidden rounded-lg border">
       <ethermail-login
-        widget="660289690063bda39760024a"
+        widget="67353ab1f14dc512c8f225ef"
         type="wallet"
         permissions="write"
         on-mounted="setStyle"
