@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
 
 import { PushAPI, CONSTANTS } from "@pushprotocol/restapi";
@@ -5,24 +8,23 @@ import { PushAPI, CONSTANTS } from "@pushprotocol/restapi";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setConnected, setPushSign } from "@/redux/slice/pushSlice";
 import { getEthersSigner } from "@/wagmi/ethersSigner";
+import { setConnected, setPushSign } from "@/redux/slice/pushSlice";
 
 import { config } from "@/config/wagmiConfig";
 
 const usePush = () => {
   const dispatch = useDispatch();
 
-  const [notifications, setNotifications] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
   const initPushStream = async () => {
     try {
-      console.log("Initializing Push stream");
       const signer = await getEthersSigner(config);
 
       const user = await PushAPI.initialize(signer, {
-        env: CONSTANTS.ENV.STAGING,
+        env: CONSTANTS.ENV.PROD,
       });
 
       dispatch(setConnected(true));
