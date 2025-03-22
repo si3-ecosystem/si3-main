@@ -49,6 +49,7 @@ export function Navbar() {
             >
               <Link href={"/login"}>Sign Up</Link>
             </Button>
+
             <Button
               title="Subscribe"
               aria-label="Subscribe"

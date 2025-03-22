@@ -1,30 +1,17 @@
 "use client";
 
-import { toast } from "sonner";
 import { useState } from "react";
-// import Link from "next/link";
-import { useAccount } from "wagmi";
 import { BellRing } from "lucide-react";
 import { useRouter } from "next/navigation";
-
-import usePush from "@/hooks/usePush";
 
 import { PingIcon } from "@/components/molecules/icons/PingIcon";
 
 export function Notification() {
   const router = useRouter();
-  const { status } = useAccount();
   const [hover, setHovered] = useState(false);
 
-  const { initPushStream } = usePush();
-
   const handleNotification = () => {
-    if (status === "connected") {
-      initPushStream();
-    } else {
-      router.push("/login");
-      toast.error("Please login to view notifications");
-    }
+    router.push("/notification");
   };
 
   return (
