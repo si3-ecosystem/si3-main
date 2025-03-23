@@ -93,6 +93,7 @@ export interface ScholarsData {
   _id: string;
   introduction: Introduction;
   title: string;
+  image: SanityImage;
   description: string;
   courses: Course[];
   community_title: string;
@@ -149,6 +150,7 @@ export interface GuidesData {
   _id: string;
   title: string;
   description: string;
+  image: SanityImage;
   introduction: Introduction;
   web3brands: Web3Brand;
   members_title: string;
@@ -176,6 +178,7 @@ export interface PartnersData {
   _id: string;
   title: string;
   description: string;
+  image: SanityImage;
   introduction: Introduction;
   explore: ExploreItem[];
   testimonials: Testimonial[];

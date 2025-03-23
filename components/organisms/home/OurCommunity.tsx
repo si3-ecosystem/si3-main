@@ -5,6 +5,7 @@ import { SiHerGuidesWrapper } from "./guides/SiHerGuidesWrapper";
 import { SiPartnersWrapper } from "./siPartners/SiPartnersWrapper";
 import dynamic from "next/dynamic";
 import { GuidesData, PartnersData, ScholarsData } from "@/types/home";
+import { urlForImage } from "@/lib/sanity/image";
 
 const CommunityAccordion = dynamic(
   () =>
@@ -25,26 +26,36 @@ export function OurCommunity({
   guidesData,
   partnersData,
 }: Props) {
+  const getImageUrl = (image) => {
+    return urlForImage(image)?.src || null;
+  };
+
   const accordionData = [
     {
       title: scholarsData?.title || "Si U Scholars",
       value: "si_u_scholars",
       sub: scholarsData?.description || "Learn the basics of Web3 technology",
-      background: "/icons/jpg/si_u_scholars_tab_background.jpg",
+      background:
+        getImageUrl(scholarsData.image) ||
+        "/icons/jpg/si_u_scholars_tab_background.jpg",
       section: <SiUScholarsWrapper data={scholarsData} />,
     },
     {
       title: guidesData?.title || "Si Her Guides",
       value: "si_her_guides",
       sub: guidesData?.description || "Meet our collaborators",
-      background: "/icons/jpg/si_her_guides_background.jpg",
+      background:
+        getImageUrl(guidesData.image) ||
+        "/icons/jpg/si_her_guides_background.jpg",
       section: <SiHerGuidesWrapper data={guidesData} />,
     },
     {
       title: partnersData?.title || "SI<3> PARTNERS",
       value: "si_partners",
       sub: partnersData?.description || "",
-      background: "/icons/jpg/si_partners_background.jpg",
+      background:
+        getImageUrl(partnersData.image) ||
+        "/icons/jpg/si_partners_background.jpg",
       section: <SiPartnersWrapper data={partnersData} />,
     },
   ];

@@ -52,19 +52,20 @@ export function TopTestimonial({ data }: Props) {
             </Title>
             <Text
               variant="2xl"
-              className="max-w-[535px] text-2xl leading-[140%] text-black lg:mb-8 lg:text-3xl lg:leading-normal"
+              className="flex max-w-[535px] flex-col gap-4 text-2xl leading-[140%] text-black lg:mb-8 lg:text-3xl lg:leading-normal"
             >
-              {data.quote}
-              <br />
-              <Link
-                href={data.sourceUrl || "#"}
-                target="_blank"
-                className="text-lg underline"
-              >
-                {" "}
-                {data.sourceTitle}
-              </Link>{" "}
-              <br />
+              <span> {data.quote}</span>
+              <span> {data.thoughts}</span>
+
+              <span>
+                <Link
+                  href={data.sourceUrl || "#"}
+                  target="_blank"
+                  className="text-lg underline"
+                >
+                  {data.sourceTitle}
+                </Link>
+              </span>
               <span className="text-lg font-medium text-[#4F4F4F] lg:text-2xl">
                 {data.author}
               </span>

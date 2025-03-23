@@ -42,8 +42,15 @@ export const homepageQuery = groq`
 export const scholarsQuery = groq`
 *[_type == "scholarsSchema"][0] {
   _id,
+    image {
+    ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
   introduction-> {
   ...,
+ 
  thumbnail {
       ...,
       "blurDataURL": asset->metadata.lqip,
@@ -69,6 +76,7 @@ export const scholarsQuery = groq`
     company->,
     presenters[]->
   },
+  
   community_title,
   community_description,
   communities[]-> {
@@ -103,6 +111,12 @@ export const scholarsQuery = groq`
 export const guidesQuery = groq`
 *[_type == "guidesSchema"][0] {
   _id,
+    image {
+    ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
    introduction-> {
   ...,
  thumbnail {
@@ -189,6 +203,12 @@ export const guidesQuery = groq`
 export const partnersQuery = groq`
 *[_type == "partnersSchema"][0] {
   _id,
+    image {
+    ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
   introduction-> {
   ...,
  thumbnail {
@@ -272,6 +292,7 @@ export const aboutQuery = groq`
     sourceUrl,
     sourceTitle,
     author,
+    thoughts,
     image {
       ...,
       "blurDataURL": asset->metadata.lqip,

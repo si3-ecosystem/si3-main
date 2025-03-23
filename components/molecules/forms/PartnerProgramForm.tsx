@@ -143,8 +143,7 @@ export function PartnerProgramForm({
               </Title>
             </DialogTitle>
             <DialogDescription className="mx-auto w-full max-w-[517.453px] text-center text-base leading-5 text-[#3D3D3D]">
-              Share your interest below and a relevant SK3+ team member will
-              respond very soon.
+              Share your interest below and a team member will respond soon.
             </DialogDescription>
           </DialogHeader>
           <div className="">

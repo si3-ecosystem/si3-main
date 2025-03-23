@@ -41,6 +41,7 @@ interface Image {
 
 interface Testimonial {
   quote: string;
+  thoughts?: string;
   sourceUrl?: string;
   sourceTitle?: string;
   author: string;
