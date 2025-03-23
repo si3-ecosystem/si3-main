@@ -43,6 +43,7 @@ export function FooterBanner() {
   });
 
   let content: VideoContent = defaultContent;
+  let isLinkValue = false;
 
   if (data) {
     switch (activeValue) {
@@ -54,6 +55,7 @@ export function FooterBanner() {
           ctaTitle: data.scholarsData.video.ctaTitle,
           showGradient: true,
         };
+        isLinkValue = true;
         break;
       case "si_her_guides":
         content = {
@@ -63,6 +65,7 @@ export function FooterBanner() {
           ctaTitle: data.guidesData.video.ctaTitle,
           showGradient: true,
         };
+        isLinkValue = false;
         break;
       case "si_partners":
         content = {
@@ -72,9 +75,11 @@ export function FooterBanner() {
           ctaTitle: data.partnersData.video.ctaTitle,
           showGradient: true,
         };
+        isLinkValue = false;
         break;
       default:
         content = defaultContent;
+        isLinkValue = false;
     }
   }
 
@@ -93,6 +98,8 @@ export function FooterBanner() {
         videoSrc={content.videoSrc}
         title={content.title}
         ctaTitle={content.ctaTitle}
+        ctaLink={content.ctaLink}
+        isLink={isLinkValue}
         showGradient={content.showGradient || true}
       />
     </div>

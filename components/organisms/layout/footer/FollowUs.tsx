@@ -26,11 +26,14 @@ export const FollowUs = () => {
   return (
     <div className="flex border-gray-400 p-4 lg:justify-center lg:border-r lg:pt-16">
       <div>
-        <p className="font-clesmont text-2xl font-black">Follow Us</p>
-        <div className="my-2 flex flex-col gap-2">
+        <p className="font-clesmont mb-2 text-2xl font-normal">Follow Us</p>
+        <div className="flex flex-col gap-2">
           {socialList.map((social) => (
             <li key={social.name} className="list-none">
-              <Link href={social.url} className="flex items-center gap-2">
+              <Link
+                href={social.url}
+                className="hover:text-primary flex items-center gap-2"
+              >
                 {social.icon}
                 <span>{social.name}</span>
               </Link>

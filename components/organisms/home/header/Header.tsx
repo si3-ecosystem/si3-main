@@ -24,8 +24,10 @@ const Header = () => {
       </p>
 
       <div className="flex justify-center space-x-4 max-lg:mt-[41px]">
-        <Button asChild>
-          <Link href={"/onboard"}>Get Started</Link>
+        <Button asChild className="!h-14">
+          <Link href={"/onboard"} className="font-medium">
+            Get Started
+          </Link>
         </Button>
       </div>
     </header>

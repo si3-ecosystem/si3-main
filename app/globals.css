@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -191,13 +192,13 @@ body {
 .communitytop {
   border-radius: 13.15px;
   background: linear-gradient(118deg, #fcc6e9 2.2%, #ffedcf 94.23%);
-  filter: blur(89.99644470214844px);
+  filter: blur(4px);
 }
 
 .communityBottom {
   border-radius: 13.15px;
   background: linear-gradient(118deg, #fcc6e9 2.2%, #ffedcf 94.23%);
-  filter: blur(135.5288848876953px);
+  filter: blur(4px);
 }
 
 ::-webkit-scrollbar {
@@ -342,4 +343,15 @@ body,
   100% {
     transform: translateX(0); /* Moves right for "right" direction */
   }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

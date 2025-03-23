@@ -13,7 +13,7 @@ export function HeaderSection({ data }: Props) {
         autoPlay
         loop
         muted
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
+        className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_calc(-20%+20px)] max-lg:object-[center_calc(-20%+65px)]"
       >
         <source
           src={data.heroVideo?.videoUrl || "/videos/SiUScholars.mp4"}

@@ -1,9 +1,8 @@
 import { Badge } from "@/components/atoms/badge";
 import { Card, CardContent } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
-import { MapPin } from "lucide-react";
+import { Globe, Linkedin, MapPin } from "lucide-react";
 import Image from "next/image";
-import { WarpcastHandle } from "../icons/WarpcastHandle";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { Button } from "@/components/atoms/button";
 import { Community } from "@/types/home";
@@ -53,18 +52,25 @@ export function CollabCard({ item }: { item: Community }) {
               <h4 className="line-clamp-2 text-xl leading-normal font-semibold tracking-tight whitespace-pre-wrap text-black uppercase">
                 {item?.communityName}
               </h4>
-              {item?.communityType && (
-                <Badge
-                  variant="outline"
-                  className="gap-1.5 border-none bg-none outline-none"
-                >
-                  <span
-                    className="size-1.5 rounded-full bg-black"
-                    aria-hidden="true"
-                  ></span>
-                  {item?.communityType}
-                </Badge>
-              )}
+              <ul className="flex flex-wrap gap-3.5">
+                {item?.communityType && item.communityType.length > 0 ? (
+                  item.communityType.map((type, index) => (
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="gap-1.5 border-none bg-none text-[#404040] outline-none"
+                    >
+                      <span
+                        className="size-1.5 rounded-full bg-[#404040]"
+                        aria-hidden="true"
+                      ></span>
+                      {type}
+                    </Badge>
+                  ))
+                ) : (
+                  <span className="opacity-0">Not Found</span>
+                )}
+              </ul>
             </div>
           </div>
           <div className="flex flex-col gap-6 bg-white px-5 py-6">
@@ -75,6 +81,18 @@ export function CollabCard({ item }: { item: Community }) {
               {item?.communityDescription}
             </Text>
             <ul className="flex flex-col gap-2.5">
+              {item?.communityWebsite && (
+                <li className="flex items-center gap-2">
+                  <Globe className="text-primary size-5" />
+                  <Link
+                    target="_blank"
+                    href={item.communityWebsite}
+                    className="text-primary"
+                  >
+                    {item.communityWebsite}
+                  </Link>
+                </li>
+              )}
               {item?.xHandle && (
                 <li className="flex items-center gap-2">
                   <TwitterIcon />
@@ -87,27 +105,16 @@ export function CollabCard({ item }: { item: Community }) {
                   </Link>
                 </li>
               )}
-              {item?.communityWebsite && (
+
+              {item?.linkedIn && (
                 <li className="flex items-center gap-2">
-                  <WarpcastHandle />
+                  <Linkedin className="text-primary size-5" />
                   <Link
                     target="_blank"
-                    href={item.communityWebsite}
+                    href={`https://warpcast.com/${item.linkedIn}`}
                     className="text-primary"
                   >
-                    {item.communityWebsite}
-                  </Link>
-                </li>
-              )}
-              {item?.warpastHandle && (
-                <li className="flex items-center gap-2">
-                  <WarpcastHandle />
-                  <Link
-                    target="_blank"
-                    href={`https://warpcast.com/${item.warpastHandle}`}
-                    className="text-primary"
-                  >
-                    {item.warpastHandle}
+                    {item.linkedIn}
                   </Link>
                 </li>
               )}

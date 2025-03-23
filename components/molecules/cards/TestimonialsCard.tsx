@@ -9,12 +9,9 @@ type Props = {
 };
 
 export function TestimonialsCard({ item }: Props) {
-  const imageUrl = item.image
-    ? urlForImage(item.image)?.src
-    : "/icons/jpg/testimonial.jpg";
-  const companyLogo = item.companyLogo
-    ? urlForImage(item.companyLogo)?.src
-    : "/icons/jpg/push.jpg";
+  const imageUrl = item.image && urlForImage(item.image)?.src;
+
+  const companyLogo = item.companyLogo && urlForImage(item.companyLogo)?.src;
   return (
     <Card className="!h-full bg-[#F6F2F2] p-4">
       <div className="flex h-full flex-col items-start gap-8 @3xl:flex-row">
@@ -44,15 +41,18 @@ export function TestimonialsCard({ item }: Props) {
                 <div className="">{item.name}</div>
                 <div className="">{item.title}</div>
               </div>
-              <div className="relative flex h-8 w-full max-w-[148.854px] items-center justify-end">
-                <Image
-                  src={companyLogo || "/icons/jpg/push.jpg"}
-                  alt={item.companyName}
-                  width={600}
-                  height={400}
-                  className="max-h-[33.906px] max-w-[148.854px] object-contain"
-                />
-              </div>
+
+              {companyLogo && (
+                <div className="relative flex h-8 w-full max-w-[148.854px] items-center justify-end">
+                  <Image
+                    src={companyLogo}
+                    alt={item.companyName}
+                    width={600}
+                    height={400}
+                    className="max-h-[33.906px] max-w-[148.854px] object-contain"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

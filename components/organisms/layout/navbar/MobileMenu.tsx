@@ -49,13 +49,16 @@ export function MobileMenu() {
           </svg>
         </div>
       </SheetTrigger>
-      <SheetContent side="left" className="h-[100vh] w-full bg-white p-0">
+      <SheetContent
+        side="left"
+        className="h-[100vh] w-full bg-white p-0 !pb-12"
+      >
         <SheetHeader className="flex flex-row items-center justify-between border-b border-gray-300 p-4">
           <SheetTitle className="!p-0">
             <Logo src="/logo.svg" alt="SI3 Logo" />
           </SheetTitle>
         </SheetHeader>
-        <div className="flex h-[calc(100vh-64px)] flex-col justify-between overflow-y-scroll">
+        <div className="no-scrollbar flex h-[calc(100vh-64px)] flex-col justify-between overflow-y-scroll pb-32">
           <div className="px-4 pb-6">
             {/* Section: SI U Scholars */}
             <div className="mb-3">
@@ -189,7 +192,8 @@ export function MobileMenu() {
                       <div>
                         <p className="text-[15px] font-normal">DEAI Training</p>
                         <p className="text-sm text-[#5D5D5D]">
-                          Description goes here
+                          Educational workshops and collaborative growth
+                          campaigns with our members.
                         </p>
                       </div>
                     </div>
@@ -242,10 +246,10 @@ export function MobileMenu() {
                 Share your unique perspective by filling out our Diversity
                 Tracker—your voice matters.
               </p>
-              <SheetClose asChild>
+              <SheetClose asChild className="mt-2">
                 <Link
                   href="/about"
-                  className="mt-2 block w-fit rounded-full border border-black bg-white px-3 py-2.5 text-center text-black hover:border-black hover:bg-black hover:text-white"
+                  className="block w-fit rounded-full border border-black bg-white px-3 py-2 text-center text-black hover:border-black hover:bg-black hover:text-white"
                 >
                   Learn More
                 </Link>

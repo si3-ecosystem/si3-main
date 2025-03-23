@@ -68,7 +68,6 @@ export function Web3Brand({ data }: Props) {
           <video
             src={videoUrl || "/videos/SiUScholars.mp4"}
             autoPlay
-            loop
             playsInline
             className="mx-auto h-full max-h-[489px] w-full max-w-[275px] object-cover object-center xl:h-full"
           />

@@ -10,6 +10,7 @@ import { Button } from "@/components/atoms/button";
 
 import { MobileMenu } from "./navbar/MobileMenu";
 import { Notification } from "./navbar/Notification";
+import { NavLinks } from "./navbar/NavLinks";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,6 +36,9 @@ export function Navbar() {
         <Link href={"/"}>
           <Logo src="/logo.svg" />
         </Link>
+        <div className="ml-32 flex-1 max-lg:hidden">
+          <NavLinks />
+        </div>
 
         <nav className="flex items-center gap-3">
           <Notification />

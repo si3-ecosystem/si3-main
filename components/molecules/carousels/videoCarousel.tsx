@@ -103,7 +103,7 @@ export function VideoCarousel({
               size="icon"
               onClick={scrollPrev}
               disabled={!emblaApi?.canScrollPrev()}
-              className="rounded-full hover:!bg-[#f4f1ff] hover:text-black"
+              className="rounded-full hover:!bg-black hover:text-white"
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
@@ -112,7 +112,7 @@ export function VideoCarousel({
               size="icon"
               onClick={scrollNext}
               disabled={!emblaApi?.canScrollNext()}
-              className="rounded-full hover:!bg-[#f4f1ff] hover:text-black"
+              className="rounded-full hover:!bg-black hover:text-white"
             >
               <ChevronRight className="h-6 w-6" />
             </Button>

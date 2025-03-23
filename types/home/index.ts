@@ -25,13 +25,13 @@ export interface Community {
   communityLogo: SanityImage;
   communityName: string;
   communityLocation: string;
-  communityType: string;
+  communityType: string[];
   communityDescription: string;
   communityWebsite: string;
   communityLeaderName: string;
   communityLeaderEmail: string;
   xHandle: string;
-  warpastHandle: string;
+  linkedIn: string;
   discover: string;
 }
 

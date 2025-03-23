@@ -2,6 +2,7 @@ import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
 import { urlForImage } from "@/lib/sanity/image";
+import { PortableText } from "@/lib/sanity/portabletext";
 import { Member } from "@/types/home";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
@@ -48,8 +49,8 @@ export function SpotlightCard({ item }: Props) {
               <span>{item.position}</span>
             </Text>
           </div>
-          <Text className="font-normal tracking-[1.7px]">
-            {item?.description}
+          <Text className="prose font-normal tracking-[1.7px]">
+            {item?.description && <PortableText value={item?.description} />}
           </Text>
         </div>
       </div>

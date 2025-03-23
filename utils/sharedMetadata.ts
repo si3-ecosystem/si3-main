@@ -16,6 +16,8 @@ export async function processMetadata() {
     return typeof imageSource === "string" ? imageSource : imageSource.src;
   };
 
+  const imageUrl = settings?.favicon && urlForImage(settings.favicon)?.src;
+
   return {
     metadataBase: new URL(process.env.BASE_URL || "https://www.si3.space"),
     title: settings?.seoTitle || "SI<3> Ecosystem",
@@ -27,28 +29,7 @@ export async function processMetadata() {
       icon: [
         {
           rel: "icon",
-          url: settings?.favicon || "/icons/fav.png",
-          sizes: "16x16",
-        },
-        {
-          rel: "icon",
-          url: settings?.favicon || "/icons/fav.png",
-          sizes: "16x16",
-        },
-        {
-          rel: "apple-touch-icon",
-          url: settings?.favicon || "/icons/fav.png",
-          sizes: "16x16",
-        },
-        {
-          rel: "mask-icon",
-          url: settings?.favicon || "/icons/fav.png",
-          color: "#5bbad5",
-        },
-        {
-          rel: "icon",
-          url: settings?.favicon || "/icons/fav.png",
-          sizes: "16x16",
+          url: imageUrl,
         },
       ],
     },

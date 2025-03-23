@@ -49,10 +49,8 @@ export function CommunityAccordion({
     if (renderItems.length === 0) return;
 
     if (isMobile) {
-      // On mobile, default to only the first item being open
-      const firstItemValue = renderItems[0]?.value;
-      setOpenValues([firstItemValue]);
-      dispatch(setActiveAccordionValue([firstItemValue]));
+      setOpenValues([]);
+      dispatch(setActiveAccordionValue([]));
     } else if (defaultValue) {
       // On larger screens, use the provided defaultValue
       setOpenValues(defaultValue);

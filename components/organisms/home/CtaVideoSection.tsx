@@ -1,21 +1,32 @@
+import { Button } from "@/components/atoms/button";
 import { Title } from "@/components/atoms/title";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
+import Link from "next/link";
 
 interface Props {
   videoSrc: string;
   showGradient?: boolean;
   title: string;
   ctaTitle?: string;
+  isLink?: boolean;
+  ctaLink?: string;
 }
 
-export function CtaVideoSection({ videoSrc, title, ctaTitle }: Props) {
+export function CtaVideoSection({
+  videoSrc,
+  title,
+  ctaTitle,
+  ctaLink,
+  showGradient = false,
+  isLink = false,
+}: Props) {
   return (
     <section className="relative h-[445.62px] w-full overflow-hidden rounded-t-2xl lg:h-[486px] lg:rounded-t-4xl">
       <video
         autoPlay
         loop
         muted
-        className="h-full w-full object-cover object-center"
+        className="h-full w-full object-cover object-bottom"
       >
         <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.
@@ -26,14 +37,17 @@ export function CtaVideoSection({ videoSrc, title, ctaTitle }: Props) {
           {title}
         </Title>
 
-        {/* <Button showGradient={showGradient} asChild>
-          <Link href={ctaLink}>{ctaTitle || "Join Now"}</Link>
-        </Button> */}
-        <PartnerProgramForm
-          className="mx-auto w-fit"
-          showGradient
-          title={ctaTitle}
-        />
+        {isLink ? (
+          <Button showGradient={showGradient} asChild>
+            <Link href={ctaLink || "#"}>{ctaTitle || "Join Now"}</Link>
+          </Button>
+        ) : (
+          <PartnerProgramForm
+            className="mx-auto w-fit"
+            showGradient
+            title={ctaTitle}
+          />
+        )}
       </div>
     </section>
   );
