@@ -24,6 +24,7 @@ export default async function AboutPage() {
         title={data.video.title || ""}
         ctaTitle={data.video.ctaTitle}
         showGradient={true}
+        isLink={true}
       />
     </Suspense>
   );

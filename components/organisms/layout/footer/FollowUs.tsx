@@ -24,7 +24,7 @@ const socialList: SocialItem[] = [
 
 export const FollowUs = () => {
   return (
-    <div className="flex border-gray-400 p-4 lg:justify-center lg:border-r lg:pt-16">
+    <div className="flex border-gray-400 p-4 lg:justify-center lg:px-11 lg:pt-16">
       <div>
         <p className="font-clesmont mb-2 text-2xl font-normal">Follow Us</p>
         <div className="flex flex-col gap-2">

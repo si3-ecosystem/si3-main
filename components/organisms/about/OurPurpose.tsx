@@ -10,7 +10,7 @@ type Props = {
 
 export function OurPurpose({ data }: Props) {
   return (
-    <Card className="@container mx-auto w-full max-w-[1083px] rounded-none px-4 py-16 max-lg:border-none max-lg:shadow-none lg:-mt-72 lg:rounded-2xl lg:p-14">
+    <Card className="@container mx-auto w-full max-w-[1083px] rounded-none px-4 py-8 pb-16 max-lg:border-none max-lg:shadow-none lg:-mt-72 lg:rounded-2xl lg:p-14 lg:py-16">
       <Title className="mb-4">{data.our_purpose_title}</Title>
       <Text variant="xl" className="mb-14 max-w-[570px]">
         {data.our_purpose_description}

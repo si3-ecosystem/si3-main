@@ -17,14 +17,6 @@ interface VideoContent {
   showGradient?: boolean;
 }
 
-const defaultContent = {
-  videoSrc: "/videos/connectionformat.mp4",
-  title: "Explore & Expand",
-  ctaLink: "/scholars",
-  ctaTitle: "Join Scholars",
-  showGradient: true,
-};
-
 export function FooterBanner() {
   const activeValue = useAppSelector(
     (state) => state.community.activeAccordionValue,
@@ -41,6 +33,15 @@ export function FooterBanner() {
       return { scholarsData, guidesData, partnersData };
     },
   });
+
+  const defaultContent = {
+    videoSrc:
+      data?.scholarsData?.video?.videoUrl || "/videos/connectionformat.mp4",
+    title: data?.scholarsData.video.title,
+    ctaLink: data?.scholarsData.video.ctaLink,
+    ctaTitle: data?.scholarsData.video.ctaTitle,
+    showGradient: true,
+  };
 
   let content: VideoContent = defaultContent;
   let isLinkValue = false;

@@ -51,7 +51,7 @@ export function Navbar() {
               showGradient
               asChild
             >
-              <Link href={"/login"}>Sign Up</Link>
+              <Link href={"/onboard"}>Sign Up</Link>
             </Button>
 
             <Button

@@ -28,12 +28,12 @@ function Presenters({ item }: PresentersProps) {
         </Avatar>
         <div className="">
           <Text className="leading-normal font-medium">{item.name}</Text>
-          <Text className="line-clamp-1 text-sm leading-4 font-medium whitespace-pre-wrap opacity-50">
+          <Text className="text-xsleading-4 line-clamp-1 font-medium whitespace-pre-wrap opacity-50 max-[378px]:text-sm">
             {item.position}
           </Text>
         </div>
       </div>
-      <div>
+      <div className="w-16 shrink-0">
         <Image
           src={logoUrl || "/icons/jpg/polygon.jpg"}
           {...(item?.logo?.blurDataURL && {
@@ -43,7 +43,7 @@ function Presenters({ item }: PresentersProps) {
           width={64}
           height={16}
           alt="polygon"
-          className="h-auto w-full max-w-16 object-cover"
+          className="h-auto w-16 shrink-0 object-cover"
         />
       </div>
     </div>
@@ -82,7 +82,7 @@ export function ProgrammingCard({ item }: Props) {
             {item.title}
           </Text>
 
-          <Text className="leading-5 font-normal tracking-[1.7px] text-[#454545]">
+          <Text className="text-base leading-[140%] font-normal text-[#454545]">
             {item.description}
           </Text>
         </div>

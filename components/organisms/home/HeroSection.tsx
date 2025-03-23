@@ -1,6 +1,7 @@
 import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
+import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { urlForImage } from "@/lib/sanity/image";
 import { Introduction } from "@/types/home";
 import Image from "next/image";
@@ -8,9 +9,10 @@ import Link from "next/link";
 
 type Props = {
   data: Introduction;
+  isForm?: boolean;
 };
 
-export function HeroSection({ data }: Props) {
+export function HeroSection({ data, isForm = false }: Props) {
   const imageResult = data?.thumbnail ? urlForImage(data.thumbnail) : null;
   const image = imageResult?.src || "/icons/jpg/si_u_scholars_heroimage.jpg";
 
@@ -25,9 +27,18 @@ export function HeroSection({ data }: Props) {
           <Text className="mb-8 max-w-[535px] leading-7 text-[#454545]">
             {data.description}
           </Text>
-          <Button asChild showGradient={true} className="mb-3">
-            <Link href={data.ctaLink}>{data.ctaText}</Link>
-          </Button>
+
+          {isForm ? (
+            <PartnerProgramForm
+              className="mx-auto w-fit text-white"
+              showGradient
+              title={data.ctaText}
+            />
+          ) : (
+            <Button asChild showGradient={true} className="mb-3">
+              <Link href={data.ctaLink}>{data.ctaText}</Link>
+            </Button>
+          )}
           {data?.memberShip && (
             <Text className="text-[#585858]">
               {data?.memberShip || "*$300 one-time membership fee"}

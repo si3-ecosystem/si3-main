@@ -1,11 +1,10 @@
 import { Badge } from "@/components/atoms/badge";
-import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
 import { urlForImage } from "@/lib/sanity/image";
 import { ExploreItem } from "@/types/home";
 import Image from "next/image";
-import Link from "next/link";
+import { PartnerProgramForm } from "../forms/PartnerProgramForm";
 
 type Props = {
   item: ExploreItem;
@@ -26,9 +25,12 @@ export function ExplorePartnersCard({ item }: Props) {
           <Text className="mb-6 max-w-[535px] leading-7 text-[#454545]">
             {item.description}
           </Text>
-          <Button asChild showGradient={true} className="">
-            <Link href={item.ctaLink}>{item.ctaText}</Link>
-          </Button>
+
+          <PartnerProgramForm
+            className="mx-auto w-fit text-white"
+            showGradient
+            title={item.ctaText}
+          />
         </div>
         <div className="h-[316px] w-full @3xl:h-full @3xl:max-h-[400px] @3xl:max-w-[400px]">
           <Image

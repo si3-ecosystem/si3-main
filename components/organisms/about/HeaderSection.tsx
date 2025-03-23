@@ -8,7 +8,7 @@ type Props = {
 
 export function HeaderSection({ data }: Props) {
   return (
-    <section className="about_gradient h-full min-h-[70vh] w-full lg:min-h-[861px]">
+    <section className="about_gradient h-full min-h-[80vh] w-full lg:min-h-[861px]">
       <video
         autoPlay
         loop

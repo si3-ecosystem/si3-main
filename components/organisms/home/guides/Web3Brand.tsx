@@ -67,8 +67,8 @@ export function Web3Brand({ data }: Props) {
         <div className="w-full @max-3xl:h-[489.217px] @3xl:h-full @3xl:max-h-[489.217px] @3xl:max-w-[445px]">
           <video
             src={videoUrl || "/videos/SiUScholars.mp4"}
-            autoPlay
             playsInline
+            controls
             className="mx-auto h-full max-h-[489px] w-full max-w-[275px] object-cover object-center xl:h-full"
           />
         </div>

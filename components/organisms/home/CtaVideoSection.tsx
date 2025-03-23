@@ -26,7 +26,7 @@ export function CtaVideoSection({
         autoPlay
         loop
         muted
-        className="h-full w-full object-cover object-bottom"
+        className="h-full w-full object-cover object-bottom max-lg:object-[center_calc(-100%-0px)]"
       >
         <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.

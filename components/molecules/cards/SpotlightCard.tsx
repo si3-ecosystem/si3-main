@@ -49,7 +49,7 @@ export function SpotlightCard({ item }: Props) {
               <span>{item.position}</span>
             </Text>
           </div>
-          <Text className="prose font-normal tracking-[1.7px]">
+          <Text className="prose prose-p:text-base prose-li:text-base prose-p:leading-[140%] leading-[140%] font-normal text-[#454545]">
             {item?.description && <PortableText value={item?.description} />}
           </Text>
         </div>

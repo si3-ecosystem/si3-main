@@ -15,12 +15,12 @@ export function TestimonialsCard({ item }: Props) {
   return (
     <Card className="!h-full bg-[#F6F2F2] p-4">
       <div className="flex h-full flex-col items-start gap-8 @3xl:flex-row">
-        <div className="relative aspect-square h-full overflow-hidden rounded-lg @3xl:w-full @3xl:max-w-[257.892px]">
+        <div className="relative w-full overflow-hidden rounded-lg max-lg:h-[257px] max-sm:h-[244px] lg:aspect-square @3xl:w-full @3xl:max-w-[257.892px]">
           <Image
             src={imageUrl || "/icons/jpg/testimonial.jpg"}
             alt={item.name || "name"}
             fill
-            className="h-full max-h-[257.892px] w-full max-w-[257.892px] object-contain"
+            className="h-full w-full !rounded-lg object-contain max-lg:w-full max-sm:h-[244px] sm:max-h-[257.892px] sm:max-w-[257.892px]"
           />
         </div>
         <div className="flex h-full w-full flex-col justify-between @3xl:flex-row">
@@ -29,11 +29,11 @@ export function TestimonialsCard({ item }: Props) {
               <QuotIcon />
             </div>
             {item.excerpt && (
-              <h4 className="mb-4 text-[32px] leading-10 font-semibold">
+              <h4 className="mb-4 text-xl leading-[120%] font-semibold lg:text-[32px] lg:leading-10">
                 {item.excerpt}
               </h4>
             )}
-            <blockquote className="mb-6 text-lg lg:text-2xl">
+            <blockquote className="mb-6 text-lg leading-[130%] lg:text-2xl">
               {item.description}
             </blockquote>
             <div className="flex flex-col items-center justify-between @3xl:flex-row">
