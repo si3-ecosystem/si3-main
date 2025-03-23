@@ -29,6 +29,7 @@ interface ContentCardProps {
   button?: ButtonProps;
   className?: string;
   isFullScreenView?: boolean;
+  isStatic?: boolean;
 }
 
 export const ContentCard: React.FC<ContentCardProps> = ({
@@ -38,6 +39,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
   button,
   className,
   isFullScreenView = false,
+  isStatic = false,
 }) => {
   const {
     mobileSrc,
@@ -56,14 +58,28 @@ export const ContentCard: React.FC<ContentCardProps> = ({
       )}
     >
       <div className="ml-auto w-full space-y-4 lg:max-w-[970px] lg:space-y-6">
-        <Title
-          className={cn(
-            "lg:max-w-[455px] lg:text-left",
-            isFullScreenView ? "text-center" : "",
-          )}
-        >
-          {title}
-        </Title>
+        {isStatic ? (
+          <div>
+            <Title
+              className={cn(
+                "tracking-wide lg:text-left",
+                isFullScreenView ? "text-center" : "",
+              )}
+            >
+              CO-CREATING <br />
+              THE NEW ECONOMY
+            </Title>
+          </div>
+        ) : (
+          <Title
+            className={cn(
+              "tracking-wide lg:max-w-[378px] lg:text-left",
+              isFullScreenView ? "text-center" : "",
+            )}
+          >
+            {title}
+          </Title>
+        )}
         <Text
           className={cn(
             "max-w-[667px] lg:text-left",

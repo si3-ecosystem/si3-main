@@ -150,7 +150,7 @@ export function PartnerProgramForm({
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmitHandler)}
-                className="space-y-10"
+                className="space-y-4 md:space-y-10"
               >
                 <FormField
                   control={form.control}

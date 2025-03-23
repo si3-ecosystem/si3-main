@@ -32,6 +32,7 @@ export function CreatingTheNewEconomy({ aboutIntroData }: Props) {
           as: Link,
           showGradient: true,
         }}
+        isStatic
         className="h-full w-full border-none bg-transparent outline-none"
       />
     </section>
