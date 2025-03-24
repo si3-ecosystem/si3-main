@@ -1,4 +1,4 @@
-import EthermailSubscribe from "@/components/molecules/EthermailSubscribe";
+// import EthermailSubscribe from "@/components/molecules/EthermailSubscribe";
 import Link from "next/link";
 import React from "react";
 
@@ -14,7 +14,7 @@ export const FooterSignUp = () => {
         </p>
       </div>
 
-      <EthermailSubscribe />
+      {/* <EthermailSubscribe /> */}
     </div>
   );
 };

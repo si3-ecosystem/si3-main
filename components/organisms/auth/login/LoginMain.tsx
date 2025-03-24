@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import LoginMail from "./LoginMail";
-import EtherMail from "./EtherMail";
+// import EtherMail from "./EtherMail";
 import LoginButton from "./LoginButton";
 import LoginFooter from "./LoginFooter";
 
@@ -52,7 +52,7 @@ const LoginMain = () => {
           num={2}
         />
 
-        <EtherMail />
+        {/* <EtherMail /> */}
       </div>
 
       <div className="my-6 flex items-center md:my-8">
