@@ -24,22 +24,21 @@ const socialList: SocialItem[] = [
 
 export const FollowUs = () => {
   return (
-    <div className="flex border-gray-400 p-4 lg:justify-center lg:px-11 lg:pt-16">
-      <div>
-        <p className="font-clesmont mb-2 text-2xl font-normal">Follow Us</p>
-        <div className="flex flex-col gap-2">
-          {socialList.map((social) => (
-            <li key={social.name} className="list-none">
-              <Link
-                href={social.url}
-                className="hover:text-primary flex items-center gap-2"
-              >
-                {social.icon}
-                <span>{social.name}</span>
-              </Link>
-            </li>
-          ))}
-        </div>
+    <div className="border-gray-400 p-4 lg:justify-center lg:px-11 lg:pt-16">
+      <p className="font-clesmont mb-2 text-2xl font-normal">Follow Us</p>
+
+      <div className="flex flex-col gap-2">
+        {socialList.map((social) => (
+          <li key={social.name} className="list-none">
+            <Link
+              href={social.url}
+              className="hover:text-primary flex items-center gap-2 hover:underline"
+            >
+              {social.icon}
+              <span>{social.name}</span>
+            </Link>
+          </li>
+        ))}
       </div>
     </div>
   );

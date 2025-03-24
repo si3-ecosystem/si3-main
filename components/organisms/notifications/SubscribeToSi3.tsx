@@ -1,3 +1,5 @@
+'use client'
+
 import { toast } from "sonner";
 import { useAccount } from "wagmi";
 import { useSelector } from "react-redux";

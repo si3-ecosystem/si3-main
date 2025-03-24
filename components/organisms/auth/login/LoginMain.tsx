@@ -39,16 +39,16 @@ const LoginMain = () => {
         /> */}
 
         <LoginButton
-          src="/login/safe-logo.png"
-          alt="Safe Multisig"
-          label="Safe Multisig"
+          src="/login/wallet-connect-logo.svg"
+          alt="Wallet Connect"
+          label="WalletConnect"
           num={1}
         />
 
         <LoginButton
-          src="/login/wallet-connect-logo.svg"
-          alt="Wallet Connect"
-          label="Wallet Connect"
+          src="/login/safe-logo.png"
+          alt="Safe Multisig"
+          label="Safe Multisig"
           num={2}
         />
 
