@@ -20,15 +20,16 @@ export const FooterNav = () => {
     <div className="flex w-full border-gray-400 p-4 px-0 pb-0 max-lg:border-t lg:w-fit lg:justify-center lg:border-r lg:pt-16">
       <div className="max-lg:px-4 lg:px-24">
         <p className="font-clesmont mb-2 text-2xl font-normal">SI Things</p>
+
         <div className="flex flex-col gap-2">
           {navItems.map(({ href, label, target }) => (
             <Link
               key={label}
               href={href}
               target={target}
-              className="hover:text-primary cursor-pointer hover:underline hover:underline-offset-2"
+              className="hover:text-primary block w-fit cursor-pointer opacity-80 hover:underline hover:underline-offset-2"
             >
-              <button className="block opacity-80">{label}</button>
+              {label}
             </Link>
           ))}
         </div>

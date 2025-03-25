@@ -5,6 +5,7 @@ const navItems = [
   { name: "About Us", path: "/about" },
   { name: "Diversity Tracker", path: "/diversity-tracker" },
 ];
+
 export function NavLinks() {
   return (
     <ul className="flex h-full w-full flex-1 items-center justify-center gap-6">
