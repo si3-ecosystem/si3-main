@@ -108,19 +108,33 @@ const EtherMail = () => {
 
   // Function to handle successful wallet connection
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSuccess = (event: any) => {
-    const { detail } = event;
-    if (detail && detail.address) {
-      setWalletAddress(detail.address);
-      console.log("Connected to EtherMail:", detail);
-    }
-  };
+  // const handleSuccess = (event: any) => {
+  //   const { detail } = event;
+  //   if (detail && detail.address) {
+  //     setWalletAddress(detail.address);
+  //     console.log("Connected to EtherMail:", detail);
+  //   }
+  // };
 
   // Function to handle wallet disconnection
   const handleDisconnect = () => {
     setWalletAddress(null);
     console.log("Disconnected from EtherMail");
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    window.addEventListener("EtherMailSignInOnSuccess", (event: any) => {
+      const __loginEvent = event;
+      const __loginData = jwt.decode(__loginEvent.detail.token);
+
+      console.log(__loginData);
+
+      if (event?.detail?.address) {
+        setWalletAddress(event.detail.address);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     window.setStyle = function () {
@@ -184,8 +198,6 @@ const EtherMail = () => {
       communityAlias: "si3",
       features: ["login"],
     });
-
-    window.addEventListener("EtherMailSignInOnSuccess", handleSuccess);
   }, []);
 
   return (
