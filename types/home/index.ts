@@ -22,6 +22,7 @@ export interface Community {
   _id: string;
   published: boolean;
   order: number;
+  background: SanityImage;
   communityLogo: SanityImage;
   communityName: string;
   communityLocation: string;
@@ -201,6 +202,10 @@ export interface Partner {
 export interface HomepageSchema {
   _id: string;
   title: string;
+  desc: string;
+  ctaText: string;
+  ctaLink: string;
+  videoUrl: string;
   image: HomepageImage;
   educationPartners: Partner[];
   communityPartners: Partner[];

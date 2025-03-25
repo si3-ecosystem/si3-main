@@ -4,8 +4,9 @@ import { Title } from "@/components/atoms/title";
 import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 import { HeaderTitle } from "./HeaderTitle";
+import { HomepageSchema } from "@/types/home";
 
-const Header = () => {
+const Header = ({ data }: { data: HomepageSchema }) => {
   return (
     <header className="relative z-10 space-y-4 pt-32 lg:space-y-8">
       <Title
@@ -18,15 +19,14 @@ const Header = () => {
         web3 era
       </Title>
 
-      <p className="mx-auto max-w-[336.016px] text-center text-lg font-normal text-white lg:max-w-[543.807px] lg:text-xl">
-        Uniting Web3 professionals, communities and organizations to accelerate
-        growth, together.
+      <p className="mx-auto -mt-4 max-w-[336.016px] text-center text-lg font-normal text-white lg:max-w-[543.807px] lg:text-xl">
+        {data.desc}
       </p>
 
       <div className="flex justify-center space-x-4 max-lg:mt-[41px]">
         <Button asChild className="!h-14">
-          <Link href={"/onboard"} className="font-medium">
-            Get Started
+          <Link href={data.ctaLink || "/onboard"} className="font-medium">
+            {data.ctaText}
           </Link>
         </Button>
       </div>

@@ -64,6 +64,8 @@ interface Hero {
 
 interface AboutQuery {
   _id: string;
+  title: string;
+  desc: string;
   about_hero: Hero;
   our_purpose_title: string;
   our_purpose_description: string;

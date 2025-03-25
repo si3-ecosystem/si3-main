@@ -13,13 +13,18 @@ export function CollabCard({ item }: { item: Community }) {
   const image = item?.communityLogo
     ? urlForImage(item.communityLogo)?.src
     : "/icons/jpg/sihericon.jpg";
+
+  const cardBg = item.background
+    ? urlForImage(item.background)?.src
+    : "/icons/jpg/collabcardbg.jpg";
+
   return (
     <Card className="h-fit cursor-pointer overflow-hidden rounded-2xl border border-[#D1D1D1] !p-0 transition-all duration-300 !ease-in-out hover:shadow-lg sm:!h-full">
       <CardContent className="flex h-full flex-col justify-between !p-0">
         <div className="flex h-fit flex-col">
           <div className="relative z-20 flex h-full w-full flex-col gap-6 px-5 pt-5">
             <Image
-              src={"/icons/jpg/collabcardbg.jpg"}
+              src={cardBg || "/icons/jpg/collabcardbg.jpg"}
               alt={"community_bg"}
               title={"Background"}
               decoding="async"
