@@ -10,7 +10,7 @@ import Logo from "@/components/atoms/Logo";
 
 const LoginMain = () => {
   return (
-    <section className="mx-auto max-w-md">
+    <section className="mx-auto max-w-md pb-10">
       <Link href="/" className="mx-auto max-w-md">
         <Logo src="/logo.svg" />
       </Link>

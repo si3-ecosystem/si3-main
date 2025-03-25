@@ -277,6 +277,15 @@ body,
   --_animation-duration: 20s;
 }
 
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @keyframes scroll {
   to {
     transform: translateX(calc(-50% - 2rem));

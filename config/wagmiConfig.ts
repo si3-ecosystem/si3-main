@@ -10,7 +10,7 @@ export const config = createConfig({
   connectors: [
     metaMask(),
     walletConnect({
-      projectId: "678a4a86ff4f89d192c79eea1d8faf18",
+      projectId: "82b9193221afcff90a3e7b1d94e67505",
     }),
     safe(),
   ],
