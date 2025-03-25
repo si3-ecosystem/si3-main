@@ -185,11 +185,10 @@ const EtherMail = () => {
       features: ["login"],
     });
 
-    // Attach event listener for successful login
-    document.addEventListener("ethermail-login-success", handleSuccess);
+    document.addEventListener("EtherMailSignInOnSuccess", handleSuccess);
 
     return () => {
-      document.removeEventListener("ethermail-login-success", handleSuccess);
+      document.removeEventListener("EtherMailSignInOnSuccess", handleSuccess);
     };
   }, []);
 
