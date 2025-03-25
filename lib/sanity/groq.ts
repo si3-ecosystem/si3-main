@@ -8,6 +8,10 @@ export const homepageQuery = groq`
   *[_type == "homepageSchema"][0] {
     _id,
     title,
+    desc,
+    ctaText,
+    ctaLink,
+    "videoUrl": videoFile.asset->url,
     image {
       ...,
       "blurDataURL": asset->metadata.lqip,
@@ -83,6 +87,11 @@ export const scholarsQuery = groq`
     _id,
     published,
     order,
+    background {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background
+    },
     communityLogo {
       ...,
       "blurDataURL": asset->metadata.lqip,

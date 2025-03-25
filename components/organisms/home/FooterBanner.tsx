@@ -66,7 +66,7 @@ export function FooterBanner() {
           ctaTitle: data.guidesData.video.ctaTitle,
           showGradient: true,
         };
-        isLinkValue = false;
+        isLinkValue = true;
         break;
       case "si_partners":
         content = {

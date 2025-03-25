@@ -131,7 +131,7 @@ export function PartnerProgramForm({
             {title || "Inquire Now"}
           </Button>
         </DialogTrigger>
-        <DialogContent className="mx-auto w-full overflow-y-scroll px-4 py-14 sm:max-w-[924px] sm:px-20">
+        <DialogContent className="mx-auto w-full overflow-y-scroll px-4 py-14 max-sm:fixed max-sm:top-[45%] max-sm:bottom-0 sm:max-w-[924px] sm:px-20">
           <DialogHeader className="flex w-full flex-col items-center justify-center gap-4">
             <DialogTitle className="">
               <Title
