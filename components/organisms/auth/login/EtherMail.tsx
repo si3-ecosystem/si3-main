@@ -95,6 +95,7 @@
 
 "use client";
 
+import jwt from "jsonwebtoken";
 import { useEffect, useState } from "react";
 
 declare global {
