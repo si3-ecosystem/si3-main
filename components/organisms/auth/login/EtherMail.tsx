@@ -186,10 +186,6 @@ const EtherMail = () => {
     });
 
     window.addEventListener("EtherMailSignInOnSuccess", handleSuccess);
-
-    return () => {
-      window.removeEventListener("EtherMailSignInOnSuccess", handleSuccess);
-    };
   }, []);
 
   return (
