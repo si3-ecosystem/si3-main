@@ -70,7 +70,7 @@ const EtherMail = () => {
       p.setAttribute("b", args.communityAlias);
       p.setAttribute("c", args.features);
     })({
-      afid: "67353ab1f14dc512c8f225ef",
+      afid: "66e644fcb593edd053b3f5ca",
       communityAlias: "si3",
       features: ["login"],
     });
@@ -79,7 +79,7 @@ const EtherMail = () => {
   return (
     <div className="w-full max-w-md overflow-hidden rounded-lg border">
       <ethermail-login
-        widget="67353ab1f14dc512c8f225ef"
+        widget="67b0e30547bb5daf3c21fa37"
         type="wallet"
         permissions="write"
         on-mounted="setStyle"
