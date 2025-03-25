@@ -39,6 +39,7 @@
     "ethers": "5.7",
     "framer-motion": "^12.4.10",
     "get-video-id": "^4.1.7",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.477.0",
     "mongoose": "^8.12.1",
     "next": "15.1.7",
