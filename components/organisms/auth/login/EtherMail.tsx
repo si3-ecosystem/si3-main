@@ -96,7 +96,11 @@
 "use client";
 
 import jwt from "jsonwebtoken";
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import { setConnected, setEthermail } from "@/redux/slice/EthermailSlice";
 
 declare global {
   interface Window {
@@ -105,7 +109,8 @@ declare global {
 }
 
 const EtherMail = () => {
-  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   // Function to handle successful wallet connection
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -118,23 +123,27 @@ const EtherMail = () => {
   // };
 
   // Function to handle wallet disconnection
-  const handleDisconnect = () => {
-    setWalletAddress(null);
-    console.log("Disconnected from EtherMail");
-  };
+  // const handleDisconnect = () => {
+  //   dispatch(resetEthermail());
+
+  //   toast.success("Wallet Disconnected");
+  // };
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     window.addEventListener("EtherMailSignInOnSuccess", (event: any) => {
       const __loginEvent = event;
-      const __loginData = jwt.decode(__loginEvent.detail.token);
+      const { address, permissions, wallet } = jwt.decode(
+        __loginEvent.detail.token,
+      );
 
-      console.log(__loginData);
+      dispatch(setConnected(true));
+      dispatch(setEthermail({ address, permissions, wallet }));
 
-      if (event?.detail?.address) {
-        setWalletAddress(event.detail.address);
-      }
+      router.replace("/");
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -203,24 +212,12 @@ const EtherMail = () => {
 
   return (
     <div className="w-full max-w-md overflow-hidden rounded-lg border">
-      {walletAddress ? (
-        <div className="flex flex-col items-center gap-3">
-          <p className="text-lg font-semibold">Connected: {walletAddress}</p>
-          <button
-            onClick={handleDisconnect}
-            className="rounded-lg bg-red-500 px-4 py-2 text-white"
-          >
-            Disconnect
-          </button>
-        </div>
-      ) : (
-        <ethermail-login
-          widget="67b0e30547bb5daf3c21fa37"
-          type="wallet"
-          permissions="write"
-          on-mounted="setStyle"
-        ></ethermail-login>
-      )}
+      <ethermail-login
+        widget="67b0e30547bb5daf3c21fa37"
+        type="wallet"
+        permissions="write"
+        on-mounted="setStyle"
+      ></ethermail-login>
     </div>
   );
 };

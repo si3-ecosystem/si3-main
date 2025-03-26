@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface PushState {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pushSign: any;
   isConnected: boolean;
 }
@@ -16,11 +17,13 @@ const pushSlice = createSlice({
   initialState,
 
   reducers: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setPushSign: (state: PushState, action: PayloadAction<any>) => {
       state.pushSign = action.payload;
     },
 
     resetPush: () => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       initialState;
     },
 
