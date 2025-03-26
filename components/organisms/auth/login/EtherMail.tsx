@@ -112,23 +112,6 @@ const EtherMail = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  // Function to handle successful wallet connection
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // const handleSuccess = (event: any) => {
-  //   const { detail } = event;
-  //   if (detail && detail.address) {
-  //     setWalletAddress(detail.address);
-  //     console.log("Connected to EtherMail:", detail);
-  //   }
-  // };
-
-  // Function to handle wallet disconnection
-  // const handleDisconnect = () => {
-  //   dispatch(resetEthermail());
-
-  //   toast.success("Wallet Disconnected");
-  // };
-
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     window.addEventListener("EtherMailSignInOnSuccess", (event: any) => {

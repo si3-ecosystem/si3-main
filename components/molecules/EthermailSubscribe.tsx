@@ -162,7 +162,7 @@ const EthermailSubscribe = () => {
         theme="light"
         on-mounted="setStyle"
         input="auto"
-        wallet-connect-project-id="b9a406625926c065ed53b302823b4157"
+        wallet-connect-project-id="82b9193221afcff90a3e7b1d94e67505"
         rpc='{"http": "https://eth-mainnet.g.alchemy.com/v2/xrSkES28Vk2dzciw2ufA7ZE-UNjmnwpK"}'
       ></ethermail-subscribe>
     </div>

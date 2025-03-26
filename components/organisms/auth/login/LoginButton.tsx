@@ -1,7 +1,7 @@
 "use client";
 
-import { toast } from "sonner";
 import Image from "next/image";
+import { toast } from "sonner";
 import { FC, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAccount, useConnect } from "wagmi";
@@ -26,9 +26,10 @@ const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num }) => {
   useEffect(() => {
     if (status === "connected") {
       router.push("/");
-      toast.success("Wallet connected successfully");
     }
-  }, [status, router]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
 
   const handleClick = async () => {
     if (status === "connected") {
