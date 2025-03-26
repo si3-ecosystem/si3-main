@@ -96,8 +96,8 @@
 "use client";
 
 import jwt from "jsonwebtoken";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 
 import { setConnected, setEthermail } from "@/redux/slice/EthermailSlice";
@@ -137,19 +137,9 @@ const EtherMail = () => {
         const style = document.createElement("style");
         style.textContent = `
           .ethermail-login-button {
-            display: flex !important;
-            width: 100% !important;
-            cursor: pointer !important;
-            align-items: center !important;
-            border-radius: 0.5rem !important;
-            border: 1px solid #f3f4f6 !important;
-            background-color: #f3f4f6 !important;
+            border: 1px solid #f3f4f6 !important;       
             padding: 0.5rem 1rem !important;
-            transition: background-color 0.3s !important;
-            color: #000 !important;
-            justify-content: start !important;
-            font-weight: bold !important;
-            font-size: 1rem !important;
+            transition: "background-color 0.3s !important",
           }
 
           .ethermail-login-button:hover {
@@ -196,10 +186,23 @@ const EtherMail = () => {
   return (
     <div className="w-full max-w-md overflow-hidden rounded-lg border">
       <ethermail-login
+        style={{
+          display: "flex !important",
+          width: "100% !important",
+          cursor: "pointer !important",
+          alignItems: "center !important",
+          borderRadius: "0.5rem !important",
+          backgroundColor: "#f3f4f6 !important",
+          color: "#000 !important",
+          justifyContent: "start !important",
+          fontWeight: "bold !important",
+          fontSize: "16px !important",
+        }}
         widget="67b0e30547bb5daf3c21fa37"
         type="wallet"
         permissions="write"
         on-mounted="setStyle"
+        label="Ethermail"
       ></ethermail-login>
     </div>
   );
