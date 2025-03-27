@@ -24,7 +24,7 @@ const Header = ({ data }: { data: HomepageSchema }) => {
       </p>
 
       <div className="flex justify-center space-x-4 max-lg:mt-[41px]">
-        <Button asChild className="!h-14">
+        <Button asChild className="!h-14 text-lg">
           <Link href={data.ctaLink || "/onboard"} className="font-medium">
             {data.ctaText}
           </Link>

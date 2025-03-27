@@ -9,7 +9,7 @@ export function OurPathways() {
         isFullScreenView={true}
         image={{
           mobileSrc: "/icons/webp/pathwayMobile.webp",
-          desktopSrc: "/icons/webp/pathwayDesktop.webp",
+          desktopSrc: "/icons/jpg/pathwayDesktop.jpg",
           alt: "Pathways illustration",
           width: 1532,
           height: 862,
