@@ -115,7 +115,7 @@ const NotificationsItem = ({ notification }) => {
       <div className="flex flex-grow items-start justify-between gap-3">
         <div className="max-w-2xl space-y-3">
           <h3 className="mb-1.5 text-lg font-bold md:text-xl">
-            {notification.message.notification.title}
+            {notification.message.payload.title}
           </h3>
 
           <div>
@@ -124,9 +124,13 @@ const NotificationsItem = ({ notification }) => {
               className={`text-sm leading-relaxed text-gray-500 md:text-base ${
                 isTruncated && !showFullText ? "line-clamp-3" : ""
               }`}
-            >
-              {notification.message.notification.body}
-            </p>
+              dangerouslySetInnerHTML={{
+                __html: notification.message.payload.body.replace(
+                  /\n/g,
+                  "<br />",
+                ),
+              }}
+            ></p>
 
             {isTruncated && (
               <button
