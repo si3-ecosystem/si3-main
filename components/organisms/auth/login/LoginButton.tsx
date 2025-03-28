@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { FC, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAccount, useConnect } from "wagmi";
+import { useDispatch } from "react-redux";
+import { setAddress, setConnected } from "@/redux/slice/userSlice";
 
 interface LoginButtonProps {
   src: string;
@@ -15,7 +17,8 @@ interface LoginButtonProps {
 
 const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num }) => {
   const router = useRouter();
-  const { status } = useAccount();
+  const dispatch = useDispatch();
+  const { status, address } = useAccount();
   const { connect, connectors } = useConnect();
 
   const isValidConnector =
@@ -25,6 +28,8 @@ const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num }) => {
 
   useEffect(() => {
     if (status === "connected") {
+      dispatch(setConnected(true));
+      dispatch(setAddress(address));
       router.push("/");
     }
 
@@ -42,6 +47,8 @@ const LoginButton: FC<LoginButtonProps> = ({ src, alt, label, num }) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         connect({ connector: connectors[num] });
+        dispatch(setConnected(true));
+        dispatch(setAddress(address));
       } catch (error) {
         console.error(error);
         toast.error("Failed to connect wallet");
