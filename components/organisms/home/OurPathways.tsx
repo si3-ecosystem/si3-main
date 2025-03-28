@@ -8,7 +8,7 @@ export function OurPathways() {
         description="Discover our three paths to join into our ecosystem and expand your potential."
         isFullScreenView={true}
         image={{
-          mobileSrc: "/icons/webp/pathwayMobile.webp",
+          mobileSrc: "/icons/jpg/pathwayMobile.jpg",
           desktopSrc: "/icons/jpg/pathwayDesktop.jpg",
           alt: "Pathways illustration",
           width: 1532,
