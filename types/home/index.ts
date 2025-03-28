@@ -10,6 +10,17 @@ export interface SanityImage {
   alt?: string;
 }
 
+export interface ImpactMetric {
+  _id: string;
+  metricTitle: string;
+  count: number;
+}
+
+interface Impact {
+  title: string;
+  metrics: ImpactMetric[];
+}
+
 export interface SanityVideo {
   videoUrl: string;
   title: string;
@@ -202,6 +213,7 @@ export interface Partner {
 export interface HomepageSchema {
   _id: string;
   title: string;
+  impact: Impact;
   desc: string;
   ctaText: string;
   ctaLink: string;

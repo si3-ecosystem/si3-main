@@ -3,12 +3,10 @@
 import { formatCount } from "@/utils/formate";
 import CountUp from "react-countup";
 import { Text } from "@/components/atoms/text";
+import { ImpactMetric } from "@/types/home";
 
 type Props = {
-  item: {
-    count: number;
-    description: string;
-  };
+  item: ImpactMetric;
 };
 
 export function ImpactCard({ item }: Props) {
@@ -24,7 +22,7 @@ export function ImpactCard({ item }: Props) {
         />
       </p>
       <div className="bg-primary h-0.5 w-7"></div>
-      <Text className="leading- text-center">{item.description}</Text>
+      <Text className="leading- text-center">{item.metricTitle}</Text>
     </li>
   );
 }

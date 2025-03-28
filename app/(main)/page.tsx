@@ -26,7 +26,7 @@ export default async function HomePage() {
   return (
     <Suspense fallback={<Loader />}>
       <HeaderContainer HomePageData={HomePageData} />
-      <OurImpact />
+      <OurImpact HomePageData={HomePageData} />
       <OurPathways />
       <Suspense fallback={<Spinner />}>
         <OurCommunity

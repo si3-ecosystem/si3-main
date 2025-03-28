@@ -11,6 +11,14 @@ export const homepageQuery = groq`
     desc,
     ctaText,
     ctaLink,
+    impact-> {
+      title,
+      metrics[] {
+        _id,
+        metricTitle,
+        count
+      }
+    },
     "videoUrl": videoFile.asset->url,
     image {
       ...,
