@@ -22,9 +22,9 @@ const pushSlice = createSlice({
       state.pushSign = action.payload;
     },
 
-    resetPush: () => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      initialState;
+    resetPush: (state: PushState) => {
+      state.pushSign = {};
+      state.isConnected = false;
     },
 
     setConnected: (state: PushState, action: PayloadAction<boolean>) => {
