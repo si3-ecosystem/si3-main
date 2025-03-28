@@ -4,10 +4,10 @@ import { Text } from "@/components/atoms/text";
 import { Globe, Linkedin, MapPin } from "lucide-react";
 import Image from "next/image";
 import { TwitterIcon } from "../icons/TwitterIcon";
-import { Button } from "@/components/atoms/button";
 import { Community } from "@/types/home";
 import { urlForImage } from "@/lib/sanity/image";
 import Link from "next/link";
+import { PartnerProgramForm } from "../forms/PartnerProgramForm";
 
 export function CollabCard({ item }: { item: Community }) {
   const image = item?.communityLogo
@@ -127,13 +127,10 @@ export function CollabCard({ item }: { item: Community }) {
           </div>
         </div>
         <div className="w-full px-5 pb-4">
-          <Button
-            variant={"outline"}
-            asChild
-            className="w-full border-2 border-black hover:bg-black hover:text-white"
-          >
-            <Link href={item?.discover || "#"}>Discover Now</Link>
-          </Button>
+          <PartnerProgramForm
+            className="mx-auto w-full"
+            title={"Partnership Inquiry"}
+          />
         </div>
       </CardContent>
     </Card>
