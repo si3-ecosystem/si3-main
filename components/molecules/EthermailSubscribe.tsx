@@ -12,6 +12,66 @@ declare global {
 }
 
 const EthermailSubscribe = () => {
+  // useEffect(() => {
+  //   window.setStyle = function () {
+  //     const element = document.querySelector("ethermail-subscribe");
+  //     if (element && element.shadowRoot) {
+  // const style = document.createElement("style");
+  // style.textContent = `
+  //   .input-web2 {
+  //     color: black !important;
+  //     border-radius: 8px !important;
+  //     font-size: 16px !important;
+  //     padding: 8px 10px !important;
+  //   }
+
+  //   .ethermailLogo {
+  //     width: 24px;
+  //     height: 24px;
+  //   }
+
+  //   .input-web2::placeholder {
+  //     font-size: 14px !important;
+  //   }
+
+  //   button.subscribe {
+  //     background-color: black !important;
+  //     color: white !important;
+  //     width: fit-content !important;
+  //     border-radius: 9999px !important;
+  //     padding: 10px 20px !important;
+  //     font-size: 14px !important;
+  //     height: full !important;
+  //   }
+
+  //   .ethermail-md-modal-title{
+  //     font-weight: bold !important;
+  //   }
+
+  //   .ethermail-md-subscribe-button, .ethermail-cw-connect-button {
+  //     background-color: black !important;
+  //     color: white !important;
+  //     border-radius: 8px !important;
+  //     overflow: hidden !important;
+  //   }
+
+  //   .ethermail-cw-check-signature h3 {
+  //     font-weight: bold !important;
+  //   }
+
+  //   .md-form-group-label {
+  //     border-color: gray !important;
+  //   }
+
+  //   .md-form-group-label:focus-within span, .md-form-group-label input:not(:placeholder-shown) + span, .md-form-group-label textarea:not(:placeholder-shown) + span {
+  //     color: black !important;
+  //   }
+  // `;
+  //       element.shadowRoot.appendChild(style);
+  //     }
+  //   };
+  // }, []);
+
   useEffect(() => {
     window.setStyle = function () {
       const element = document.querySelector("ethermail-subscribe");

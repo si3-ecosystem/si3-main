@@ -1,19 +1,25 @@
 "use client";
 
 import Link from "next/link";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
 
+import { RootState } from "@/redux/store";
+
 import { Logo } from "@/components/atoms/Logo";
 import { Button } from "@/components/atoms/button";
+import ProfileMenu from "@/components/molecules/menus/ProfileMenu";
 
+import { NavLinks } from "./navbar/NavLinks";
 import { MobileMenu } from "./navbar/MobileMenu";
 import { Notification } from "./navbar/Notification";
-import { NavLinks } from "./navbar/NavLinks";
 
 export function Navbar({ showLinks = true }) {
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const isLoggedIn = useSelector((state: RootState) => state.user.address);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -47,23 +53,29 @@ export function Navbar({ showLinks = true }) {
           <Notification />
 
           <div className="flex items-center gap-3 max-lg:hidden">
-            <Button
-              title="Subscribe"
-              aria-label="Subscribe"
-              className="bg-black !py-2"
-              showGradient
-              asChild
-            >
-              <Link href={"/onboard"}>Sign Up</Link>
-            </Button>
+            {isLoggedIn ? (
+              <ProfileMenu />
+            ) : (
+              <>
+                <Button
+                  title="Subscribe"
+                  aria-label="Sign Up Button"
+                  className="bg-black !py-2"
+                  showGradient
+                  asChild
+                >
+                  <Link href={"/onboard"}>Sign Up</Link>
+                </Button>
 
-            <Button
-              title="Subscribe"
-              aria-label="Subscribe"
-              className="border border-gray-400 bg-white !py-2 text-black"
-            >
-              <Link href={"/login"}>Login</Link>
-            </Button>
+                <Button
+                  title="Subscribe"
+                  aria-label="Login Button"
+                  className="border border-gray-400 bg-white !py-2 text-black"
+                >
+                  <Link href={"/login"}>Login</Link>
+                </Button>
+              </>
+            )}
           </div>
 
           <div className="lg:hidden">

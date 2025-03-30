@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useAccount, useDisconnect } from "wagmi";
-import { Copy, LogOut, SendHorizonal } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { useDisconnect } from "wagmi";
+import { Copy, LogOut } from "lucide-react";
 
 import {
   Menubar,
@@ -15,30 +15,21 @@ import {
 } from "@/components/atoms/menubar";
 import { Profile } from "@/components/organisms/layout/navbar/Profile";
 
+import { resetPush } from "@/redux/slice/pushSlice";
+import { resetUser } from "@/redux/slice/userSlice";
+
 import { WalletAddressWithProfile } from "../WalletProfile";
 
-{
-  /* <script defer>(function ({ ...args }) {
-    var p = document.createElement('script');
-    p.src = 'https://cdn-email.ethermail.io/sdk/v2/ethermail.js';
-    document.body.appendChild(p);
-    p.setAttribute('a', args.afid);
-    p.setAttribute('b', args.communityAlias);
-    p.setAttribute('c', args.features);
-  })({
-    afid: '67353ab1f14dc512c8f225ef',
-    communityAlias: 'si3',
-    features: ['subscribe']
-  });
-  </script>
-  <ethermail-subscribe widget="677f0f8f690e56d4d9800180" theme='light' input='auto' wallet-connect-project-id="[YOUR_WALLET_CONNECT_PROJECT_ID]" rpc='{"http": "[YOUR_RPC_URL]"}'></ethermail-subscribe> */
-}
-
 const ProfileMenu = () => {
-  const router = useRouter();
-
-  const { status } = useAccount();
+  const dispatch = useDispatch();
   const { disconnect } = useDisconnect();
+
+  const handleDisconnect = () => {
+    dispatch(resetPush());
+    dispatch(resetUser());
+
+    disconnect();
+  };
 
   return (
     <Menubar className="w-fit rounded-full p-2">
@@ -47,16 +38,15 @@ const ProfileMenu = () => {
           <Profile />
         </MenubarTrigger>
 
-        {status === "connected" ? (
-          <MenubarContent>
-            <MenubarItem>
-              <WalletAddressWithProfile />{" "}
-              <MenubarShortcut>
-                <Copy size={16} />
-              </MenubarShortcut>
-            </MenubarItem>
+        <MenubarContent side="bottom" sideOffset={10} align="end">
+          <MenubarItem>
+            <WalletAddressWithProfile />{" "}
+            <MenubarShortcut>
+              <Copy size={16} />
+            </MenubarShortcut>
+          </MenubarItem>
 
-            {/* <MenubarItem>
+          {/* <MenubarItem>
             New Window <MenubarShortcut>⌘N</MenubarShortcut>
           </MenubarItem>
 
@@ -73,31 +63,15 @@ const ProfileMenu = () => {
             </MenubarSubContent>
           </MenubarSub> */}
 
-            <MenubarSeparator />
+          <MenubarSeparator />
 
-            <MenubarItem
-              onClick={() => disconnect()}
-              className="cursor-pointer"
-            >
-              Disconnect{" "}
-              <MenubarShortcut>
-                <LogOut size={16} />
-              </MenubarShortcut>
-            </MenubarItem>
-          </MenubarContent>
-        ) : (
-          <MenubarContent>
-            <MenubarItem
-              onClick={() => router.push("/login")}
-              className="cursor-pointer"
-            >
-              Login
-              <MenubarShortcut>
-                <SendHorizonal size={16} />
-              </MenubarShortcut>
-            </MenubarItem>
-          </MenubarContent>
-        )}
+          <MenubarItem onClick={handleDisconnect} className="cursor-pointer">
+            Disconnect{" "}
+            <MenubarShortcut>
+              <LogOut size={16} />
+            </MenubarShortcut>
+          </MenubarItem>
+        </MenubarContent>
       </MenubarMenu>
     </Menubar>
   );

@@ -1,9 +1,11 @@
 "use client";
 
 import { toast } from "sonner";
-import { useAccount } from "wagmi";
 import Avatar from "boring-avatars";
+import { useSelector } from "react-redux";
 import React, { FC, useEffect } from "react";
+
+import { RootState } from "@/redux/store";
 
 import shortenAddress from "@/utils/shortenAddress";
 
@@ -37,7 +39,7 @@ const WalletAddressWithProfile: FC<WalletAddressWithProfileProps> = ({
   avatarSize = 28,
   size = "text-base",
 }) => {
-  const { address } = useAccount();
+  const address = useSelector((state: RootState) => state.user.address);
   const [walletAddress, setWalletAddress] = React.useState("0x0000...000");
 
   useEffect(() => {
