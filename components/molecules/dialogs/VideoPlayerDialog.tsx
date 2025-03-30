@@ -111,7 +111,7 @@ export function VideoPlayerDialog({
               className="aspect-video w-full rounded-md object-cover"
               src={video}
               autoPlay
-              muted={!isSignedIn}
+              muted={false}
             />
           </div>
         </DialogContent>
