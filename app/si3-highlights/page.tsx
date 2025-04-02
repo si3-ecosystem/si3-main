@@ -4,7 +4,7 @@ import { processMetadata } from "@/utils/sharedMetadata";
 import { Footer } from "@/components/organisms/layout/Footer";
 import { Navbar } from "@/components/organisms/layout/Navbar";
 
-import SubscribeToSi3 from "@/components/organisms/notifications/SubscribeToSi3";
+// import SubscribeToSi3 from "@/components/organisms/notifications/SubscribeToSi3";
 import PushNotifContainer from "@/components/organisms/notifications/NotificationContainer";
 
 export async function generateMetadata() {
@@ -21,7 +21,7 @@ const NotificationsPage = () => {
           <div className="sticky top-0 flex w-full items-center justify-between border-b border-gray-700 px-5 py-3">
             <h2 className="text-3xl font-bold">Ecosystem Highlights</h2>
 
-            <SubscribeToSi3 />
+            {/* <SubscribeToSi3 /> */}
           </div>
 
           <PushNotifContainer />
