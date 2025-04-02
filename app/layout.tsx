@@ -5,7 +5,7 @@ import { Toaster } from "sonner";
 import ReduxProvider from "@/providers/ReduxProvider";
 import WalletProvider from "@/providers/WagmiProvider";
 import PlausibleWrapper from "@/providers/PlausibleWrapper";
-import OCConnectWrapper from "@/providers/OCConnectWrapper";
+// import OCConnectWrapper from "@/providers/OCConnectWrapper";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
 
 import { processMetadata } from "@/utils/sharedMetadata";
@@ -21,11 +21,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const opts = {
-    clientId: "<Does_Not_Matter_For_Sandbox_mode>",
-    redirectUri: "http://localhost:3000/redirect",
-    referralCode: "PARTNER6",
-  };
+  // const opts = {
+  //   clientId: "<Does_Not_Matter_For_Sandbox_mode>",
+  //   redirectUri: "http://localhost:3000/redirect",
+  //   referralCode: "PARTNER6",
+  // };
 
   return (
     <html lang="en">
@@ -34,15 +34,15 @@ export default async function RootLayout({
       >
         <PlausibleWrapper>
           <WalletProvider>
-            <OCConnectWrapper opts={opts} sandboxMode={true}>
-              <ReduxProvider>
-                <TanstackQueryClientProvider>
-                  {children}
+            {/* <OCConnectWrapper opts={opts} sandboxMode={true}> */}
+            <ReduxProvider>
+              <TanstackQueryClientProvider>
+                {children}
 
-                  <Toaster />
-                </TanstackQueryClientProvider>
-              </ReduxProvider>
-            </OCConnectWrapper>
+                <Toaster />
+              </TanstackQueryClientProvider>
+            </ReduxProvider>
+            {/* </OCConnectWrapper> */}
           </WalletProvider>
         </PlausibleWrapper>
       </body>
