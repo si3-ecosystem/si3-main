@@ -44,7 +44,7 @@ export function FooterBanner() {
   };
 
   let content: VideoContent = defaultContent;
-  let isLinkValue = false;
+  let isLinkValue = true;
 
   if (data) {
     switch (activeValue) {
@@ -80,7 +80,7 @@ export function FooterBanner() {
         break;
       default:
         content = defaultContent;
-        isLinkValue = false;
+        isLinkValue = true;
     }
   }
 

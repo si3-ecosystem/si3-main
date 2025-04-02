@@ -23,6 +23,7 @@ export default async function AboutPage() {
         videoSrc={data.video.videoUrl}
         title={data.video.title || ""}
         ctaTitle={data.video.ctaTitle}
+        ctaLink={data.video.ctaLink}
         showGradient={true}
         isLink={true}
       />

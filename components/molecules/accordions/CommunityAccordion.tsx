@@ -102,7 +102,7 @@ export function CommunityAccordion({
         onValueChange={handleValueChange}
         defaultValue={
           isMobile
-            ? [renderItems[0]?.value] // Only the first item on mobile
+            ? [renderItems[0]?.value]
             : defaultValue || renderItems[0]?.value
         }
       >
@@ -110,9 +110,9 @@ export function CommunityAccordion({
           <AccordionItem
             value={item.value}
             key={item.value}
-            className="-mt-8 !overflow-hidden rounded-2xl !p-0 transition-all duration-300 ease-in-out sm:shadow-xl md:-mt-16 lg:rounded-[40px] [data-state=open]:z-40 [data-state=open]:mt-8 md:[data-state=open]:mt-16"
+            className="mt-6 !overflow-hidden rounded-2xl !p-0 transition-all duration-300 ease-in-out sm:shadow-xl lg:rounded-lg [data-state=open]:z-40"
           >
-            <AccordionPrimitive.Header className="group relative !z-20 flex !cursor-pointer py-[30px] lg:py-14">
+            <AccordionPrimitive.Header className="group relative !z-20 flex !cursor-pointer py-[26px] lg:py-10">
               <AccordionPrimitive.Trigger className="focus-visible:ring-ring/50 focus-visible:border-ring flex flex-1 items-center justify-between overflow-hidden rounded-md px-4 py-2 text-left text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] lg:px-[90px] group-hover:[&>img]:scale-110">
                 <Image
                   src={item.background || ""}
@@ -126,19 +126,19 @@ export function CommunityAccordion({
                   <Title
                     as="h3"
                     variant="medium"
-                    className="text-white uppercase"
+                    className="text-black uppercase"
                   >
                     {item.title}
                   </Title>
                 </span>
                 {isItemOpen(item.value) ? (
-                  <MinusIcon className="pointer-events-none z-10 size-8 shrink-0 text-white lg:size-16" />
+                  <MinusIcon className="pointer-events-none z-10 size-8 shrink-0 text-black lg:size-16" />
                 ) : (
-                  <PlusIcon className="pointer-events-none z-10 size-8 shrink-0 text-white lg:size-16" />
+                  <PlusIcon className="pointer-events-none z-10 size-8 shrink-0 text-black lg:size-16" />
                 )}
               </AccordionPrimitive.Trigger>
             </AccordionPrimitive.Header>
-            <AccordionContent className="text-muted-foreground !z-0 bg-white ease-in-out">
+            <AccordionContent className="text-muted-foreground !z-10 !bg-white ease-in-out">
               {item.section}
             </AccordionContent>
           </AccordionItem>

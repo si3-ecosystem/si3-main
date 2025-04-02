@@ -25,7 +25,11 @@ export function SiHerGuidesWrapper({ data }: Props) {
         <Programming data={data} />
       </div>
       <div className="px-4 pb-10 lg:px-[90px]">
-        <Testimonials items={data.testimonials} title="Si Her Testimonials" />
+        <Testimonials
+          items={data.testimonials}
+          isCover={true}
+          title="Si Her Testimonials"
+        />
       </div>
     </section>
   );

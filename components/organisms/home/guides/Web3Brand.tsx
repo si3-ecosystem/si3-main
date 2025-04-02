@@ -25,9 +25,9 @@ function BrandCard({ item }: ItemProps) {
                 alt="push"
                 loading="lazy"
                 decoding="async"
-                width={114}
-                height={30}
-                className="aspect-auto h-full max-h-[26.066px] w-full max-w-[114px] object-contain"
+                width={400}
+                height={300}
+                className="aspect-auto h-full max-h-[26.066px] w-[114px] object-contain"
               />
             </div>
           );

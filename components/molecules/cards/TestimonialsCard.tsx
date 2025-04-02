@@ -3,12 +3,14 @@ import { urlForImage } from "@/lib/sanity/image";
 import { Testimonial } from "@/types/home";
 import Image from "next/image";
 import { QuotIcon } from "../icons/Quot";
+import { cn } from "@/lib/utils";
 
 type Props = {
   item: Testimonial;
+  isCover?: boolean;
 };
 
-export function TestimonialsCard({ item }: Props) {
+export function TestimonialsCard({ item, isCover = false }: Props) {
   const imageUrl = item.image && urlForImage(item.image)?.src;
 
   const companyLogo = item.companyLogo && urlForImage(item.companyLogo)?.src;
@@ -20,7 +22,10 @@ export function TestimonialsCard({ item }: Props) {
             src={imageUrl || "/icons/jpg/testimonial.jpg"}
             alt={item.name || "name"}
             fill
-            className="h-full w-full !rounded-lg object-contain max-lg:w-full max-sm:h-[244px] sm:max-h-[257.892px] sm:max-w-[257.892px]"
+            className={cn(
+              "h-full w-full !rounded-lg max-lg:w-full max-sm:h-[244px] sm:max-h-[257.892px] sm:max-w-[257.892px] sm:object-contain",
+              isCover ? "object-cover" : "object-contain",
+            )}
           />
         </div>
         <div className="flex h-full w-full flex-col justify-between @3xl:flex-row">
@@ -43,7 +48,7 @@ export function TestimonialsCard({ item }: Props) {
               </div>
 
               {companyLogo && (
-                <div className="relative flex h-8 w-full max-w-[148.854px] items-center justify-end">
+                <div className="relative flex h-8 w-full max-w-[148.854px] items-center justify-end max-sm:mt-4">
                   <Image
                     src={companyLogo}
                     alt={item.companyName}

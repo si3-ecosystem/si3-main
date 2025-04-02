@@ -10,6 +10,7 @@ import { Testimonial } from "@/types/home";
 interface TestimonialsProps {
   title: string;
   items: Testimonial[];
+  isCover: boolean;
 }
 
 const options = {
@@ -18,7 +19,11 @@ const options = {
   containScroll: "trimSnaps",
 };
 
-export function Testimonials({ title, items }: TestimonialsProps) {
+export function Testimonials({
+  title,
+  items,
+  isCover = false,
+}: TestimonialsProps) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
@@ -81,7 +86,7 @@ export function Testimonials({ title, items }: TestimonialsProps) {
               className="h-full w-full min-w-0 flex-[0_0_100%] pl-4"
               style={{ transform: "translateX(0%)" }}
             >
-              <TestimonialsCard item={item} />
+              <TestimonialsCard item={item} isCover={isCover} />
             </div>
           ))}
         </div>

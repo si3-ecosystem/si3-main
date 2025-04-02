@@ -69,6 +69,7 @@ export function Navbar({ showLinks = true }) {
 
                 <Button
                   title="Subscribe"
+                  showGradient
                   aria-label="Login Button"
                   className="border border-gray-400 bg-white !py-2 text-black"
                 >
