@@ -97,7 +97,7 @@ export function CommunityAccordion({
       <Accordion
         type={isMobile ? "multiple" : "single"}
         collapsible
-        className="animate-out animate-in w-full"
+        className="animate-out animate-in w-full max-md:px-4"
         value={openValues}
         onValueChange={handleValueChange}
         defaultValue={
