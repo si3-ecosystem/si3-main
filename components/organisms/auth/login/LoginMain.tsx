@@ -1,12 +1,16 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
 import LoginMail from "./LoginMail";
 import EtherMail from "./EtherMail";
-import LoginButton from "./LoginButton";
+// import LoginButton from "./LoginButton";
 import LoginFooter from "./LoginFooter";
 
 import Logo from "@/components/atoms/Logo";
+// import OpenCampusID from "./OpenCampusID";
+import InjectedWallet from "./InjectedWallet";
 
 const LoginMain = () => {
   return (
@@ -24,35 +28,10 @@ const LoginMain = () => {
       </div>
 
       <div className="mt-4 space-y-3 md:mt-6 md:space-y-4">
-        <LoginButton
-          src="/login/metamask-logo.svg"
-          alt="Metamask"
-          label="Metamask"
-          num={0}
-        />
-
-        {/* <LoginButton
-          src="/login/coinbase-logo.svg"
-          alt="Coinbase"
-          label="Coinbase"
-          num={1}
-        /> */}
-
-        <LoginButton
-          src="/login/wallet-connect-logo.svg"
-          alt="Wallet Connect"
-          label="WalletConnect"
-          num={1}
-        />
-
-        <LoginButton
-          src="/login/safe-logo.png"
-          alt="Safe Multisig"
-          label="Safe Multisig"
-          num={2}
-        />
-
+        <InjectedWallet />
         <EtherMail />
+
+        {/* <OpenCampusID /> */}
       </div>
 
       <div className="my-6 flex items-center md:my-8">
