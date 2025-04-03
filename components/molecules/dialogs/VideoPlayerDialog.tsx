@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/atoms/dialog";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import { X } from "lucide-react";
 
@@ -20,70 +20,15 @@ export function VideoPlayerDialog({
 }: VideoCardProps) {
   const [showSuccess, setShowSuccess] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const TIME_LIMIT = 5;
 
-  useEffect(() => {
-    const videoElement = videoRef.current;
-
-    const handleTimeUpdate = () => {
-      if (
-        videoElement &&
-        videoElement.currentTime >= TIME_LIMIT &&
-        !isSignedIn
-      ) {
-        videoElement.currentTime = TIME_LIMIT;
-        videoElement.pause();
-        setIsVideoOpen(false);
-        setTimeout(() => {
-          setShowSuccess(true);
-        }, 100);
-      }
-    };
-
-    const handleSeeking = () => {
-      if (
-        videoElement &&
-        videoElement.currentTime > TIME_LIMIT &&
-        !isSignedIn
-      ) {
-        videoElement.currentTime = TIME_LIMIT;
-      }
-    };
-
-    if (videoElement) {
-      videoElement.addEventListener("timeupdate", handleTimeUpdate);
-      videoElement.addEventListener("seeking", handleSeeking);
+  const handleVideoEnd = () => {
+    if (!isSignedIn) {
+      setIsVideoOpen(false);
+      setTimeout(() => {
+        setShowSuccess(true);
+      }, 100);
     }
-
-    return () => {
-      if (videoElement) {
-        videoElement.removeEventListener("timeupdate", handleTimeUpdate);
-        videoElement.removeEventListener("seeking", handleSeeking);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSignedIn]);
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    if (isVideoOpen && !isSignedIn) {
-      timeoutId = setTimeout(() => {
-        if (videoRef.current) {
-          videoRef.current.pause();
-        }
-        setIsVideoOpen(false);
-        setTimeout(() => {
-          setShowSuccess(true);
-        }, 100);
-      }, TIME_LIMIT * 1000);
-    }
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVideoOpen, isSignedIn]);
+  };
 
   const handleDialogClose = () => {
     if (videoRef.current) {
@@ -107,11 +52,12 @@ export function VideoPlayerDialog({
           <div className="relative w-full max-w-[1240px] overflow-hidden rounded-md">
             <video
               ref={videoRef}
-              controls={isSignedIn}
+              controls
               className="aspect-video w-full rounded-md object-cover"
               src={video}
               autoPlay
               muted={false}
+              onEnded={handleVideoEnd}
             />
           </div>
         </DialogContent>
@@ -120,7 +66,7 @@ export function VideoPlayerDialog({
       {showSuccess && (
         <SuccessDialog
           titleClass="max-w-[544px] mx-auto w-full text-2xl font-medium mb-0"
-          descClass="text-lg text-[#454545] font-normal leading-6  mx-auto w-full tracking-tight"
+          descClass="text-lg text-[#454545] font-normal leading-6 mx-auto w-full tracking-tight"
           className="h-[125.571px] w-[188.088px]"
           open={showSuccess}
           onOpenChange={setShowSuccess}

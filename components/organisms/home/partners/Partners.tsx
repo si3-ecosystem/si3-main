@@ -16,8 +16,8 @@ const Partners = ({ data }: Props) => {
       <Title className="text-center text-white">Our Partners</Title>
 
       <div className="space-y-4 md:space-y-8">
-        <CommunityPartner data={data.communityPartners || []} />
-        <EducationPartner data={data.educationPartners || []} />
+        <EducationPartner data={data.communityPartners || []} />
+        <CommunityPartner data={data.educationPartners || []} />
       </div>
     </section>
   );
