@@ -68,8 +68,8 @@ function WalletConnectButtons() {
 
   return (
     <>
-      {injectedButtons}
       {nonInjectedButtons}
+      {injectedButtons}
     </>
   );
 }
