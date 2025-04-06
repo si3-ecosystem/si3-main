@@ -1,6 +1,7 @@
 import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
+import { GalleryCarousel } from "@/components/molecules/carousels/GalleryCarousel";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { urlForImage } from "@/lib/sanity/image";
 import { Introduction } from "@/types/home";
@@ -11,10 +12,12 @@ type Props = {
   data: Introduction;
   isForm?: boolean;
 };
+const fallbackImage = "/icons/jpg/si_u_scholars_heroimage.jpg";
 
 export function HeroSection({ data, isForm = false }: Props) {
-  const imageResult = data?.thumbnail ? urlForImage(data.thumbnail) : null;
-  const image = imageResult?.src || "/icons/jpg/si_u_scholars_heroimage.jpg";
+  const imageResult = data?.thumbnail
+    ? urlForImage(data.thumbnail)?.src
+    : fallbackImage;
 
   return (
     <div className="@container py-14 lg:py-20">
@@ -45,20 +48,25 @@ export function HeroSection({ data, isForm = false }: Props) {
             </Text>
           )}
         </div>
+
         <div className="relative h-[328px] w-full flex-1 overflow-hidden rounded-xl">
-          <Image
-            src={image}
-            {...(data?.thumbnail?.blurDataURL && {
-              placeholder: "blur",
-              blurDataURL: data?.thumbnail?.blurDataURL,
-            })}
-            alt="si ui scholars image"
-            width={600}
-            height={328}
-            decoding="async"
-            loading="lazy"
-            className="h-full w-full rounded-lg object-cover object-center"
-          />
+          {data?.gallery && data.gallery.length > 0 ? (
+            <GalleryCarousel gallery={data.gallery} />
+          ) : (
+            <Image
+              src={imageResult || fallbackImage}
+              {...(data?.thumbnail?.blurDataURL && {
+                placeholder: "blur",
+                blurDataURL: data?.thumbnail?.blurDataURL,
+              })}
+              alt="si ui scholars image"
+              width={600}
+              height={328}
+              decoding="async"
+              loading="lazy"
+              className="h-full w-full rounded-lg object-cover object-center"
+            />
+          )}
         </div>
       </div>
     </div>

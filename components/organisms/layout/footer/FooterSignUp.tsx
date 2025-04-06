@@ -10,7 +10,10 @@ export const FooterSignUp = () => {
         <Link href="/" className="text-5xl font-bold uppercase">
           <span className="font-clesmont text-[40px]">{"SI<3>"}</span>
         </Link>
-        <p className="my-3">Stay up-to-date with our CurrentSi newsletter.</p>
+        <p className="my-3 max-sm:max-w-[250px]">
+          Stay up-to-date with our{" "}
+          <span className="">CurrentSi newsletter.</span>
+        </p>
       </div>
 
       <EthermailSubscribe />

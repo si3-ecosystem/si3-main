@@ -28,6 +28,10 @@ export interface SanityVideo {
   ctaTitle: string;
 }
 
+export interface GalleryImage extends SanityImage {
+  caption?: string;
+}
+
 // Scholars Data Types
 export interface Community {
   _id: string;
@@ -56,6 +60,7 @@ export interface Introduction {
   ctaText: string;
   ctaLink: string;
   memberShip?: string;
+  gallery?: GalleryImage[];
 }
 
 export interface Web3Brand {
@@ -112,6 +117,7 @@ export interface ScholarsData {
   community_description: string;
   communities: Community[];
   video: SanityVideo;
+  gallery?: GalleryImage[];
 }
 
 // Guides Data Types

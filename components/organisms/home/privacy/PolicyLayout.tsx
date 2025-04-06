@@ -88,8 +88,8 @@ export const PolicyLayout: React.FC<PolicyLayoutProps> = ({
               ref={contentRef}
               className="flex flex-col gap-11 overflow-x-hidden overflow-y-auto py-7 lg:w-3/4 lg:pb-96"
             >
-              <div className="">
-                <div className="no-scrollbar mx-auto flex flex-nowrap gap-6 overflow-x-scroll pr-4 lg:px-24">
+              <div className="w-full">
+                <div className="no-scrollbar flex items-start gap-6 overflow-x-auto pr-4 lg:pr-24">
                   {policyButtons.map((button) => (
                     <Button
                       key={button.type}

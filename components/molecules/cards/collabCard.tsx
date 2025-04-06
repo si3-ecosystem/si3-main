@@ -10,6 +10,7 @@ import Link from "next/link";
 import { PartnerProgramForm } from "../forms/PartnerProgramForm";
 
 export function CollabCard({ item }: { item: Community }) {
+  console.log("item", item);
   const image = item?.communityLogo
     ? urlForImage(item.communityLogo)?.src
     : "/icons/jpg/sihericon.jpg";

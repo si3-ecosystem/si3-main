@@ -61,13 +61,19 @@ export const scholarsQuery = groq`
       alt
     },
   introduction-> {
-  ...,
- 
- thumbnail {
+    ...,
+    thumbnail {
       ...,
       "blurDataURL": asset->metadata.lqip,
       "ImageColor": asset->metadata.palette.dominant.background,
       alt
+    },
+    gallery[] {  
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt,
+      caption
     },
   },
   title,
@@ -114,7 +120,8 @@ export const scholarsQuery = groq`
     communityLeaderEmail,
     xHandle,
     warpastHandle,
-    discover
+    discover,
+    linkedIn
   },
   video {
     "videoUrl": videoFile.asset->url,
@@ -143,6 +150,13 @@ export const guidesQuery = groq`
       alt
     },
   },
+   gallery[] {  
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt,
+      caption
+    },
   web3brands->,
   members_title,
   members_description,
@@ -235,6 +249,13 @@ export const partnersQuery = groq`
       alt
     },
   },
+   gallery[] {  
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt,
+      caption
+    },
   title,
   explore[]-> {
     _id,

@@ -52,7 +52,7 @@ const PrivacyPage: React.FC = () => {
   // Button labels and corresponding policy types
   const policyButtons = [
     { label: "Privacy Policy", type: "privacyPolicy" },
-    { label: "Terms & Conditions", type: "termsAndConditions" },
+    { label: "Diversity Tracker Policy", type: "termsAndConditions" },
     { label: "Members Policy", type: "membersPolicy" },
     { label: "Cookie Policy", type: "cookiePolicy" },
   ];

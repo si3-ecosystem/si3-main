@@ -29,6 +29,7 @@ import { Slider } from "@/components/atoms/slider";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
+import emailjs from "@emailjs/browser";
 
 const formSchema = z
   .object({
@@ -86,27 +87,34 @@ export function DiversityTrackerForm() {
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await fetch("/api/diversity-tracker", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          self_identity: data.self_identity,
-          self_identity_custom: data.self_identity_custom,
-          age_range: data.age_range,
-          ethnicity: data.ethnicity.join(", "),
-          ethnicity_custom: data.ethnicity_custom,
-          disability: data.disability.join(", "),
-          sexual_orientation: data.sexual_orientation,
-          equity_scale: data.equity_scale,
-          improvement_suggestions: data.improvement_suggestions,
-          grant_provider: data.grant_provider,
-          grant_round: data.grant_round,
-          suggestions: data.suggestions,
-          active_grants_participated: data.active_grants_participated === "yes",
-        }),
-      });
-      if (!response.ok) throw new Error("Failed to submit diversity tracker");
-      return response.json();
+      const emailData = {
+        self_identity: data.self_identity,
+        self_identity_custom: data.self_identity_custom || "N/A",
+        age_range: data.age_range,
+        ethnicity: data.ethnicity.join(", "),
+        ethnicity_custom: data.ethnicity_custom || "N/A",
+        disability: data.disability.join(", "),
+        sexual_orientation: data.sexual_orientation,
+        equity_scale: data.equity_scale.toString(),
+        improvement_suggestions: data.improvement_suggestions || "N/A",
+        grant_provider: data.grant_provider || "N/A",
+        grant_round: data.grant_round || "N/A",
+        suggestions: data.suggestions || "N/A",
+        active_grants_participated:
+          data.active_grants_participated === "yes" ? "Yes" : "No",
+      };
+
+      const result = await emailjs.send(
+        "", // Your EmailJS Service ID
+        "", // Your EmailJS Template ID
+        emailData,
+        "", // Your EmailJS Public Key
+      );
+
+      if (result.text !== "OK") {
+        throw new Error("Failed to send email via EmailJS");
+      }
+      return result;
     },
     onSuccess: () => {
       setShowSuccess(true);
