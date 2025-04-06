@@ -391,3 +391,46 @@ export const aboutIntroQuery = groq`
       },
   }
 `;
+
+export const privacyPolicyQuery = groq`
+  *[_type == "privacy-Policy"][0] {
+    _id,
+    "sections": sections[] {
+      id,
+      title,
+      content
+    }
+  }
+`;
+
+export const termsAndConditionsQuery = groq`
+  *[_type == "termsAndConditions"][0] {
+    _id,
+    "sections": sections[] {
+      id,
+      title,
+      content
+    }
+  }
+`;
+
+export const membersPolicyQuery = groq`
+  *[_type == "membersPolicy"][0] {
+    _id,
+    "sections": sections[] {
+      id,
+      title,
+      content
+    }
+  }
+`;
+export const cookiePolicyQuery = groq`
+  *[_type == "cookiePolicy"][0] {
+    _id,
+    "sections": sections[] {
+      id,
+      title,
+      content
+    }
+  }
+`;

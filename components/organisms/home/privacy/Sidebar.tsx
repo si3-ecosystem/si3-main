@@ -14,7 +14,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
   onSectionClick,
 }) => {
   return (
-    <div className="hidden overflow-y-auto py-7 lg:block lg:w-1/4">
+    <div className="hidden overflow-y-auto py-7 lg:block lg:w-1/4 lg:pt-11 lg:pb-24">
       <div className="sticky top-0">
         <nav className="">
           {sections.map((section) => (

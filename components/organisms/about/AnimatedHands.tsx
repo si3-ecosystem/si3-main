@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useWindowSize } from "@/hooks/useWindowsSize";
 
 export function AnimatedHands() {
   const ref = useRef(null);
@@ -10,17 +11,19 @@ export function AnimatedHands() {
     once: false,
     amount: 0.3,
   });
-
+  const { width } = useWindowSize();
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     if (isInView) setAnimate(true);
   }, [isInView]);
 
+  const yValue = width < 640 ? 150 : 200;
+
   const upVariants = {
     hidden: { y: 0, opacity: 0.8 },
     visible: {
-      y: -250,
+      y: -yValue, // Moves up
       opacity: 1,
       transition: { duration: 1.2, ease: "easeInOut", delay: 0.2 },
     },
@@ -29,7 +32,7 @@ export function AnimatedHands() {
   const downVariants = {
     hidden: { y: 0, opacity: 0.8 },
     visible: {
-      y: 250,
+      y: yValue, // Moves down
       opacity: 1,
       transition: { duration: 1.2, ease: "easeInOut", delay: 0.2 },
     },
@@ -40,7 +43,7 @@ export function AnimatedHands() {
       ref={ref}
       initial="hidden"
       animate={animate ? "visible" : "hidden"}
-      className="flex h-[40vh] items-center justify-between gap-6 sm:h-[70vh]"
+      className="!z-20 flex h-[40vh] items-center justify-between gap-6 sm:h-[70vh]"
     >
       {/* Left Hand - Moves Up */}
       <motion.div

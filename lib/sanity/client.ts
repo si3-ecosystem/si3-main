@@ -15,6 +15,10 @@ import {
   onboardQuery,
   homepageQuery,
   aboutIntroQuery,
+  privacyPolicyQuery,
+  termsAndConditionsQuery,
+  membersPolicyQuery,
+  cookiePolicyQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -118,6 +122,31 @@ export async function getOnboardPageData() {
 export async function getAboutIntroData() {
   if (client) {
     return (await client.fetch(aboutIntroQuery)) || {};
+  }
+  return {};
+}
+
+export async function getPrivacyPolicy() {
+  if (client) {
+    return (await client.fetch(privacyPolicyQuery)) || {};
+  }
+  return {};
+}
+export async function getTermsAndConditions() {
+  if (client) {
+    return (await client.fetch(termsAndConditionsQuery)) || {};
+  }
+  return {};
+}
+export async function getMembersPolicy() {
+  if (client) {
+    return (await client.fetch(membersPolicyQuery)) || {};
+  }
+  return {};
+}
+export async function getCookiePolicy() {
+  if (client) {
+    return (await client.fetch(cookiePolicyQuery)) || {};
   }
   return {};
 }

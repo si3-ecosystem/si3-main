@@ -71,7 +71,7 @@ export function ParallaxGallery({ teamMembers }: ParallaxGalleryProps) {
   return (
     <div
       ref={containerRef}
-      className="from-background to-accent relative min-h-screen overflow-hidden bg-gradient-to-b py-20"
+      className="from-background to-accent relative !z-10 min-h-screen overflow-hidden bg-gradient-to-b py-20"
     >
       <Image
         src={"/about/abougbackgroundbg.png"}

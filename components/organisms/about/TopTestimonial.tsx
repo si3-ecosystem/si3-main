@@ -43,7 +43,7 @@ export function TopTestimonial({ data }: Props) {
   };
 
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 py-14 lg:px-[90px] lg:py-20">
+    <section className="z-20 mx-auto w-full max-w-[1440px] px-4 py-14 lg:px-[90px] lg:py-20">
       <div className="@container">
         <div className="flex flex-col gap-10 @3xl:flex-row @3xl:items-center @3xl:gap-[60px]">
           <div className="flex-1">
