@@ -74,7 +74,7 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
                       }
                       alt={image.alt || "Gallery image"}
                       fill
-                      className="rounded-lg"
+                      className="aspect-video rounded-lg object-contain"
                       placeholder={image.blurDataURL ? "blur" : "empty"}
                       blurDataURL={image.blurDataURL}
                     />

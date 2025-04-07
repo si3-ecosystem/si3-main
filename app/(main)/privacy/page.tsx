@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PolicyLayout } from "@/components/organisms/home/privacy/PolicyLayout";
 
 import {
@@ -12,7 +13,6 @@ import {
 } from "@/lib/sanity/client";
 import { Loader } from "@/components/atoms/Loader";
 
-// Type definitions
 interface Section {
   id: string;
   title: string;
@@ -24,7 +24,6 @@ interface PolicyData {
   sections: Section[];
 }
 
-// Fetch function
 const fetchPolicyData = async (policyType: string): Promise<PolicyData> => {
   switch (policyType) {
     case "privacyPolicy":
@@ -41,21 +40,39 @@ const fetchPolicyData = async (policyType: string): Promise<PolicyData> => {
 };
 
 const PrivacyPage: React.FC = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [activePolicy, setActivePolicy] = useState("privacyPolicy");
 
-  // Use TanStack Query to fetch data
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "diversity-tracker-policy") {
+      setActivePolicy("termsAndConditions");
+    } else if (tab && policyButtons.some((button) => button.type === tab)) {
+      setActivePolicy(tab);
+    }
+  }, [searchParams]);
+
   const { data: policyData, isLoading } = useQuery({
     queryKey: ["policy", activePolicy],
     queryFn: () => fetchPolicyData(activePolicy),
   });
 
-  // Button labels and corresponding policy types
   const policyButtons = [
     { label: "Privacy Policy", type: "privacyPolicy" },
     { label: "Diversity Tracker Policy", type: "termsAndConditions" },
     { label: "Members Policy", type: "membersPolicy" },
     { label: "Cookie Policy", type: "cookiePolicy" },
   ];
+
+  const handleSetActivePolicy = (policyType: string) => {
+    setActivePolicy(policyType);
+    const tabValue =
+      policyType === "termsAndConditions"
+        ? "diversity-tracker-policy"
+        : policyType;
+    router.push(`/privacy?tab=${tabValue}`, { scroll: false });
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -66,7 +83,7 @@ const PrivacyPage: React.FC = () => {
       <PolicyLayout
         sections={policyData?.sections || []}
         activePolicy={activePolicy}
-        setActivePolicy={setActivePolicy}
+        setActivePolicy={handleSetActivePolicy}
         policyButtons={policyButtons}
       />
     </div>
