@@ -3,6 +3,7 @@
 import { Button } from "@/components/atoms/button";
 import { Dialog, DialogContent, DialogFooter } from "@/components/atoms/dialog";
 import { cn } from "@/lib/utils";
+import { DialogTitle } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,6 +34,7 @@ export function SuccessDialog({
 }: SuccessDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTitle className="sr-only">Success Dialog</DialogTitle>
       <DialogContent className="mx-auto w-full rounded-lg p-6 py-8 lg:max-w-[731px] lg:py-12">
         <div
           className={cn(

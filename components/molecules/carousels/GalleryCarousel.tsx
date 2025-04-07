@@ -13,7 +13,7 @@ interface GalleryCarouselProps {
 }
 
 const options = {
-  loop: true,
+  loop: false,
   align: "center",
   containScroll: "trimSnaps",
 };
@@ -53,7 +53,7 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
           variant="outline"
           size="icon"
           onClick={scrollPrev}
-          className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full hover:!bg-black hover:text-white"
+          className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full hover:!bg-black hover:text-white max-sm:hidden"
         >
           <ChevronLeft className="h-6 w-6" />
         </Button>
@@ -74,7 +74,7 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
                       }
                       alt={image.alt || "Gallery image"}
                       fill
-                      className="rounded-lg object-cover"
+                      className="rounded-lg"
                       placeholder={image.blurDataURL ? "blur" : "empty"}
                       blurDataURL={image.blurDataURL}
                     />
@@ -94,7 +94,7 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
           variant="outline"
           size="icon"
           onClick={scrollNext}
-          className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full hover:!bg-black hover:text-white"
+          className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full hover:!bg-black hover:text-white max-sm:hidden"
         >
           <ChevronRight className="h-6 w-6" />
         </Button>

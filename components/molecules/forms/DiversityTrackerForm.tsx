@@ -29,38 +29,26 @@ import { Slider } from "@/components/atoms/slider";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
-import emailjs from "@emailjs/browser";
 
-const formSchema = z
-  .object({
-    self_identity: z.string().min(1, "Please select a gender identity"),
-    self_identity_custom: z.string().optional(),
-    age_range: z.string().min(1, "Please select an age range"),
-    ethnicity: z
-      .array(z.string())
-      .min(1, "Please select at least one ethnicity option"),
-    ethnicity_custom: z.string().optional(),
-    disability: z
-      .array(z.string())
-      .min(1, "Please select at least one disability option"),
-    sexual_orientation: z.string().min(1, "Please select a sexual orientation"),
-    equity_scale: z.number().min(1).max(10),
-    improvement_suggestions: z.string().optional(),
-    grant_provider: z.string().optional(),
-    grant_round: z.string().optional(),
-    suggestions: z.string().optional(),
-    active_grants_participated: z.enum(["yes", "no"]),
-  })
-  .refine(
-    (data) =>
-      data.ethnicity.includes("prefer to self-describe") &&
-      data.ethnicity_custom &&
-      data.ethnicity_custom.length > 0,
-    {
-      message: "Please provide a description for 'Prefer to self-describe'",
-      path: ["ethnicity_custom"],
-    },
-  );
+const formSchema = z.object({
+  self_identity: z.string().min(1, "Please select a gender identity"),
+  self_identity_custom: z.string().optional(),
+  age_range: z.string().min(1, "Please select an age range"),
+  ethnicity: z
+    .array(z.string())
+    .min(1, "Please select at least one ethnicity option"),
+  ethnicity_custom: z.string().optional(),
+  disability: z
+    .array(z.string())
+    .min(1, "Please select at least one disability option"),
+  sexual_orientation: z.string().min(1, "Please select a sexual orientation"),
+  equity_scale: z.number().min(1).max(10),
+  improvement_suggestions: z.string().optional(),
+  grant_provider: z.string().optional(),
+  grant_round: z.string().optional(),
+  suggestions: z.string().optional(),
+  active_grants_participated: z.enum(["yes", "no"]),
+});
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -87,34 +75,27 @@ export function DiversityTrackerForm() {
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const emailData = {
-        self_identity: data.self_identity,
-        self_identity_custom: data.self_identity_custom || "N/A",
-        age_range: data.age_range,
-        ethnicity: data.ethnicity.join(", "),
-        ethnicity_custom: data.ethnicity_custom || "N/A",
-        disability: data.disability.join(", "),
-        sexual_orientation: data.sexual_orientation,
-        equity_scale: data.equity_scale.toString(),
-        improvement_suggestions: data.improvement_suggestions || "N/A",
-        grant_provider: data.grant_provider || "N/A",
-        grant_round: data.grant_round || "N/A",
-        suggestions: data.suggestions || "N/A",
-        active_grants_participated:
-          data.active_grants_participated === "yes" ? "Yes" : "No",
-      };
-
-      const result = await emailjs.send(
-        "", // Your EmailJS Service ID
-        "", // Your EmailJS Template ID
-        emailData,
-        "", // Your EmailJS Public Key
-      );
-
-      if (result.text !== "OK") {
-        throw new Error("Failed to send email via EmailJS");
-      }
-      return result;
+      const response = await fetch("/api/diversity-tracker", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          self_identity: data.self_identity,
+          self_identity_custom: data.self_identity_custom,
+          age_range: data.age_range,
+          ethnicity: data.ethnicity.join(", "),
+          ethnicity_custom: data.ethnicity_custom,
+          disability: data.disability.join(", "),
+          sexual_orientation: data.sexual_orientation,
+          equity_scale: data.equity_scale,
+          improvement_suggestions: data.improvement_suggestions,
+          grant_provider: data.grant_provider,
+          grant_round: data.grant_round,
+          suggestions: data.suggestions,
+          active_grants_participated: data.active_grants_participated === "yes",
+        }),
+      });
+      if (!response.ok) throw new Error("Failed to submit diversity tracker");
+      return response.json();
     },
     onSuccess: () => {
       setShowSuccess(true);
@@ -125,6 +106,8 @@ export function DiversityTrackerForm() {
       toast.error(error.message || "Something went wrong");
     },
   });
+
+  console.log("form", form.formState.errors);
 
   return (
     <div className="mx-auto w-full">
