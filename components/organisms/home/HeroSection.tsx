@@ -22,7 +22,7 @@ export function HeroSection({ data, isForm = false }: Props) {
   return (
     <div className="@container py-14 lg:py-20">
       <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
-        <div className="flex-1">
+        <div className="h-full w-full flex-1">
           <Text className="text-primary mb-3.5 pt-6 text-sm font-medium">
             {data.subtitle}
           </Text>
@@ -49,7 +49,7 @@ export function HeroSection({ data, isForm = false }: Props) {
           )}
         </div>
 
-        <div className="relative h-[328px] w-full flex-1 overflow-hidden rounded-xl">
+        <div className="relative min-h-[400px] w-full flex-1 overflow-hidden rounded-xl">
           {data?.gallery && data.gallery.length > 0 ? (
             <GalleryCarousel gallery={data.gallery} />
           ) : (

@@ -111,7 +111,7 @@ export function CollabCard({ item }: { item: Community }) {
                 </li>
               )}
 
-              {item?.linkedIn && (
+              {item?.linkedXHandle && (
                 <li className="flex items-center gap-2">
                   <Linkedin className="text-primary size-5" />
                   <Link
