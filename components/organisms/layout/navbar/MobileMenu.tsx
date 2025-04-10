@@ -14,7 +14,7 @@ import { AccordionMenu } from "@/components/molecules/accordions/NavAccordion";
 export function MobileMenu() {
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger asChild>
         <div className="group h-full w-full rounded-full bg-black p-2">
           <svg
             className="pointer-events-none size-6"

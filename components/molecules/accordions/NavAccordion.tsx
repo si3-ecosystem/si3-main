@@ -38,8 +38,8 @@ export function AccordionMenu() {
         },
         {
           title: "DEAI Web3 Training",
-          href: "/#si_her_guides_programming",
-          accordionValue: "si_her_guides",
+          href: "/#si_partners_training",
+          accordionValue: "si_partners",
         },
       ],
     },
@@ -94,9 +94,24 @@ export function AccordionMenu() {
     },
   ];
 
-  const handleMenuItemClick = (accordionValue: string | null) => {
+  const handleMenuItemClick = (href: string, accordionValue: string | null) => {
+    if (href.startsWith("/#")) {
+      const sectionId = href.split("#")[1];
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navbarHeight = 160;
+        const offsetTop =
+          element.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: "smooth",
+        });
+      }
+    } else {
+      router.push(href);
+    }
+
     if (accordionValue) {
-      router.push(accordionValue);
       if (pathName === "/about") {
         setTimeout(() => {
           dispatch(setActiveAccordionValue(accordionValue));
@@ -189,7 +204,9 @@ export function AccordionMenu() {
                     <Link
                       href={item.href}
                       className="block p-2.5 text-sm text-gray-700 hover:text-purple-500"
-                      onClick={() => handleMenuItemClick(item.accordionValue)}
+                      onClick={() => {
+                        handleMenuItemClick(item.href, item.accordionValue);
+                      }}
                       target={item.href.startsWith("http") ? "_blank" : "_self"}
                       rel={
                         item.href.startsWith("http")

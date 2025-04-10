@@ -11,7 +11,7 @@ export function SiUScholarsWrapper({ data }: SiUScholarsWrapperProps) {
   return (
     <section className="px-4 pb-2 lg:px-[90px] lg:pb-14">
       <HeroSection data={data.introduction} />
-      <div id="si_u_scholars_education" className="py-14 lg:py-20">
+      <div id="si_u_scholars_education" className="py-20">
         <VideoCarousel
           title={data?.title || "SI U Education"}
           description={
