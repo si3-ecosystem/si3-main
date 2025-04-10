@@ -21,7 +21,7 @@ export function SiHerGuidesWrapper({ data }: Props) {
       <div className="px-4 sm:pl-4 lg:pl-[90px]">
         <SpotlightSection data={data} />
       </div>
-      <div className="px-4 sm:pl-4 lg:pl-[90px]">
+      <div id="si_her_guides_programming" className="px-4 sm:pl-4 lg:pl-[90px]">
         <Programming data={data} />
       </div>
       <div className="px-4 pb-10 lg:px-[90px]">

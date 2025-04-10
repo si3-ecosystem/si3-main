@@ -121,7 +121,8 @@ export const scholarsQuery = groq`
     xHandle,
     warpastHandle,
     discover,
-    linkedIn
+    linkedIn,
+    linkedXHandle
   },
   video {
     "videoUrl": videoFile.asset->url,

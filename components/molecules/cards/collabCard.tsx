@@ -119,7 +119,7 @@ export function CollabCard({ item }: { item: Community }) {
                     href={`https://warpcast.com/${item.linkedIn}`}
                     className="text-primary"
                   >
-                    {item.linkedIn}
+                    {item.linkedXHandle}
                   </Link>
                 </li>
               )}

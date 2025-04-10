@@ -33,12 +33,12 @@ export function SpotlightCard({ item }: Props) {
           <Text variant="2xl" className="font-semibold">
             {item.name}
           </Text>
-          <div className="mb-4 flex items-center gap-5">
-            <Text className="flex items-center gap-2 text-base tracking-[1.73px] text-[#696969]">
+          <div className="mb-4 flex flex-wrap items-center gap-x-5 gap-y-4">
+            <Text className="flex items-center gap-2 text-sm tracking-[1.73px] text-[#696969]">
               <MapPin className="size-6 shrink-0" />
               <span>{item.country}</span>
             </Text>
-            <Text className="flex items-center gap-2 text-base tracking-[1.73px] text-[#696969]">
+            <Text className="flex items-center gap-2 text-sm tracking-[1.73px] text-[#696969]">
               <Image
                 src={"/icons/svg/profile.svg"}
                 alt="profile"

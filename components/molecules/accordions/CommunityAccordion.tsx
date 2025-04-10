@@ -12,7 +12,7 @@ import { Title } from "@/components/atoms/title";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store"; // Import useAppSelector
 import { setActiveAccordionValue } from "@/redux/slice/communitySlice";
 import { PlusIcon, MinusIcon } from "lucide-react";
 import { useWindowSize } from "@/hooks/useWindowsSize";
@@ -36,6 +36,9 @@ export function CommunityAccordion({
 }: DynamicAccordionProps) {
   const dispatch = useAppDispatch();
   const { width } = useWindowSize();
+  const activeAccordionValue = useAppSelector(
+    (state) => state.community.activeAccordionValue,
+  ); // Get the active accordion value from Redux
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -48,15 +51,38 @@ export function CommunityAccordion({
   useEffect(() => {
     if (renderItems.length === 0) return;
 
+    // Handle initial state based on isMobile and defaultValue
     if (isMobile) {
       setOpenValues([]);
       dispatch(setActiveAccordionValue([]));
     } else if (defaultValue) {
-      // On larger screens, use the provided defaultValue
       setOpenValues(defaultValue);
       dispatch(setActiveAccordionValue(defaultValue));
     }
   }, [isMobile, renderItems, defaultValue, dispatch]);
+
+  // Separate useEffect to handle changes in activeAccordionValue
+  useEffect(() => {
+    if (activeAccordionValue) {
+      // Update openValues based on Redux state
+      setOpenValues(activeAccordionValue);
+
+      // Scroll to the anchor if present in the URL
+      const hash = window.location.hash; // e.g., #si_u_scholars
+      if (hash) {
+        const element = document.getElementById(hash.replace("#", ""));
+        if (element) {
+          const offset = 50;
+          const elementTop =
+            element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elementTop - offset,
+            behavior: isMobile ? "auto" : "smooth",
+          });
+        }
+      }
+    }
+  }, [activeAccordionValue, isMobile]); // Depend on activeAccordionValue
 
   const handleValueChange = (value: string | string[]) => {
     if (isMobile) {
@@ -68,7 +94,6 @@ export function CommunityAccordion({
       setOpenValues(newValues);
       dispatch(setActiveAccordionValue(newValues));
     } else {
-      // For larger screens, handle single item
       const newValue = typeof value === "string" ? value : value[0] || "";
       setOpenValues(newValue);
       dispatch(setActiveAccordionValue(newValue));
@@ -80,12 +105,11 @@ export function CommunityAccordion({
       const offset = 50;
       window.scrollTo({
         top: sectionTop - offset,
-        behavior: isMobile ? "auto" : "smooth", // Use "auto" on mobile, "smooth" on larger screens
+        behavior: isMobile ? "auto" : "smooth",
       });
     }
   };
 
-  // Helper to check if an item is open
   const isItemOpen = (value: string) => {
     return Array.isArray(openValues)
       ? openValues.includes(value)
@@ -110,6 +134,7 @@ export function CommunityAccordion({
           <AccordionItem
             value={item.value}
             key={item.value}
+            id={item.value} // Add ID for anchor scrolling (e.g., id="si_u_scholars")
             className="mt-6 !overflow-hidden rounded-2xl !p-0 transition-all duration-300 ease-in-out sm:shadow-xl lg:rounded-lg [data-state=open]:z-40"
           >
             <AccordionPrimitive.Header className="group relative !z-20 flex !cursor-pointer py-[26px] lg:py-10">

@@ -48,6 +48,7 @@ export interface Community {
   communityLeaderEmail: string;
   xHandle: string;
   linkedIn: string;
+  linkedXHandle?:string;
   discover: string;
 }
 

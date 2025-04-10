@@ -10,7 +10,7 @@ type Props = {
 export function SiPartnersWrapper({ data }: Props) {
   return (
     <section className="pb-2 lg:pb-14">
-      <div className="px-4 lg:px-[90px]">
+      <div id="si_partners_campaigns" className="px-4 lg:px-[90px]">
         <HeroSection data={data.introduction} isForm />
       </div>
       <div className="px-4 py-14 lg:px-[90px] lg:py-20">
