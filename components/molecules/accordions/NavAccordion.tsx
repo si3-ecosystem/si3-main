@@ -120,10 +120,10 @@ export function AccordionMenu() {
           <AccordionItem
             key={section.id}
             value={section.id}
-            className="flex flex-col gap-3 border-t border-[#B0B0B0] last-of-type:border-b"
+            className="flex flex-col border-t border-[#B0B0B0] last-of-type:border-b"
           >
             <AccordionTrigger
-              className="flex w-full items-center justify-between px-4 py-0 hover:no-underline"
+              className="flex w-full items-center justify-between px-4 py-0 transition-all duration-300 ease-in-out hover:no-underline"
               showPurpleChevron={openSection === section.id}
               showChevronRight={section?.items.length === 0}
             >
@@ -146,7 +146,7 @@ export function AccordionMenu() {
                   className={cn(
                     "flex w-full items-center gap-1 px-2.5 py-[30px] text-base",
                     openSection === section.id
-                      ? "text-primary rounded-m4 -ml-4"
+                      ? "text-primary -ml-4 rounded-md"
                       : "border-r border-[#B0B0B0] text-black",
                   )}
                 >
@@ -183,13 +183,13 @@ export function AccordionMenu() {
               )}
             </AccordionTrigger>
             {section.items.length > 0 && (
-              <AccordionContent className="px-8 py-2 pb-3">
+              <AccordionContent className="px-8 pb-3">
                 {section.items.map((item, idx) => (
                   <SheetClose key={idx} asChild>
                     <Link
                       href={item.href}
                       className="block p-2.5 text-sm text-gray-700 hover:text-purple-500"
-                      onClick={() => handleMenuItemClick(item.accordionValue)} // Dispatch on click
+                      onClick={() => handleMenuItemClick(item.accordionValue)}
                       target={item.href.startsWith("http") ? "_blank" : "_self"}
                       rel={
                         item.href.startsWith("http")
@@ -208,37 +208,41 @@ export function AccordionMenu() {
       </Accordion>
 
       <div className="border-t border-gray-200">
-        <Button
-          asChild
-          className="mb-4 w-full rounded-md bg-black py-3 text-white"
-        >
-          <Link href={"/onboard"}>Get Started</Link>
-        </Button>
-        <Button
-          asChild
-          className="mb-4 flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white py-3 text-black"
-        >
-          <Link
-            href={"/login"}
-            className="flex w-full items-center justify-center gap-2"
+        <SheetClose asChild>
+          <Button
+            asChild
+            className="mb-4 w-full rounded-md bg-black py-3 text-white"
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <Link href={"/onboard"}>Get Started</Link>
+          </Button>
+        </SheetClose>
+        <SheetClose asChild>
+          <Button
+            asChild
+            className="mb-4 flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white py-3 text-black"
+          >
+            <Link
+              href={"/login"}
+              className="flex w-full items-center justify-center gap-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.76 0-5 2.24-5 5h10c0-2.76-2.24-5-5-5z"
-              />
-            </svg>
-            Member Login
-          </Link>
-        </Button>
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.76 0-5 2.24-5 5h10c0-2.76-2.24-5-5-5z"
+                />
+              </svg>
+              Member Login
+            </Link>
+          </Button>
+        </SheetClose>
         <div className="flex flex-col items-start justify-start rounded-md bg-gray-100 p-4 text-center">
           <p className="text-left text-base text-[#303030]">
             <span className="text-[17px] leading-[140%] font-medium text-black">
@@ -248,11 +252,13 @@ export function AccordionMenu() {
             Share your unique perspective by filling out our Diversity Tracker —
             your voice matters.
           </p>
-          <button className="mt-2 w-fit rounded-md border border-gray-300 bg-white px-3 py-2 text-black">
-            <Link href={"/diversity-tracker"} className="w-full">
-              Contribute
-            </Link>
-          </button>
+          <SheetClose asChild>
+            <button className="mt-2 w-fit rounded-md border border-gray-300 bg-white px-3 py-2 text-black">
+              <Link href={"/diversity-tracker"} className="w-full">
+                Contribute
+              </Link>
+            </button>
+          </SheetClose>
         </div>
       </div>
     </div>

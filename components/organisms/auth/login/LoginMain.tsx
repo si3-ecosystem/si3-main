@@ -19,7 +19,7 @@ const LoginMain = () => {
         <Logo src="/logo.svg" />
       </Link>
 
-      <div className="mt-16">
+      <div className="mt-8 sm:mt-16">
         <h1 className="text-4xl font-bold">Login</h1>
 
         <p className="mt-2 text-lg font-medium">

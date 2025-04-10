@@ -59,7 +59,7 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
         </Button> */}
 
         <div className="h-full overflow-hidden" ref={emblaRef}>
-          <div className="-ml-4 flex h-full w-full">
+          <div className="z-10 -ml-4 flex h-full w-full max-sm:-mt-10">
             {gallery.map((image, index) => {
               const imageUrl = image.asset && urlForImage(image)?.src;
               return (
@@ -99,7 +99,7 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
           <ChevronRight className="h-6 w-6" />
         </Button> */}
       </div>
-      <div className="absolute -bottom-4 mx-auto mt-8 flex w-full justify-center gap-2 !pt-6 sm:-bottom-0">
+      <div className="absolute -bottom-0 z-20 mx-auto mt-8 flex w-full justify-center gap-2 !pt-6 sm:-bottom-0">
         {gallery.map((_, index) => (
           <button
             key={index}
