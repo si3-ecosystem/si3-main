@@ -27,8 +27,9 @@ import {
 import { LoaderCircleIcon } from "lucide-react";
 import { Slider } from "@/components/atoms/slider";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
+import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
   self_identity: z.string().min(1, "Please select a gender identity"),
@@ -54,6 +55,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export function DiversityTrackerForm() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -95,6 +97,39 @@ export function DiversityTrackerForm() {
         }),
       });
       if (!response.ok) throw new Error("Failed to submit diversity tracker");
+
+      if (formRef.current) {
+        try {
+          const emailData = {
+            self_identity: data.self_identity || "Not provided",
+            self_identity_custom: data.self_identity_custom || "",
+            age_range: data.age_range || "Not provided",
+            ethnicity: data.ethnicity.length
+              ? data.ethnicity.join(", ")
+              : "Not provided",
+            ethnicity_custom: data.ethnicity_custom || "",
+            disability: data.disability.length
+              ? data.disability.join(", ")
+              : "Not provided",
+            sexual_orientation: data.sexual_orientation || "Not provided",
+            equity_scale: data.equity_scale.toString() || "Not provided",
+            improvement_suggestions: data.improvement_suggestions || "",
+            suggestions: data.suggestions || "",
+            active_grants_participated:
+              data.active_grants_participated || "Not provided",
+          };
+
+          await emailjs.send(
+            "service_lpq6tza",
+            "template_8qds4fc",
+            emailData,
+            "G2NEQfp4-OPU83wxD",
+          );
+        } catch (error) {
+          console.log(error);
+          toast.error("Failed to send email. Please try again.");
+        }
+      }
       return response.json();
     },
     onSuccess: () => {
@@ -107,8 +142,6 @@ export function DiversityTrackerForm() {
     },
   });
 
-  console.log("form", form.formState.errors);
-
   return (
     <div className="mx-auto w-full">
       <h2 className="mb-6 text-2xl font-bold">
@@ -116,6 +149,7 @@ export function DiversityTrackerForm() {
       </h2>
       <Form {...form}>
         <form
+          ref={formRef}
           onSubmit={form.handleSubmit((data) => mutation.mutate(data))}
           className="space-y-10"
         >

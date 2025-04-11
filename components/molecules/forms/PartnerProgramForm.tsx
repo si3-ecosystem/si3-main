@@ -33,6 +33,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import { cn } from "@/lib/utils";
+import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -98,6 +99,24 @@ export function PartnerProgramForm({
       if (!response.ok) {
         throw new Error("Failed to submit inquiry");
       }
+
+      const emailData = {
+        name: data.name || "Not provided",
+        email: data.email || "Not provided",
+        companyName: data.companyName || "Not provided",
+        interests: data.interests.length
+          ? data.interests.join(", ")
+          : "Not provided",
+        details: data.details || "",
+        newsletter: data.newsletter || "Not provided",
+      };
+
+      await emailjs.send(
+        "service_lpq6tza",
+        "template_baqtv9q",
+        emailData,
+        "G2NEQfp4-OPU83wxD",
+      );
       return response.json();
     },
     onSuccess: () => {
