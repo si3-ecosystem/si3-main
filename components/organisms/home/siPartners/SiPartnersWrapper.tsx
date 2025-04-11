@@ -11,7 +11,11 @@ export function SiPartnersWrapper({ data }: Props) {
   return (
     <section className="pb-2 lg:pb-14">
       <div id="si_partners_campaigns" className="px-4 lg:px-[90px]">
-        <HeroSection data={data.introduction} isForm />
+        <HeroSection
+          data={data.introduction}
+          isForm
+          extraClassName="max-[430px]:-mt-20"
+        />
       </div>
       <div id="si_partners_training" className="px-4 py-20 lg:px-[90px]">
         <ExploreSection data={data.explore} />

@@ -7,6 +7,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { GalleryImage } from "@/types/home";
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity/image";
+import { Button } from "@/components/atoms/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface GalleryCarouselProps {
   gallery: GalleryImage[];
@@ -24,13 +26,13 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // const scrollPrev = () => {
-  //   if (emblaApi) emblaApi.scrollPrev();
-  // };
+  const scrollPrev = () => {
+    if (emblaApi) emblaApi.scrollPrev();
+  };
 
-  // const scrollNext = () => {
-  //   if (emblaApi) emblaApi.scrollNext();
-  // };
+  const scrollNext = () => {
+    if (emblaApi) emblaApi.scrollNext();
+  };
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -48,33 +50,43 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
 
   return (
     <div className="relative mx-auto h-full w-full">
-      <div className="relative h-full">
-        {/* <Button
-          variant="outline"
-          size="icon"
-          onClick={scrollPrev}
-          className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full hover:!bg-black hover:text-white max-sm:hidden"
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </Button> */}
+      <div className="relative h-full sm:space-y-5">
+        <div className="flex items-center justify-end gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={scrollPrev}
+            className="rounded-full hover:!bg-black hover:text-white max-sm:hidden"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={scrollNext}
+            className="rounded-full hover:!bg-black hover:text-white max-sm:hidden"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </Button>
+        </div>
 
         <div className="h-full overflow-hidden" ref={emblaRef}>
-          <div className="z-10 -ml-4 flex h-full w-full max-sm:-mt-10">
+          <div className="z-10 flex h-full w-full">
             {gallery.map((image, index) => {
               const imageUrl = image.asset && urlForImage(image)?.src;
               return (
                 <div
                   key={index}
-                  className="h-full w-full min-w-0 flex-[0_0_100%] pl-4"
+                  className="h-full w-full min-w-0 flex-[0_0_100%]"
                 >
-                  <div className="relative h-full min-h-[350px] w-full sm:min-h-[400px]">
+                  <div className="relative min-h-[350px] w-full sm:min-h-[400px]">
                     <Image
                       src={
                         imageUrl || "/icons/jpg/si_u_scholars_galleryimage.jpg"
                       }
                       alt={image.alt || "Gallery image"}
                       fill
-                      className="h-full w-full rounded-lg object-contain"
+                      className="!aspect-video w-full rounded-lg object-contain object-bottom sm:object-top"
                       placeholder={image.blurDataURL ? "blur" : "empty"}
                       blurDataURL={image.blurDataURL}
                     />
@@ -89,17 +101,8 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
             })}
           </div>
         </div>
-
-        {/* <Button
-          variant="outline"
-          size="icon"
-          onClick={scrollNext}
-          className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full hover:!bg-black hover:text-white max-sm:hidden"
-        >
-          <ChevronRight className="h-6 w-6" />
-        </Button> */}
       </div>
-      <div className="absolute -bottom-0 z-20 mx-auto mt-8 flex w-full justify-center gap-2 !pt-6 sm:-bottom-0">
+      <div className="z-20 mx-auto mt-8 flex w-full justify-center gap-2 !pt-6 sm:-bottom-0">
         {gallery.map((_, index) => (
           <button
             key={index}

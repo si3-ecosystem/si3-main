@@ -13,7 +13,10 @@ export function SiHerGuidesWrapper({ data }: Props) {
   return (
     <section className="pb-2 lg:pb-14">
       <div className="px-4 lg:px-[90px]">
-        <HeroSection data={data.introduction} />
+        <HeroSection
+          data={data.introduction}
+          extraClassName="max-[430px]:-mt-20"
+        />
       </div>
       <div className="px-4 lg:px-[90px]">
         <Web3Brand data={data.web3brands} />
