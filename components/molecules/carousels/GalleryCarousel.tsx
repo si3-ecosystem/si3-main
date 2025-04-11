@@ -51,7 +51,7 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
   return (
     <div className="relative mx-auto h-full w-full">
       <div className="relative h-full sm:space-y-5">
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-center justify-end gap-2 max-lg:hidden">
           <Button
             variant="outline"
             size="icon"
