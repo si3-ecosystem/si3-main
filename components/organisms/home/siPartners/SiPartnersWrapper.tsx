@@ -17,7 +17,7 @@ export function SiPartnersWrapper({ data }: Props) {
           extraClassName="max-[430px]:-mt-20"
         />
       </div>
-      <div id="si_partners_training" className="px-4 py-20 lg:px-[90px]">
+      <div className="px-4 py-20 lg:px-[90px]">
         <ExploreSection data={data.explore} />
       </div>
       <div className="px-4 pb-10 lg:px-[90px]">
