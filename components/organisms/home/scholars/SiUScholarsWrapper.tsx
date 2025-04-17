@@ -13,9 +13,9 @@ export function SiUScholarsWrapper({ data }: SiUScholarsWrapperProps) {
       <HeroSection data={data.introduction} />
       <div id="si_u_scholars_education" className="py-20">
         <VideoCarousel
-          title={data?.title || "SI U Education"}
+          title={data?.education_title || "SI U Education"}
           description={
-            data?.description ||
+            data?.education_description ||
             "Discover leading-edge insights and education in our free and open university."
           }
           itemsPerSlide={6}

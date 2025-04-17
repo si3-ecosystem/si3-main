@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { PolicyLayout } from "@/components/organisms/home/privacy/PolicyLayout";
 
 import {
@@ -26,7 +26,7 @@ interface PolicyData {
 
 const fetchPolicyData = async (policyType: string): Promise<PolicyData> => {
   switch (policyType) {
-    case "privacyPolicy":
+    case "privacy":
       return await getPrivacyPolicy();
     case "termsAndConditions":
       return await getTermsAndConditions();
@@ -41,17 +41,12 @@ const fetchPolicyData = async (policyType: string): Promise<PolicyData> => {
 
 const PrivacyPage: React.FC = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [activePolicy, setActivePolicy] = useState("privacyPolicy");
+  const pathname = usePathname();
+  const [activePolicy, setActivePolicy] = useState("privacy");
 
   useEffect(() => {
-    const tab = searchParams.get("tab");
-    if (tab === "diversity-tracker-policy") {
-      setActivePolicy("termsAndConditions");
-    } else if (tab && policyButtons.some((button) => button.type === tab)) {
-      setActivePolicy(tab);
-    }
-  }, [searchParams]);
+    setActivePolicy("cookiePolicy");
+  }, [pathname]);
 
   const { data: policyData, isLoading } = useQuery({
     queryKey: ["policy", activePolicy],
@@ -59,7 +54,7 @@ const PrivacyPage: React.FC = () => {
   });
 
   const policyButtons = [
-    { label: "Privacy Policy", type: "privacyPolicy" },
+    { label: "Privacy Policy", type: "privacy" },
     { label: "Diversity Tracker Policy", type: "termsAndConditions" },
     { label: "Members Policy", type: "membersPolicy" },
     { label: "Cookie Policy", type: "cookiePolicy" },
@@ -71,7 +66,11 @@ const PrivacyPage: React.FC = () => {
       policyType === "termsAndConditions"
         ? "diversity-tracker-policy"
         : policyType;
-    router.push(`/privacy?tab=${tabValue}`, { scroll: false });
+    if (policyType === "privacy") {
+      router.push(`/policy/privacy`, { scroll: false });
+    } else {
+      router.push(`/policy/${tabValue}`, { scroll: false });
+    }
   };
 
   if (isLoading) {
