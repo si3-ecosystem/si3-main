@@ -153,7 +153,7 @@ export function PartnerProgramForm({
         </DialogTrigger>
         <DialogContent className="mx-auto w-full overflow-y-scroll px-4 py-14 max-sm:fixed max-sm:top-[45%] max-sm:bottom-0 sm:max-w-[924px] sm:px-20">
           <DialogHeader className="mb-4 flex w-full gap-4">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-row items-center gap-4 max-[400px]:flex-col">
               <Image
                 src={"/onboard/partneropportunity.svg"}
                 alt="partneropportunity"
@@ -171,7 +171,7 @@ export function PartnerProgramForm({
                     Partner Programs
                   </Title>
                 </DialogTitle>
-                <DialogDescription className="mx-auto w-full max-w-[517.453px] text-left text-base leading-5 text-[#3D3D3D]">
+                <DialogDescription className="mx-auto w-full max-w-[517.453px] text-base leading-5 text-[#3D3D3D] sm:text-left">
                   Please share your interest(s) in ways to partner with{" "}
                   {"SI<3>"}, and a member of our team will reach out soon.
                 </DialogDescription>

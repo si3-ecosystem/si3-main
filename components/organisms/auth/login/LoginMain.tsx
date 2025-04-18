@@ -14,17 +14,21 @@ import InjectedWallet from "./InjectedWallet";
 
 const LoginMain = () => {
   return (
-    <section className="mx-auto max-w-md pb-10">
-      <Link href="/" className="mx-auto max-w-md">
-        <Logo src="/logo.svg" />
-      </Link>
+    <section className="mx-auto max-w-[528px] bg-white p-8 pb-10">
+      <div className="flex flex-col items-center justify-center gap-8">
+        <Link href="/" className="">
+          <Logo src="/logo.svg" />
+        </Link>
 
-      <div className="mt-8 sm:mt-16">
-        <h1 className="text-4xl font-bold">Login</h1>
+        <div className="mt-8">
+          <h1 className="text-center text-4xl font-bold">
+            Login into your account
+          </h1>
 
-        <p className="mt-2 text-lg font-medium">
-          It&apos;s so nice to SI you 👋
-        </p>
+          <p className="mt-2 text-center text-lg font-medium">
+            It&apos;s so nice to SI you 👋
+          </p>
+        </div>
       </div>
 
       <div className="mt-4 space-y-3 md:mt-6 md:space-y-4">
