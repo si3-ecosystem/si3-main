@@ -32,6 +32,8 @@ interface ButtonModeFields {
 interface OnboardMaterial {
   _id: string;
   title: string;
+  subtitle: string;
+  image: SanityImage;
   description: string;
   membership?: string;
   ctaText?: string;

@@ -8,8 +8,9 @@ type Props = {
   data: ScholarsData;
 };
 export function SiHerKollab({ data }: Props) {
+  console.log("data", data.communities);
   return (
-    <div className="h-full py-14 lg:py-20">
+    <div id="si_u_scholars_kollab" className="h-full py-20">
       <VideoCarousel
         title={data?.community_title || "Si Her Kollab"}
         description={

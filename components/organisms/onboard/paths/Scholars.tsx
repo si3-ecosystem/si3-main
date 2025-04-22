@@ -4,6 +4,7 @@ import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
 import { urlForImage } from "@/lib/sanity/image";
 import { OnboardMaterial } from "@/types/onboard";
+import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,6 +16,8 @@ export function Scholars({ data }: Props) {
   const imageUrl = data?.thumbnail
     ? urlForImage(data.thumbnail)?.src
     : "/icons/jpg/si_u_scholars_heroimage.jpg";
+
+  const logoUrl = data?.image && urlForImage(data.image)?.src;
   return (
     <Card className="hover:border-primary flex h-full w-full flex-col gap-6 border border-[#D1D1D1] p-5">
       <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-2xl">
@@ -32,15 +35,58 @@ export function Scholars({ data }: Props) {
         />
       </AspectRatio>
       <div className="flex flex-col gap-6">
-        <Text as={"h2"} variant="2xl" className="text-black">
-          {data.title}
-        </Text>
-        <Text variant="xl" as={"p"} className="tracking-tight">
-          {data.description}
-        </Text>
-        <Button asChild variant={"outline"} className="w-full">
-          <Link href={data.ctaLink || "#"}>{data.ctaText}</Link>
-        </Button>
+        <div className="flex w-full items-center justify-between gap-4">
+          <div>
+            <Text as={"h2"} variant="2xl" className="text-black">
+              {data.title}
+            </Text>
+            <Text className="!text-sm">{data.subtitle}</Text>
+          </div>
+          <div className="relative h-11 w-11 overflow-hidden rounded-2xl">
+            {data?.image && (
+              <Image
+                src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
+                fill
+                loading="lazy"
+                decoding="async"
+                alt="scholars"
+                className="h-full w-full object-cover"
+              />
+            )}
+          </div>
+        </div>
+        <div className="mb-8 flex flex-col gap-2">
+          <Text variant="xl" as={"p"} className="tracking-tight">
+            {data.description}
+          </Text>
+          <Text variant="base" as={"p"} className="text-left text-[#585858]">
+            {data.membership}
+          </Text>
+        </div>
+        <div className="flex w-full items-center justify-between gap-2 overflow-hidden">
+          <div className="w-full">
+            <Button
+              asChild
+              variant={"outline"}
+              showGradient
+              className="w-full max-w-[240px] text-white"
+            >
+              <Link href={data.ctaLink || "#"}>{data.ctaText}</Link>
+            </Button>
+          </div>
+          <Button
+            showGradient
+            asChild
+            variant={"outline"}
+            aria-label="Login Button"
+            className="w-full max-w-[96px] border border-gray-400 bg-white !py-2 text-black"
+          >
+            <Link className="flex items-center gap-2" href={"/login"}>
+              Login
+              <MoveRight />
+            </Link>
+          </Button>
+        </div>
       </div>
     </Card>
   );

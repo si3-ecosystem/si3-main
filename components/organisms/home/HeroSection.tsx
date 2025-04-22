@@ -4,6 +4,7 @@ import { Title } from "@/components/atoms/title";
 import { GalleryCarousel } from "@/components/molecules/carousels/GalleryCarousel";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { urlForImage } from "@/lib/sanity/image";
+import { cn } from "@/lib/utils";
 import { Introduction } from "@/types/home";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,18 +12,19 @@ import Link from "next/link";
 type Props = {
   data: Introduction;
   isForm?: boolean;
+  extraClassName?: string;
 };
 const fallbackImage = "/icons/jpg/si_u_scholars_heroimage.jpg";
 
-export function HeroSection({ data, isForm = false }: Props) {
+export function HeroSection({ data, isForm = false, extraClassName }: Props) {
   const imageResult = data?.thumbnail
     ? urlForImage(data.thumbnail)?.src
     : fallbackImage;
 
   return (
     <div className="@container py-14 lg:py-20">
-      <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
-        <div className="flex-1">
+      <div className="flex flex-col gap-4 sm:gap-10 @3xl:flex-row @3xl:gap-[60px]">
+        <div className="z-20 h-full w-full flex-1">
           <Text className="text-primary mb-3.5 pt-6 text-sm font-medium">
             {data.subtitle}
           </Text>
@@ -49,7 +51,12 @@ export function HeroSection({ data, isForm = false }: Props) {
           )}
         </div>
 
-        <div className="relative h-[328px] w-full flex-1 overflow-hidden rounded-xl">
+        <div
+          className={cn(
+            "relative z-0 w-full flex-1 overflow-hidden rounded-xl",
+            extraClassName,
+          )}
+        >
           {data?.gallery && data.gallery.length > 0 ? (
             <GalleryCarousel gallery={data.gallery} />
           ) : (

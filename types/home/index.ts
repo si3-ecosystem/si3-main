@@ -48,6 +48,7 @@ export interface Community {
   communityLeaderEmail: string;
   xHandle: string;
   linkedIn: string;
+  linkedXHandle?: string;
   discover: string;
 }
 
@@ -110,6 +111,8 @@ export interface ScholarsData {
   _id: string;
   introduction: Introduction;
   title: string;
+  education_title: string;
+  education_description: string;
   image: SanityImage;
   description: string;
   courses: Course[];

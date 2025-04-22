@@ -1,4 +1,3 @@
-// components/PartnerProgramForm.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -8,9 +7,9 @@ import { Button } from "@/components/atoms/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogTrigger,
 } from "@/components/atoms/dialog";
 import {
@@ -22,7 +21,6 @@ import {
   FormMessage,
 } from "@/components/atoms/form";
 import { Input } from "@/components/atoms/input";
-
 import { Checkbox } from "@/components/atoms/checkbox";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -33,21 +31,20 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import { cn } from "@/lib/utils";
-import emailjs from "@emailjs/browser";
 import Image from "next/image";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address").min(1, "Email is required"),
-  companyName: z.string().min(1, "Company name is required"),
+  companyAffiliation: z.string().min(1, "Company affiliation is required"),
   interests: z.array(z.string()).min(1, "Select at least one interest"),
-  details: z.string().optional(),
-  newsletter: z.enum(["yes", "no"]),
+  personalValues: z.string().optional(),
+  digitalLink: z.enum(["yes", "no"]),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function PartnerProgramForm({
+export function SiHerGuidesForm({
   title,
   showGradient = false,
   className,
@@ -63,10 +60,10 @@ export function PartnerProgramForm({
     defaultValues: {
       name: "",
       email: "",
-      companyName: "",
+      companyAffiliation: "",
       interests: [],
-      details: "",
-      newsletter: "no",
+      personalValues: "",
+      digitalLink: "no",
     },
   });
 
@@ -76,7 +73,6 @@ export function PartnerProgramForm({
     } else {
       document.body.classList.remove("no-scroll");
     }
-
     return () => {
       document.body.classList.remove("no-scroll");
     };
@@ -85,14 +81,14 @@ export function PartnerProgramForm({
   const interestOptions = [
     "Educational workshops",
     "Community growth campaign",
-    "DEI & Inclusion training",
-    "Grants & Financial Inclusion",
+    "DEI training",
+    "Grants & Financial Inclusion training",
     "Custom Partnership",
   ];
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await fetch("/api/partnerProgram", {
+      const response = await fetch("/api/siHerGuides", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -101,23 +97,6 @@ export function PartnerProgramForm({
         throw new Error("Failed to submit inquiry");
       }
 
-      const emailData = {
-        name: data.name || "Not provided",
-        email: data.email || "Not provided",
-        companyName: data.companyName || "Not provided",
-        interests: data.interests.length
-          ? data.interests.join(", ")
-          : "Not provided",
-        details: data.details || "",
-        newsletter: data.newsletter || "Not provided",
-      };
-
-      await emailjs.send(
-        "service_lpq6tza",
-        "template_baqtv9q",
-        emailData,
-        "G2NEQfp4-OPU83wxD",
-      );
       return response.json();
     },
     onSuccess: () => {
@@ -138,24 +117,24 @@ export function PartnerProgramForm({
   return (
     <div className="overflow-hidden">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
+        <DialogTrigger asChild className="w-full">
           <Button
             variant={"outline"}
             className={cn(
-              "w-full",
-              className,
+              "w-full max-w-[240px] text-white",
               showGradient && "border border-none",
+              className,
             )}
             showGradient={showGradient}
           >
-            {title || "Inquire Now"}
+            {title}
           </Button>
         </DialogTrigger>
         <DialogContent className="mx-auto w-full overflow-y-scroll px-4 py-14 max-sm:fixed max-sm:top-[45%] max-sm:bottom-0 sm:max-w-[924px] sm:px-20">
           <DialogHeader className="mb-4 flex w-full gap-4">
             <div className="flex flex-row items-center gap-4 max-[400px]:flex-col">
               <Image
-                src={"/onboard/partneropportunity.svg"}
+                src={"/onboard/siherguides.svg"}
                 alt="partneropportunity"
                 width={64}
                 height={64}
@@ -168,12 +147,13 @@ export function PartnerProgramForm({
                     as="span"
                     className="text-2xl leading-none font-normal text-black"
                   >
-                    Partner Programs
+                    Si Her Guides
                   </Title>
                 </DialogTitle>
                 <DialogDescription className="mx-auto w-full max-w-[517.453px] text-base leading-5 text-[#3D3D3D] sm:text-left">
-                  Please share your interest(s) in ways to partner with{" "}
-                  {"SI<3>"}, and a member of our team will reach out soon.
+                  Please complete our application form to join us a Si Her
+                  Guide. Our team will review your application and respond via
+                  email with any questions or next steps.
                 </DialogDescription>
               </div>
             </div>
@@ -205,7 +185,7 @@ export function PartnerProgramForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-medium">
-                        Email *
+                        Email <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input placeholder="johndoe@gmail.com" {...field} />
@@ -216,14 +196,18 @@ export function PartnerProgramForm({
                 />
                 <FormField
                   control={form.control}
-                  name="companyName"
+                  name="companyAffiliation"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-medium">
-                        Company Name <span className="text-red-500">*</span>
+                        Company Affiliation{" "}
+                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter company name" {...field} />
+                        <Input
+                          placeholder="Enter company affiliation"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -235,8 +219,8 @@ export function PartnerProgramForm({
                   render={({ field }) => (
                     <FormItem className="flex flex-col gap-8">
                       <FormLabel htmlFor="" className="text-base font-medium">
-                        What are you interested in exploring? (select all that
-                        apply) <span className="text-red-500">*</span>
+                        Please share your pronouns (select all that apply){" "}
+                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <ul className="flex flex-col gap-2.5">
                         {interestOptions.map((option) => (
@@ -267,12 +251,11 @@ export function PartnerProgramForm({
                 />
                 <FormField
                   control={form.control}
-                  name="details"
+                  name="personalValues"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-normal">
-                        What do you want us to know about your interest as a
-                        partner?
+                        Please share your personal values
                       </FormLabel>
                       <FormControl>
                         <Textarea
@@ -287,11 +270,12 @@ export function PartnerProgramForm({
                 />
                 <FormField
                   control={form.control}
-                  name="newsletter"
+                  name="digitalLink"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-normal">
-                        Would you like to be added to our partner newsletter? *
+                        Please share a digital link that identifies you
+                        (LinkedIn, X, website, etc.) *
                       </FormLabel>
                       <FormControl>
                         <RadioGroup
@@ -338,8 +322,8 @@ export function PartnerProgramForm({
           open={showSuccess}
           onOpenChange={setShowSuccess}
           imageSrc="/icons/jpg/successGreen.jpg"
-          title="Inquiry Submitted Successfully"
-          description="Thank you for your partnership inquiry. A member of our team will be in touch soon!"
+          title="Thank you for your application."
+          description="A member of our team will be in touch soon!"
           ctaLink="/"
           ctaTitle="Get Back to Home Page"
         />

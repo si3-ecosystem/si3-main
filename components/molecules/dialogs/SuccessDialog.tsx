@@ -60,7 +60,12 @@ export function SuccessDialog({
           {title}
         </h2>
 
-        <p className={cn("mb-6 text-center text-sm text-gray-600", descClass)}>
+        <p
+          className={cn(
+            "mx-auto mb-6 w-full max-w-[450px] text-center text-sm text-gray-600",
+            descClass,
+          )}
+        >
           {description}
         </p>
 

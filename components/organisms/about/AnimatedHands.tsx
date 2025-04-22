@@ -43,7 +43,7 @@ export function AnimatedHands() {
       ref={ref}
       initial="hidden"
       animate={animate ? "visible" : "hidden"}
-      className="!z-20 flex h-[40vh] items-center justify-between gap-6 sm:h-[70vh]"
+      className="!z-10 flex h-[40vh] items-center justify-between gap-6 sm:h-[85vh]"
     >
       {/* Left Hand - Moves Up */}
       <motion.div

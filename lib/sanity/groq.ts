@@ -77,7 +77,8 @@ export const scholarsQuery = groq`
     },
   },
   title,
-  description,
+  education_title,
+  education_description,
   courses[]-> {
     _id,
     title,
@@ -121,7 +122,8 @@ export const scholarsQuery = groq`
     xHandle,
     warpastHandle,
     discover,
-    linkedIn
+    linkedIn,
+    linkedXHandle
   },
   video {
     "videoUrl": videoFile.asset->url,
@@ -379,6 +381,13 @@ export const onboardQuery = groq`
     "onboard_materials": onboard_materials[]-> {
       _id,
       title,
+      subtitle,
+       image {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
       description,
       membership,
       ctaText,

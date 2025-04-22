@@ -14,8 +14,19 @@ export function ExplorePartnersCard({ item }: Props) {
   const imageUrl = item?.image
     ? urlForImage(item.image)?.src
     : "/icons/jpg/si_u_scholars_heroimage.jpg";
+
+  const cardId =
+    item.subTitle === "DEAI tRAINING"
+      ? "si_partners_campaigns"
+      : item.subTitle === "Partner Workshops & Events"
+        ? "si_partners_training"
+        : "";
+
   return (
-    <div className="@container rounded-[33px] border border-[rgba(0,0,0,0.2)] px-5 py-6 transition-all duration-300 ease-in-out hover:shadow-md lg:px-8 lg:py-[30px]">
+    <div
+      id={cardId}
+      className="@container rounded-[33px] border border-[rgba(0,0,0,0.2)] px-5 py-6 transition-all duration-300 ease-in-out hover:shadow-md lg:px-8 lg:py-[30px]"
+    >
       <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
         <div className="flex-1">
           <Badge className="mb-6 bg-[#E8C1FF] text-base leading-5 font-medium tracking-[0.16px] text-black">

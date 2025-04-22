@@ -9,7 +9,7 @@ export default async function OnboardPage() {
   const data: OnboardSchema = await getOnboardPageData();
   return (
     <Suspense fallback={<Loader />}>
-      <section className="overflow-hidden">
+      <section className="flex flex-col overflow-hidden">
         <HeroSection />
         <PathsSection data={data} />
       </section>
