@@ -88,23 +88,23 @@ const NotificationsItem = ({ notification }) => {
     return () => clearTimeout(timeoutId);
   }, [notification.message.notification.body]);
 
-  const formatTimestamp = (timestamp) => {
-    const date = new Date(timestamp);
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
+  // const formatTimestamp = (timestamp) => {
+  //   const date = new Date(timestamp);
+  //   const now = new Date();
+  //   const diff = now.getTime() - date.getTime();
 
-    if (diff < 60000) {
-      return "Just now";
-    } else if (diff < 3600000) {
-      const minutes = Math.floor(diff / 60000);
-      return `${minutes} min ago`;
-    } else if (diff < 86400000) {
-      const hours = Math.floor(diff / 3600000);
-      return `${hours} hours ago`;
-    } else {
-      return date.toLocaleDateString();
-    }
-  };
+  //   if (diff < 60000) {
+  //     return "Just now";
+  //   } else if (diff < 3600000) {
+  //     const minutes = Math.floor(diff / 60000);
+  //     return `${minutes} min ago`;
+  //   } else if (diff < 86400000) {
+  //     const hours = Math.floor(diff / 3600000);
+  //     return `${hours} hours ago`;
+  //   } else {
+  //     return date.toLocaleDateString();
+  //   }
+  // };
 
   return (
     <div className="flex items-start space-x-4 rounded-md border border-[#B668E4] bg-[#FBF6FE] px-2 py-3 sm:px-3 sm:py-4 md:space-x-6 lg:items-center">
@@ -112,8 +112,8 @@ const NotificationsItem = ({ notification }) => {
         <ScrollText className="h-5 w-5 text-sm text-white lg:h-6 lg:w-6 2xl:h-8 2xl:w-8" />
       </div>
 
-      <div className="flex flex-grow items-start justify-between gap-3">
-        <div className="max-w-2xl space-y-3">
+      <div className="flex flex-1 flex-grow items-start justify-between gap-3">
+        <div className="space-y-3">
           <h3 className="mb-1.5 text-lg font-bold md:text-xl">
             {notification.message.payload.title}
           </h3>
@@ -154,9 +154,9 @@ const NotificationsItem = ({ notification }) => {
           </div>
         </div>
 
-        <div className="ml-3.5 hidden text-sm whitespace-nowrap text-gray-400 md:block">
+        {/* <div className="ml-3.5 hidden text-sm whitespace-nowrap text-gray-400 md:block">
           {formatTimestamp(notification.timestamp)}
-        </div>
+        </div> */}
       </div>
     </div>
   );
