@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+
 import { setAddress, setConnected, setUser } from "@/redux/slice/userSlice";
 
 declare global {
@@ -15,11 +16,14 @@ declare global {
   }
 }
 
+let etherMailScriptLoaded = false;
+
 const EtherMail = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Listen for login success from EtherMail
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     window.addEventListener("EtherMailSignInOnSuccess", (event: any) => {
       const __loginEvent = event;
@@ -36,13 +40,29 @@ const EtherMail = () => {
   }, []);
 
   useEffect(() => {
-    window.setStyle = function () {
+    if (!etherMailScriptLoaded) {
+      etherMailScriptLoaded = true;
+
+      const p = document.createElement("script");
+      p.src = "https://cdn-email.ethermail.io/sdk/v2/ethermail.js";
+      p.setAttribute("a", "66e644fcb593edd053b3f5ca");
+      p.setAttribute("b", "si3");
+      p.setAttribute("c", JSON.stringify(["login"]));
+      document.body.appendChild(p);
+    }
+
+    const applyStyles = () => {
       const element = document.querySelector("ethermail-login");
 
-      if (element && element.shadowRoot) {
+      if (
+        element &&
+        element.shadowRoot &&
+        !element.shadowRoot.querySelector("style[data-ethermail-style]")
+      ) {
         const style = document.createElement("style");
+        style.setAttribute("data-ethermail-style", "true");
         style.textContent = `
-         .ethermail-login-button {
+          .ethermail-login-button {
             display: flex !important;
             width: 100% !important;
             cursor: pointer !important;
@@ -73,27 +93,25 @@ const EtherMail = () => {
         element.shadowRoot.appendChild(style);
       }
     };
-  }, []);
 
-  useEffect(() => {
-    (function ({ ...args }) {
-      const p = document.createElement("script");
+    // Try applying styles right away
+    applyStyles();
 
-      p.src = "https://cdn-email.ethermail.io/sdk/v2/ethermail.js";
-      document.body.appendChild(p);
-
-      p.setAttribute("a", args.afid);
-      p.setAttribute("b", args.communityAlias);
-      p.setAttribute("c", args.features);
-    })({
-      afid: "66e644fcb593edd053b3f5ca",
-      communityAlias: "si3",
-      features: ["login"],
+    // Observe DOM in case widget is re-rendered
+    const observer = new MutationObserver(() => {
+      applyStyles();
     });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="w-full max-w-md overflow-hidden rounded-lg border">
+    <div className="w-full overflow-hidden rounded-lg border">
       <ethermail-login
         widget="67b0e30547bb5daf3c21fa37"
         type="wallet"
