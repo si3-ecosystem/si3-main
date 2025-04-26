@@ -33,7 +33,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import { cn } from "@/lib/utils";
-import emailjs from "@emailjs/browser";
 import Image from "next/image";
 
 const formSchema = z.object({
@@ -92,32 +91,29 @@ export function PartnerProgramForm({
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await fetch("/api/partnerProgram", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/mail/partners-program`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            formData: {
+              name: data.name,
+              email: data.email,
+              companyName: data.companyName,
+              interests: Array.isArray(data.interests)
+                ? data.interests.join(", ")
+                : data.interests,
+              details: data.details || "",
+              newsletter: !!data.newsletter,
+            },
+          }),
+        },
+      );
       if (!response.ok) {
         throw new Error("Failed to submit inquiry");
       }
 
-      const emailData = {
-        name: data.name || "Not provided",
-        email: data.email || "Not provided",
-        companyName: data.companyName || "Not provided",
-        interests: data.interests.length
-          ? data.interests.join(", ")
-          : "Not provided",
-        details: data.details || "",
-        newsletter: data.newsletter || "Not provided",
-      };
-
-      await emailjs.send(
-        "service_lpq6tza",
-        "template_baqtv9q",
-        emailData,
-        "G2NEQfp4-OPU83wxD",
-      );
       return response.json();
     },
     onSuccess: () => {

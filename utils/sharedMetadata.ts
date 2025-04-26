@@ -19,7 +19,7 @@ export async function processMetadata() {
   const imageUrl = settings?.favicon && urlForImage(settings.favicon)?.src;
 
   return {
-    metadataBase: new URL(process.env.BASE_URL || "https://www.si3.space"),
+    metadataBase: "https://www.si3.space",
     title: settings?.seoTitle || "SI<3> Ecosystem",
     description:
       settings?.overview ||

@@ -29,7 +29,6 @@ import { Slider } from "@/components/atoms/slider";
 import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
-import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
   self_identity: z.string().min(1, "Please select a gender identity"),
@@ -77,59 +76,32 @@ export function DiversityTrackerForm() {
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await fetch("/api/diversity-tracker", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          self_identity: data.self_identity,
-          self_identity_custom: data.self_identity_custom,
-          age_range: data.age_range,
-          ethnicity: data.ethnicity.join(", "),
-          ethnicity_custom: data.ethnicity_custom,
-          disability: data.disability.join(", "),
-          sexual_orientation: data.sexual_orientation,
-          equity_scale: data.equity_scale,
-          improvement_suggestions: data.improvement_suggestions,
-          grant_provider: data.grant_provider,
-          grant_round: data.grant_round,
-          suggestions: data.suggestions,
-          active_grants_participated: data.active_grants_participated === "yes",
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/mail/diversity-tracker`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            formData: {
+              selfIdentity: data.self_identity,
+              selfIdentityCustom: data.self_identity_custom,
+              ageRange: data.age_range,
+              ethnicity: data.ethnicity.join(", "),
+              disability: data.disability.join(", "),
+              sexualOrientation: data.sexual_orientation,
+              equityScale: data.equity_scale,
+              improvementSuggestions: data.improvement_suggestions || "",
+              grantProvider: data.grant_provider || "",
+              grantRound: data.grant_round || "",
+              suggestions: data.suggestions || "",
+              activeGrantsParticipated:
+                data.active_grants_participated === "yes" ? "yes" : "no",
+            },
+          }),
+        },
+      );
       if (!response.ok) throw new Error("Failed to submit diversity tracker");
 
-      if (formRef.current) {
-        try {
-          const emailData = {
-            self_identity: data.self_identity || "Not provided",
-            self_identity_custom: data.self_identity_custom || "",
-            age_range: data.age_range || "Not provided",
-            ethnicity: data.ethnicity.length
-              ? data.ethnicity.join(", ")
-              : "Not provided",
-            ethnicity_custom: data.ethnicity_custom || "",
-            disability: data.disability.length
-              ? data.disability.join(", ")
-              : "Not provided",
-            sexual_orientation: data.sexual_orientation || "Not provided",
-            equity_scale: data.equity_scale.toString() || "Not provided",
-            improvement_suggestions: data.improvement_suggestions || "",
-            suggestions: data.suggestions || "",
-            active_grants_participated:
-              data.active_grants_participated || "Not provided",
-          };
-
-          await emailjs.send(
-            "service_lpq6tza",
-            "template_8qds4fc",
-            emailData,
-            "G2NEQfp4-OPU83wxD",
-          );
-        } catch (error) {
-          console.log(error);
-          toast.error("Failed to send email. Please try again.");
-        }
-      }
       return response.json();
     },
     onSuccess: () => {

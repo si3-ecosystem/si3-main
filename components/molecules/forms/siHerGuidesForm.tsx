@@ -88,11 +88,25 @@ export function SiHerGuidesForm({
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await fetch("/api/siHerGuides", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/mail/guides`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            formData: {
+              name: data.name,
+              email: data.email,
+              companyAffiliation: data.companyAffiliation,
+              interests: Array.isArray(data.interests)
+                ? data.interests
+                : [data.interests],
+              personalValues: data.personalValues || "",
+              digitalLink: data.digitalLink === "yes" ? "yes" : "no",
+            },
+          }),
+        },
+      );
       if (!response.ok) {
         throw new Error("Failed to submit inquiry");
       }
