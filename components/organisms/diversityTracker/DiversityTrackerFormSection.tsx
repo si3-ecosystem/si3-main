@@ -9,27 +9,23 @@ export function DiversityTrackerFormSection() {
         By clicking the submit button, I hereby agree to and accept the
         following{" "}
         <Link
-          href={"https://si3.sanity.studio/structure/diversityTrackerPolicy"}
+          href={"/policy/diversity-tracker-policy"}
           className="text-primary"
           target="_blank"
         >
           terms and conditions
         </Link>{" "}
-        governing my use of the {"Si<3>"} website. I further reaffirm my
+        governing my use of the {"SI<3>"} website. I further reaffirm my
         acceptance of the general{" "}
         <Link
-          href={"https://si3.sanity.studio/structure/diversityTrackerPolicy"}
+          href={"/policy/diversity-tracker-policy"}
           className="text-primary"
           target="_blank"
         >
           terms and conditions
         </Link>{" "}
         &{" "}
-        <Link
-          href={"https://si3.sanity.studio/structure/privacyPolicy"}
-          className="text-primary"
-          target="_blank"
-        >
+        <Link href={"/policy/privacy"} className="text-primary" target="_blank">
           privacy policy
         </Link>{" "}
         governing my use of any website controlled by {"SI<3>"} and understand
