@@ -19,6 +19,7 @@ import {
   termsAndConditionsQuery,
   membersPolicyQuery,
   cookiePolicyQuery,
+  diversityTrackerQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -147,6 +148,13 @@ export async function getMembersPolicy() {
 export async function getCookiePolicy() {
   if (client) {
     return (await client.fetch(cookiePolicyQuery)) || {};
+  }
+  return {};
+}
+
+export async function getDiversityTrackerData() {
+  if (client) {
+    return (await client.fetch(diversityTrackerQuery)) || {};
   }
   return {};
 }

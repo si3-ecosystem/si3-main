@@ -47,12 +47,12 @@ const formSchema = z.object({
   grant_provider: z.string().optional(),
   grant_round: z.string().optional(),
   suggestions: z.string().optional(),
-  active_grants_participated: z.enum(["yes", "no"]),
+  active_grants_participated: z.enum(["yes", "no"]).optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function DiversityTrackerForm() {
+export function DiversityTrackerForm({ onSuccess }: { onSuccess: () => void }) {
   const [showSuccess, setShowSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const form = useForm<FormValues>({
@@ -70,7 +70,7 @@ export function DiversityTrackerForm() {
       grant_provider: "",
       grant_round: "",
       suggestions: "",
-      active_grants_participated: "no",
+      active_grants_participated: "no", // Default to "no" but keep it optional
     },
   });
 
@@ -94,8 +94,7 @@ export function DiversityTrackerForm() {
               grantProvider: data.grant_provider || "",
               grantRound: data.grant_round || "",
               suggestions: data.suggestions || "",
-              activeGrantsParticipated:
-                data.active_grants_participated === "yes" ? "yes" : "no",
+              activeGrantsParticipated: data.active_grants_participated || "no",
             },
           }),
         },
@@ -108,6 +107,7 @@ export function DiversityTrackerForm() {
       setShowSuccess(true);
       toast.success("Diversity tracker submitted successfully!");
       form.reset();
+      onSuccess();
     },
     onError: (error: Error) => {
       toast.error(error.message || "Something went wrong");

@@ -464,3 +464,28 @@ export const cookiePolicyQuery = groq`
     }
   }
 `;
+
+export const diversityTrackerQuery = groq`
+  *[_type == "diversityTrackerSchema"] [0] {
+    _id,
+    title,
+    description,
+    banner -> {
+      title,
+      subTitle,
+      description,
+      thumbnail {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt
+      },
+      background {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt
+      }
+    }
+  }
+`;
