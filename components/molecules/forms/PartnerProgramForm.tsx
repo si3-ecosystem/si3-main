@@ -82,11 +82,11 @@ export function PartnerProgramForm({
   }, [open]);
 
   const interestOptions = [
-    "Educational workshops",
-    "Community growth campaign",
+    "Educational workshop",
+    "Growth campaign",
+    "Grow3dge accelerator",
     "DEI & Inclusion training",
-    "Grants & Financial Inclusion",
-    "Custom Partnership",
+    "Grants & financial inclusion training",
   ];
 
   const mutation = useMutation({
@@ -164,7 +164,7 @@ export function PartnerProgramForm({
                     as="span"
                     className="text-2xl leading-none font-normal text-black"
                   >
-                    Partner Programs
+                    Partner Inquiry
                   </Title>
                 </DialogTitle>
                 <DialogDescription className="mx-auto w-full max-w-[517.453px] text-base leading-5 text-[#3D3D3D] sm:text-left">
@@ -189,7 +189,7 @@ export function PartnerProgramForm({
                         Name <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="John Doe" {...field} />
+                        <Input placeholder="Your name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -204,7 +204,7 @@ export function PartnerProgramForm({
                         Email *
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="johndoe@gmail.com" {...field} />
+                        <Input placeholder="Your company email" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -219,7 +219,7 @@ export function PartnerProgramForm({
                         Company Name <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter company name" {...field} />
+                        <Input placeholder="Your company name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -231,8 +231,8 @@ export function PartnerProgramForm({
                   render={({ field }) => (
                     <FormItem className="flex flex-col gap-8">
                       <FormLabel htmlFor="" className="text-base font-medium">
-                        What are you interested in exploring? (select all that
-                        apply) <span className="text-red-500">*</span>
+                        What are you interested in exploring?{" "}
+                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <ul className="flex flex-col gap-2.5">
                         {interestOptions.map((option) => (
@@ -287,7 +287,7 @@ export function PartnerProgramForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-normal">
-                        Would you like to be added to our partner newsletter? *
+                        Would you like to be added to our partner newsletter?
                       </FormLabel>
                       <FormControl>
                         <RadioGroup

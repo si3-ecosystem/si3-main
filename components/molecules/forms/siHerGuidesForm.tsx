@@ -27,7 +27,6 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Title } from "@/components/atoms/title";
 import { Textarea } from "@/components/atoms/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import { cn } from "@/lib/utils";
@@ -36,10 +35,13 @@ import Image from "next/image";
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address").min(1, "Email is required"),
-  companyAffiliation: z.string().min(1, "Company affiliation is required"),
+  pronouns: z.string().min(1, "Pronouns are required"),
   interests: z.array(z.string()).min(1, "Select at least one interest"),
-  personalValues: z.string().optional(),
-  digitalLink: z.enum(["yes", "no"]),
+  personalValues: z.string().min(1, "Personal values are required"),
+  digitalLink: z
+    .string()
+    .url("Please enter a valid URL")
+    .min(1, "Digital link is required"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -60,10 +62,10 @@ export function SiHerGuidesForm({
     defaultValues: {
       name: "",
       email: "",
-      companyAffiliation: "",
+      pronouns: "",
       interests: [],
       personalValues: "",
-      digitalLink: "no",
+      digitalLink: "",
     },
   });
 
@@ -79,11 +81,11 @@ export function SiHerGuidesForm({
   }, [open]);
 
   const interestOptions = [
-    "Educational workshops",
-    "Community growth campaign",
-    "DEI training",
-    "Grants & Financial Inclusion training",
-    "Custom Partnership",
+    "She/Her/Hers",
+    "He/Him/His",
+    "They/Them/Theirs",
+    "Ze/Hir/Hirs",
+    "Other (please specify in personal values)",
   ];
 
   const mutation = useMutation({
@@ -97,12 +99,12 @@ export function SiHerGuidesForm({
             formData: {
               name: data.name,
               email: data.email,
-              companyAffiliation: data.companyAffiliation,
+              pronouns: data.pronouns,
               interests: Array.isArray(data.interests)
                 ? data.interests
                 : [data.interests],
-              personalValues: data.personalValues || "",
-              digitalLink: data.digitalLink === "yes" ? "yes" : "no",
+              personalValues: data.personalValues,
+              digitalLink: data.digitalLink,
             },
           }),
         },
@@ -187,7 +189,7 @@ export function SiHerGuidesForm({
                         Name <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="John Doe" {...field} />
+                        <Input placeholder="Your name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -202,7 +204,7 @@ export function SiHerGuidesForm({
                         Email <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="johndoe@gmail.com" {...field} />
+                        <Input placeholder="Your email" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -210,16 +212,16 @@ export function SiHerGuidesForm({
                 />
                 <FormField
                   control={form.control}
-                  name="companyAffiliation"
+                  name="pronouns"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-medium">
-                        Company Affiliation{" "}
+                        Please share your pronouns{" "}
                         <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Enter company affiliation"
+                          placeholder="e.g., she/her/hers, they/them/theirs"
                           {...field}
                         />
                       </FormControl>
@@ -233,7 +235,7 @@ export function SiHerGuidesForm({
                   render={({ field }) => (
                     <FormItem className="flex flex-col gap-8">
                       <FormLabel htmlFor="" className="text-base font-medium">
-                        Please share your pronouns (select all that apply){" "}
+                        How do you identify? (select all that apply){" "}
                         <span className="text-red-500">*</span>
                       </FormLabel>
                       <ul className="flex flex-col gap-2.5">
@@ -268,8 +270,9 @@ export function SiHerGuidesForm({
                   name="personalValues"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base font-normal">
-                        Please share your personal values
+                      <FormLabel className="text-base font-medium">
+                        Please share your personal values{" "}
+                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
@@ -287,25 +290,13 @@ export function SiHerGuidesForm({
                   name="digitalLink"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base font-normal">
+                      <FormLabel className="text-base font-medium">
                         Please share a digital link that identifies you
-                        (LinkedIn, X, website, etc.) *
+                        (LinkedIn, X, website, etc.)
+                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <RadioGroup
-                          onValueChange={field.onChange}
-                          value={field.value}
-                          className="flex flex-col space-x-5"
-                        >
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="yes" id="yes" />
-                            <label htmlFor="yes">Yes</label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="no" id="no" />
-                            <label htmlFor="no">No</label>
-                          </div>
-                        </RadioGroup>
+                        <Input placeholder="https://" type="url" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
