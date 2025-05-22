@@ -32,7 +32,7 @@ const colorMap = [
 function BarGroup({ items }: { items: ChartItem[] }) {
   if (!items) return;
   return (
-    <div className="flex h-6 overflow-hidden rounded">
+    <div className="flex h-6 overflow-hidden rounded bg-gray-200 shadow">
       {items?.map((item, idx) =>
         item.percent > 0 ? (
           <div

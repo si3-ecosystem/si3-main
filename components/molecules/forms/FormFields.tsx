@@ -135,9 +135,12 @@ export function CheckboxField({ form, name, label, options }) {
       control={form.control}
       name={name}
       render={({ field }) => {
-        const hasSelfDescribe = field.value.some(
+        // Ensure field.value is always an array
+        const fieldValue = Array.isArray(field.value) ? field.value : [];
+
+        const hasSelfDescribe = fieldValue.some(
           (value) =>
-            value.toLowerCase() === "prefer to self-describe".toLowerCase(),
+            value?.toLowerCase() === "prefer to self-describe".toLowerCase(),
         );
 
         return (
@@ -151,17 +154,17 @@ export function CheckboxField({ form, name, label, options }) {
                     className="flex h-full items-center space-x-2"
                   >
                     <Checkbox
-                      checked={field.value.includes(option)}
+                      checked={fieldValue.includes(option)}
                       onCheckedChange={(checked) => {
                         const newValue = checked
-                          ? [...field.value, option]
-                          : field.value.filter((value) => value !== option);
+                          ? [...fieldValue, option]
+                          : fieldValue.filter((value) => value !== option);
                         field.onChange(newValue);
 
                         if (
                           !newValue.some(
                             (value) =>
-                              value.toLowerCase() ===
+                              value?.toLowerCase() ===
                               "prefer to self-describe".toLowerCase(),
                           )
                         ) {
@@ -175,16 +178,16 @@ export function CheckboxField({ form, name, label, options }) {
                       className="cursor-pointer text-sm"
                       onClick={(e) => {
                         e.preventDefault();
-                        const isChecked = field.value.includes(option);
+                        const isChecked = fieldValue.includes(option);
                         const newValue = isChecked
-                          ? field.value.filter((value) => value !== option)
-                          : [...field.value, option];
+                          ? fieldValue.filter((value) => value !== option)
+                          : [...fieldValue, option];
                         field.onChange(newValue);
 
                         if (
                           !newValue.some(
                             (value) =>
-                              value.toLowerCase() ===
+                              value?.toLowerCase() ===
                               "prefer to self-describe".toLowerCase(),
                           )
                         ) {
@@ -213,8 +216,8 @@ export function CheckboxField({ form, name, label, options }) {
                         {...customField}
                         onChange={(e) => {
                           customField.onChange(e);
-                          const updatedEthnicity = field.value.map((value) =>
-                            value.toLowerCase() ===
+                          const updatedEthnicity = fieldValue.map((value) =>
+                            value?.toLowerCase() ===
                             "prefer to self-describe".toLowerCase()
                               ? e.target.value
                               : value,

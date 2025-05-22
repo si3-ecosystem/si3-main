@@ -3,255 +3,163 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Button } from "@/components/atoms/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/atoms/form";
-import { Textarea } from "@/components/atoms/textarea";
+import { Form } from "@/components/atoms/form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { RadioField, CheckboxField, SelectField } from "./FormFields";
-import {
-  ageRangeOptions,
-  disabilityOptions,
-  ethnicityOptions,
-  selfIdentityOptions,
-  sexualOrientationOptions,
-} from "@/utils/diversityTracker";
-import { LoaderCircleIcon } from "lucide-react";
-import { Slider } from "@/components/atoms/slider";
-import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
+import { LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 
-const formSchema = z.object({
-  self_identity: z.string().min(1, "Please select a gender identity"),
-  self_identity_custom: z.string().optional(),
-  age_range: z.string().min(1, "Please select an age range"),
-  ethnicity: z
-    .array(z.string())
-    .min(1, "Please select at least one ethnicity option"),
-  ethnicity_custom: z.string().optional(),
-  disability: z
-    .array(z.string())
-    .min(1, "Please select at least one disability option"),
-  sexual_orientation: z.string().min(1, "Please select a sexual orientation"),
-  equity_scale: z.number().min(1).max(10),
-  improvement_suggestions: z.string().optional(),
-  grant_provider: z.string().optional(),
-  grant_round: z.string().optional(),
-  suggestions: z.string().optional(),
-  active_grants_participated: z.enum(["yes", "no"]).optional(),
-});
+import { AccessibilitySection } from "./sections/AccessibilitySection";
+import { TransparencySection } from "./sections/TransparencySection";
+import { InclusivitySection } from "./sections/InclusivitySection";
+import { ImpactSection } from "./sections/ImpactSection";
+import { PersonalInformationSection } from "./sections/PersonalInformationSection";
 
-type FormValues = z.infer<typeof formSchema>;
+import {
+  formSchema,
+  type FormValues,
+} from "@/validations/diversityTracker/schema";
+import { transformFormData } from "@/utils/diversityTracker/formater";
 
 export function DiversityTrackerForm({ onSuccess }: { onSuccess: () => void }) {
   const [showSuccess, setShowSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      self_identity: "",
-      self_identity_custom: "",
-      age_range: "",
-      ethnicity: [],
-      ethnicity_custom: "",
-      disability: [],
-      sexual_orientation: "",
-      equity_scale: 1,
-      improvement_suggestions: "",
-      grant_provider: "",
-      grant_round: "",
+      // Personal Information
+      selfIdentity: "",
+      selfIdentityCustom: "",
+      ageRange: "",
+      ethnicity: "",
+      disability: "",
+      sexualOrientation: "",
+      equityScale: 5,
+
+      // Optional fields
+      improvementSuggestions: "",
+      grantProvider: "",
+      grantRound: "",
       suggestions: "",
-      active_grants_participated: "no", // Default to "no" but keep it optional
+      activeGrantsParticipated: "no",
+
+      // Accessibility
+      offeringClear: "",
+      claritySuggestions: "",
+      engagementChannels: [],
+
+      // Transparency
+      decentralizedDecisionMaking: "",
+      hasRoadmap: "",
+      reportsFinancials: "",
+      runsGrantPrograms: "",
+      grantRoundParticipation: "",
+      grantExperience: "",
+
+      // Inclusivity
+      diversityInitiatives: "",
+      diverseTeam: "",
+      underrepresentedLeadership: "",
+      highlightsUnderrepresented: "",
+
+      // Impact
+      uniqueValue: "",
+      marketImpact: "",
     },
   });
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
+      const transformedData = transformFormData(data);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/mail/diversity-tracker`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            formData: {
-              selfIdentity: data.self_identity,
-              selfIdentityCustom: data.self_identity_custom,
-              ageRange: data.age_range,
-              ethnicity: data.ethnicity.join(", "),
-              disability: data.disability.join(", "),
-              sexualOrientation: data.sexual_orientation,
-              equityScale: data.equity_scale,
-              improvementSuggestions: data.improvement_suggestions || "",
-              grantProvider: data.grant_provider || "",
-              grantRound: data.grant_round || "",
-              suggestions: data.suggestions || "",
-              activeGrantsParticipated: data.active_grants_participated || "no",
-            },
-          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(transformedData),
         },
       );
-      if (!response.ok) throw new Error("Failed to submit diversity tracker");
 
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Something went wrong");
+      }
       return response.json();
     },
     onSuccess: () => {
       setShowSuccess(true);
-      toast.success("Diversity tracker submitted successfully!");
-      form.reset();
-      onSuccess();
+
+      setTimeout(() => {
+        onSuccess();
+      }, 5000);
     },
     onError: (error: Error) => {
-      toast.error(error.message || "Something went wrong");
+      toast.error(error.message || "Failed to submit form");
     },
   });
 
+  const onSubmit = (data: FormValues) => {
+    mutation.mutate(data);
+  };
   return (
-    <div className="mx-auto w-full">
-      <h2 className="mb-6 text-2xl font-bold">
-        Describe how you self-identify
-      </h2>
-      <Form {...form}>
-        <form
-          ref={formRef}
-          onSubmit={form.handleSubmit((data) => mutation.mutate(data))}
-          className="space-y-10"
-        >
-          <RadioField
-            form={form}
-            badge
-            name="self_identity"
-            label="Which of the following gender categories best describes how you self-identify?"
-            options={selfIdentityOptions}
-          />
-          <RadioField
-            form={form}
-            name="age_range"
-            label="What is your age range?"
-            options={ageRangeOptions}
-          />
-          <CheckboxField
-            form={form}
-            name="ethnicity"
-            label="Which of the following ethnic or racial categories best describes how you self-identify? (Select all that apply)"
-            options={ethnicityOptions}
-          />
-          <CheckboxField
-            form={form}
-            name="disability"
-            label="Do you have any of the following disabilities or chronic conditions? (Select all that apply)"
-            options={disabilityOptions}
-          />
-          <SelectField
-            form={form}
-            name="sexual_orientation"
-            label="Which of the following best describes your sexual orientation?"
-            options={sexualOrientationOptions}
-            placeholder="Select orientation"
-          />
-          <FormField
-            control={form.control}
-            name="equity_scale"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-base font-medium">
-                  On a scale from 1 to 10, how inclusive and equitable do you
-                  feel the Web3 industry is?
-                </FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Slider
-                      min={1}
-                      max={10}
-                      step={1}
-                      value={[field.value]}
-                      onValueChange={(value) => field.onChange(value[0])}
-                      className="w-full"
-                    />
-                    <div
-                      className="mt-3 flex w-full items-center justify-between gap-1 px-2.5 text-xs font-medium text-gray-500"
-                      aria-hidden="true"
-                    >
-                      {[...Array(11)].map((_, i) => (
-                        <span
-                          key={i}
-                          className="flex w-0 flex-col items-center justify-center gap-2"
-                        >
-                          <span className={cn("h-1 w-px bg-gray-500")} />
-                          <span className={cn()}>{i}</span>
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="improvement_suggestions"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-base font-medium">
-                  Please share your thoughts on how the Web3 industry can
-                  improve on the topics of Diversity, Equity, Accessibility, and
-                  Inclusion.
-                </FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Please share suggestions here"
-                    className="h-32 resize-none p-4"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <RadioField
-            form={form}
-            name="active_grants_participated"
-            label="Are you currently participating in any of these active grant rounds?"
-            options={["Yes", "No"]}
-          />
+    <Form {...form}>
+      <form
+        ref={formRef}
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8"
+      >
+        <div className="space-y-6 rounded-lg p-6">
+          <h3 className="text-lg font-semibold">Personal Information</h3>
+          <PersonalInformationSection form={form} />
+        </div>
 
+        <div className="space-y-6 rounded-lg p-6">
+          <AccessibilitySection form={form} />
+        </div>
+
+        <div className="space-y-6 rounded-lg p-6">
+          <TransparencySection form={form} />
+        </div>
+
+        <div className="space-y-6 rounded-lg p-6">
+          <InclusivitySection form={form} />
+        </div>
+
+        <div className="space-y-6 rounded-lg p-6">
+          <ImpactSection form={form} />
+        </div>
+
+        <div className="flex justify-end">
           <Button
             type="submit"
-            loading={mutation.isPending}
-            className="w-full"
-            showGradient
+            disabled={mutation.isPending}
+            className="min-w-[120px]"
           >
-            {mutation.isPending && (
-              <LoaderCircleIcon
-                className="mr-2 animate-spin"
-                size={16}
-                aria-hidden="true"
-              />
+            {mutation.isPending ? (
+              <>
+                <LoaderCircleIcon className="mr-2 h-4 w-4 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              "Submit"
             )}
-            {mutation.isPending ? "Submitting..." : "Submit"}
           </Button>
-        </form>
-      </Form>
-      {showSuccess && (
-        <SuccessDialog
-          open={showSuccess}
-          onOpenChange={setShowSuccess}
-          imageSrc="/icons/jpg/success.jpg"
-          title="Thank you for sharing your voice! 🎉"
-          description="Your input helps us build a more inclusive and equitable Web3 community. Stay connected for meaningful changes inspired by YOUR feedback!"
-          ctaLink="/"
-          ctaTitle="Back to Home"
-        />
-      )}
-    </div>
+        </div>
+      </form>
+      <SuccessDialog
+        open={showSuccess}
+        onOpenChange={setShowSuccess}
+        title="Thank you for your submission!"
+        description="Your feedback has been recorded and will help us improve our diversity and inclusion efforts."
+        imageSrc="/icons/jpg/success.jpg"
+        ctaLink="/"
+        ctaTitle="Go to Home"
+      />
+    </Form>
   );
 }

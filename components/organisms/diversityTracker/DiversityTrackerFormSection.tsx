@@ -13,13 +13,20 @@ export function DiversityTrackerFormSection({
   setShowChart: React.Dispatch<React.SetStateAction<boolean>>;
   data?: DiversityTracker;
 }) {
+  const handleFormSuccess = () => {
+    // Save to localStorage when form is submitted
+    if (typeof window !== "undefined") {
+      localStorage.setItem("diversityTrackerChartShown", "true");
+    }
+    setShowChart(true);
+  };
   return (
     <section className="mx-auto w-full max-w-[1440px] px-4 py-8 lg:px-24">
       <div className="flex w-full flex-col gap-2 rounded-lg bg-white">
         <div className={cn(showChart ? "mt-8" : "mt-16")}>
           {!showChart ? (
             <>
-              <DiversityTrackerForm onSuccess={() => setShowChart(true)} />
+              <DiversityTrackerForm onSuccess={handleFormSuccess} />
               <p className="mx-auto mt-14 w-full max-w-[782px] pb-20 text-center lg:pb-16">
                 By clicking the submit button, I hereby agree to and accept the
                 following{" "}

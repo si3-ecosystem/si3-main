@@ -3,7 +3,7 @@ import Link from "next/link";
 const navItems = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
-  { name: "Diversity Tracker", path: "/diversity-tracker" },
+  { name: "Web3 Health Tracker", path: "/web3health-tracker" },
 ];
 
 export function NavLinks() {

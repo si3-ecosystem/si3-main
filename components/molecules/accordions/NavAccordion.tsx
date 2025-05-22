@@ -266,12 +266,12 @@ export function AccordionMenu() {
               Help us build a more inclusive Web3!
             </span>
             <br />
-            Share your unique perspective by filling out our Diversity Tracker —
-            your voice matters.
+            Share your unique perspective by filling out our Web3 Health Tracker
+            — your voice matters.
           </p>
           <SheetClose asChild>
             <button className="mt-2 w-fit rounded-md border border-gray-300 bg-white px-3 py-2 text-black">
-              <Link href={"/diversity-tracker"} className="w-full">
+              <Link href={"/web3health-tracker"} className="w-full">
                 Contribute
               </Link>
             </button>
