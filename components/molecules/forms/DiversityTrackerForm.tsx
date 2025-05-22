@@ -93,7 +93,6 @@ export function DiversityTrackerForm({ onSuccess }: { onSuccess: () => void }) {
     },
     onSuccess: () => {
       setShowSuccess(true);
-
       setTimeout(() => {
         onSuccess();
       }, 5000);
@@ -134,20 +133,21 @@ export function DiversityTrackerForm({ onSuccess }: { onSuccess: () => void }) {
           <ImpactSection form={form} />
         </div>
 
-        <div className="flex justify-end">
+        <div className="w-full">
           <Button
             type="submit"
-            disabled={mutation.isPending}
-            className="min-w-[120px]"
+            loading={mutation.isPending}
+            className="w-full"
+            showGradient
           >
-            {mutation.isPending ? (
-              <>
-                <LoaderCircleIcon className="mr-2 h-4 w-4 animate-spin" />
-                Submitting...
-              </>
-            ) : (
-              "Submit"
+            {mutation.isPending && (
+              <LoaderCircleIcon
+                className="mr-2 animate-spin"
+                size={16}
+                aria-hidden="true"
+              />
             )}
+            {mutation.isPending ? "Submitting..." : "Submit"}
           </Button>
         </div>
       </form>
