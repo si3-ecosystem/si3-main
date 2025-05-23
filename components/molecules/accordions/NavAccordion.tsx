@@ -263,15 +263,16 @@ export function AccordionMenu() {
         <div className="flex flex-col items-start justify-start rounded-md bg-gray-100 p-4 text-center">
           <p className="text-left text-base text-[#303030]">
             <span className="text-[17px] leading-[140%] font-medium text-black">
-              Help us build a more inclusive Web3!
+              Help us improve Web3!
             </span>
             <br />
-            Share your unique perspective by filling out our Web3 Health Tracker
-            — your voice matters.
+            Share your experience with the accessibility, inclusivity,
+            transparency, and ethics of blockchains and DeFi protocols - the
+            industry&apos;s building blocks.
           </p>
           <SheetClose asChild>
             <button className="mt-2 w-fit rounded-md border border-gray-300 bg-white px-3 py-2 text-black">
-              <Link href={"/web3health-tracker"} className="w-full">
+              <Link href={"/web3-tracker"} className="w-full">
                 Contribute
               </Link>
             </button>
