@@ -24,7 +24,7 @@ export function Programming({ data }: Props) {
             key={key}
           />
         )}
-        className="pr-4 lg:pr-[90px]"
+        className=""
       />
     </div>
   );

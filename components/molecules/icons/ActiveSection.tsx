@@ -1,0 +1,32 @@
+export function ActiveSection() {
+  return (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="127"
+        viewBox="0 0 16 127"
+        fill="none"
+        className="border border-red-500"
+      >
+        <path
+          d="M8 126.5C12.4183 126.5 16 122.918 16 118.5C16 114.082 12.4183 110.5 8 110.5C3.58172 110.5 0 114.082 0 118.5C0 122.918 3.58172 126.5 8 126.5ZM9.5 1.99965C9.5 1.17122 8.82843 0.499649 8 0.499649C7.17157 0.499649 6.5 1.17122 6.5 1.99965H9.5ZM8 118.5H9.5L9.5 1.99965H8H6.5L6.5 118.5H8Z"
+          fill="url(#paint0_linear_1064_9770)"
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear_1064_9770"
+            x1="8.5"
+            y1="1.99965"
+            x2="8.5"
+            y2="80"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="white" />
+            <stop offset="1" stop-color="#A020F0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </>
+  );
+}

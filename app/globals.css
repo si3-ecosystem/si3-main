@@ -126,6 +126,14 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .layout {
+    @apply mx-auto w-full max-w-[1440px] lg:px-[67px] lg:py-[32px];
+  }
+
+  .gradient {
+    @apply absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-[#9F44D3] to-[#D939CD] transition-transform duration-500 ease-out group-hover:translate-x-0 group-active:translate-x-0;
+  }
 }
 
 @font-face {
@@ -363,4 +371,48 @@ body,
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.token-gradient {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, #2e004b 100%);
+  box-shadow: 0px 0px 9.2px 0px #9f44d3;
+}
+
+.button-gradient {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, #2e004b 100%);
+}
+
+.nav-gradient {
+  box-shadow: 0px 1px 11.6px 0px #9f44d3;
+}
+
+.card-gradient {
+  border-radius: 33px;
+  background: #fff;
+  box-shadow: 0px 4px 30px -2px #ce9ffc;
+}
+
+.web3-university-gradient {
+  fill: linear-gradient(125deg, #e5abff 5.07%, #8300be 55.8%, #450063 85.01%);
+  width: 100%;
+  height: 100%;
+}
+
+.active-universe {
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px 0px #2e004b;
+}
+
+.animate-scroll {
+  display: inline-block;
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

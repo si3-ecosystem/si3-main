@@ -4,7 +4,6 @@ import React from "react";
 export const FooterNav = () => {
   const navItems = [
     { href: "/policy/privacy", label: "Policies" },
-    { href: "/diversity-tracker", label: "Diversity Tracker" },
     {
       href: "https://coda.io/d/SI-3-Coda-Hub_daevZXQYrvh/SI-3-Brand-Kit_sui7d299?notification_link_uid=bko3UlA4dHMrRUNERGw5REY0UldzaENjUVFlaFg1WldLNUQyTXNQNm9QQThUMWVranJhS3VIb2RLUy9aUjMxdURDUEQyenNNRG8vTHdaeHBIcTh2T3NOVGIzM1V0N3BlTUZLUjNDM053UTVPNC94RTFqZWhnZVdud3dMOGxpWGs3S2NFL1BnTnEwb1JDZDVNcE9VMXhnPT0tLWo4UTNJclRERDBXbkZCNVFnMW5qN0E9PQ%3D%3D--b0e3af3daf6ad6a1a931324c579a3ca92c6ad0a3",
       label: "Brand Kit",

@@ -6,10 +6,7 @@ import { Copyright } from "./footer/Copyright";
 export const Footer = () => {
   return (
     <footer className="relative border-t border-gray-400 bg-white max-lg:pt-6 lg:-mt-4">
-      <div
-        id="stayConnected"
-        className="mx-auto w-full max-w-[1440px] lg:flex lg:px-24"
-      >
+      <div id="stayConnected" className="layout mx-auto w-full lg:flex">
         <FooterSignUp />
         <FooterNav />
         <FollowUs />

@@ -14,7 +14,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex flex-col justify-between overflow-x-hidden">
       <Navbar />
-      <main className="mt-14 h-full w-full flex-1">{children}</main>
+      <main className="h-full w-full flex-1">{children}</main>
       <Footer />
     </div>
   );

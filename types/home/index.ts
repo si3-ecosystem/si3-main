@@ -1,3 +1,5 @@
+import { PortableTextBlock } from "@portabletext/react";
+
 // Common types
 export interface SanityImage {
   _type: string;
@@ -52,6 +54,14 @@ export interface Community {
   discover: string;
 }
 
+export interface DemoSession {
+  _key?: string;
+  title: string;
+  description: string;
+  tag?: string;
+  image: SanityImage;
+}
+
 export interface Introduction {
   _id: string;
   title: string;
@@ -62,6 +72,7 @@ export interface Introduction {
   ctaLink: string;
   memberShip?: string;
   gallery?: GalleryImage[];
+  demoSessions?: DemoSession[];
 }
 
 export interface Web3Brand {
@@ -121,6 +132,9 @@ export interface ScholarsData {
   communities: Community[];
   video: SanityVideo;
   gallery?: GalleryImage[];
+  ideas_title: string;
+  ideas_description: string;
+  demoSessions?: DemoSession[];
 }
 
 // Guides Data Types
@@ -219,6 +233,22 @@ export interface Partner {
   type?: string;
 }
 
+export interface FAQ {
+  _id: string;
+  question: string;
+  answer: PortableTextBlock[];
+}
+
+export interface ThoughtLeadership {
+  _id: string;
+  title: string;
+  cta1Text: string;
+  cta1Link: string;
+  cta2Text: string;
+  cta2Link: string;
+  backgroundImage: SanityImage & { alt: string }; // alt is required in thoughtLeadership schema
+}
+
 export interface HomepageSchema {
   _id: string;
   title: string;
@@ -226,8 +256,14 @@ export interface HomepageSchema {
   desc: string;
   ctaText: string;
   ctaLink: string;
+  ctaText2: string;
+  ctaLink2: string;
   videoUrl: string;
   image: HomepageImage;
   educationPartners: Partner[];
   communityPartners: Partner[];
+  faqTitle: string;
+  faqs: FAQ[];
+  thoughtLeadershipTitle: string;
+  thoughtLeadership: ThoughtLeadership[];
 }

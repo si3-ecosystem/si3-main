@@ -36,16 +36,15 @@ function TeamMemberCard({
   return (
     <motion.div
       style={{ y }}
-      initial={{ opacity: 0, y: 100 }}
+      initial={{ opacity: 1, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.2 }}
+      transition={{ duration: 0.2, delay: index * 0.2 }}
     >
       <Card className="bg-card/50 overflow-hidden rounded-2xl border-2 px-3 py-4 backdrop-blur-sm transition-all duration-300 hover:shadow-md">
         <AspectRatio ratio={9 / 10}>
           <Image
             fill
-            loading="lazy"
+            priority
             decoding="async"
             src={imageUrl || "/about/kara.jpg"}
             alt={member.name}

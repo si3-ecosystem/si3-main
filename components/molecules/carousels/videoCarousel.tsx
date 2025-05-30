@@ -79,20 +79,20 @@ export function VideoCarousel({
   }
 
   return (
-    <section className="@container w-full bg-white">
+    <section className="@container w-full">
       <div className="w-full">
         <div className="flex w-full flex-col justify-between lg:flex-row lg:gap-8">
           <div className="space-y-2">
             {title && (
               <Title
                 variant="sm"
-                className="mb-4 text-start text-3xl font-bold"
+                className="mb-4 text-start text-3xl font-bold lg:text-white"
               >
                 {title}
               </Title>
             )}
             {description && (
-              <Text variant="xl" className="mb-8 max-w-[580px] text-[#454545]">
+              <Text variant="xl" className="mb-8 max-w-[580px] lg:text-white">
                 {description}
               </Text>
             )}
@@ -124,7 +124,7 @@ export function VideoCarousel({
             <div className="mt-8 -ml-6 flex lg:mt-8">
               {slides.map((slideItems, slideIndex) => (
                 <div key={slideIndex} className="min-w-0 flex-[0_0_100%] pl-6">
-                  <div className="grid h-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="flex h-full flex-col gap-6 max-sm:h-auto sm:grid md:grid-cols-2 lg:grid-cols-3">
                     {slideItems.map((item, itemIndex) =>
                       renderFunction(
                         item,

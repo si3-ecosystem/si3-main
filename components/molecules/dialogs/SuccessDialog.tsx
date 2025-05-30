@@ -70,7 +70,7 @@ export function SuccessDialog({
         </p>
 
         <DialogFooter className="flex justify-center">
-          <Button asChild className="mx-auto w-fit" showGradient>
+          <Button asChild className="mx-auto w-fit">
             <Link href={ctaLink}>{ctaTitle}</Link>
           </Button>
         </DialogFooter>

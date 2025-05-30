@@ -13,8 +13,8 @@ type ItemProps = {
 
 function BrandCard({ item }: ItemProps) {
   return (
-    <li className="flex w-full items-center justify-between gap-4 rounded-full border border-gray-300 px-4 py-3 transition-all duration-300 ease-in-out hover:shadow-md">
-      <Text>{item.galleryTitle}</Text>
+    <li className="flex w-full items-center justify-between gap-4 rounded-full border border-gray-300 bg-white px-4 py-3 transition-all duration-300 ease-in-out hover:shadow-md">
+      <Text className="text-[#000000] opacity-80">{item.galleryTitle}</Text>
       <ul className="flex items-center gap-5">
         {item?.images?.map((image, key) => {
           const imageUrl = urlForImage(image)?.src;
@@ -54,8 +54,8 @@ export function Web3Brand({ data }: Props) {
     <div className="@container py-14 lg:py-20">
       <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
         <div className="flex-1">
-          <Title className="mb-4 text-black">{data?.title}</Title>
-          <Text className="mb-6 max-w-[535px] leading-7 text-[#454545]">
+          <Title className="mb-4 text-black lg:text-white">{data?.title}</Title>
+          <Text className="mb-6 max-w-[535px] leading-7 text-black lg:text-white">
             {data.description}
           </Text>
           <ul className="grid gap-3">

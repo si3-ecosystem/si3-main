@@ -62,7 +62,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
           <div>
             <Title
               className={cn(
-                "tracking-wide lg:text-left",
+                "text-[32px] font-normal tracking-wide text-black uppercase lg:text-left lg:text-[36px]",
                 isFullScreenView ? "text-center" : "",
               )}
             >
@@ -90,9 +90,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({
         </Text>
         {button ? (
           <Link href={button?.link || "#"} scroll={false}>
-            <Button showGradient={true} className={cn("mt-4 bg-black")}>
-              {button?.ctaText}
-            </Button>
+            <Button className={cn("mt-4 bg-black")}>{button?.ctaText}</Button>
           </Link>
         ) : null}
       </div>

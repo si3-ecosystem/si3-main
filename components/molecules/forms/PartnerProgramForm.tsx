@@ -137,12 +137,7 @@ export function PartnerProgramForm({
         <DialogTrigger asChild>
           <Button
             variant={"outline"}
-            className={cn(
-              "w-full",
-              className,
-              showGradient && "border border-none",
-            )}
-            showGradient={showGradient}
+            className={cn("w-full", className, showGradient && "")}
           >
             {title || "Inquire Now"}
           </Button>
@@ -312,7 +307,6 @@ export function PartnerProgramForm({
                 <Button
                   type="submit"
                   disabled={mutation.isPending}
-                  showGradient
                   className="mt-12 w-full"
                 >
                   {mutation.isPending && (

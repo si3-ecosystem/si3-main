@@ -11,6 +11,8 @@ export const homepageQuery = groq`
     desc,
     ctaText,
     ctaLink,
+    ctaText2,
+    ctaLink2,
     impact-> {
       title,
       metrics[] {
@@ -48,12 +50,47 @@ export const homepageQuery = groq`
         alt,
       },
     },
+    faqTitle,
+    faqs[]-> {
+      _id,
+      question,
+      answer
+    },
+    thoughtLeadershipTitle,
+    thoughtLeadership[]-> {
+      _id,
+      title,
+      cta1Text,
+      cta1Link,
+      cta2Text,
+      cta2Link,
+      backgroundImage {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      }
+    }
   }
 `;
 
 export const scholarsQuery = groq`
 *[_type == "scholarsSchema"][0] {
   _id,
+  ideas_title,
+  ideas_description,
+   demoSessions[] {
+      _key,
+      title,
+      description,
+      tag,
+      image {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt
+      }
+    },
     image {
     ...,
       "blurDataURL": asset->metadata.lqip,
@@ -75,6 +112,18 @@ export const scholarsQuery = groq`
       alt,
       caption
     },
+    demoSessions[] {
+      _key,
+      title,
+      description,
+      tag,
+      image {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt
+      }
+    }
   },
   title,
   education_title,
@@ -144,13 +193,32 @@ export const guidesQuery = groq`
       alt
     },
    introduction-> {
-  ...,
- thumbnail {
+    ...,
+    thumbnail {
       ...,
       "blurDataURL": asset->metadata.lqip,
       "ImageColor": asset->metadata.palette.dominant.background,
       alt
     },
+    gallery[] {  
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt,
+      caption
+    },
+    demoSessions[] {
+      _key,
+      title,
+      description,
+      tag,
+      image {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt
+      }
+    }
   },
    gallery[] {  
       ...,
@@ -258,6 +326,18 @@ export const partnersQuery = groq`
       alt,
       caption
     },
+    demoSessions[] {
+      _key,
+      title,
+      description,
+      tag,
+      image {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt
+      }
+    },
   title,
   explore[]-> {
     _id,
@@ -339,6 +419,43 @@ export const aboutQuery = groq`
       "ImageColor": asset->metadata.palette.dominant.background,
       alt
     },
+  },
+  communityPartners[]-> {
+    _id,
+    name,
+    logo {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    }
+  },
+  educationPartners[]-> {
+    _id,
+    name,
+    logo {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    }
+  },
+  purpose_texts[] {
+    text
+  },
+  tickerGif {
+    "url": asset->url,
+    alt,
+    placeholderImage {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    }
+  },
+  placeholder {
+    "url": asset->url,
+    alt
   },
   members[]-> {
     _id,

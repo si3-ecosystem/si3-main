@@ -136,12 +136,7 @@ export function SiHerGuidesForm({
         <DialogTrigger asChild className="w-full">
           <Button
             variant={"outline"}
-            className={cn(
-              "w-full max-w-[240px] text-white",
-              showGradient && "border border-none",
-              className,
-            )}
-            showGradient={showGradient}
+            className={cn("w-full", showGradient && "", className)}
           >
             {title}
           </Button>
@@ -305,7 +300,6 @@ export function SiHerGuidesForm({
                 <Button
                   type="submit"
                   disabled={mutation.isPending}
-                  showGradient
                   className="mt-12 w-full"
                 >
                   {mutation.isPending && (

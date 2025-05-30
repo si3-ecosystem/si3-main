@@ -1,3 +1,5 @@
+import { Partner } from "../home";
+
 interface Purpose {
   _id: string;
   title: string;
@@ -62,11 +64,32 @@ interface Hero {
   heroVideo?: Video;
 }
 
+interface TickerGif {
+  url: string;
+  alt: string;
+  placeholderImage: {
+    _type: "image";
+    asset: {
+      _ref: string;
+      _type: "reference";
+    };
+    blurDataURL?: string;
+    ImageColor?: string;
+    alt?: string;
+  };
+}
+
 interface AboutQuery {
   _id: string;
   title: string;
   desc: string;
   about_hero: Hero;
+  purpose_texts?: Array<{
+    text: string;
+  }>;
+  tickerGif: TickerGif;
+  educationPartners: Partner[];
+  communityPartners: Partner[];
   our_purpose_title: string;
   our_purpose_description: string;
   purposes: Purpose[];

@@ -1,93 +1,114 @@
+"use client";
+
 import { AspectRatio } from "@/components/atoms/aspect-ratio";
 import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
 import { urlForImage } from "@/lib/sanity/image";
+import { cn } from "@/lib/utils";
+import { setActiveSection } from "@/redux/slice/activeSectionSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { OnboardMaterial } from "@/types/onboard";
-import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
   data: OnboardMaterial;
+  showSvg?: boolean;
 };
 
-export function Scholars({ data }: Props) {
-  const imageUrl = data?.thumbnail
-    ? urlForImage(data.thumbnail)?.src
-    : "/icons/jpg/si_u_scholars_heroimage.jpg";
-
+export function Scholars({ data, showSvg = false }: Props) {
   const logoUrl = data?.image && urlForImage(data.image)?.src;
+
+  const dispatch = useAppDispatch();
+
+  const activeSection = useAppSelector(
+    (state) => state.activeSection.activeSection,
+  );
+
+  const handleSectionHover = (section: "scholars" | "guides" | "partners") => {
+    dispatch(setActiveSection(section));
+  };
+
   return (
-    <Card className="hover:border-primary flex h-full w-full flex-col gap-6 border border-[#D1D1D1] p-5">
-      <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-2xl">
-        <Image
-          src={imageUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
-          fill
-          {...(data?.thumbnail?.blurDataURL && {
-            placeholder: "blur",
-            blurDataURL: data?.thumbnail?.blurDataURL,
-          })}
-          loading="lazy"
-          decoding="async"
-          alt="scholars"
-          className="h-full w-full object-cover"
-        />
-      </AspectRatio>
-      <div className="flex flex-col gap-6">
-        <div className="flex w-full items-center justify-between gap-4">
-          <div>
-            <Text as={"h2"} variant="2xl" className="text-black">
-              {data.title}
-            </Text>
-            <Text className="!text-sm">{data.subtitle}</Text>
+    <div id="scholars">
+      <Card
+        className={cn(
+          "z-10 flex w-full flex-col gap-6 rounded-[33px] border bg-transparent p-4 transition-all duration-300",
+          activeSection === "scholars" &&
+            "card-gradient !z-20 !bg-[#7b43b0] sm:!bg-white",
+        )}
+        onMouseEnter={() => handleSectionHover("scholars")}
+      >
+        <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-2xl">
+          <Image
+            src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
+            fill
+            {...(data?.thumbnail?.blurDataURL && {
+              placeholder: "blur",
+              blurDataURL: data?.thumbnail?.blurDataURL,
+            })}
+            loading="lazy"
+            decoding="async"
+            alt="scholars"
+            className="h-full w-full object-contain"
+          />
+        </AspectRatio>
+        <div className="flex flex-col gap-6">
+          <div className="flex w-full items-center justify-between gap-4">
+            <div>
+              <Text
+                as={"h2"}
+                variant="2xl"
+                className="text-2xl font-semibold text-white sm:text-black"
+              >
+                {data.title}
+              </Text>
+              <Text className="!text-sm leading-5 text-black max-sm:mt-3.5 sm:text-[#616060]">
+                {data.subtitle}
+              </Text>
+            </div>
           </div>
-          <div className="relative h-11 w-11 overflow-hidden rounded-2xl">
-            {data?.image && (
-              <Image
-                src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
-                fill
-                loading="lazy"
-                decoding="async"
-                alt="scholars"
-                className="h-full w-full object-cover"
-              />
-            )}
-          </div>
-        </div>
-        <div className="mb-8 flex flex-col gap-2">
-          <Text variant="xl" as={"p"} className="tracking-tight">
-            {data.description}
-          </Text>
-          <Text variant="base" as={"p"} className="text-left text-[#585858]">
-            {data.membership}
-          </Text>
-        </div>
-        <div className="flex w-full items-center justify-between gap-2 overflow-hidden">
-          <div className="w-full">
-            <Button
-              asChild
-              variant={"outline"}
-              showGradient
-              className="w-full max-w-[240px] text-white"
+          <div className="mb-8 flex flex-col gap-2">
+            <Text
+              variant="xl"
+              as={"p"}
+              className="text-xl leading-7 font-normal tracking-tight text-[#D9D9D9] sm:text-[#3D3D3D]"
             >
-              <Link href={data.ctaLink || "#"}>{data.ctaText}</Link>
-            </Button>
+              {data.description}
+            </Text>
+            <Text
+              variant="base"
+              as={"p"}
+              className="text-left text-black max-sm:mt-3.5 sm:text-[#585858]"
+            >
+              {data.membership}
+            </Text>
           </div>
           <Button
-            showGradient
             asChild
             variant={"outline"}
-            aria-label="Login Button"
-            className="w-full max-w-[96px] border border-gray-400 bg-white !py-2 text-black"
+            className="w-full border border-black text-center max-sm:bg-black max-sm:text-white"
           >
-            <Link className="flex items-center gap-2" href={"/login"}>
-              Login
-              <MoveRight />
-            </Link>
+            <Link href={data.ctaLink || "#"}>{data.ctaText}</Link>
           </Button>
         </div>
-      </div>
-    </Card>
+      </Card>
+      {showSvg && (
+        <div className="z-20 flex items-center justify-center">
+          {activeSection === "scholars" && (
+            <>
+              <Image
+                src={"/home/Conector.svg"}
+                alt="connector"
+                width={16}
+                height={127}
+                className="bg-transparent"
+              />
+            </>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

@@ -10,12 +10,22 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
-        pathname: "/images/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "*.sanity.io",
-        pathname: "/images/**",
+        hostname: "h4ttr3aq.apicdn.sanity.io",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.apicdn.sanity.io",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "coin-images.coingecko.com",
+        pathname: "/**",
       },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],

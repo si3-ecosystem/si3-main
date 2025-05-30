@@ -87,7 +87,7 @@ export function PartialContentCarousel({
   }
 
   return (
-    <section className="@container w-full bg-white">
+    <section className="@container w-full">
       <div className="w-full">
         <div
           className={cn(
@@ -99,7 +99,7 @@ export function PartialContentCarousel({
             {title && (
               <Title
                 variant="sm"
-                className="mb-4 text-start text-3xl font-bold"
+                className="mb-4 text-start text-3xl font-bold text-black lg:text-white"
               >
                 {title}
               </Title>
@@ -107,7 +107,7 @@ export function PartialContentCarousel({
             {description && (
               <Text
                 variant="xl"
-                className="max-w-[580px] text-[#454545] lg:mb-8"
+                className="max-w-[580px] text-black lg:mb-8 lg:text-white"
               >
                 {description}
               </Text>

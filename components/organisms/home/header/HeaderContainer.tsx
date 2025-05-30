@@ -1,30 +1,27 @@
 import React from "react";
 
 import Header from "./Header";
-import Partners from "../partners/Partners";
 import { HomepageSchema } from "@/types/home";
+import Image from "next/image";
+import { urlForImage } from "@/lib/sanity/image";
 
 type Props = {
   HomePageData: HomepageSchema;
 };
 
 const HeaderContainer = ({ HomePageData }: Props) => {
+  const imageUrl = HomePageData.image && urlForImage(HomePageData.image)?.src;
   return (
-    <div className="relative space-y-16 max-xl:-mt-10 lg:space-y-36">
-      <video
-        autoPlay
-        loop
-        muted
-        className="absolute top-0 left-0 z-0 h-full w-full object-cover object-center"
-      >
-        <source
-          src={HomePageData.videoUrl || "/videos/connectionformat.mp4"}
-          type="video/mp4"
+    <div className="relative min-h-[60vh] space-y-16 pb-[52px] md:pb-[108px] lg:space-y-36">
+      {imageUrl && (
+        <Image
+          src={imageUrl}
+          alt={HomePageData.title}
+          fill
+          className="h-full w-full object-cover object-center"
         />
-        Your browser does not support the video tag.
-      </video>
+      )}
       <Header data={HomePageData} />
-      <Partners data={HomePageData} />
     </div>
   );
 };

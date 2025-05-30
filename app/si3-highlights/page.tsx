@@ -14,7 +14,7 @@ export async function generateMetadata() {
 const NotificationsPage = () => {
   return (
     <div className="flex flex-col justify-between overflow-x-hidden">
-      <Navbar showLinks={false} />
+      <Navbar />
 
       <main className="mt-14 h-full w-full flex-1">
         <div className="flex-center relative mx-auto my-10 w-full max-w-[1440px] flex-1 flex-col px-4 py-3 lg:px-24">

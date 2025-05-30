@@ -55,7 +55,7 @@ export function Testimonials({
   return (
     <div className="mx-auto h-full w-full">
       <div className="mb-12 flex items-center justify-between">
-        <h2 className="text-3xl font-bold tracking-tight text-black">
+        <h2 className="text-3xl font-bold tracking-tight text-white">
           {title}
         </h2>
         <div className="flex gap-2">

@@ -17,7 +17,6 @@ export function CtaVideoSection({
   title,
   ctaTitle,
   ctaLink,
-  showGradient = false,
   isLink = false,
 }: Props) {
   return (
@@ -38,15 +37,11 @@ export function CtaVideoSection({
         </Title>
 
         {isLink ? (
-          <Button showGradient={showGradient} asChild>
+          <Button asChild>
             <Link href={ctaLink || "#"}>{ctaTitle || "Join Now"}</Link>
           </Button>
         ) : (
-          <PartnerProgramForm
-            className="mx-auto w-fit"
-            showGradient
-            title={ctaTitle}
-          />
+          <PartnerProgramForm className="mx-auto w-fit" title={ctaTitle} />
         )}
       </div>
     </section>

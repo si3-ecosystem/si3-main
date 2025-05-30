@@ -8,12 +8,12 @@ type Props = {
 
 export function HeaderSection({ data }: Props) {
   return (
-    <section className="about_gradient h-full min-h-[80vh] w-full lg:min-h-[861px]">
+    <section className="about_gradient relative h-full min-h-[80vh] w-full border-1 border-b border-white bg-gradient-to-b from-transparent to-white lg:min-h-[861px]">
       <video
         autoPlay
         loop
         muted
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_calc(-20%+20px)] max-lg:object-[center_calc(-20%+65px)]"
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
       >
         <source
           src={data.heroVideo?.videoUrl || "/videos/SiUScholars.mp4"}
@@ -21,6 +21,7 @@ export function HeaderSection({ data }: Props) {
         />
         Your browser does not support the video tag.
       </video>
+      <div className="absolute inset-0 -z-50 h-full w-full border-1 border-b border-white bg-gradient-to-b from-transparent to-white"></div>
       <div className="mx-auto flex h-full min-h-[70vh] w-full max-w-[1440px] flex-col justify-center gap-3 px-4 lg:min-h-[80vh] lg:px-[90px]">
         <Title
           as="h1"

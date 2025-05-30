@@ -15,7 +15,7 @@ export function MobileMenu() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div className="group h-full w-full rounded-full bg-black p-2">
+        <div className="group h-full w-fit rounded-full bg-black p-2 lg:hidden">
           <svg
             className="pointer-events-none size-6"
             width={16}

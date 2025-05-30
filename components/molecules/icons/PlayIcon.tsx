@@ -63,8 +63,8 @@ export function PlayIcon() {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(26.9453 25.498) rotate(90) scale(27.6557)"
         >
-          <stop stopColor="white" />
-          <stop offset="1" stopColor="#FEFEFE" />
+          <stop stop-color="white" />
+          <stop offset="1" stop-color="#FEFEFE" />
         </radialGradient>
       </defs>
     </svg>

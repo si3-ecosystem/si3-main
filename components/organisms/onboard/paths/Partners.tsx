@@ -1,30 +1,48 @@
+"use client";
+
 import { AspectRatio } from "@/components/atoms/aspect-ratio";
-import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { urlForImage } from "@/lib/sanity/image";
+import { cn } from "@/lib/utils";
+import { setActiveSection } from "@/redux/slice/activeSectionSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { OnboardMaterial } from "@/types/onboard";
-import { MoveRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 type Props = {
   data: OnboardMaterial;
+  showSvg?: boolean;
 };
 
-export function Partners({ data }: Props) {
-  const imageUrl = data?.thumbnail
-    ? urlForImage(data.thumbnail)?.src
-    : "/icons/jpg/si_u_scholars_heroimage.jpg";
+export function Partners({ data, showSvg = false }: Props) {
   const logoUrl = data?.image && urlForImage(data.image)?.src;
 
+  const dispatch = useAppDispatch();
+
+  const activeSection = useAppSelector(
+    (state) => state.activeSection.activeSection,
+  );
+
+  const handleSectionHover = (section: "scholars" | "guides" | "partners") => {
+    dispatch(setActiveSection(section));
+  };
+
   return (
-    <>
-      <Card className="hover:border-primary flex h-full w-full flex-col gap-6 border border-[#D1D1D1] p-5">
+    <div>
+      <Card
+        className={cn(
+          "z-10 flex w-full flex-col gap-6 rounded-[33px] border bg-transparent p-5 transition-all duration-300",
+          activeSection === "partners"
+            ? "card-gradient !z-20 !bg-[#7b43b0] sm:!bg-white"
+            : "border-[#D1D1D1]",
+        )}
+        onMouseEnter={() => handleSectionHover("partners")}
+      >
         <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-2xl">
           <Image
-            src={imageUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
+            src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
             fill
             {...(data?.thumbnail?.blurDataURL && {
               placeholder: "blur",
@@ -33,52 +51,52 @@ export function Partners({ data }: Props) {
             loading="lazy"
             decoding="async"
             alt="scholars"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           />
         </AspectRatio>
         <div className="flex flex-col gap-6">
           <div className="flex w-full items-center justify-between gap-4">
             <div>
-              <Text as={"h2"} variant="2xl" className="text-black">
+              <Text
+                as={"h2"}
+                variant="2xl"
+                className="text-2xl font-semibold text-black max-sm:text-white"
+              >
                 {data.title}
               </Text>
-              <Text className="!text-sm">{data.subtitle}</Text>
-            </div>
-            <div className="relative h-11 w-11 overflow-hidden rounded-2xl">
-              {data?.image && (
-                <Image
-                  src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
-                  fill
-                  loading="lazy"
-                  decoding="async"
-                  alt="scholars"
-                  className="h-full w-full object-cover"
-                />
-              )}
+              <Text className="!text-sm leading-5 text-black max-sm:mt-3.5 sm:text-[#616060]">
+                {data.subtitle}
+              </Text>
             </div>
           </div>
-          <Text variant="xl" as={"p"} className="mb-16 tracking-tight">
+          <Text
+            variant="xl"
+            as={"p"}
+            className="mb-16 tracking-tight max-sm:text-[#D9D9D9]"
+          >
             {data.description}
           </Text>
-          <div className="flex w-full items-center justify-between gap-2 overflow-hidden lg:gap-4">
-            <div className="w-full">
-              <PartnerProgramForm showGradient className="text-white" />
-            </div>
-            <Button
-              showGradient
-              asChild
-              variant={"outline"}
-              aria-label="Login Button"
-              className="w-full max-w-[96px] border border-gray-400 bg-white !py-2 text-black"
-            >
-              <Link className="flex items-center gap-2" href={"/login"}>
-                Login
-                <MoveRight />
-              </Link>
-            </Button>
-          </div>
+          <PartnerProgramForm
+            showGradient
+            className="w-full text-black max-sm:bg-black max-sm:text-white"
+          />
         </div>
       </Card>
-    </>
+      {showSvg && (
+        <div className="flex items-center justify-center">
+          {activeSection === "partners" && (
+            <>
+              <Image
+                src={"/home/Conector.svg"}
+                alt="connector"
+                width={16}
+                height={127}
+                className="bg-transparent"
+              />
+            </>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

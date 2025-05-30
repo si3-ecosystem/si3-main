@@ -9,7 +9,7 @@ type Props = {
 
 export function SpotlightSection({ data }: Props) {
   return (
-    <div className="py-14 lg:py-20">
+    <div className="py-14 pb-0 lg:py-20">
       <PartialContentCarousel
         title={data.members_title}
         description={data.members_description}
@@ -22,7 +22,7 @@ export function SpotlightSection({ data }: Props) {
             key={key}
           />
         )}
-        className="pr-4 lg:pr-[90px]"
+        className=""
       />
     </div>
   );

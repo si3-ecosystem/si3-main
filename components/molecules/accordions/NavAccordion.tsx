@@ -21,6 +21,7 @@ export function AccordionMenu() {
   const router = useRouter();
   const pathName = usePathname();
 
+
   const menuItems = [
     {
       id: "learn",

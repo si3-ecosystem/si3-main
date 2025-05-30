@@ -134,12 +134,7 @@ export function DiversityTrackerForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
 
         <div className="w-full">
-          <Button
-            type="submit"
-            loading={mutation.isPending}
-            className="w-full"
-            showGradient
-          >
+          <Button type="submit" loading={mutation.isPending} className="w-full">
             {mutation.isPending && (
               <LoaderCircleIcon
                 className="mr-2 animate-spin"

@@ -7,11 +7,27 @@ import { ImpactMetric } from "@/types/home";
 
 type Props = {
   item: ImpactMetric;
+  isFirst?: boolean;
+  isHovered?: boolean;
+  onHover?: () => void;
+  onLeave?: () => void;
 };
 
-export function ImpactCard({ item }: Props) {
+export function ImpactCard({
+  item,
+  isFirst = false,
+  isHovered = false,
+  onHover,
+  onLeave,
+}: Props) {
   return (
-    <li className="flex flex-col items-center justify-center gap-2.5 rounded-2xl bg-[#F4F4F4] p-3.5">
+    <li
+      className={`flex w-full max-w-[291px] flex-col items-center justify-center gap-2.5 rounded-2xl py-6 transition-colors lg:p-3.5 ${
+        isHovered ? "bg-[#F4F4F4]" : isFirst ? "bg-white" : "bg-[#9c83bd]"
+      }`}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+    >
       <p className="text-[40px] leading-none font-semibold">
         <CountUp
           end={item.count}
@@ -22,7 +38,9 @@ export function ImpactCard({ item }: Props) {
         />
       </p>
       <div className="bg-primary h-0.5 w-7"></div>
-      <Text className="leading- text-center">{item.metricTitle}</Text>
+      <Text className="text-center text-[18px] leading-[140%]">
+        {item.metricTitle}
+      </Text>
     </li>
   );
 }
