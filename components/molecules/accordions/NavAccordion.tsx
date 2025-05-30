@@ -271,13 +271,13 @@ export function AccordionMenu() {
             transparency, and ethics of blockchains and DeFi protocols - the
             industry&apos;s building blocks.
           </p>
-          <SheetClose asChild>
+{/*           <SheetClose asChild>
             <button className="mt-2 w-fit rounded-md border border-gray-300 bg-white px-3 py-2 text-black">
               <Link href={"/web3-tracker"} className="w-full">
                 Contribute
               </Link>
             </button>
-          </SheetClose>
+          </SheetClose> */}
         </div>
       </div>
     </div>
