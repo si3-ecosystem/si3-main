@@ -1,3 +1,4 @@
+import { Grow3dgePopupCard } from "@/components/molecules/cards/Grow3dgePopupCard";
 import { Footer } from "@/components/organisms/layout/Footer";
 import { Navbar } from "@/components/organisms/layout/Navbar";
 import { processMetadata } from "@/utils/sharedMetadata";
@@ -15,6 +16,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     <div className="flex flex-col justify-between overflow-x-hidden">
       <Navbar />
       <main className="h-full w-full flex-1">{children}</main>
+      <Grow3dgePopupCard />
       <Footer />
     </div>
   );

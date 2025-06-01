@@ -8,6 +8,7 @@ import { Testimonial } from "@/types/about";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   data: Testimonial;
@@ -43,7 +44,12 @@ export function TopTestimonial({ data }: Props) {
   };
 
   return (
-    <section className="z-20 mx-auto w-full max-w-[1440px] px-4 py-14 lg:px-[90px] lg:py-20">
+    <motion.section
+      className="z-20 mx-auto w-full max-w-[1440px] px-4 py-14 lg:px-[90px] lg:py-20"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="@container">
         <div className="flex flex-col gap-10 @3xl:flex-row @3xl:items-center @3xl:gap-[60px]">
           <div className="flex-1">
@@ -56,7 +62,6 @@ export function TopTestimonial({ data }: Props) {
             >
               <span> {data.quote}</span>
               <span> {data.thoughts}</span>
-
               <span>
                 <Link
                   href={data.sourceUrl || "#"}
@@ -71,11 +76,13 @@ export function TopTestimonial({ data }: Props) {
               </span>
             </Text>
           </div>
-          <div
+          <motion.div
             ref={cardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="h-[384.445px] w-full transition-transform duration-300 ease-out @3xl:h-full @3xl:max-h-[384.445px] @3xl:max-w-[356.365px]"
+            className="h-[384.445px] w-full @3xl:h-full @3xl:max-h-[384.445px] @3xl:max-w-[356.365px]"
+            whileHover={{ rotateX: 10, rotateY: 10 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             <Image
               src={imageUrl || "/about/kara.jpg"}
@@ -90,9 +97,9 @@ export function TopTestimonial({ data }: Props) {
               loading="lazy"
               className="h-full w-full rounded-lg object-cover object-center shadow-lg"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

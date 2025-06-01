@@ -40,7 +40,7 @@
     "coingecko-api-v3": "^0.0.31",
     "embla-carousel-react": "^8.5.2",
     "ethers": "5.7",
-    "framer-motion": "^12.4.10",
+    "framer-motion": "^12.15.0",
     "get-video-id": "^4.1.7",
     "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.1",

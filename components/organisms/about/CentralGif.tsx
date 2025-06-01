@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface CentralGifProps {
   onHoverChange: (isHovering: boolean) => void;
@@ -12,83 +13,52 @@ interface CentralGifProps {
 export default function CentralGif({
   onHoverChange,
   gifUrl,
-  placeholderUrl,
+  placeholderUrl = "/placeholder.svg",
 }: CentralGifProps) {
   const [isHovering, setIsHovering] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const playPromiseRef = useRef<Promise<void> | null>(null);
-  const isVideo = useMemo(
-    () => gifUrl?.endsWith(".mp4") || gifUrl?.includes("mp4"),
-    [gifUrl],
-  );
+  const [isGifLoaded, setIsGifLoaded] = useState(false);
+  const gifRef = useRef<HTMLImageElement>(null);
+  const placeholderRef = useRef<HTMLImageElement>(null);
 
-  const handleMouseEnter = async () => {
+  // Preload the GIF
+  useEffect(() => {
     if (!gifUrl) return;
 
+    const img = new window.Image();
+    img.src = gifUrl;
+    img.onload = () => setIsGifLoaded(true);
+    img.onerror = () => console.error("Failed to load GIF:", gifUrl);
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [gifUrl]);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!isGifLoaded) return;
     setIsHovering(true);
-    onHoverChange(true);
+    onHoverChange?.(true);
+  }, [isGifLoaded, onHoverChange]);
 
-    if (isVideo && videoRef.current) {
-      try {
-        // Wait for any pending play promise to resolve before starting new one
-        if (playPromiseRef.current) {
-          await playPromiseRef.current;
-        }
-
-        playPromiseRef.current = videoRef.current.play();
-        await playPromiseRef.current;
-        playPromiseRef.current = null;
-      } catch (error) {
-        console.error("Video play failed:", error);
-        setHasError(true);
-        playPromiseRef.current = null;
-      }
-    }
-  };
-
-  const handleMouseLeave = async () => {
+  const handleMouseLeave = useCallback(() => {
     setIsHovering(false);
-    onHoverChange(false);
+    onHoverChange?.(false);
+  }, [onHoverChange]);
 
-    if (isVideo && videoRef.current) {
-      try {
-        // Wait for any pending play promise before pausing
-        if (playPromiseRef.current) {
-          await playPromiseRef.current;
-          playPromiseRef.current = null;
-        }
-
-        videoRef.current.pause();
-        videoRef.current.currentTime = 0; // Reset to beginning
-      } catch (error) {
-        console.error("Video pause failed:", error);
-      }
-    }
-  };
-
-  const handleVideoError = () => {
-    console.error("Failed to load video:", gifUrl);
-    setHasError(true);
-  };
-
-  const handleImageError = () => {
-    console.error("Failed to load image:", placeholderUrl);
-    setHasError(true);
-  };
-
-  // If we have an error or no URL, show the placeholder
-  if (hasError || !gifUrl) {
+  // If no GIF URL is provided or it failed to load, just show the placeholder
+  if (!gifUrl || !isGifLoaded) {
     return (
       <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform">
         <div className="w-[320px] rounded-lg bg-black p-4 text-white shadow-lg">
           <div className="relative h-[400px] w-full">
             <Image
-              src={placeholderUrl || "/placeholder.svg"}
+              ref={placeholderRef}
+              src={placeholderUrl}
               alt=""
               fill
               className="object-cover"
-              onError={handleImageError}
+              priority
             />
           </div>
         </div>
@@ -97,51 +67,56 @@ export default function CentralGif({
   }
 
   return (
-    <div
-      className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="w-[320px] rounded-lg bg-black p-4 text-white shadow-lg">
-        {isVideo ? (
-          // Video Player
+    <>
+      <motion.div
+        className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="w-[320px] rounded-lg bg-black p-4 text-white shadow-lg">
           <div className="relative h-[400px] w-full">
-            {isHovering ? (
-              <video
-                ref={videoRef}
-                className="h-full w-full object-cover"
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                onError={handleVideoError}
-              >
-                <source src={gifUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
+            {gifUrl && isGifLoaded && (
               <Image
-                src={placeholderUrl || "/placeholder.svg"}
+                ref={gifRef}
+                src={gifUrl}
                 alt=""
                 fill
                 className="object-cover"
-                onError={handleImageError}
+                unoptimized
+                priority
+                style={{
+                  opacity: isHovering ? 1 : 0,
+                  transition: "opacity 0.6s cubic-bezier(0.7, 0.6, 0.3, 1)",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                }}
               />
             )}
+
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isHovering ? 0 : 1 }}
+              transition={{ duration: 0.6, ease: [0.7, 0.6, 0.3, 1] }}
+              className="absolute inset-0"
+            >
+              <Image
+                ref={placeholderRef}
+                src={placeholderUrl}
+                alt=""
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
           </div>
-        ) : (
-          // GIF/Image
-          <div className="relative h-[400px] w-full">
-            <Image
-              src={isHovering ? gifUrl : placeholderUrl || "/placeholder.svg"}
-              alt=""
-              fill
-              className="object-cover"
-              onError={handleImageError}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+        </div>
+      </motion.div>
+    </>
   );
 }

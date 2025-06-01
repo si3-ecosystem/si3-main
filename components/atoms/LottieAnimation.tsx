@@ -45,7 +45,7 @@ export function LottieAnimation({
         animationData={animationData}
         loop={loop}
         autoplay={autoplay}
-        className="max-lg:scale-[1.8]"
+        className="scale-50 max-lg:scale-[1.8]"
       />
     </div>
   );

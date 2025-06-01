@@ -32,7 +32,7 @@ export function InitialLoader({ children }: { children: React.ReactNode }) {
             autoplay={true}
             height="100%"
             width="100%"
-            className=""
+            className="scale-75"
           />
         </div>
       </div>
