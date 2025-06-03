@@ -43,8 +43,8 @@ export function SectionWrapper({
         )}
       >
         {activeSection === "scholars" && "SI U SCHOLARS JOURNEY"}
-        {activeSection === "guides" && "SI U GUIDES JOURNEY"}
-        {activeSection === "partners" && "SI U PARTNERS JOURNEY"}
+        {activeSection === "guides" && "SI HER GUIDES EXPERIENCE"}
+        {activeSection === "partners" && "SI<3> PARTNER OPPORTUNITIES"}
       </h2>
 
       <div className="relative h-full w-full rounded-[30px] from-[#E5ABFF] via-[#8300BE] to-[#450063] bg-[length:100%_100%] bg-no-repeat max-lg:bg-white lg:bg-gradient-to-br">

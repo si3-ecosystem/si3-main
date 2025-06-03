@@ -3,6 +3,7 @@ import HeaderContainer from "@/components/organisms/home/header/HeaderContainer"
 import { CreatingTheNewEconomy } from "@/components/organisms/home/CreatingTheNewEconomy";
 import {
   getAboutIntroData,
+  getAboutPageData,
   getGuidesData,
   getHomePageData,
   getPartnersData,
@@ -15,6 +16,8 @@ import { SectionWrapper } from "@/components/organisms/home/web3-university/Sect
 import { FaqSection } from "@/components/organisms/home/FaqSection";
 import { CryptoTickerCarousel } from "@/components/organisms/home/CryptoTickerCarousel";
 import { InitialLoader } from "@/components/atoms/InitialLoader";
+import { WomenOfWeb3Banner } from "@/components/organisms/about/WomenOfWeb3Banner";
+import { urlForImage } from "@/lib/sanity/image";
 
 export default async function HomePage() {
   const [
@@ -24,6 +27,7 @@ export default async function HomePage() {
     partnersData,
     aboutIntroData,
     onboardData,
+    data,
   ] = await Promise.all([
     getHomePageData(),
     getScholarsData(),
@@ -31,7 +35,20 @@ export default async function HomePage() {
     getPartnersData(),
     getAboutIntroData(),
     getOnboardPageData(),
+    getAboutPageData(),
   ]);
+
+  const topRowTerms = data.educationPartners.map((partner) => partner.name);
+  const bottomRowTerms = data.communityPartners.map((partner) => partner.name);
+
+  const gifUrl = data?.tickerGif?.url || "";
+  const placeholderUrl =
+    data?.tickerGif?.placeholderImage &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    urlForImage(data?.tickerGif?.placeholderImage).src;
+
+  const purposeTexts = data.purpose_texts?.map((item) => item.text) || [];
 
   const pageContent = (
     <Suspense fallback={null}>
@@ -65,6 +82,13 @@ export default async function HomePage() {
         className="!z-0"
       >
         <OurImpact HomePageData={HomePageData} />
+        <WomenOfWeb3Banner
+          topRowTerms={topRowTerms}
+          bottomRowTerms={bottomRowTerms}
+          gifUrl={gifUrl}
+          purposeTexts={purposeTexts}
+          placeholderUrl={placeholderUrl}
+        />
         <FaqSection
           faqTitle={HomePageData?.faqTitle}
           faqs={HomePageData?.faqs}

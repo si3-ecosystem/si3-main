@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Header = ({ data }: { data: HomepageSchema }) => {
   return (
-    <div className="relative z-10 space-y-4 pt-[112px] lg:pt-[220px]">
+    <div className="relative z-10 space-y-4 pt-[112px] lg:pt-[180px]">
       <Title
         as="h1"
         variant="huge"
@@ -26,7 +26,7 @@ const Header = ({ data }: { data: HomepageSchema }) => {
         Powered by <span>{"SI<3>"}</span>
       </h3>
 
-      <div className="layout mt-[98px] flex w-full items-center justify-center py-0 max-lg:px-5 md:items-end md:justify-between">
+      <div className="layout mt-[68px] flex w-full items-center justify-center py-0 max-lg:px-5 md:items-end md:justify-between">
         <div className="flex flex-col gap-4">
           <h3 className="text-[25px] leading-9 font-semibold tracking-[2.75px] text-white max-md:hidden">
             Web3 Access For All

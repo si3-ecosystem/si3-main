@@ -4,9 +4,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ThoughtLeadership } from "@/types/home";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import { urlForImage } from "@/lib/sanity/image";
-import { Button } from "@/components/atoms/button";
+// import { Button } from "@/components/atoms/button";
 
 const options = {
   loop: true,
@@ -71,7 +71,7 @@ export function ThoughtLeadershipSection({
                   <h3 className="text-xl font-semibold max-lg:text-center">
                     {item.title}
                   </h3>
-                  <div className="flex gap-4 max-lg:hidden">
+                  {/* <div className="flex gap-4 max-lg:hidden">
                     {item.cta1Text && (
                       <Button className="bg-[#9F44D3] text-white">
                         <Link href={item.cta1Link || "#"}>{item.cta1Text}</Link>
@@ -82,10 +82,10 @@ export function ThoughtLeadershipSection({
                         <Link href={item.cta2Link || "#"}>{item.cta2Text}</Link>
                       </Button>
                     )}
-                  </div>
+                  </div> */}
                 </div>
 
-                <div className="mt-12 flex w-full items-center justify-center gap-2.5 lg:hidden">
+                {/* <div className="mt-12 flex hidden w-full items-center justify-center gap-2.5">
                   {item.cta1Text && (
                     <Button className="w-[124px] bg-[#9F44D3] text-white">
                       <Link href={item.cta1Link || "#"}>{item.cta1Text}</Link>
@@ -96,7 +96,7 @@ export function ThoughtLeadershipSection({
                       <Link href={item.cta2Link || "#"}>{item.cta2Text}</Link>
                     </Button>
                   )}
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

@@ -8,10 +8,25 @@ export function HeaderTitle() {
   const [direction, setDirection] = useState(1);
 
   const words = [
-    { text: "An Accessible", gradient: "from-[#F6CEEC] to-[#D939CD]" },
-    { text: "A Collaborative", gradient: "from-[#CE9FFC] to-[#7367F0]" },
-    { text: "A Diverse", gradient: "from-[#ABDCFF] to-[#0396FF]" },
-    { text: "An Invincible", gradient: "from-[#FFF6B7] to-[#F6416C]" },
+    {
+      text: "AN IMPACTFUL",
+      gradient: "bg-gradient-to-r from-[#c084fc] via-[#a855f7] to-[#9ca3af]",
+    },
+    {
+      text: "AN ACCESSIBLE",
+      gradient:
+        "bg-gradient-to-r from-[#fb923c] via-[#f97316] via-[#d97706] to-[#9ca3af]",
+    },
+    {
+      text: "A TRANSPARENT",
+      gradient:
+        "bg-gradient-to-r from-[#3b82f6] via-[#2563eb] via-[#1d4ed8] to-[#9ca3af]",
+    },
+    {
+      text: "AN INCLUSIVE",
+      gradient:
+        "bg-gradient-to-r from-[#a855f7] via-[#9333ea] via-[#7c3aed] to-[#9ca3af]",
+    },
   ];
 
   useEffect(() => {

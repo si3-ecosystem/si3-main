@@ -10,6 +10,7 @@ import {
 } from "@/components/atoms/sheet";
 import React from "react";
 import { AccordionMenu } from "@/components/molecules/accordions/NavAccordion";
+import Link from "next/link";
 
 export function MobileMenu() {
   return (
@@ -48,8 +49,10 @@ export function MobileMenu() {
         className="h-[100vh] w-full bg-white p-0 !pb-12"
       >
         <SheetHeader className="flex flex-row items-center justify-between border-b border-gray-300 p-4 py-6">
-          <SheetTitle className="!p-0">
-            <Logo src="/logo.svg" alt="SI3 Logo" />
+          <SheetTitle asChild className="!p-0">
+            <Link href={"/"}>
+              <Logo src="/logo.svg" alt="SI3 Logo" />
+            </Link>
           </SheetTitle>
         </SheetHeader>
         <div className="no-scrollbar -top-4 -mt-4 flex h-[calc(100vh-64px)] flex-col justify-between overflow-y-scroll pb-32">

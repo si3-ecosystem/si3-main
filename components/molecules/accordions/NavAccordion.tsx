@@ -21,26 +21,25 @@ export function AccordionMenu() {
   const router = useRouter();
   const pathName = usePathname();
 
-
   const menuItems = [
     {
       id: "learn",
       title: "LEARN",
       items: [
         {
-          title: "SI U Education",
-          href: "/#si_u_scholars_education",
-          accordionValue: "si_u_scholars",
+          title: "Scholars",
+          href: "/#scholars",
+          accordionValue: "scholars",
         },
         {
-          title: "SI Her Programming",
-          href: "/#si_her_guides_programming",
-          accordionValue: "si_her_guides",
+          title: "Guides",
+          href: "/#guides",
+          accordionValue: "guides",
         },
         {
-          title: "DEAI Web3 Training",
-          href: "/#si_partners_training",
-          accordionValue: "si_partners",
+          title: "Partners",
+          href: "/#partners",
+          accordionValue: "partners",
         },
       ],
     },
@@ -56,20 +55,9 @@ export function AccordionMenu() {
       ],
     },
     {
-      id: "grow",
-      title: "GROW",
-      items: [
-        {
-          title: "Partner Campaigns",
-          href: "/#si_partners_campaigns",
-          accordionValue: "si_partners",
-        },
-        {
-          title: "SI Her Kollab Communities",
-          href: "/#si_u_scholars_kollab",
-          accordionValue: "si_u_scholars",
-        },
-      ],
+      id: "grow3dge",
+      title: "Grow3dge",
+      items: [],
     },
     { id: "about", title: "ABOUT", items: [] },
     {
@@ -231,54 +219,9 @@ export function AccordionMenu() {
             asChild
             className="mb-4 w-full rounded-md bg-black py-3 text-white"
           >
-            <Link href={"/onboard"}>Get Started</Link>
+            <Link href={"/login"}>SI U Onboard</Link>
           </Button>
         </SheetClose>
-        <SheetClose asChild>
-          <Button
-            asChild
-            className="mb-4 flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white py-3 text-black"
-          >
-            <Link
-              href={"/login"}
-              className="flex w-full items-center justify-center gap-2"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.76 0-5 2.24-5 5h10c0-2.76-2.24-5-5-5z"
-                />
-              </svg>
-              Member Login
-            </Link>
-          </Button>
-        </SheetClose>
-        <div className="flex flex-col items-start justify-start rounded-md bg-gray-100 p-4 text-center">
-          <p className="text-left text-base text-[#303030]">
-            <span className="text-[17px] leading-[140%] font-medium text-black">
-              Help us improve Web3!
-            </span>
-            <br />
-            Share your experience with the accessibility, inclusivity,
-            transparency, and ethics of blockchains and DeFi protocols - the
-            industry&apos;s building blocks.
-          </p>
-{/*           <SheetClose asChild>
-            <button className="mt-2 w-fit rounded-md border border-gray-300 bg-white px-3 py-2 text-black">
-              <Link href={"/web3-tracker"} className="w-full">
-                Contribute
-              </Link>
-            </button>
-          </SheetClose> */}
-        </div>
       </div>
     </div>
   );

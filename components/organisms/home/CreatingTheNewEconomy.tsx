@@ -25,8 +25,8 @@ export function CreatingTheNewEconomy({
   return (
     <section className="!z-10 -mt-44 w-full rounded-[31px] bg-white lg:rounded-[83px]">
       <div className="layout mt-28 space-y-20 max-lg:px-5 max-lg:py-5 lg:space-y-[87px]">
-        <div className="space-y-4">
-          <Title className="text-[32px] font-normal text-black uppercase lg:text-[36px]">
+        <div className="space-y-4 pt-[20px] lg:pt-[48px]">
+          <Title className="text-2xl font-normal text-black uppercase lg:text-[36px]">
             {thoughtLeadershipTitle}
           </Title>
 

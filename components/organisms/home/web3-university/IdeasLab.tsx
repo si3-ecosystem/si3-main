@@ -82,26 +82,24 @@ export function IdeasLab({
                 ))}
               </div>
             </div>
-            {data.demoSessions.length > 2 && (
-              <>
-                <button
-                  onClick={scrollPrev}
-                  disabled={!canScrollPrev}
-                  className="absolute top-1/2 -left-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={scrollNext}
-                  disabled={!canScrollNext}
-                  className="absolute top-1/2 -right-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              </>
-            )}
+            <>
+              <button
+                onClick={scrollPrev}
+                disabled={!canScrollPrev}
+                className="absolute top-1/2 -left-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={scrollNext}
+                disabled={!canScrollNext}
+                className="absolute top-1/2 -right-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </>
           </div>
         </div>
       )}

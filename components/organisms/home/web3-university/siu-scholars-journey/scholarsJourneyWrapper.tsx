@@ -9,7 +9,7 @@ export function ScholarsJourneyWrapper({
   scholarsData: ScholarsData;
 }) {
   return (
-    <div className="">
+    <div id="scholars" className="">
       <HeroSection data={scholarsData.introduction} />
       <SiHerKollab data={scholarsData} />
       <div id="si_u_scholars_education" className="pb-8">

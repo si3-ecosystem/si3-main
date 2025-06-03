@@ -12,7 +12,7 @@ type Props = {
 const HeaderContainer = ({ HomePageData }: Props) => {
   const imageUrl = HomePageData.image && urlForImage(HomePageData.image)?.src;
   return (
-    <div className="relative min-h-[60vh] space-y-16 pb-[52px] md:pb-[108px] lg:space-y-36">
+    <div className="relative min-h-[55vh] space-y-16 pb-[52px] md:pb-[88px] lg:space-y-28">
       {imageUrl && (
         <Image
           src={imageUrl}

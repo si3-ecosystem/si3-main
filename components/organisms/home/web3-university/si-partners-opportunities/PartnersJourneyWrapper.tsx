@@ -9,7 +9,7 @@ export function PartnersJourneyWrapper({
   partnersData: PartnersData;
 }) {
   return (
-    <div>
+    <div id="partners">
       <HeroSection data={partnersData?.introduction} />
       <div className="max-sm:mt-6">
         <ExploreSection data={partnersData.explore} />

@@ -44,9 +44,9 @@ export function Scholars({ data, showSvg = false }: Props) {
           <Image
             src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
             fill
-            {...(data?.thumbnail?.blurDataURL && {
+            {...(data?.image?.blurDataURL && {
               placeholder: "blur",
-              blurDataURL: data?.thumbnail?.blurDataURL,
+              blurDataURL: data?.image?.blurDataURL,
             })}
             loading="lazy"
             decoding="async"

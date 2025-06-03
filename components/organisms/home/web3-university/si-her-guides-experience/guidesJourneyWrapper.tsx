@@ -11,7 +11,7 @@ export function GuidesJourneyWrapper({
   guidesData: GuidesData;
 }) {
   return (
-    <div>
+    <div id="guides">
       <HeroSection data={guidesData.introduction} />
       <div className="">
         <Web3Brand data={guidesData.web3brands} />

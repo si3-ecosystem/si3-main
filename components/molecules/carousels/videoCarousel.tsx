@@ -124,7 +124,7 @@ export function VideoCarousel({
             <div className="mt-8 -ml-6 flex lg:mt-8">
               {slides.map((slideItems, slideIndex) => (
                 <div key={slideIndex} className="min-w-0 flex-[0_0_100%] pl-6">
-                  <div className="flex h-full flex-col gap-6 max-sm:h-auto sm:grid md:grid-cols-2 lg:grid-cols-3">
+                  <div className="flex h-full flex-col justify-between gap-6 max-sm:h-auto sm:grid md:grid-cols-2 lg:grid-cols-3">
                     {slideItems.map((item, itemIndex) =>
                       renderFunction(
                         item,
