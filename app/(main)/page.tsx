@@ -88,6 +88,7 @@ export default async function HomePage() {
           gifUrl={gifUrl}
           purposeTexts={purposeTexts}
           placeholderUrl={placeholderUrl}
+          textColor={"white"}
         />
         <FaqSection
           faqTitle={HomePageData?.faqTitle}

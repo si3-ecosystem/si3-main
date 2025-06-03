@@ -6,6 +6,7 @@ import TopScrollingRow from "./TopScrollingRow";
 import MiddleHeading from "./MiddleHeading";
 import BottomScrollingRow from "./BottomScrollingRow";
 import CentralGif from "./CentralGif";
+import { cn } from "@/lib/utils";
 
 interface WomenOfWeb3BannerProps {
   topRowTerms?: string[];
@@ -13,6 +14,7 @@ interface WomenOfWeb3BannerProps {
   purposeTexts?: string[];
   gifUrl?: string;
   placeholderUrl?: string;
+  textColor?: string;
 }
 
 export function WomenOfWeb3Banner({
@@ -21,6 +23,7 @@ export function WomenOfWeb3Banner({
   purposeTexts,
   gifUrl,
   placeholderUrl,
+  textColor = "black",
 }: WomenOfWeb3BannerProps) {
   const [isPaused, setIsPaused] = useState(false);
 
@@ -31,14 +34,25 @@ export function WomenOfWeb3Banner({
   return (
     <motion.div
       id="ecosystem"
-      className="relative flex min-h-screen flex-col items-center justify-center bg-[#ffffff] py-8 max-sm:gap-44"
+      className={cn(
+        "relative flex min-h-screen flex-col items-center justify-center py-8 max-sm:gap-44",
+        textColor === "black" ? "bg-white" : "",
+      )}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <TopScrollingRow terms={topRowTerms || []} isPaused={isPaused} />
-      <MiddleHeading purposeTexts={purposeTexts || []} />
-      <BottomScrollingRow terms={bottomRowTerms || []} isPaused={isPaused} />
+      <TopScrollingRow
+        textColor={textColor}
+        terms={topRowTerms || []}
+        isPaused={isPaused}
+      />
+      <MiddleHeading textColor={textColor} purposeTexts={purposeTexts || []} />
+      <BottomScrollingRow
+        textColor={textColor}
+        terms={bottomRowTerms || []}
+        isPaused={isPaused}
+      />
       <CentralGif
         onHoverChange={handleHoverChange}
         gifUrl={gifUrl}

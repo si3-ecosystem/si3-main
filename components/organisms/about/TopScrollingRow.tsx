@@ -1,15 +1,18 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 
 interface TopScrollingRowProps {
   terms: string[];
   isPaused: boolean;
+  textColor?: string;
 }
 
 export default function TopScrollingRow({
   terms,
   isPaused,
+  textColor = "black",
 }: TopScrollingRowProps) {
   // Duplicate terms for seamless loop
   const duplicatedTerms = [...terms, ...terms];
@@ -68,7 +71,10 @@ export default function TopScrollingRow({
     <div className="relative mb-8 w-full overflow-hidden">
       <div
         ref={containerRef}
-        className="flex space-x-8 text-lg font-bold whitespace-nowrap text-black md:text-xl lg:text-2xl"
+        className={cn(
+          "flex space-x-8 text-lg font-bold whitespace-nowrap md:text-xl lg:text-2xl",
+          textColor === "black" ? "text-black" : "text-white",
+        )}
       >
         {duplicatedTerms.map((term, index) => (
           <span key={index} className="flex-shrink-0">
@@ -78,10 +84,20 @@ export default function TopScrollingRow({
       </div>
 
       {/* Left fade edge */}
-      <div className="pointer-events-none absolute top-0 left-0 z-10 h-full w-20 bg-gradient-to-r from-[#ffffff] to-transparent" />
+      <div
+        className={cn(
+          "pointer-events-none absolute top-0 left-0 z-10 h-full w-20 bg-gradient-to-r from-[#ffffff] to-transparent",
+          textColor === "black" ? "from-[#ffffff]" : "hidden",
+        )}
+      />
 
       {/* Right fade edge */}
-      <div className="pointer-events-none absolute top-0 right-0 z-10 h-full w-20 bg-gradient-to-l from-[#ffffff] to-transparent" />
+      <div
+        className={cn(
+          "pointer-events-none absolute top-0 right-0 z-10 h-full w-20 bg-gradient-to-l from-[#ffffff] to-transparent",
+          textColor === "black" ? "from-[#000000]" : "hidden",
+        )}
+      />
     </div>
   );
 }
