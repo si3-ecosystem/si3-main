@@ -50,7 +50,7 @@ export default function CentralGif({
   if (!gifUrl || !isGifLoaded) {
     return (
       <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform">
-        <div className="w-[320px] rounded-lg bg-black p-4 text-white shadow-lg">
+        <div className="w-[320px] rounded-lg p-4 text-white shadow-lg">
           <div className="relative h-[400px] w-full">
             <Image
               ref={placeholderRef}
@@ -76,7 +76,7 @@ export default function CentralGif({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="w-[320px] rounded-lg bg-black p-4 text-white shadow-lg">
+        <div className="w-[320px] rounded-lg p-4 text-white shadow-lg">
           <div className="relative h-[400px] w-full">
             {gifUrl && isGifLoaded && (
               <Image
