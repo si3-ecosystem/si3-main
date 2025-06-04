@@ -150,7 +150,7 @@ export function PartnerProgramForm({
                 alt="partneropportunity"
                 width={64}
                 height={64}
-                className="h-12 w-12"
+                className="h-28 w-28"
               />
               <div className="flex flex-col gap-0.5">
                 <DialogTitle className="">

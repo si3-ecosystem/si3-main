@@ -22,6 +22,7 @@ export interface VideoCarouselProps {
   autoplay?: boolean;
   autoplayInterval?: number;
   renderItem?: RenderItemFunction;
+  hidetitleAndDescription?: boolean;
 }
 
 export function VideoCarousel({
@@ -32,6 +33,7 @@ export function VideoCarousel({
   autoplay = false,
   autoplayInterval = 3000,
   renderItem,
+  hidetitleAndDescription,
 }: VideoCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
@@ -82,22 +84,24 @@ export function VideoCarousel({
     <section className="@container w-full">
       <div className="w-full">
         <div className="flex w-full flex-col justify-between lg:flex-row lg:gap-8">
-          <div className="space-y-2">
-            {title && (
-              <Title
-                variant="sm"
-                className="mb-4 text-start text-3xl font-bold lg:text-white"
-              >
-                {title}
-              </Title>
-            )}
-            {description && (
-              <Text variant="xl" className="mb-8 max-w-[580px] lg:text-white">
-                {description}
-              </Text>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
+          {!hidetitleAndDescription && (
+            <div className="space-y-2">
+              {title && (
+                <Title
+                  variant="sm"
+                  className="mb-4 text-start !text-xl font-bold lg:!text-3xl lg:text-white"
+                >
+                  {title}
+                </Title>
+              )}
+              {description && (
+                <Text variant="xl" className="mb-8 max-w-[580px] lg:text-white">
+                  {description}
+                </Text>
+              )}
+            </div>
+          )}
+          <div className="flex w-full items-center justify-end gap-2">
             <Button
               variant="outline"
               size="icon"

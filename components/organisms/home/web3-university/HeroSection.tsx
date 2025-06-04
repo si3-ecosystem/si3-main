@@ -59,18 +59,18 @@ export default function HeroSection({
         <div className="flex flex-col gap-4 sm:gap-10 @3xl:flex-row @3xl:gap-[60px]">
           <div className="z-20 flex h-full w-full flex-1 flex-col justify-between gap-6 md:flex-row">
             <div className="space-y-2 lg:space-y-6">
-              <Title className="max-lg:text-xl lg:text-white">
+              <Title className="!text-xl font-bold lg:!text-3xl lg:text-white">
                 {data?.title}
               </Title>
-              <Text className="w-fit rounded-[35px] bg-[#FCB0DE] px-4 py-1.5 text-[10px] font-medium text-black lg:px-6 lg:py-3">
+              <Text className="w-fit rounded-[5px] bg-[#FCB0DE] px-4 py-1.5 text-[10px] font-medium text-black lg:px-6 lg:py-3">
                 {data?.subtitle}
               </Text>
-              <Text className="mt-6 max-w-[535px] text-xl font-medium max-lg:text-xs lg:mb-8 lg:leading-7 lg:text-white">
+              <Text className="mt-6 max-w-[425px] text-xl font-medium max-lg:text-xs lg:mb-8 lg:leading-7 lg:text-white">
                 {data?.description}
               </Text>
             </div>
 
-            <div>
+            <div className="lg:mt-4 lg:mr-8">
               {isForm ? (
                 <PartnerProgramForm
                   className="mx-auto text-white lg:w-[265px]"
@@ -79,6 +79,7 @@ export default function HeroSection({
               ) : (
                 <Button
                   asChild
+                  size={"md"}
                   className="mb-3 w-[125px] bg-black lg:w-[265px]"
                 >
                   <Link href={data?.ctaLink}>{data?.ctaText}</Link>

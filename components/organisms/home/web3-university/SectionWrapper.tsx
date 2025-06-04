@@ -47,7 +47,7 @@ export function SectionWrapper({
         {activeSection === "partners" && "SI<3> PARTNER OPPORTUNITIES"}
       </h2>
 
-      <div className="relative h-full w-full rounded-[30px] from-[#E5ABFF] via-[#8300BE] to-[#450063] bg-[length:100%_100%] bg-no-repeat max-lg:bg-white lg:bg-gradient-to-br">
+      <div className="relative h-full w-full rounded-[30px] from-[#E5ABFF] via-[#6B0099] to-[#450063] max-lg:bg-white lg:bg-gradient-to-br">
         <div className="layout min-h-screen max-lg:p-8 lg:py-24">
           <SectionComponent
             scholarsData={scholarsData}

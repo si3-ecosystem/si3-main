@@ -61,16 +61,12 @@ export default async function HomePage() {
         className="@container max-lg:bg-gradient-to-br max-lg:from-[#211257] max-lg:to-[#8A04C5]"
       >
         <Web3UniversitySection data={onboardData} />
-        <div id="scholars">
-          <div id="guides">
-            <div id="partners">
-              <SectionWrapper
-                scholarsData={scholarsData}
-                guidesData={guidesData}
-                partnersData={partnersData}
-              />
-            </div>
-          </div>
+        <div>
+          <SectionWrapper
+            scholarsData={scholarsData}
+            guidesData={guidesData}
+            partnersData={partnersData}
+          />
         </div>
       </div>
       <section

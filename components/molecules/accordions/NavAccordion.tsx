@@ -59,7 +59,7 @@ export function AccordionMenu() {
       title: "Grow3dge",
       items: [],
     },
-    { id: "about", title: "ABOUT", items: [] },
+    { id: "mission", title: "Mission", items: [] },
     {
       id: "stay-connected",
       title: "STAY CONNECTED",

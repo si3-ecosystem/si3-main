@@ -56,7 +56,7 @@ export function IdeasLab({
         {title && (
           <Title
             variant="sm"
-            className="mb-4 text-start text-3xl font-bold lg:text-white"
+            className="mb-4 text-start !text-xl font-bold lg:!text-3xl lg:text-white"
           >
             {title}
           </Title>

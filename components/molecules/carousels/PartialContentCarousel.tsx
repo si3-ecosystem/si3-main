@@ -99,7 +99,7 @@ export function PartialContentCarousel({
             {title && (
               <Title
                 variant="sm"
-                className="mb-4 text-start text-3xl font-bold text-black lg:text-white"
+                className="!lg:text-3xl mb-4 text-start !text-xl font-bold text-black lg:text-white"
               >
                 {title}
               </Title>
