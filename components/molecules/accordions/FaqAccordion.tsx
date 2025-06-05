@@ -28,8 +28,10 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
     setOpenValues(value);
   };
 
-  const isItemOpen = (id: string) => {
-    return isMobile ? (openValues as string[]).includes(id) : openValues === id;
+  const isItemOpen = (_key: string) => {
+    return isMobile
+      ? (openValues as string[]).includes(_key)
+      : openValues === _key;
   };
 
   if (!faqs || faqs.length === 0) {
@@ -44,13 +46,13 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
       collapsible
       className="animate-out animate-in w-full overflow-hidden border-none bg-transparent shadow-none max-md:px-4"
       value={openValues}
-      defaultValue={isMobile ? [faqs[0]?._id] : faqs[0]?._id}
+      defaultValue={isMobile ? [faqs[0]?._key] : faqs[0]?._key}
       onValueChange={handleValueChange}
     >
       {faqs.map((faq) => (
         <AccordionItem
-          value={faq._id}
-          key={faq._id}
+          value={faq._key}
+          key={faq._key}
           className="mt-6 !overflow-hidden rounded-2xl bg-[#8f75b1] !p-0 transition-all duration-300 ease-in-out data-[state=open]:bg-[#9F44D3] lg:rounded-lg [data-state=open]:z-40"
         >
           <AccordionPrimitive.Header className="group relative !z-20 flex !cursor-pointer py-[10px] lg:py-10">
@@ -64,7 +66,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
                   {faq.question}
                 </Title>
               </span>
-              {isItemOpen(faq._id) ? (
+              {isItemOpen(faq._key) ? (
                 <MinusIcon className="pointer-events-none z-10 size-8 shrink-0 text-black lg:size-16" />
               ) : (
                 <PlusIcon className="pointer-events-none z-10 size-8 shrink-0 text-black lg:size-16" />

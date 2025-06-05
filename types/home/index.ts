@@ -234,7 +234,7 @@ export interface Partner {
 }
 
 export interface FAQ {
-  _id: string;
+  _key: string;
   question: string;
   answer: PortableTextBlock[];
 }

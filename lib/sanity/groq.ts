@@ -51,8 +51,9 @@ export const homepageQuery = groq`
       },
     },
     faqTitle,
-    faqs[]-> {
-      _id,
+    faqs[] {
+    ...,
+      _key,
       question,
       answer
     },
