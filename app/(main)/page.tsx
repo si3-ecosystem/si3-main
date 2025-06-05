@@ -50,8 +50,6 @@ export default async function HomePage() {
 
   const purposeTexts = data.purpose_texts?.map((item) => item.text) || [];
 
-  console.log("HomePageData", HomePageData);
-
   const pageContent = (
     <Suspense fallback={null}>
       <HeaderContainer HomePageData={HomePageData} />

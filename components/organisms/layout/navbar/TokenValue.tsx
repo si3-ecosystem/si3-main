@@ -1,133 +1,187 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore
+
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight, ArrowDownRight, MinusCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/atoms/card";
-import { ArrowUp, ArrowDown } from "lucide-react";
 import Image from "next/image";
-import { CoinGeckoClient } from "coingecko-api-v3";
 
-interface TrendingResponse {
-  coins: Array<{
-    item: {
-      id: string;
-      symbol: string;
-      name: string;
-      market_cap_rank: number;
-      thumb: string;
-      small: string;
-      price_btc: number;
-      data: {
-        price_change_percentage_24h: {
-          usd: number;
-        };
-      };
-    };
-  }>;
-}
-
-interface CoinData {
-  id: string;
+interface CoinConfig {
+  key: string;
+  slug: string;
   symbol: string;
-  price: number;
-  change24h: number;
-  imageUrl: string;
 }
+
+const COIN_CONFIG_LIST: CoinConfig[] = [
+  { key: "up", slug: "unistake", symbol: "UP" },
+  { key: "lpt", slug: "livepeer", symbol: "LPT" },
+  { key: "arb", slug: "arbitrum", symbol: "ARB" },
+  { key: "eth", slug: "ethereum", symbol: "ETH" },
+  { key: "edu", slug: "open-campus", symbol: "EDU" },
+];
+
+const COIN_GECKO_IDS = COIN_CONFIG_LIST.map((coin) => coin.slug);
+const CYCLE_INTERVAL_MS = 15000;
+const API_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 
 export function TokenValue() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [coins, setCoins] = useState<CoinData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [cryptoDataList, setCryptoDataList] = useState([]);
+  const [currentCoinIndex, setCurrentCoinIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [animationKey, setAnimationKey] = useState(0);
 
-  const client = useMemo(
-    () =>
-      new CoinGeckoClient({
-        timeout: 10000,
-        autoRetry: true,
-      }),
-    [],
-  );
-
-  const fetchTrendingCoins = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const trending = (await client.trending()) as unknown as TrendingResponse;
-
-      const topCoins = trending.coins
-        .filter((coin) => coin.item.market_cap_rank <= 5) // Get top 5 coins
-        .map((coin) => ({
-          id: coin.item.id,
-          symbol: coin.item.symbol.toUpperCase(),
-          price: 0, // Will be updated from simplePrice
-          change24h: coin.item.data.price_change_percentage_24h?.usd || 0,
-          imageUrl: coin.item.small || "/home/Ellipse.svg",
-        }));
-
-      // Get current prices
-      const coinIds = topCoins.map((coin) => coin.id).join(",");
-      const simplePriceData = await client.simplePrice({
-        ids: coinIds,
-        vs_currencies: "usd",
-        include_24hr_change: true,
-      });
-
-      const coinsWithPrices = topCoins.map((coin) => {
-        const priceData = simplePriceData[coin.id] || {};
-        return {
-          ...coin,
-          price: priceData.usd || 0,
-          change24h: Number(priceData.usd_24h_change) || coin.change24h,
-        };
-      });
-
-      setCoins(coinsWithPrices);
-    } catch (error) {
-      console.error("Error fetching trending coins:", error);
-    } finally {
-      setIsLoading(false);
+  const fetchData = async (isInitialLoad = false) => {
+    if (isInitialLoad) {
+      setLoading(true);
+      setError(null);
     }
-  }, [client]);
 
-  useEffect(() => {
-    let isMounted = true;
-    let refreshInterval: NodeJS.Timeout;
+    const idsString = COIN_GECKO_IDS.join(",");
+    const apiUrl = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${idsString}&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`;
 
-    const fetchData = async () => {
-      await fetchTrendingCoins();
-      if (isMounted) {
-        refreshInterval = setInterval(fetchTrendingCoins, 30000);
+    try {
+      if (!idsString) {
+        setError("No coins configured to fetch.");
+        if (isInitialLoad) setLoading(false);
+        return;
       }
-    };
 
-    fetchData();
+      console.log(`Attempting to fetch data from: ${apiUrl}`);
+      const response = await fetch(apiUrl, {
+        cache: "no-cache",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+        },
+      });
 
-    return () => {
-      isMounted = false;
-      if (refreshInterval) clearInterval(refreshInterval);
-    };
-  }, [fetchTrendingCoins]);
+      if (!response.ok) {
+        let errorDetails =
+          "Could not retrieve error details from API response.";
+        try {
+          const errorData = await response.json();
+          errorDetails =
+            errorData.error ||
+            (typeof errorData === "string"
+              ? errorData
+              : JSON.stringify(errorData));
+        } catch (jsonError) {
+          console.error("Failed to parse error JSON from API:", jsonError);
+          errorDetails = await response
+            .text()
+            .catch(() => "Could not get raw text error response.");
+        }
+        throw new Error(
+          `API Error: ${response.status} ${response.statusText}. Details: ${errorDetails}`,
+        );
+      }
+      const data = await response.json();
 
-  // Set up carousel rotation every 3 seconds
+      const orderedData = COIN_GECKO_IDS.map((id) =>
+        data.find((coin) => coin.id === id),
+      ).filter(Boolean);
+
+      if (orderedData.length > 0) {
+        // @ts-ignore
+        setCryptoDataList(orderedData);
+        setError(null);
+      } else if (COIN_GECKO_IDS.length > 0) {
+        const message =
+          "No data returned from API for the selected coins. Please check the coin IDs or API status.";
+        setError(message);
+        setCryptoDataList([]);
+      }
+    } catch (err) {
+      let errorMessage =
+        "An unexpected error occurred while fetching cryptocurrency data.";
+      if (
+        err instanceof TypeError &&
+        err.message.toLowerCase().includes("failed to fetch")
+      ) {
+        errorMessage = `Failed to fetch data from CoinGecko API. Please check your internet connection and ensure the URL (${apiUrl}) is accessible directly in your browser. The API might be temporarily unavailable or blocking requests.`;
+      } else if (err instanceof Error) {
+        if (err.message.startsWith("API Error:")) {
+          errorMessage = err.message;
+        } else {
+          errorMessage = `An error occurred: ${err.message}`;
+        }
+      } else {
+        errorMessage =
+          "An unexpected error occurred while fetching cryptocurrency data. Check console for details.";
+      }
+      console.error(
+        "Fetch error details:",
+        (err as Error).message,
+        "\nStack:",
+        (err as Error).stack,
+        "\nCause:",
+        (err as Error).cause,
+      );
+      console.error(`Failed URL: ${apiUrl}`);
+      setError(errorMessage);
+    } finally {
+      if (isInitialLoad) {
+        setLoading(false);
+      }
+    }
+  };
+
   useEffect(() => {
-    if (coins.length <= 1) return;
-
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % coins.length);
-    }, 3000);
-
-    return () => clearInterval(timer);
-  }, [coins.length]);
-
-  if (isLoading || coins.length === 0) {
-    return (
-      <Card className="w-[220px] rounded-lg border-none !bg-[#211257] px-3 py-2 max-xl:hidden">
-        <div className="h-6 w-full animate-pulse rounded bg-gray-600" />
-      </Card>
+    fetchData(true);
+    const interval = setInterval(
+      () => fetchData(false),
+      API_REFRESH_INTERVAL_MS,
     );
-  }
+    return () => clearInterval(interval);
+  }, []);
 
-  const currentCoin = coins[currentIndex];
-  const isPositive = currentCoin.change24h >= 0;
-  const ChangeIcon = isPositive ? ArrowUp : ArrowDown;
+  useEffect(() => {
+    if (cryptoDataList.length === 0) return;
+
+    const cycleTimer = setInterval(() => {
+      setCurrentCoinIndex(
+        (prevIndex) => (prevIndex + 1) % cryptoDataList.length,
+      );
+      setAnimationKey((prevKey) => prevKey + 1);
+    }, CYCLE_INTERVAL_MS);
+
+    return () => clearInterval(cycleTimer);
+  }, [cryptoDataList]);
+
+  const currentCoin =
+    cryptoDataList.length > 0 ? cryptoDataList[currentCoinIndex] : null;
+
+  return (
+    <>
+      <div className="flex h-[60px] items-center justify-center">
+        {loading && !currentCoin && !error ? (
+          <>{"..."}</>
+        ) : currentCoin ? (
+          <div key={animationKey} className="animate-in fade-in duration-500">
+            <CryptoCard crypto={currentCoin} />
+          </div>
+        ) : null}
+      </div>
+    </>
+  );
+}
+
+const CryptoCard = ({ crypto }) => {
+  const priceChange = crypto.price_change_percentage_24h ?? 0;
+  const isPositive = priceChange > 0;
+  const isNegative = priceChange < 0;
+
+  let ChangeIcon = MinusCircle;
+  if (isPositive) ChangeIcon = ArrowUpRight;
+  if (isNegative) ChangeIcon = ArrowDownRight;
+
+  // Fix the image URL - prepend https: if it starts with //
+  const imageUrl = crypto.image?.startsWith("//")
+    ? `https:${crypto.image}`
+    : crypto.image || "/home/Ellipse.svg";
 
   return (
     <Card className="w-[180px] overflow-hidden rounded-lg border-none !bg-[#211257] px-3 py-2 max-xl:hidden">
@@ -135,18 +189,20 @@ export function TokenValue() {
         <div className="flex items-center gap-1">
           <div className="relative h-4 w-4">
             <Image
-              src={currentCoin.imageUrl}
-              alt={currentCoin.symbol}
-              fill
-              className="object-cover"
+              src={imageUrl}
+              alt={crypto.symbol?.toUpperCase() || "crypto"}
+              width={16}
+              height={16}
+              className="rounded-full object-cover"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "/home/Ellipse.svg";
               }}
+              unoptimized={imageUrl.endsWith(".gif")}
             />
           </div>
           <span className="text-xs font-medium text-white">
             $
-            {currentCoin.price.toLocaleString(undefined, {
+            {crypto.current_price?.toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
@@ -154,14 +210,14 @@ export function TokenValue() {
           <span className="text-xs font-medium text-[#848484]">USD</span>
         </div>
         <span
-          className={`flex items-center gap-0.5 text-xs ${
+          className={`flex items-center gap-0.5 text-xs font-medium ${
             isPositive ? "text-[#00A208]" : "text-[#FF3B30]"
           }`}
         >
-          <ChangeIcon className="size-3" />
-          {Math.abs(currentCoin.change24h).toFixed(2)}%
+          <ChangeIcon className="h-3 w-3" />
+          {Math.abs(priceChange).toFixed(2)}%
         </span>
       </CardContent>
     </Card>
   );
-}
+};
