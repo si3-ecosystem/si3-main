@@ -78,7 +78,7 @@ const PrivacyPage: React.FC = () => {
   }
 
   return (
-    <div className="">
+    <div className="mt-14 lg:mt-28">
       <PolicyLayout
         sections={policyData?.sections || []}
         activePolicy={activePolicy}
