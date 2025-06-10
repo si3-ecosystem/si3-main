@@ -185,6 +185,36 @@ export const scholarsQuery = groq`
 }
 `;
 
+export const getCardsQuery = groq`
+*[_type == "cards"] {
+  _id,
+    published,
+    order,
+    background {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background
+    },
+    communityLogo {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background
+    },
+    communityName,
+    communityLocation,
+    communityType,
+    communityDescription,
+    communityWebsite,
+    communityLeaderName,
+    communityLeaderEmail,
+    xHandle,
+    warpastHandle,
+    discover,
+    linkedIn,
+    linkedXHandle
+}
+`;
+
 export const guidesQuery = groq`
 *[_type == "guidesSchema"][0] {
   _id,

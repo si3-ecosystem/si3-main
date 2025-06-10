@@ -61,7 +61,7 @@ export function AccordionMenu() {
       items: [
         {
           title: "Grow3dge",
-          href: "#grow3dge",
+          href: "#",
           accordionValue: "grow3dge",
           isGrow3dge: true,
         },

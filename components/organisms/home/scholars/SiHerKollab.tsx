@@ -2,12 +2,13 @@
 
 import { CollabCard } from "@/components/molecules/cards/collabCard";
 import { VideoCarousel } from "@/components/molecules/carousels/videoCarousel";
-import { ScholarsData } from "@/types/home";
+import { Course, ScholarsData } from "@/types/home";
 
 type Props = {
   data: ScholarsData;
+  cardsData: Course[];
 };
-export function SiHerKollab({ data }: Props) {
+export function SiHerKollab({ data, cardsData }: Props) {
   return (
     <div id="si_u_scholars_kollab" className="h-full py-20">
       <VideoCarousel
@@ -17,7 +18,7 @@ export function SiHerKollab({ data }: Props) {
           "Explore our growing collaborative of women & non-binary led Web3 communities."
         }
         itemsPerSlide={3}
-        items={data.communities}
+        items={cardsData}
         renderItem={(item, key) => (
           <CollabCard
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

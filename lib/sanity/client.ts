@@ -20,6 +20,7 @@ import {
   membersPolicyQuery,
   cookiePolicyQuery,
   diversityTrackerQuery,
+  getCardsQuery,
 } from "./groq";
 import { createClient } from "next-sanity";
 
@@ -85,6 +86,13 @@ export async function getHomePageData() {
     return (await client.fetch(homepageQuery)) || {};
   }
   return {};
+}
+
+export async function getCardsData() {
+  if (client) {
+    return (await client.fetch(getCardsQuery)) || [];
+  }
+  return [];
 }
 
 export async function getScholarsData() {

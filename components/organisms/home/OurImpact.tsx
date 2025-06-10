@@ -24,7 +24,7 @@ export function OurImpact({ HomePageData }: Props) {
       <Title className="mt-28 text-center text-white">
         {HomePageData?.impact?.title || "OUR IMPACT"}
       </Title>
-      <ul className="mx-auto mt-6 flex w-full max-w-[1440px] flex-wrap justify-center gap-5 px-4">
+      <ul className="mx-auto mt-6 grid w-full max-w-[1440px] grid-cols-1 place-content-center place-items-center justify-center gap-5 px-4 sm:grid-cols-2 md:grid-cols-4">
         {HomePageData?.impact?.metrics?.map((item, index) => (
           <ImpactCard
             item={item}

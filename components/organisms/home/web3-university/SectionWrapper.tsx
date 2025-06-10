@@ -5,18 +5,20 @@ import { useAppSelector } from "@/redux/store";
 import { ScholarsJourneyWrapper } from "./siu-scholars-journey/scholarsJourneyWrapper";
 import { GuidesJourneyWrapper } from "./si-her-guides-experience/guidesJourneyWrapper";
 import { PartnersJourneyWrapper } from "./si-partners-opportunities/PartnersJourneyWrapper";
-import { ScholarsData, GuidesData, PartnersData } from "@/types/home";
+import { ScholarsData, GuidesData, PartnersData, Course } from "@/types/home";
 
 type Props = {
   scholarsData: ScholarsData;
   guidesData: GuidesData;
   partnersData: PartnersData;
+  cardsData: Course[];
 };
 
 export function SectionWrapper({
   scholarsData,
   guidesData,
   partnersData,
+  cardsData,
 }: Props) {
   const activeSection = useAppSelector(
     (state) => state.activeSection.activeSection,
@@ -53,6 +55,7 @@ export function SectionWrapper({
             scholarsData={scholarsData}
             guidesData={guidesData}
             partnersData={partnersData}
+            cardsData={cardsData}
           />
         </div>
       </div>

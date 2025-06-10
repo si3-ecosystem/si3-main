@@ -22,7 +22,7 @@ export function ImpactCard({
 }: Props) {
   return (
     <li
-      className={`flex w-full max-w-[291px] flex-col items-center justify-center gap-2.5 rounded-2xl py-6 transition-colors lg:p-3.5 ${
+      className={`flex w-full max-w-[251px] flex-col items-center justify-center gap-2.5 rounded-2xl py-6 transition-colors lg:p-3.5 ${
         isHovered ? "bg-[#F4F4F4]" : isFirst ? "bg-white" : "bg-[#9c83bd]"
       }`}
       onMouseEnter={onHover}
