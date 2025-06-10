@@ -242,6 +242,7 @@ export interface FAQ {
 export interface ThoughtLeadership {
   _id: string;
   title: string;
+  desc?: string;
   cta1Text: string;
   cta1Link: string;
   cta2Text: string;

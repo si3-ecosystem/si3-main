@@ -8,6 +8,7 @@ import pushReducer from "./slice/pushSlice";
 import modelReducer from "./slice/modelSlice";
 import communityReducer from "./slice/communitySlice";
 import activeSectionReducer from "./slice/activeSectionSlice";
+import grow3dgeReducer from "./slice/grow3dgeSlice";
 
 export const store: Store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store: Store = configureStore({
     model: modelReducer,
     community: communityReducer,
     activeSection: activeSectionReducer,
+    grow3dge: grow3dgeReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

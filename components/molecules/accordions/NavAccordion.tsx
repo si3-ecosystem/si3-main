@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { setActiveAccordionValue } from "@/redux/slice/communitySlice";
+import { openGrow3dgeModal } from "@/redux/slice/grow3dgeSlice";
 import { Button } from "@/components/atoms/button";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -55,9 +56,16 @@ export function AccordionMenu() {
       ],
     },
     {
-      id: "grow3dge",
-      title: "Grow3dge",
-      items: [],
+      id: "grow",
+      title: "GROW",
+      items: [
+        {
+          title: "Grow3dge",
+          href: "#grow3dge",
+          accordionValue: "grow3dge",
+          isGrow3dge: true,
+        },
+      ],
     },
     { id: "mission", title: "Mission", items: [] },
     {
@@ -83,7 +91,16 @@ export function AccordionMenu() {
     },
   ];
 
-  const handleMenuItemClick = (href: string, accordionValue: string | null) => {
+  const handleMenuItemClick = (
+    href: string,
+    accordionValue: string | null,
+    isGrow3dge = false,
+  ) => {
+    if (isGrow3dge) {
+      dispatch(openGrow3dgeModal());
+      return;
+    }
+
     if (href.startsWith("/#")) {
       const sectionId = href.split("#")[1];
       const element = document.getElementById(sectionId);
@@ -96,7 +113,7 @@ export function AccordionMenu() {
           behavior: "smooth",
         });
       }
-    } else {
+    } else if (href && !href.startsWith("#")) {
       router.push(href);
     }
 
@@ -194,7 +211,11 @@ export function AccordionMenu() {
                       href={item.href}
                       className="block p-2.5 text-sm text-gray-700 hover:text-purple-500"
                       onClick={() => {
-                        handleMenuItemClick(item.href, item.accordionValue);
+                        handleMenuItemClick(
+                          item.href,
+                          item.accordionValue,
+                          item.isGrow3dge,
+                        );
                       }}
                       target={item.href.startsWith("http") ? "_blank" : "_self"}
                       rel={

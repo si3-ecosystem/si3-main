@@ -6,6 +6,8 @@ import { ThoughtLeadership } from "@/types/home";
 import Image from "next/image";
 // import Link from "next/link";
 import { urlForImage } from "@/lib/sanity/image";
+import { Button } from "@/components/atoms/button";
+import Link from "next/link";
 // import { Button } from "@/components/atoms/button";
 
 const options = {
@@ -41,7 +43,7 @@ export function ThoughtLeadershipSection({
   if (!thoughtLeadership?.length) return null;
 
   return (
-    <div className="relative h-[248px] w-full overflow-hidden rounded-[30px] md:h-[479px]">
+    <div className="relative h-[458px] w-full overflow-hidden rounded-[30px] md:h-[479px]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 h-full w-full">
         {thoughtLeadership[selectedIndex].backgroundImage && (
@@ -54,7 +56,6 @@ export function ThoughtLeadershipSection({
             alt={thoughtLeadership[selectedIndex].backgroundImage.alt || ""}
             fill
             className="object-cover"
-            priority
           />
         )}
       </div>
@@ -65,38 +66,31 @@ export function ThoughtLeadershipSection({
             {thoughtLeadership.map((item) => (
               <div
                 key={item._id}
-                className="relative flex h-fit w-full flex-shrink-0 flex-col justify-between text-white lg:flex-row lg:p-6 lg:pl-6"
+                className="relative flex h-fit w-full flex-shrink-0 flex-col justify-between text-white lg:flex-row lg:items-start lg:p-6 lg:pl-6"
               >
                 <div className="flex w-full items-center justify-between bg-black/40 p-6 max-lg:mt-7 lg:rounded-[10px]">
-                  <h3 className="text-xl font-semibold max-lg:text-center">
-                    {item.title}
-                  </h3>
-                  {/* <div className="flex gap-4 max-lg:hidden">
-                    {item.cta1Text && (
-                      <Button className="bg-[#9F44D3] text-white">
-                        <Link href={item.cta1Link || "#"}>{item.cta1Text}</Link>
-                      </Button>
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-xl font-semibold max-lg:text-center">
+                      {item.title}
+                    </h3>
+                    {item.desc && (
+                      <p className="w-full max-w-[600px] text-sm max-lg:text-center">
+                        {item.desc}
+                      </p>
                     )}
-                    {item.cta2Text && (
-                      <Button className="bg-black text-white">
-                        <Link href={item.cta2Link || "#"}>{item.cta2Text}</Link>
-                      </Button>
-                    )}
-                  </div> */}
+                  </div>
+                  <div className="flex h-full gap-4 max-lg:hidden">
+                    <Button className="bg-black text-white">
+                      <Link href={"/onboard"}>Read More</Link>
+                    </Button>
+                  </div>
                 </div>
 
-                {/* <div className="mt-12 flex hidden w-full items-center justify-center gap-2.5">
-                  {item.cta1Text && (
-                    <Button className="w-[124px] bg-[#9F44D3] text-white">
-                      <Link href={item.cta1Link || "#"}>{item.cta1Text}</Link>
-                    </Button>
-                  )}
-                  {item.cta2Text && (
-                    <Button className="w-[124px] bg-black text-white">
-                      <Link href={item.cta2Link || "#"}>{item.cta2Text}</Link>
-                    </Button>
-                  )}
-                </div> */}
+                <div className="mt-12 flex w-full items-center justify-center gap-2.5 lg:hidden">
+                  <Button className="w-[124px] bg-black text-white">
+                    <Link href={"/onboard"}>Read More</Link>
+                  </Button>
+                </div>
               </div>
             ))}
           </div>

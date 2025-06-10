@@ -61,6 +61,7 @@ export const homepageQuery = groq`
     thoughtLeadership[]-> {
       _id,
       title,
+      desc,
       cta1Text,
       cta1Link,
       cta2Text,

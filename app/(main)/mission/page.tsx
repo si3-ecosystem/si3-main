@@ -1,3 +1,4 @@
+import { InitialLoader } from "@/components/atoms/InitialLoader";
 import { Loader } from "@/components/atoms/Loader";
 import { HeroSection } from "@/components/organisms/about/HeroSection";
 import { ParallaxGallery } from "@/components/organisms/about/ParallaxGallery";
@@ -11,7 +12,7 @@ import { Suspense } from "react";
 export default async function AboutPage() {
   const data: AboutQuery = await getAboutPageData();
 
-  return (
+  const pageContent = (
     <Suspense fallback={<Loader />}>
       <HeroSection data={data} />
       <TopTestimonial data={data.testimonial} />
@@ -28,4 +29,6 @@ export default async function AboutPage() {
       />
     </Suspense>
   );
+
+  return <InitialLoader>{pageContent}</InitialLoader>;
 }

@@ -1,7 +1,6 @@
 // components/molecules/cards/Grow3dgePopupCard.tsx
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { Card } from "@/components/atoms/card";
@@ -10,9 +9,13 @@ import { useQuery } from "@tanstack/react-query";
 import { getHomePageData } from "@/lib/sanity/client";
 import { HomepageSchema } from "@/types/home";
 import { MovingLogos } from "./MovingLogos";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { closeGrow3dgeModal } from "@/redux/slice/grow3dgeSlice";
 
 export function Grow3dgePopupCard() {
-  const [isVisible, setIsVisible] = useState(true);
+  const isOpen = useAppSelector((state) => state.grow3dge.isOpen);
+  const dispatch = useAppDispatch();
+
   const { data } = useQuery<HomepageSchema>({
     queryKey: ["homepage"],
     queryFn: getHomePageData,
@@ -21,10 +24,10 @@ export function Grow3dgePopupCard() {
   const partners = data?.communityPartners || [];
 
   const handleDismiss = () => {
-    setIsVisible(false);
+    dispatch(closeGrow3dgeModal());
   };
 
-  if (!isVisible) return null;
+  if (!isOpen) return null;
 
   return (
     <>
