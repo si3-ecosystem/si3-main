@@ -15,7 +15,7 @@ interface CoinConfig {
 }
 
 const COIN_CONFIG_LIST: CoinConfig[] = [
-  { key: "up", slug: "unistake", symbol: "UP" },
+  { key: "up", slug: "unlock-protocol", symbol: "UP" },
   { key: "lpt", slug: "livepeer", symbol: "LPT" },
   { key: "arb", slug: "arbitrum", symbol: "ARB" },
   { key: "eth", slug: "ethereum", symbol: "ETH" },
@@ -204,7 +204,7 @@ const CryptoCard = ({ crypto }) => {
             $
             {crypto.current_price?.toLocaleString(undefined, {
               minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
+              maximumFractionDigits: 5,
             })}
           </span>
           <span className="text-xs font-medium text-[#848484]">USD</span>

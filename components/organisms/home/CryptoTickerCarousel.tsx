@@ -13,7 +13,7 @@ interface CoinConfig {
 }
 
 const COIN_CONFIG_LIST: CoinConfig[] = [
-  { key: "up", slug: "unistake", symbol: "UP" },
+  { key: "up", slug: "unlock-protocol", symbol: "UP" },
   { key: "lpt", slug: "livepeer", symbol: "LPT" },
   { key: "arb", slug: "arbitrum", symbol: "ARB" },
   { key: "eth", slug: "ethereum", symbol: "ETH" },
@@ -94,7 +94,7 @@ export function CryptoTickerCarousel() {
           price: `$${
             coin.current_price?.toLocaleString(undefined, {
               minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
+              maximumFractionDigits: 5,
             }) || "0.00"
           }`,
           change24h: (coin.price_change_percentage_24h ?? 0).toFixed(2),
