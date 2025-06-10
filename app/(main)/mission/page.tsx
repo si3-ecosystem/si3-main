@@ -1,4 +1,3 @@
-import { InitialLoader } from "@/components/atoms/InitialLoader";
 import { Loader } from "@/components/atoms/Loader";
 import { HeroSection } from "@/components/organisms/about/HeroSection";
 import { ParallaxGallery } from "@/components/organisms/about/ParallaxGallery";
@@ -30,5 +29,5 @@ export default async function AboutPage() {
     </Suspense>
   );
 
-  return <InitialLoader>{pageContent}</InitialLoader>;
+  return <>{pageContent}</>;
 }

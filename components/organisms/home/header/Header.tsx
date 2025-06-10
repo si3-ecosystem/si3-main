@@ -8,7 +8,7 @@ import { HomepageSchema } from "@/types/home";
 
 const Header = ({ data }: { data: HomepageSchema }) => {
   return (
-    <div className="relative z-10 space-y-4 pt-[112px] lg:pt-[180px]">
+    <div className="relative z-10 space-y-4 pt-[112px] lg:pt-[240px]">
       <Title
         as="h1"
         variant="huge"

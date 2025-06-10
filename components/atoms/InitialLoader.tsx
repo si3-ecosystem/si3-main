@@ -4,27 +4,37 @@ import { useEffect, useState } from "react";
 import { LottieAnimation } from "./LottieAnimation";
 import AnimateLoading from "@/public/loading.json";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export function InitialLoader({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
+    const hasVisited = localStorage.getItem("hasVisited");
 
-    return () => clearTimeout(timer);
-  }, []);
+    if (!hasVisited) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        localStorage.setItem("hasVisited", "true");
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    } else {
+      setIsLoading(false);
+    }
+  }, [pathname]);
 
   if (isLoading) {
     return (
-      <div className="absolute inset-0 z-[9999] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
-        <div className="">
+      <div className="fixed inset-0 z-[9999] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
+        <div className="relative h-full w-full">
           <Image
             src="/loadingbg.svg"
             alt="loadingbg"
             fill
-            className="h-full w-full object-cover object-center"
+            className="object-cover object-center"
+            priority
           />
           <LottieAnimation
             animationData={AnimateLoading}
