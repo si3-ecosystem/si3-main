@@ -1,10 +1,10 @@
 import React from "react";
 
 import { Title } from "@/components/atoms/title";
-import { Button } from "@/components/atoms/button";
+// import { Button } from "@/components/atoms/button";
 import { HeaderTitle } from "./HeaderTitle";
 import { HomepageSchema } from "@/types/home";
-import Link from "next/link";
+// import Link from "next/link";
 
 const Header = ({ data }: { data: HomepageSchema }) => {
   return (
@@ -25,7 +25,7 @@ const Header = ({ data }: { data: HomepageSchema }) => {
       <h3 className="text-center text-[11px] leading-7 font-semibold tracking-[1.5px] text-white md:hidden md:text-xl">
         Powered by <span>{"SI<3>"}</span>
       </h3>
-
+      {/* 
       <div className="layout mt-[68px] flex w-full items-center justify-center py-0 max-lg:px-5 md:items-end md:justify-between">
         <div className="flex flex-col gap-4">
           <h3 className="text-[25px] leading-9 font-semibold tracking-[2.75px] text-white max-md:hidden">
@@ -49,7 +49,7 @@ const Header = ({ data }: { data: HomepageSchema }) => {
             Powered by <span>{"SI<3>"}</span>
           </h3>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

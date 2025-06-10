@@ -11,7 +11,6 @@ export function ScholarsJourneyWrapper({
   scholarsData: ScholarsData;
   cardsData: Course[];
 }) {
-  console.log("cardsData", cardsData);
   return (
     <div id="scholars" className="">
       <HeroSection data={scholarsData.introduction} />
