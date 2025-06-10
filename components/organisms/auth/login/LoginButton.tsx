@@ -77,7 +77,9 @@ const LoginButton: FC<LoginButtonProps> = ({ connector }) => {
       onClick={handleClick}
     >
       <Image src={src} alt={alt} width={20} height={20} />
-      <span className="text-base font-semibold">{alt}</span>
+      <span className="text-base font-semibold">
+        {connector.id === "walletConnect" ? "Continue With WalletConnect" : alt}
+      </span>
     </button>
   );
 };

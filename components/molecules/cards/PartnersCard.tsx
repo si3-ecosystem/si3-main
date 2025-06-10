@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
@@ -8,31 +10,16 @@ interface PartnersCardProps {
   type?: string;
 }
 
-const PartnersCard: React.FC<PartnersCardProps> = ({
-  src,
-  alt,
-  className,
-  type,
-}) => {
+const PartnersCard: React.FC<PartnersCardProps> = ({ src, alt }) => {
   return (
-    <div className="w-40 space-y-2 rounded-2xl border border-gray-100 bg-white p-5 md:w-72 md:p-8">
-      <div className="relative h-8 md:h-12">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          style={{
-            objectFit: "contain",
-            objectPosition: "left",
-          }}
-          className={className}
-        />
-      </div>
-
-      <p className="text-gray-500 max-md:text-[9px]">
-        {" "}
-        {type || "Business Partner"}
-      </p>
+    <div className="h-8 md:h-12">
+      <Image
+        src={src}
+        alt={alt}
+        width={400}
+        height={140}
+        className={"w-[140px]"}
+      />
     </div>
   );
 };

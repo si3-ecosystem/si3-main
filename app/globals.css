@@ -416,3 +416,10 @@ body,
     transform: translateX(-50%);
   }
 }
+
+.loginpage {
+  background-image: url("/login/Loginpagebg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
