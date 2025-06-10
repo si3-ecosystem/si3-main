@@ -55,7 +55,7 @@ const PrivacyPage: React.FC = () => {
 
   const policyButtons = [
     { label: "Privacy Policy", type: "privacy" },
-    { label: "Diversity Tracker Policy", type: "termsAndConditions" },
+    // { label: "Web3 Health Policy", type: "termsAndConditions" },
     { label: "Members Policy", type: "membersPolicy" },
     { label: "Cookie Policy", type: "cookiePolicy" },
   ];
