@@ -67,7 +67,7 @@ export function Web3UniversitySection({ data }: { data: OnboardSchema }) {
             <h2 className="font-clesmont text-center text-[48px] leading-[125%] font-normal text-white lg:text-[50px] lg:leading-[140%] lg:text-black">
               SI U:
             </h2>
-            <h2 className="font-clesmont text-center text-[27px] leading-[125%] font-normal text-white lg:text-[40px] lg:leading-[140%] lg:text-black">
+            <h2 className="font-clesmont text-center text-[20px] leading-[125%] font-normal text-white sm:text-[32px] lg:text-[40px] lg:leading-[140%] lg:text-black">
               THE WEB3 UNIVERSITY
             </h2>
           </div>

@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { setActiveAccordionValue } from "@/redux/slice/communitySlice";
 import { openGrow3dgeModal } from "@/redux/slice/grow3dgeSlice";
-import { Button } from "@/components/atoms/button";
+// import { Button } from "@/components/atoms/button";
 import { usePathname, useRouter } from "next/navigation";
 
 export function AccordionMenu() {
@@ -234,7 +234,7 @@ export function AccordionMenu() {
         ))}
       </Accordion>
 
-      <div className="border-t border-gray-200">
+      {/* <div className="border-t border-gray-200">
         <SheetClose asChild>
           <Button
             asChild
@@ -243,7 +243,7 @@ export function AccordionMenu() {
             <Link href={"/login"}>SI U Onboard</Link>
           </Button>
         </SheetClose>
-      </div>
+      </div> */}
     </div>
   );
 }

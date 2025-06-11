@@ -10,7 +10,7 @@ export function PartnersJourneyWrapper({
 }) {
   return (
     <div id="partners">
-      <HeroSection data={partnersData?.introduction} />
+      <HeroSection data={partnersData?.introduction} hideButton={true} />
       <div className="max-sm:mt-6">
         <ExploreSection data={partnersData.explore} />
       </div>

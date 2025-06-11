@@ -38,7 +38,7 @@ export function SectionWrapper({
     <div className="@container h-full w-full from-[#E5ABFF] via-[#8300BE] to-[#450063] bg-[length:100%_100%] bg-no-repeat max-lg:bg-gradient-to-br max-lg:from-[#211257] max-lg:to-[#8A04C5]">
       <h2
         className={cn(
-          "font-clesmont layout pt-0 text-[40px] leading-[50px] font-normal text-white max-lg:p-8 lg:text-black",
+          "font-clesmont layout pt-0 text-[32px] leading-[50px] font-normal text-white max-lg:p-8 md:text-[40px] lg:text-black",
           activeSection === "scholars" && "text-center lg:text-left",
           activeSection === "guides" && "text-center",
           activeSection === "partners" && "text-center lg:text-right",

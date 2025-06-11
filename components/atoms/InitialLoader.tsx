@@ -11,18 +11,14 @@ export function InitialLoader({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const hasVisited = localStorage.getItem("hasVisited");
+    // const hasVisited = localStorage.getItem("hasVisited");
 
-    if (!hasVisited) {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-        localStorage.setItem("hasVisited", "true");
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    } else {
+    const timer = setTimeout(() => {
       setIsLoading(false);
-    }
+      // localStorage.setItem("hasVisited", "true");
+    }, 5000);
+
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   if (isLoading) {

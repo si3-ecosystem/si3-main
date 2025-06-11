@@ -10,13 +10,16 @@ import { Introduction } from "@/types/home";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { DemoSessionCard } from "@/components/molecules/cards/DemoSessionCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function HeroSection({
   data,
   isForm = false,
+  hideButton = false,
 }: {
   data: Introduction;
   isForm?: boolean;
+  hideButton?: boolean;
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -70,7 +73,9 @@ export default function HeroSection({
               </Text>
             </div>
 
-            <div className="lg:mt-4 lg:mr-8">
+            <div
+              className={cn("lg:mt-4 lg:mr-8", !hideButton && "max-md:hidden")}
+            >
               {isForm ? (
                 <PartnerProgramForm
                   className="mx-auto text-white lg:w-[265px]"
