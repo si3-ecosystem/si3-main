@@ -96,14 +96,12 @@ export function Web3UniversitySection({ data }: { data: OnboardSchema }) {
                 <Scholars data={data.onboard_materials[0]} showSvg={true} />
               </li>
               <li
-                id="guides"
                 onMouseEnter={() => handleSectionHover("guides")}
                 onClick={() => handleSectionClick("guides")}
               >
                 <Guides data={data.onboard_materials[1]} showSvg={true} />
               </li>
               <li
-                id="partners"
                 onMouseEnter={() => handleSectionHover("partners")}
                 onClick={() => handleSectionClick("partners")}
               >

@@ -91,7 +91,32 @@ export function AccordionMenu() {
     },
   ];
 
-  const handleMenuItemClick = (
+  const scrollToSection = (id: string, attempts = 0) => {
+    if (attempts >= 5) {
+      console.error(
+        `Failed to find element with ID: ${id} after multiple attempts`,
+      );
+      return;
+    }
+
+    const element = document.getElementById(id);
+    if (element) {
+      const navbarHeight = 160;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    } else {
+      // Try again after a delay if element not found
+      setTimeout(() => scrollToSection(id, attempts + 1), 100);
+    }
+  };
+
+  const handleMenuItemClick = async (
     href: string,
     accordionValue: string | null,
     isGrow3dge = false,
@@ -101,22 +126,24 @@ export function AccordionMenu() {
       return;
     }
 
+    // Handle navigation first
     if (href.startsWith("/#")) {
       const sectionId = href.split("#")[1];
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const navbarHeight = 160;
-        const offsetTop =
-          element.getBoundingClientRect().top + window.scrollY - navbarHeight;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: "smooth",
-        });
+      // If we're already on the page, just scroll
+      if (pathName === "/") {
+        scrollToSection(sectionId);
+      } else {
+        // If we need to navigate first, then scroll after navigation
+        router.push(`/#${sectionId}`);
+        // Wait for navigation to complete
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        scrollToSection(sectionId);
       }
     } else if (href && !href.startsWith("#")) {
       router.push(href);
     }
 
+    // Handle accordion state
     if (accordionValue) {
       if (pathName === "/about") {
         setTimeout(() => {

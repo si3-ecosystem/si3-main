@@ -31,7 +31,7 @@ export function Scholars({ data, showSvg = false }: Props) {
   };
 
   return (
-    <div id="scholars">
+    <div>
       <Card
         className={cn(
           "z-10 flex w-full flex-col gap-6 rounded-[33px] border bg-transparent p-4 transition-all duration-300",

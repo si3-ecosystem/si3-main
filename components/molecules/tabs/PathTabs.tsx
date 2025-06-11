@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { setActiveSection } from "@/redux/slice/activeSectionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -21,8 +23,22 @@ export function PathTabs() {
     { id: "partners", label: "SI<3> Partners" },
   ];
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Sync tab with URL hash
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (["scholars", "guides", "partners"].includes(hash)) {
+      dispatch(setActiveSection(hash as "scholars" | "guides" | "partners"));
+    }
+  }, [pathname, searchParams, dispatch]);
+
   const handleTabClick = (tabId: "scholars" | "guides" | "partners") => {
     dispatch(setActiveSection(tabId));
+    // Update URL hash using Next.js router
+    router.push(`#${tabId}`, { scroll: false });
   };
 
   return (
