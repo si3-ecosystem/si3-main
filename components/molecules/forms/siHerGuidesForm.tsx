@@ -300,16 +300,24 @@ export function SiHerGuidesForm({
                 <Button
                   type="submit"
                   disabled={mutation.isPending}
-                  className="mt-12 w-full"
+                  className="mt-12 !flex w-full !items-center gap-2"
                 >
-                  {mutation.isPending && (
-                    <LoaderCircleIcon
-                      className="mr-2 animate-spin"
-                      size={16}
-                      aria-hidden="true"
-                    />
-                  )}
-                  {mutation.isPending ? "Submitting..." : "Submit Application"}
+                  <div className="flex items-center gap-2">
+                    <span>
+                      {mutation.isPending && (
+                        <LoaderCircleIcon
+                          className="mr-2 animate-spin"
+                          size={16}
+                          aria-hidden="true"
+                        />
+                      )}
+                    </span>
+                    <span>
+                      {mutation.isPending
+                        ? "Submitting..."
+                        : "Submit Application"}
+                    </span>
+                  </div>
                 </Button>
               </form>
             </Form>

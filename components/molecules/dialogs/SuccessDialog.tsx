@@ -33,7 +33,7 @@ export function SuccessDialog({
   className,
 }: SuccessDialogProps) {
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={() => onOpenChange(!open)}>
       <DialogTitle className="sr-only">Success Dialog</DialogTitle>
       <DialogContent className="mx-auto w-full rounded-lg p-6 py-8 lg:max-w-[731px] lg:py-12">
         <div
@@ -70,7 +70,11 @@ export function SuccessDialog({
         </p>
 
         <DialogFooter className="flex justify-center">
-          <Button asChild className="mx-auto w-fit">
+          <Button
+            onClick={() => onOpenChange(false)}
+            asChild
+            className="mx-auto w-fit"
+          >
             <Link href={ctaLink || "/"}>{ctaTitle}</Link>
           </Button>
         </DialogFooter>

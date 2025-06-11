@@ -82,11 +82,9 @@ export function PartnerProgramForm({
   }, [open]);
 
   const interestOptions = [
-    "Educational workshop",
-    "Growth campaign",
-    "Grow3dge accelerator",
-    "DEI & Inclusion training",
-    "Grants & financial inclusion training",
+    "Grow3dge Education and Growth 3.0 accelerator program (August-October 2025) ",
+    "Community growth and education partnership ",
+    "Diversity, Equity, Accessibility, and Inclusion training",
   ];
 
   const mutation = useMutation({
@@ -307,16 +305,22 @@ export function PartnerProgramForm({
                 <Button
                   type="submit"
                   disabled={mutation.isPending}
-                  className="mt-12 w-full"
+                  className="mt-12 !flex w-full !items-center gap-2"
                 >
-                  {mutation.isPending && (
-                    <LoaderCircleIcon
-                      className="mr-2 animate-spin"
-                      size={16}
-                      aria-hidden="true"
-                    />
-                  )}
-                  {mutation.isPending ? "Submitting..." : "Submit Inquiry"}
+                  <div className="flex items-center gap-2">
+                    <span>
+                      {mutation.isPending && (
+                        <LoaderCircleIcon
+                          className="mr-2 animate-spin"
+                          size={16}
+                          aria-hidden="true"
+                        />
+                      )}
+                    </span>
+                    <span>
+                      {mutation.isPending ? "Submitting..." : "Submit Inquiry"}
+                    </span>
+                  </div>
                 </Button>
               </form>
             </Form>

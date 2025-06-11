@@ -14,7 +14,6 @@ function Presenters({ item }: PresentersProps) {
   const imageUrl = item?.image && urlForImage(item.image)?.src;
 
   const logoUrl = item?.logo && urlForImage(item.logo)?.src;
-  console.log("logoUrl", logoUrl);
   return (
     <div className="flex w-full items-center justify-between gap-2 rounded-full bg-[#eeeeee] p-2">
       <div className="flex items-center gap-2">
