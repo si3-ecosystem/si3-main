@@ -35,7 +35,9 @@ import Image from "next/image";
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address").min(1, "Email is required"),
-  pronouns: z.string().min(1, "Pronouns are required"),
+  daoInterests: z
+    .string()
+    .min(1, "Please share your interests in joining our DAO"),
   interests: z.array(z.string()).min(1, "Select at least one interest"),
   personalValues: z.string().min(1, "Personal values are required"),
   digitalLink: z
@@ -62,7 +64,7 @@ export function SiHerGuidesForm({
     defaultValues: {
       name: "",
       email: "",
-      pronouns: "",
+      daoInterests: "",
       interests: [],
       personalValues: "",
       digitalLink: "",
@@ -82,9 +84,7 @@ export function SiHerGuidesForm({
 
   const interestOptions = [
     "She/Her/Hers",
-    "He/Him/His",
     "They/Them/Theirs",
-    "Ze/Hir/Hirs",
     "Other (please specify in personal values)",
   ];
 
@@ -99,7 +99,7 @@ export function SiHerGuidesForm({
             formData: {
               name: data.name,
               email: data.email,
-              pronouns: data.pronouns,
+              daoInterests: data.daoInterests,
               interests: Array.isArray(data.interests)
                 ? data.interests
                 : [data.interests],
@@ -207,16 +207,16 @@ export function SiHerGuidesForm({
                 />
                 <FormField
                   control={form.control}
-                  name="pronouns"
+                  name="daoInterests"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-medium">
-                        Please share your pronouns{" "}
+                        Please share your interests in joining our DAO
                         <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g., she/her/hers, they/them/theirs"
+                          placeholder="e.g., Web3 development, community building, content creation"
                           {...field}
                         />
                       </FormControl>
@@ -309,7 +309,7 @@ export function SiHerGuidesForm({
                       aria-hidden="true"
                     />
                   )}
-                  {mutation.isPending ? "Submitting..." : "Submit Inquiry"}
+                  {mutation.isPending ? "Submitting..." : "Submit Application"}
                 </Button>
               </form>
             </Form>
