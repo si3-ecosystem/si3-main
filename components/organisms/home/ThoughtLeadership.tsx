@@ -6,8 +6,8 @@ import { ThoughtLeadership } from "@/types/home";
 import Image from "next/image";
 // import Link from "next/link";
 import { urlForImage } from "@/lib/sanity/image";
-import { Button } from "@/components/atoms/button";
-import Link from "next/link";
+// import { Button } from "@/components/atoms/button";
+// import Link from "next/link";
 // import { Button } from "@/components/atoms/button";
 
 const options = {
@@ -79,18 +79,18 @@ export function ThoughtLeadershipSection({
                       </p>
                     )}
                   </div>
-                  <div className="flex h-full gap-4 max-lg:hidden">
+                  {/* <div className="flex h-full gap-4 max-lg:hidden">
                     <Button className="bg-black text-white">
                       <Link href={"/onboard"}>Read More</Link>
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
 
-                <div className="mt-12 flex w-full items-center justify-center gap-2.5 lg:hidden">
+                {/* <div className="mt-12 flex w-full items-center justify-center gap-2.5 lg:hidden">
                   <Button className="w-[124px] bg-black text-white">
                     <Link href={"/onboard"}>Read More</Link>
                   </Button>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

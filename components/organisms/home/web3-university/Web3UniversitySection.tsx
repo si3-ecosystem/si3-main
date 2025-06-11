@@ -52,19 +52,22 @@ export function Web3UniversitySection({ data }: { data: OnboardSchema }) {
 
   return (
     <section id="si-u" className="@container relative">
-      <Image
-        src="/home/web3-university-bg.svg"
-        alt="web3 university background"
-        fill
-        className="absolute inset-0 -z-10 h-full w-full bg-center object-cover"
-      />
+      <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
+        <Image
+          src="/home/web3-university-bg.svg"
+          alt="web3 university background"
+          fill
+          className="sm:blur-0 h-full w-full bg-center object-cover blur-xl"
+        />
+        <div className="absolute inset-0 bg-black/30 sm:hidden" />
+      </div>
       <div className="layout z-20 space-y-[30px] max-lg:py-9 lg:space-y-[70px] lg:py-[77px]">
         <div className="space-y-6">
           <div className="">
             <h2 className="font-clesmont text-center text-[48px] leading-[125%] font-normal text-white lg:text-[50px] lg:leading-[140%] lg:text-black">
               SI U:
             </h2>
-            <h2 className="font-clesmont text-center text-[30px] leading-[125%] font-normal text-white lg:text-[40px] lg:leading-[140%] lg:text-black">
+            <h2 className="font-clesmont text-center text-[27px] leading-[125%] font-normal text-white lg:text-[40px] lg:leading-[140%] lg:text-black">
               THE WEB3 UNIVERSITY
             </h2>
           </div>

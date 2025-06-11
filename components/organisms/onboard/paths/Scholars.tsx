@@ -87,10 +87,11 @@ export function Scholars({ data, showSvg = false }: Props) {
           </div>
           <Button
             asChild
+            disabled
             variant={"outline"}
             className="w-full border border-black text-center max-sm:bg-black max-sm:text-white"
           >
-            <Link href={data.ctaLink || "#"}>{data.ctaText}</Link>
+            <Link href={"#"}>{"COMING SOON"}</Link>
           </Button>
         </div>
       </Card>

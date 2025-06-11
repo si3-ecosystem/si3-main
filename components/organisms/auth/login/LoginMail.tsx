@@ -12,7 +12,7 @@ const LoginMail = () => {
       <div className="relative mt-2 border">
         <input
           type="email"
-          className="md:text-md w-full rounded-lg p-2 text-sm md:p-3"
+          className="md:text-md w-full rounded-lg p-2 text-lg md:p-3 md:text-sm"
           placeholder="youremail@mail.com"
         />
       </div>

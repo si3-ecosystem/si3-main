@@ -36,13 +36,13 @@ export function CtaVideoSection({
           {title}
         </Title>
 
-        {isLink ? (
+        {isLink && ctaTitle ? (
           <Button asChild>
-            <Link href={ctaLink || "#"}>{ctaTitle || "Join Now"}</Link>
+            <Link href={ctaLink || "#"}>{ctaTitle}</Link>
           </Button>
-        ) : (
+        ) : ctaTitle ? (
           <PartnerProgramForm className="mx-auto w-fit" title={ctaTitle} />
-        )}
+        ) : null}
       </div>
     </section>
   );

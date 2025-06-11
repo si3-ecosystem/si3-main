@@ -62,7 +62,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <MobileMenu />
 
-          <Link href={"/"}>
+          <Link href={"/"} className="max-md:hidden">
             <Logo
               src="/logo.svg"
               alt="SI3 Logo"

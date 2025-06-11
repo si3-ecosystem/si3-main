@@ -22,7 +22,7 @@ const Header = ({ data }: { data: HomepageSchema }) => {
       <p className="mx-auto max-w-[336.016px] text-center text-base font-normal text-white lg:max-w-[543.807px] lg:text-xl">
         {data.desc}
       </p>
-      <h3 className="text-center text-[11px] leading-7 font-semibold tracking-[1.5px] text-white md:hidden md:text-xl">
+      <h3 className="text-center text-[11px] leading-7 font-semibold tracking-[1.5px] text-white max-md:hidden md:hidden md:text-xl">
         Powered by <span>{"SI<3>"}</span>
       </h3>
       {/* 

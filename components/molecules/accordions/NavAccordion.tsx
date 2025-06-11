@@ -67,7 +67,7 @@ export function AccordionMenu() {
         },
       ],
     },
-    { id: "mission", title: "Mission", items: [] },
+    { id: "mission", title: "MISSION", items: [] },
     {
       id: "stay-connected",
       title: "STAY CONNECTED",

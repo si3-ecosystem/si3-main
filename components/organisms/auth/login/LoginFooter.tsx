@@ -7,12 +7,18 @@ const LoginFooter = () => {
     <div className="flex flex-col justify-between gap-8 bg-white">
       <p className="mx-auto mt-2 max-w-[288px] text-center text-base text-gray-500">
         By continuing, you agree to {"SI<3>'s"}
-        <Link href="/" className="font-medium underline hover:text-purple-500">
+        <Link
+          href="/policy/membersPolicy"
+          className="font-medium underline hover:text-purple-500"
+        >
           {" "}
           Member Policy
         </Link>{" "}
         and{" "}
-        <Link href="/" className="font-medium underline hover:text-purple-500">
+        <Link
+          href="/policy/privacy"
+          className="font-medium underline hover:text-purple-500"
+        >
           {" "}
           Privacy Policy
         </Link>

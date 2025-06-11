@@ -15,7 +15,7 @@ import { Web3UniversitySection } from "@/components/organisms/home/web3-universi
 import { getOnboardPageData } from "@/lib/sanity/client";
 import { SectionWrapper } from "@/components/organisms/home/web3-university/SectionWrapper";
 import { FaqSection } from "@/components/organisms/home/FaqSection";
-import { CryptoTickerCarousel } from "@/components/organisms/home/CryptoTickerCarousel";
+// import { CryptoTickerCarousel } from "@/components/organisms/home/CryptoTickerCarousel";
 import { InitialLoader } from "@/components/atoms/InitialLoader";
 import { WomenOfWeb3Banner } from "@/components/organisms/about/WomenOfWeb3Banner";
 import { urlForImage } from "@/lib/sanity/image";
@@ -56,9 +56,7 @@ export default async function HomePage() {
   const pageContent = (
     <Suspense fallback={null}>
       <HeaderContainer HomePageData={HomePageData} />
-      <div className="block lg:hidden">
-        <CryptoTickerCarousel />
-      </div>
+      <div className="block lg:hidden">{/* <CryptoTickerCarousel /> */}</div>
       <div
         id="si-u"
         className="@container max-lg:bg-gradient-to-br max-lg:from-[#211257] max-lg:to-[#8A04C5]"
