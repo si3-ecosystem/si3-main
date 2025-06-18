@@ -19,6 +19,7 @@ import { FaqSection } from "@/components/organisms/home/FaqSection";
 import { InitialLoader } from "@/components/atoms/InitialLoader";
 import { WomenOfWeb3Banner } from "@/components/organisms/about/WomenOfWeb3Banner";
 import { urlForImage } from "@/lib/sanity/image";
+import { Grow3dgePopupCard } from "@/components/molecules/cards/Grow3dgePopupCard";
 
 export default async function HomePage() {
   const [
@@ -56,7 +57,7 @@ export default async function HomePage() {
   const pageContent = (
     <Suspense fallback={null}>
       <HeaderContainer HomePageData={HomePageData} />
-      <div className="block lg:hidden">{/* <CryptoTickerCarousel /> */}</div>
+
       <div
         id="si-u"
         className="@container max-lg:bg-gradient-to-br max-lg:from-[#211257] max-lg:to-[#8A04C5]"

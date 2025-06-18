@@ -22,9 +22,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`mx-auto w-screen max-w-[2560px] overflow-x-hidden bg-white antialiased`}
-      >
+      <body className={``}>
         <PlausibleWrapper>
           <WalletProvider>
             <ReduxProvider>
