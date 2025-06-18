@@ -57,7 +57,7 @@ export function AccordionMenu() {
     },
     {
       id: "grow",
-      title: "GROW",
+      title: "Grow3dge Accelerator",
       items: [
         {
           title: "Grow3dge",

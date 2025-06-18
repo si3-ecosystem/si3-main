@@ -1,5 +1,5 @@
 export const navItems = [
-  // { name: "SI<3>", path: "/" },
+  { name: "Home", path: "/" },
   { name: "SI U", path: "/#si-u" },
   { name: "MISSION", path: "/mission" },
   { name: "ECOSYSTEM", path: "/#ecosystem" },

@@ -53,11 +53,10 @@ export function Grow3dgePopupCard() {
             <div className="relative z-20 flex flex-1 flex-col justify-between pb-2 max-lg:p-3">
               <div className="z-30 flex flex-col gap-1 max-sm:mb-0.5 sm:gap-3">
                 <h3 className="text-left text-sm font-bold text-gray-900 max-sm:text-xs">
-                  INTRODUCING GROW3DGE
+                  {data?.growthTitle}
                 </h3>
                 <p className="max-w-[250px] text-sm text-gray-700 max-sm:max-w-[200px] max-sm:text-[8.9px] sm:mb-4 sm:max-w-[300px]">
-                  Join our 10-week emerging tech growth accelerator program with
-                  over twenty leading industry educators.
+                  {data?.growthContent}
                 </p>
               </div>
 

@@ -5,7 +5,7 @@ interface Grow3dgeState {
 }
 
 const initialState: Grow3dgeState = {
-  isOpen: false,
+  isOpen: true,
 };
 
 const grow3dgeSlice = createSlice({

@@ -28,6 +28,8 @@ export const homepageQuery = groq`
       "ImageColor": asset->metadata.palette.dominant.background,
       alt,
     },
+    growthTitle,
+    growthContent,
     communityPartners[]-> {
       _id,
       name,

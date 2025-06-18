@@ -260,6 +260,8 @@ export interface HomepageSchema {
   ctaText2: string;
   ctaLink2: string;
   videoUrl: string;
+  growthTitle: string;
+  growthContent: string;
   image: HomepageImage;
   educationPartners: Partner[];
   communityPartners: Partner[];
