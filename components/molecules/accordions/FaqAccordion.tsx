@@ -53,7 +53,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
         <AccordionItem
           value={faq._key}
           key={faq._key}
-          className="mt-6 !overflow-hidden rounded-2xl bg-[#8f75b1] !p-0 transition-all duration-300 ease-in-out data-[state=open]:bg-[#9F44D3] lg:rounded-lg [data-state=open]:z-40"
+          className="mt-6 !overflow-hidden rounded-2xl bg-[#8f75b1] !p-0 transition-all duration-300 ease-in-out data-[state=open]:bg-[#FCF8FF] lg:rounded-lg [data-state=open]:z-40"
         >
           <AccordionPrimitive.Header className="group relative !z-20 flex !cursor-pointer py-[10px] lg:py-10">
             <AccordionPrimitive.Trigger className="focus-visible:ring-ring/50 focus-visible:border-ring flex flex-1 items-center justify-between overflow-hidden rounded-md px-4 py-2 text-left text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] lg:px-[90px] group-hover:[&>img]:scale-110">
@@ -73,7 +73,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
               )}
             </AccordionPrimitive.Trigger>
           </AccordionPrimitive.Header>
-          <AccordionContent className="text-muted-foreground !z-10 !bg-[#9F44D3] ease-in-out">
+          <AccordionContent className="text-muted-foreground !z-10 !bg-[#FCF8FF] ease-in-out">
             <div className="prose px-4 pb-4 text-sm text-[#070707] lg:px-[90px] lg:pb-6 lg:text-xl">
               <PortableText value={faq.answer} />
             </div>

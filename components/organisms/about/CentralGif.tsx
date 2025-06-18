@@ -88,7 +88,7 @@ export default function CentralGif({
                 unoptimized
                 priority
                 style={{
-                  opacity: isHovering ? 1 : 0,
+                  opacity: isHovering ? 1 : 1,
                   transition: "opacity 0.6s cubic-bezier(0.7, 0.6, 0.3, 1)",
                   position: "absolute",
                   top: 0,
@@ -99,7 +99,7 @@ export default function CentralGif({
               />
             )}
 
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 1 }}
               animate={{ opacity: isHovering ? 0 : 1 }}
               transition={{ duration: 0.6, ease: [0.7, 0.6, 0.3, 1] }}
@@ -113,7 +113,7 @@ export default function CentralGif({
                 className="object-cover"
                 priority
               />
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </motion.div>
