@@ -57,10 +57,10 @@ export function AccordionMenu() {
     },
     {
       id: "grow",
-      title: "Grow3dge Accelerator",
+      title: "GROW",
       items: [
         {
-          title: "Grow3dge",
+          title: "Grow3dge Accelerator",
           href: "#",
           accordionValue: "grow3dge",
           isGrow3dge: true,

@@ -65,7 +65,7 @@ export function PartnerProgramForm({
       companyName: "",
       interests: [],
       details: "",
-      newsletter: "no",
+      newsletter: "yes",
     },
   });
 
