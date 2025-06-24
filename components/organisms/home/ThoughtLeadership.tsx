@@ -4,18 +4,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ThoughtLeadership } from "@/types/home";
 import Image from "next/image";
-// import Link from "next/link";
 import { urlForImage } from "@/lib/sanity/image";
 import { cn } from "@/lib/utils";
-// import { Button } from "@/components/atoms/button";
-// import Link from "next/link";
-// import { Button } from "@/components/atoms/button";
 
 const options = {
   loop: true,
   align: "start",
   containScroll: "trimSnaps",
 };
+
+const AUTO_SCROLL_DELAY = 3000;
 
 export function ThoughtLeadershipSection({
   thoughtLeadership,
@@ -32,14 +30,26 @@ export function ThoughtLeadershipSection({
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
+  const scrollNext = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollNext();
+  }, [emblaApi]);
+
   useEffect(() => {
     if (!emblaApi) return;
+
     onSelect();
     emblaApi.on("select", onSelect);
+
+    const autoScroll = setInterval(() => {
+      scrollNext();
+    }, AUTO_SCROLL_DELAY);
+
     return () => {
       emblaApi.off("select", onSelect);
+      clearInterval(autoScroll);
     };
-  }, [emblaApi, onSelect]);
+  }, [emblaApi, onSelect, scrollNext]);
 
   if (!thoughtLeadership?.length) return null;
 
