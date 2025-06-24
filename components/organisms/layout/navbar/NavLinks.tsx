@@ -3,7 +3,7 @@ import { navItems } from "@/constants/navLinks";
 
 export function NavLinks() {
   return (
-    <ul className="nav-gradient flex h-full w-full max-w-[517px] items-center justify-center gap-[22px] rounded-[22px] !bg-[#4C1192] px-4 max-lg:hidden">
+    <ul className="nav-gradient -ml-[5.5rem] flex h-full w-full max-w-[517px] items-center justify-center gap-[22px] rounded-[22px] !bg-[#4C1192] px-4 max-lg:hidden">
       {navItems.map((item, index) => (
         <li key={index} className="group relative overflow-hidden rounded-full">
           <Link
