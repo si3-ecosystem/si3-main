@@ -6,6 +6,7 @@ import { ThoughtLeadership } from "@/types/home";
 import Image from "next/image";
 // import Link from "next/link";
 import { urlForImage } from "@/lib/sanity/image";
+import { cn } from "@/lib/utils";
 // import { Button } from "@/components/atoms/button";
 // import Link from "next/link";
 // import { Button } from "@/components/atoms/button";
@@ -43,9 +44,9 @@ export function ThoughtLeadershipSection({
   if (!thoughtLeadership?.length) return null;
 
   return (
-    <div className="relative h-[458px] w-full overflow-hidden rounded-[30px] md:h-[479px]">
+    <div className="relative h-[458px] w-full overflow-hidden rounded-[30px] bg-black/40 md:h-[479px]">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 h-full w-full">
+      <div className="absolute inset-0 z-0 h-full w-full max-lg:hidden">
         {thoughtLeadership[selectedIndex].backgroundImage && (
           <Image
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -59,16 +60,40 @@ export function ThoughtLeadershipSection({
           />
         )}
       </div>
+      <div className="absolute inset-0 z-0 hidden h-full w-full max-lg:block">
+        {thoughtLeadership[selectedIndex].backgroundImageMobile && (
+          <Image
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //   @ts-ignore
+            src={
+              urlForImage(
+                thoughtLeadership[selectedIndex].backgroundImageMobile,
+              )?.src
+            }
+            alt={
+              thoughtLeadership[selectedIndex].backgroundImageMobile.alt || ""
+            }
+            fill
+            className="object-cover"
+          />
+        )}
+      </div>
 
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex-1 overflow-hidden" ref={emblaRef}>
           <div className="mx-auto flex h-full gap-6">
-            {thoughtLeadership.map((item) => (
+            {thoughtLeadership.map((item, index) => (
               <div
                 key={item._id}
                 className="relative flex h-fit w-full flex-shrink-0 flex-col justify-between text-white lg:flex-row lg:items-start lg:p-6 lg:pl-6"
               >
-                <div className="flex w-full items-center justify-between bg-black/40 p-6 max-lg:mt-7 lg:rounded-[10px]">
+                <div
+                  className={cn(
+                    "flex w-full items-center justify-between p-6 max-lg:mt-7 max-lg:hidden lg:rounded-[10px]",
+                    index !== 0 && "hidden",
+                    selectedIndex === 0 && "bg-black/40",
+                  )}
+                >
                   <div className="flex flex-col gap-4">
                     <h3 className="text-xl font-semibold max-lg:text-center">
                       {item.title}
@@ -79,18 +104,7 @@ export function ThoughtLeadershipSection({
                       </p>
                     )}
                   </div>
-                  {/* <div className="flex h-full gap-4 max-lg:hidden">
-                    <Button className="bg-black text-white">
-                      <Link href={"/onboard"}>Read More</Link>
-                    </Button>
-                  </div> */}
                 </div>
-
-                {/* <div className="mt-12 flex w-full items-center justify-center gap-2.5 lg:hidden">
-                  <Button className="w-[124px] bg-black text-white">
-                    <Link href={"/onboard"}>Read More</Link>
-                  </Button>
-                </div> */}
               </div>
             ))}
           </div>

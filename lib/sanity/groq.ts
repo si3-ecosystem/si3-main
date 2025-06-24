@@ -28,8 +28,16 @@ export const homepageQuery = groq`
       "ImageColor": asset->metadata.palette.dominant.background,
       alt,
     },
+    growthData,
+    growthCarouselTitle,
     growthTitle,
     growthContent,
+    growthImage {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt,
+    },
     communityPartners[]-> {
       _id,
       name,
@@ -69,6 +77,12 @@ export const homepageQuery = groq`
       cta2Text,
       cta2Link,
       backgroundImage {
+        ...,
+        "blurDataURL": asset->metadata.lqip,
+        "ImageColor": asset->metadata.palette.dominant.background,
+        alt,
+      },
+      backgroundImageMobile {
         ...,
         "blurDataURL": asset->metadata.lqip,
         "ImageColor": asset->metadata.palette.dominant.background,

@@ -13,13 +13,11 @@ import {
 import { Suspense } from "react";
 import { Web3UniversitySection } from "@/components/organisms/home/web3-university/Web3UniversitySection";
 import { getOnboardPageData } from "@/lib/sanity/client";
-import { SectionWrapper } from "@/components/organisms/home/web3-university/SectionWrapper";
 import { FaqSection } from "@/components/organisms/home/FaqSection";
 // import { CryptoTickerCarousel } from "@/components/organisms/home/CryptoTickerCarousel";
 import { InitialLoader } from "@/components/atoms/InitialLoader";
 import { WomenOfWeb3Banner } from "@/components/organisms/about/WomenOfWeb3Banner";
 import { urlForImage } from "@/lib/sanity/image";
-import { Grow3dgePopupCard } from "@/components/molecules/cards/Grow3dgePopupCard";
 
 export default async function HomePage() {
   const [
@@ -58,19 +56,14 @@ export default async function HomePage() {
     <Suspense fallback={null}>
       <HeaderContainer HomePageData={HomePageData} />
 
-      <div
-        id="si-u"
-        className="@container max-lg:bg-gradient-to-br max-lg:from-[#211257] max-lg:to-[#8A04C5]"
-      >
-        <Web3UniversitySection data={onboardData} />
-        <div>
-          <SectionWrapper
-            scholarsData={scholarsData}
-            guidesData={guidesData}
-            cardsData={cardsData}
-            partnersData={partnersData}
-          />
-        </div>
+      <div id="si-u" className="@container max-lg:bg-white">
+        <Web3UniversitySection
+          data={onboardData}
+          scholarsData={scholarsData}
+          guidesData={guidesData}
+          partnersData={partnersData}
+          cardsData={cardsData}
+        />
       </div>
       <section
         id="impact"

@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { setActiveSection } from "@/redux/slice/activeSectionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { OnboardMaterial } from "@/types/onboard";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -34,64 +35,48 @@ export function Scholars({ data, showSvg = false }: Props) {
     <div>
       <Card
         className={cn(
-          "z-10 flex w-full flex-col gap-6 rounded-[33px] border bg-transparent p-4 transition-all duration-300",
-          activeSection === "scholars" &&
-            "card-gradient !z-20 !bg-[#7b43b0] sm:!bg-white",
+          "relative z-10 flex w-full flex-col gap-6 rounded-[30px] border border-[#9F44D3] bg-transparent p-[33px] pb-[18px] transition-all duration-300",
+          activeSection === "scholars" && "!z-20 bg-white sm:!bg-white",
         )}
         onMouseEnter={() => handleSectionHover("scholars")}
       >
-        <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-2xl">
-          <Image
-            src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
-            fill
-            {...(data?.thumbnail?.blurDataURL && {
-              placeholder: "blur",
-              blurDataURL: data?.thumbnail?.blurDataURL,
-            })}
-            loading="lazy"
-            decoding="async"
-            alt="scholars"
-            className="h-full w-full object-contain"
-          />
-        </AspectRatio>
-        <div className="flex flex-col gap-6">
-          <div className="flex w-full items-center justify-between gap-4">
+        <Image
+          src={logoUrl || "/icons/jpg/si_u_scholars_heroimage.jpg"}
+          fill
+          loading="lazy"
+          decoding="async"
+          alt="scholars"
+          className="h-full w-full object-contain object-right"
+        />
+        <div className="flex flex-col">
+          <div className="mb-4 flex w-full items-center justify-between gap-4">
             <div>
-              <Text
-                as={"h2"}
-                variant="2xl"
-                className="text-2xl font-semibold text-white sm:text-black"
-              >
-                {data.title}
-              </Text>
-              <Text className="!text-sm leading-5 text-black max-sm:mt-3.5 sm:text-[#616060]">
-                {data.subtitle}
+              <Text as={"h2"} variant="2xl" className="!text-2xl font-semibold">
+                {data.title}{" "}
+                <span className="text-sm font-normal"> {data.membership}</span>
               </Text>
             </div>
           </div>
-          <div className="mb-8 flex flex-col gap-2">
+          <div className="mb-8 flex max-w-[235px] flex-col gap-2">
             <Text
               variant="xl"
               as={"p"}
-              className="text-xl leading-7 font-normal tracking-tight text-[#D9D9D9] sm:text-[#3D3D3D]"
+              className="text-xl leading-7 font-normal tracking-tight text-[#121417]"
             >
               {data.description}
-            </Text>
-            <Text
-              variant="base"
-              as={"p"}
-              className="text-left text-black max-sm:mt-3.5 sm:text-[#585858]"
-            >
-              {data.membership}
             </Text>
           </div>
           <Button
             asChild
-            disabled
-            variant={"outline"}
-            className="w-full border border-black text-center max-sm:bg-black max-sm:text-white"
+            size={"md"}
+            className="mb-3 flex h-[39px] w-fit items-center gap-4 border border-black bg-transparent !px-[18px] !py-[13px] text-sm font-normal text-black"
           >
-            <Link href={"#"}>{"COMING SOON"}</Link>
+            <Link
+              href={data?.ctaLink || "#"}
+              className="flex items-center gap-4"
+            >
+              <span>{data?.ctaText}</span> <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </Card>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Title } from "@/components/atoms/title";
 import { Text } from "@/components/atoms/text";
 import useEmblaCarousel from "embla-carousel-react";
@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/button";
 import { Member, ProgrammingEvent } from "@/types/home";
 import { SpotlightCard } from "../cards/SpotlightCard";
+import { useWindowSize } from "@/hooks/useWindowsSize";
+import { SiHerGuidesForm } from "../forms/siHerGuidesForm";
 
 export type RenderItemFunction = (
   item: Member | ProgrammingEvent,
@@ -71,15 +73,30 @@ export function PartialContentCarousel({
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  useEffect(() => {
-    if (!emblaApi || !autoplay) return;
+  const { width: windowWidth } = useWindowSize();
+  const isMobile = windowWidth < 768;
+  const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
 
-    const autoplayTimer = setInterval(() => {
-      if (emblaApi) emblaApi.scrollNext();
+  useEffect(() => {
+    if (!autoplay || !isMobile) {
+      if (autoplayTimer.current) {
+        clearInterval(autoplayTimer.current);
+        autoplayTimer.current = null;
+      }
+      return;
+    }
+
+    autoplayTimer.current = setInterval(() => {
+      emblaApi?.scrollNext();
     }, autoplayInterval);
 
-    return () => clearInterval(autoplayTimer);
-  }, [emblaApi, autoplay, autoplayInterval]);
+    return () => {
+      if (autoplayTimer.current) {
+        clearInterval(autoplayTimer.current);
+        autoplayTimer.current = null;
+      }
+    };
+  }, [emblaApi, autoplay, autoplayInterval, isMobile]);
 
   const slides: (Member | ProgrammingEvent)[][] = [];
   for (let i = 0; i < items.length; i += 3) {
@@ -87,38 +104,39 @@ export function PartialContentCarousel({
   }
 
   return (
-    <section className="@container w-full">
+    <section className="@container -mt-[86px] w-full">
       <div className="w-full">
         <div
           className={cn(
-            "flex w-full flex-col justify-between gap-8 lg:flex-row",
+            "flex h-full w-full flex-col justify-between gap-8 lg:flex-row",
             className,
           )}
         >
           <div className="space-y-2">
             {title && (
-              <Title
-                variant="sm"
-                className="!lg:text-3xl mb-4 text-start !text-xl font-bold text-black lg:text-white"
-              >
+              <Title className="!text-xl font-bold max-lg:mb-4 max-lg:text-center lg:!text-[45px]">
                 {title}
               </Title>
             )}
             {description && (
               <Text
                 variant="xl"
-                className="max-w-[580px] text-black lg:mb-8 lg:text-white"
+                className="max-w-[580px] text-black lg:mb-8 lg:!text-[20px]"
               >
                 {description}
               </Text>
             )}
+
+            <div className="mb-6 hidden lg:block">
+              <SiHerGuidesForm title={"APPLY NOW"} className="" fill={true} />
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="mt-16 flex items-center justify-end gap-2 max-lg:hidden">
             <Button
               variant="outline"
               size="icon"
               onClick={scrollPrev}
-              className="rounded-full hover:!bg-black hover:text-white"
+              className="rounded-full hover:!bg-black"
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
@@ -126,7 +144,7 @@ export function PartialContentCarousel({
               variant="outline"
               size="icon"
               onClick={scrollNext}
-              className="rounded-full hover:!bg-black hover:text-white"
+              className="rounded-full hover:!bg-black"
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
@@ -135,7 +153,7 @@ export function PartialContentCarousel({
 
         <div className="relative w-full overflow-hidden sm:hidden">
           <div className="w-full" ref={emblaRef}>
-            <div className="mt-16 flex w-full lg:mt-8">
+            <div className="mt-16 flex w-full lg:mt-0">
               {slides.map((slideItems, slideIndex) => (
                 <div
                   key={slideIndex}
@@ -164,7 +182,7 @@ export function PartialContentCarousel({
         </div>
         <div className="relative w-full overflow-hidden max-sm:hidden">
           <div className="w-full" ref={emblaRef}>
-            <div className="mt-16 flex w-full flex-col gap-6 sm:flex-row sm:gap-0 lg:mt-8">
+            <div className="mt-16 flex w-full flex-col gap-6 sm:flex-row sm:gap-0 lg:mt-0">
               {items.map((slideItems, slideIndex) => (
                 <div
                   key={slideIndex}
@@ -177,6 +195,10 @@ export function PartialContentCarousel({
               ))}
             </div>
           </div>
+        </div>
+
+        <div className="block lg:hidden">
+          <SiHerGuidesForm title={"APPLY NOW"} className="" fill={true} />
         </div>
       </div>
     </section>

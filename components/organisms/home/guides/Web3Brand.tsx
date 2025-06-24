@@ -1,5 +1,6 @@
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
+import { SiHerGuidesForm } from "@/components/molecules/forms/siHerGuidesForm";
 import { urlForImage } from "@/lib/sanity/image";
 import { SanityImage, Web3Brand as Web3Type } from "@/types/home";
 import Image from "next/image";
@@ -51,26 +52,36 @@ export function Web3Brand({ data }: Props) {
     : null;
 
   return (
-    <div className="@container py-14 lg:py-20">
+    <div className="@container">
       <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
         <div className="flex-1">
-          <Title className="mb-4 text-black lg:text-white">{data?.title}</Title>
-          <Text className="mb-6 max-w-[535px] leading-7 text-black lg:text-white">
+          <Title className="mb-4 !text-xl font-bold text-black max-lg:mx-auto max-lg:max-w-[250px] max-lg:text-center lg:!text-3xl">
+            {data?.title}
+          </Title>
+          <Text className="mb-6 max-w-[535px] leading-7 text-black">
             {data.description}
           </Text>
+
+          <div className="mb-6 hidden lg:block">
+            <SiHerGuidesForm title={"APPLY NOW"} className="" fill={true} />
+          </div>
           <ul className="grid gap-3">
             {data?.gallery?.map((item, key) => (
               <BrandCard item={item} key={key} />
             ))}
           </ul>
         </div>
-        <div className="w-full @max-3xl:h-[489.217px] @3xl:h-full @3xl:max-h-[489.217px] @3xl:max-w-[445px]">
+        <div className="w-full @max-3xl:h-[589.217px] @3xl:h-full @3xl:max-h-[589.217px] @3xl:max-w-[445px]">
           <video
             src={videoUrl || "/videos/SiUScholars.mp4"}
             playsInline
             controls
-            className="mx-auto h-full max-h-[489px] w-full max-w-[275px] object-cover object-center xl:h-full"
+            className="mx-auto h-full max-h-[589px] w-full max-w-[275px] object-cover object-center xl:h-full"
           />
+        </div>
+
+        <div className="mb-6 block lg:hidden">
+          <SiHerGuidesForm title={"APPLY NOW"} className="" fill={true} />
         </div>
       </div>
     </div>

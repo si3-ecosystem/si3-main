@@ -30,7 +30,7 @@ import { toast } from "sonner";
 import { Title } from "@/components/atoms/title";
 import { Textarea } from "@/components/atoms/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
-import { LoaderCircleIcon } from "lucide-react";
+import { ArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -134,10 +134,13 @@ export function PartnerProgramForm({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
-            variant={"outline"}
-            className={cn("w-full", className, showGradient && "")}
+            asChild
+            size={"md"}
+            className="mb-3 flex h-[39px] w-fit items-center gap-4 border border-black bg-transparent !px-[18px] !py-[13px] text-sm font-normal text-black"
           >
-            {title || "Inquire Now"}
+            <div className="flex items-center gap-2">
+              <span>{title}</span> <ArrowRight className="h-4 w-4" />
+            </div>
           </Button>
         </DialogTrigger>
         <DialogContent className="mx-auto w-full overflow-y-scroll px-4 py-14 max-sm:fixed max-sm:top-[45%] max-sm:bottom-0 sm:max-w-[924px] sm:px-20">

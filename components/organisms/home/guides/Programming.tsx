@@ -11,8 +11,10 @@ type Props = {
 
 export function Programming({ data }: Props) {
   return (
-    <div className="w-full py-20">
+    <div className="w-full py-14 lg:py-20">
       <PartialContentCarousel
+        autoplay={true}
+        autoplayInterval={3500}
         title={data.programming_title}
         description={data.programming_description}
         items={data.programming}

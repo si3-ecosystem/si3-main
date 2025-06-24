@@ -27,10 +27,11 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Title } from "@/components/atoms/title";
 import { Textarea } from "@/components/atoms/textarea";
-import { LoaderCircleIcon } from "lucide-react";
+import { ArrowRight, CircleArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -52,10 +53,12 @@ export function SiHerGuidesForm({
   title,
   showGradient = false,
   className,
+  fill = false,
 }: {
   title?: string;
   showGradient?: boolean;
   className?: string;
+  fill?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -134,12 +137,30 @@ export function SiHerGuidesForm({
     <div className="overflow-hidden">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild className="w-full">
-          <Button
-            variant={"outline"}
-            className={cn("w-full", showGradient && "", className)}
-          >
-            {title}
-          </Button>
+          {fill ? (
+            <Button
+              asChild
+              size={"md"}
+              className="mb-3 flex !h-[34px] w-fit items-center gap-4 border border-black bg-black !px-[0ox] !py-[6px] !pr-[5px] !pl-[24px] text-sm font-normal text-black max-lg:mx-auto"
+            >
+              <div className="flex items-center gap-4 text-white">
+                <span>{title}</span>{" "}
+                <div className="flex shrink-0 items-center justify-center">
+                  <CircleArrowRight className="h-6 w-6 !shrink-0" />
+                </div>
+              </div>
+            </Button>
+          ) : (
+            <Button
+              asChild
+              size={"md"}
+              className="mb-3 flex h-[39px] w-fit items-center gap-4 border border-black bg-transparent !px-[18px] !py-[13px] text-sm font-normal text-black"
+            >
+              <div className="flex items-center gap-2">
+                <span>{title}</span> <ArrowRight className="h-4 w-4" />
+              </div>
+            </Button>
+          )}
         </DialogTrigger>
         <DialogContent className="mx-auto w-full overflow-y-scroll px-4 py-14 max-sm:fixed max-sm:top-[45%] max-sm:bottom-0 sm:max-w-[924px] sm:px-20">
           <DialogHeader className="mb-4 flex w-full gap-4">

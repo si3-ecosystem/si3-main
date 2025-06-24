@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type SectionType = "scholars" | "guides" | "partners";
+export type SectionType = "scholars" | "guides" | "partners";
 
 interface ActiveSectionState {
   activeSection: SectionType;

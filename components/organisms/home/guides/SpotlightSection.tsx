@@ -14,6 +14,8 @@ export function SpotlightSection({ data }: Props) {
         title={data.members_title}
         description={data.members_description}
         items={data.members}
+        autoplay={true}
+        autoplayInterval={3500}
         renderItem={(item, key) => (
           <SpotlightCard
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -9,17 +9,22 @@ import Link from "next/link";
 import { Introduction } from "@/types/home";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { DemoSessionCard } from "@/components/molecules/cards/DemoSessionCard";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { urlForImage } from "@/lib/sanity/image";
+import { SiHerGuidesForm } from "@/components/molecules/forms/siHerGuidesForm";
 
 export default function HeroSection({
   data,
   isForm = false,
   hideButton = false,
+  isGuides = false,
 }: {
   data: Introduction;
   isForm?: boolean;
   hideButton?: boolean;
+  isGuides?: boolean;
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -58,83 +63,61 @@ export default function HeroSection({
   }, [emblaApi, onSelect]);
   return (
     <div>
-      <div className="@container">
+      <div className="@container overflow-hidden">
+        <Image
+          src={urlForImage(data.thumbnail)?.src || ""}
+          alt={data.title}
+          fill
+          className="h-full w-full object-contain object-right"
+        />
         <div className="flex flex-col gap-4 sm:gap-10 @3xl:flex-row @3xl:gap-[60px]">
-          <div className="z-20 flex h-full w-full flex-1 flex-col justify-between gap-6 md:flex-row">
-            <div className="space-y-2 lg:space-y-6">
-              <Title className="!text-xl font-bold lg:!text-3xl lg:text-white">
+          <div className="relative z-20 flex h-full w-full flex-1 flex-col justify-between gap-5">
+            <div className="">
+              <Title className="!text-xl font-bold lg:!text-[45px]">
                 {data?.title}
               </Title>
-              <Text className="w-fit rounded-[5px] bg-[#FCB0DE] px-4 py-1.5 text-[10px] font-medium text-black lg:px-6 lg:py-3">
-                {data?.subtitle}
-              </Text>
-              <Text className="mt-6 max-w-[425px] text-xl font-medium max-lg:text-xs lg:mb-8 lg:leading-7 lg:text-white">
+              <Text className="text-[35px]">{data?.subtitle}</Text>
+              <Text className="mt-6 max-w-[425px] text-xl font-medium max-lg:text-xs lg:mb-8 lg:leading-7">
                 {data?.description}
               </Text>
             </div>
 
             <div
-              className={cn("lg:mt-4 lg:mr-8", !hideButton && "max-md:hidden")}
-            >
-              {isForm ? (
-                <PartnerProgramForm
-                  className="mx-auto text-white lg:w-[265px]"
-                  title={data?.ctaText}
-                />
-              ) : (
-                <Button
-                  asChild
-                  size={"md"}
-                  className="mb-3 w-[125px] bg-black lg:w-[265px]"
-                >
-                  <Link href={data?.ctaLink}>{data?.ctaText}</Link>
-                </Button>
+              className={cn(
+                "space-y-6 lg:mr-8",
+                !hideButton && "max-md:hidden",
               )}
+            >
               {data?.memberShip && (
                 <Text className="text-sm text-[#BCBCBC] max-sm:my-2 max-sm:mb-6">
                   {data?.memberShip || "*$300 one-time membership fee"}
                 </Text>
               )}
+              {isForm ? (
+                <PartnerProgramForm
+                  className="mx-auto lg:w-[265px]"
+                  title={data?.ctaText}
+                />
+              ) : isGuides ? (
+                <SiHerGuidesForm title={data?.ctaText} className="" />
+              ) : (
+                <Button
+                  asChild
+                  size={"md"}
+                  className="mb-3 flex h-[39px] w-fit items-center gap-4 border border-black bg-transparent !px-[18px] !py-[13px] text-sm font-normal text-black"
+                >
+                  <Link
+                    href={data?.ctaLink}
+                    className="flex items-center gap-4"
+                  >
+                    <span>{data?.ctaText}</span>{" "}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         </div>
-
-        {data?.demoSessions && data.demoSessions.length > 0 && (
-          <div className="mt-12 w-full">
-            <div className="relative">
-              <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex gap-4 max-sm:p-1">
-                  {data.demoSessions.map((session, index) => (
-                    <div
-                      key={session._key || index}
-                      className="relative flex-[0_0_calc(100%-1rem)] md:flex-[0_0_calc(50%-0.5rem)]"
-                    >
-                      <DemoSessionCard session={session} className="h-full" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <>
-                <button
-                  onClick={scrollPrev}
-                  disabled={!canScrollPrev}
-                  className="absolute top-1/2 -left-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={scrollNext}
-                  disabled={!canScrollNext}
-                  className="absolute top-1/2 -right-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              </>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

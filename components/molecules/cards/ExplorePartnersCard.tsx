@@ -25,7 +25,7 @@ export function ExplorePartnersCard({ item }: Props) {
   return (
     <div
       id={cardId}
-      className="@container rounded-[33px] border border-[rgba(0,0,0,0.2)] bg-white px-5 py-6 transition-all duration-300 ease-in-out hover:shadow-md lg:px-8 lg:py-[30px]"
+      className="@container mt-16 rounded-[33px] border border-[rgba(0,0,0,0.2)] bg-white px-5 py-6 transition-all duration-300 ease-in-out hover:shadow-md lg:px-8 lg:py-[30px]"
     >
       <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
         <div className="flex-1">

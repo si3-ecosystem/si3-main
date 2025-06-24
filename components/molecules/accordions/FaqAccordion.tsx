@@ -74,7 +74,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
             </AccordionPrimitive.Trigger>
           </AccordionPrimitive.Header>
           <AccordionContent className="text-muted-foreground !z-10 !bg-[#FCF8FF] ease-in-out">
-            <div className="prose px-4 pb-4 text-sm text-[#070707] lg:px-[90px] lg:pb-6 lg:text-xl">
+            <div className="prose w-full max-w-[1200px] px-4 pb-4 text-sm text-[#070707] lg:px-[90px] lg:pb-6 lg:text-xl">
               <PortableText value={faq.answer} />
             </div>
           </AccordionContent>

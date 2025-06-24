@@ -248,6 +248,7 @@ export interface ThoughtLeadership {
   cta2Text: string;
   cta2Link: string;
   backgroundImage: SanityImage & { alt: string }; // alt is required in thoughtLeadership schema
+  backgroundImageMobile: SanityImage & { alt: string }; // alt is required in thoughtLeadership schema
 }
 
 export interface HomepageSchema {
@@ -262,6 +263,9 @@ export interface HomepageSchema {
   videoUrl: string;
   growthTitle: string;
   growthContent: string;
+  growthData: string;
+  growthCarouselTitle: string;
+  growthImage: HomepageImage;
   image: HomepageImage;
   educationPartners: Partner[];
   communityPartners: Partner[];

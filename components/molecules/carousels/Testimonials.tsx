@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useCallback, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { Button } from "@/components/atoms/button";
+import type { EmblaCarouselType } from "embla-carousel";
 import { TestimonialsCard } from "../cards/TestimonialsCard";
 import { Testimonial } from "@/types/home";
+import { Title } from "@/components/atoms/title";
+import { useWindowSize } from "@/hooks/useWindowsSize";
 
 interface TestimonialsProps {
   title: string;
@@ -15,8 +16,8 @@ interface TestimonialsProps {
 
 const options = {
   loop: true,
-  align: "center",
-  containScroll: "trimSnaps",
+  align: "center" as const,
+  containScroll: "trimSnaps" as const,
 };
 
 export function Testimonials({
@@ -24,67 +25,114 @@ export function Testimonials({
   items,
   isCover = false,
 }: TestimonialsProps) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
-  const scrollPrev = () => {
-    if (emblaApi) emblaApi.scrollPrev();
-  };
-
-  const scrollNext = () => {
-    if (emblaApi) emblaApi.scrollNext();
-  };
+  // Desktop carousel
+  const [desktopEmblaRef, desktopEmblaApi] = useEmblaCarousel(options);
+  // Mobile carousel
+  const [mobileEmblaRef, mobileEmblaApi] = useEmblaCarousel({
+    ...options,
+    dragFree: true,
+  });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+  const autoPlayInterval = 5000; // 5 seconds
+  const { width: windowWidth } = useWindowSize();
+  const isMobile = windowWidth < 768; // 768px is the breakpoint for md in Tailwind
+  const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
 
+  // Navigation functions
+  const scrollPrev = useCallback(() => {
+    desktopEmblaApi?.scrollPrev();
+    mobileEmblaApi?.scrollPrev();
+  }, [desktopEmblaApi, mobileEmblaApi]);
+
+  const scrollNext = useCallback(() => {
+    desktopEmblaApi?.scrollNext();
+    mobileEmblaApi?.scrollNext();
+  }, [desktopEmblaApi, mobileEmblaApi]);
+
+  // Handle carousel selection
   const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
+    if (desktopEmblaApi) {
+      setSelectedIndex(desktopEmblaApi.selectedScrollSnap());
+    } else if (mobileEmblaApi) {
+      setSelectedIndex(mobileEmblaApi.selectedScrollSnap());
+    }
+  }, [desktopEmblaApi, mobileEmblaApi]);
 
+  // Auto-scroll functionality for mobile only
   useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
+    if (!autoPlay || !isMobile) {
+      if (autoplayTimer.current) {
+        clearInterval(autoplayTimer.current);
+        autoplayTimer.current = null;
+      }
+      return;
+    }
+
+    autoplayTimer.current = setInterval(() => {
+      mobileEmblaApi?.scrollNext();
+      desktopEmblaApi?.scrollNext();
+    }, autoPlayInterval);
+
     return () => {
-      emblaApi.off("select", onSelect);
+      if (autoplayTimer.current) {
+        clearInterval(autoplayTimer.current);
+        autoplayTimer.current = null;
+      }
     };
-  }, [emblaApi, onSelect]);
+  }, [autoPlay, autoPlayInterval, isMobile, mobileEmblaApi, desktopEmblaApi]);
+
+  // Setup event listeners for both carousels
+  useEffect(() => {
+    const setupCarousel = (api: EmblaCarouselType | undefined) => {
+      if (!api) return () => {};
+
+      onSelect();
+      api.on("select", onSelect);
+
+      // Only pause on interaction if we're on mobile and autoplay is enabled
+      if (isMobile && autoPlay) {
+        api.on("pointerDown", () => setAutoPlay(false));
+        api.on("pointerUp", () => setAutoPlay(true));
+      }
+
+      return () => {
+        api.off("select", onSelect);
+        if (isMobile && autoPlay) {
+          api.off("pointerDown", () => setAutoPlay(false));
+          api.off("pointerUp", () => setAutoPlay(true));
+        }
+      };
+    };
+
+    const cleanupDesktop = setupCarousel(desktopEmblaApi);
+    const cleanupMobile = setupCarousel(mobileEmblaApi);
+
+    return () => {
+      cleanupDesktop();
+      cleanupMobile();
+    };
+  }, [desktopEmblaApi, mobileEmblaApi, onSelect, isMobile, autoPlay]);
 
   return (
     <div className="mx-auto h-full w-full">
-      <div className="mb-12 flex items-center justify-between">
-        <h2 className="!lg:text-3xl text-xl font-bold tracking-tight text-black lg:text-white">
+      <div className="mb-6 flex w-full items-center justify-between lg:items-start">
+        <Title className="w-full text-center !text-xl font-bold max-lg:mx-auto max-lg:max-w-[250px] lg:text-left lg:!text-3xl">
           {title}
-        </h2>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={scrollPrev}
-            className="rounded-full hover:!bg-black hover:text-white"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={scrollNext}
-            className="rounded-full hover:!bg-black hover:text-white"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </Button>
-        </div>
+        </Title>
       </div>
 
-      <div className="h-full overflow-hidden" ref={emblaRef}>
-        <div className="4 @container -ml-4 flex h-full w-full">
+      {/* Desktop Carousel */}
+      <div
+        className="hidden h-fit overflow-hidden md:block"
+        ref={desktopEmblaRef}
+      >
+        <div className="@container -ml-4 flex w-full">
           {items.map((item, index) => (
             <div
-              key={index}
+              key={`desktop-${index}`}
               className="h-full w-full min-w-0 flex-[0_0_100%] pl-4"
-              style={{ transform: "translateX(0%)" }}
             >
               <TestimonialsCard item={item} isCover={isCover} />
             </div>
@@ -92,14 +140,33 @@ export function Testimonials({
         </div>
       </div>
 
+      {/* Mobile Carousel */}
+      <div className="h-fit overflow-hidden md:hidden" ref={mobileEmblaRef}>
+        <div className="flex w-full">
+          {items.map((item, index) => (
+            <div
+              key={`mobile-${index}`}
+              className="h-full w-full min-w-0 flex-[0_0_100%] px-4"
+            >
+              <TestimonialsCard item={item} isCover={isCover} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Pagination Dots */}
       <div className="mt-6 flex justify-center gap-2">
         {items.map((_, index) => (
           <button
             key={index}
-            className={`h-2 w-2 rounded-full transition-all ${
-              index === selectedIndex ? "w-8 bg-black" : "bg-[#D9D9D9]"
+            className={`h-2 rounded-full transition-all ${
+              index === selectedIndex ? "w-8 bg-black" : "w-2 bg-[#D9D9D9]"
             }`}
-            onClick={() => emblaApi?.scrollTo(index)}
+            onClick={() => {
+              desktopEmblaApi?.scrollTo(index);
+              mobileEmblaApi?.scrollTo(index);
+            }}
+            aria-label={`Go to testimonial ${index + 1}`}
           />
         ))}
       </div>

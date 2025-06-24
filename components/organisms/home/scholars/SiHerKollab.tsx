@@ -7,11 +7,15 @@ import { Course, ScholarsData } from "@/types/home";
 type Props = {
   data: ScholarsData;
   cardsData: Course[];
+  joinWaitlist?: boolean;
 };
-export function SiHerKollab({ data, cardsData }: Props) {
+export function SiHerKollab({ data, cardsData, joinWaitlist }: Props) {
   return (
-    <div id="si_u_scholars_kollab" className="h-full py-20">
+    <div id="si_u_scholars_kollab" className="h-full">
       <VideoCarousel
+        autoplay={true}
+        autoplayInterval={3500}
+        joinWaitlist={joinWaitlist}
         title={data?.community_title || "Si Her Kollab"}
         description={
           data?.community_description ||

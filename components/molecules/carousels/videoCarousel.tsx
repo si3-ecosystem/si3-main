@@ -1,13 +1,15 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Title } from "@/components/atoms/title";
 import { Text } from "@/components/atoms/text";
 import { EducationCard } from "../cards/educationCard";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, CircleArrowRight } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { Course, Community } from "@/types/home";
+import { useWindowSize } from "@/hooks/useWindowsSize";
+import Link from "next/link";
 
 export type RenderItemFunction = (
   item: Course | Community,
@@ -23,6 +25,7 @@ export interface VideoCarouselProps {
   autoplayInterval?: number;
   renderItem?: RenderItemFunction;
   hidetitleAndDescription?: boolean;
+  joinWaitlist?: boolean;
 }
 
 export function VideoCarousel({
@@ -34,8 +37,15 @@ export function VideoCarousel({
   autoplayInterval = 3000,
   renderItem,
   hidetitleAndDescription,
+  joinWaitlist = false,
 }: VideoCarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
+  const [desktopEmblaRef, desktopEmblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+  });
+
+  const [mobileEmblaRef, mobileEmblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
     slidesToScroll: 1,
@@ -46,7 +56,6 @@ export function VideoCarousel({
     items.length,
   );
 
-  // Default render function
   const defaultRenderItem = (item: Course | Community, index: number) => {
     if ("title" in item) {
       return <EducationCard item={item} key={index} />;
@@ -55,25 +64,40 @@ export function VideoCarousel({
   };
   const renderFunction = renderItem || defaultRenderItem;
 
-  // Navigation controls
   const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
+    desktopEmblaApi?.scrollPrev();
+    mobileEmblaApi?.scrollPrev();
+  }, [desktopEmblaApi, mobileEmblaApi]);
 
   const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
+    desktopEmblaApi?.scrollNext();
+    mobileEmblaApi?.scrollNext();
+  }, [desktopEmblaApi, mobileEmblaApi]);
 
-  // Autoplay functionality
+  const { width: windowWidth } = useWindowSize();
+  const isMobile = windowWidth < 768;
+  const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
-    if (!emblaApi || !autoplay) return;
+    if (!autoplay || !isMobile) {
+      if (autoplayTimer.current) {
+        clearInterval(autoplayTimer.current);
+        autoplayTimer.current = null;
+      }
+      return;
+    }
 
-    const autoplayTimer = setInterval(() => {
-      if (emblaApi) emblaApi.scrollNext();
+    autoplayTimer.current = setInterval(() => {
+      mobileEmblaApi?.scrollNext();
     }, autoplayInterval);
 
-    return () => clearInterval(autoplayTimer);
-  }, [emblaApi, autoplay, autoplayInterval]);
+    return () => {
+      if (autoplayTimer.current) {
+        clearInterval(autoplayTimer.current);
+        autoplayTimer.current = null;
+      }
+    };
+  }, [mobileEmblaApi, autoplay, autoplayInterval, isMobile]);
 
   const slides: (Course | Community)[][] = [];
   for (let i = 0; i < items.length; i += 3) {
@@ -81,33 +105,53 @@ export function VideoCarousel({
   }
 
   return (
-    <section className="@container w-full">
+    <section className="@container">
       <div className="w-full">
         <div className="flex w-full flex-col justify-between lg:flex-row lg:gap-8">
           {!hidetitleAndDescription && (
-            <div className="space-y-2">
+            <div className="w-full space-y-2">
               {title && (
                 <Title
                   variant="sm"
-                  className="mb-4 text-start !text-xl font-bold lg:!text-3xl lg:text-white"
+                  className="mb-4 text-center !text-xl font-bold lg:mb-1 lg:text-start lg:!text-[45px]"
                 >
                   {title}
                 </Title>
               )}
               {description && (
-                <Text variant="xl" className="mb-8 max-w-[580px] lg:text-white">
+                <Text variant="xl" className="mb-8 w-full max-w-[580px]">
                   {description}
                 </Text>
               )}
+              {joinWaitlist && (
+                <Button
+                  asChild
+                  size={"md"}
+                  className="mb-3 flex !h-[34px] w-fit items-center gap-4 border border-black bg-black !px-[0ox] !py-[6px] !pr-[5px] !pl-[24px] text-sm font-normal text-black max-lg:hidden"
+                >
+                  <Link
+                    href={"#"}
+                    className="flex items-center gap-4 text-white"
+                  >
+                    <span>JOIN WAITLIST</span>{" "}
+                    <div className="flex shrink-0 items-center justify-center">
+                      <CircleArrowRight className="h-6 w-6 !shrink-0" />
+                    </div>
+                  </Link>
+                </Button>
+              )}
             </div>
           )}
-          <div className="flex w-full items-center justify-end gap-2">
+          <div className="mt-16 flex w-full items-center justify-end gap-2 max-lg:hidden">
             <Button
               variant="outline"
               size="icon"
               onClick={scrollPrev}
-              disabled={!emblaApi?.canScrollPrev()}
-              className="rounded-full hover:!bg-black hover:text-white"
+              disabled={
+                !desktopEmblaApi?.canScrollPrev() &&
+                !mobileEmblaApi?.canScrollPrev()
+              }
+              className="rounded-full hover:!bg-black"
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
@@ -115,20 +159,24 @@ export function VideoCarousel({
               variant="outline"
               size="icon"
               onClick={scrollNext}
-              disabled={!emblaApi?.canScrollNext()}
-              className="rounded-full hover:!bg-black hover:text-white"
+              disabled={
+                !desktopEmblaApi?.canScrollNext() &&
+                !mobileEmblaApi?.canScrollNext()
+              }
+              className="rounded-full hover:!bg-black"
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
           </div>
         </div>
 
-        <div className="relative">
-          <div className="overflow-hidden" ref={emblaRef}>
+        {/* Desktop Carousel */}
+        <div className="relative max-sm:hidden">
+          <div className="overflow-hidden" ref={desktopEmblaRef}>
             <div className="mt-8 -ml-6 flex lg:mt-8">
               {slides.map((slideItems, slideIndex) => (
                 <div key={slideIndex} className="min-w-0 flex-[0_0_100%] pl-6">
-                  <div className="flex h-full flex-col justify-between gap-6 max-sm:h-auto sm:grid md:grid-cols-2 lg:grid-cols-3">
+                  <div className="flex h-full flex-col justify-between gap-6 sm:grid md:grid-cols-2 lg:grid-cols-3">
                     {slideItems.map((item, itemIndex) =>
                       renderFunction(
                         item,
@@ -141,6 +189,33 @@ export function VideoCarousel({
             </div>
           </div>
         </div>
+
+        {/* Mobile Carousel */}
+        <div className="relative sm:hidden">
+          <div className="overflow-hidden" ref={mobileEmblaRef}>
+            <div className="mt-8 -ml-6 flex">
+              {items.map((item, index) => (
+                <div key={index} className="min-w-0 flex-[0_0_100%] pl-6">
+                  <div className="pr-6">{renderFunction(item, index)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {joinWaitlist && (
+          <Button
+            asChild
+            size={"md"}
+            className="mx-auto mt-8 mb-3 flex !h-[34px] w-fit items-center gap-4 border border-black bg-black !px-[0ox] !py-[6px] !pr-[5px] !pl-[24px] text-sm font-normal text-black lg:hidden"
+          >
+            <Link href={"#"} className="flex items-center gap-4 text-white">
+              <span>JOIN WAITLIST</span>{" "}
+              <div className="flex shrink-0 items-center justify-center">
+                <CircleArrowRight className="h-6 w-6 !shrink-0" />
+              </div>
+            </Link>
+          </Button>
+        )}
       </div>
     </section>
   );

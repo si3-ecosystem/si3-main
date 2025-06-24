@@ -43,20 +43,20 @@ export function PathTabs() {
 
   return (
     <div className="mb-8 lg:hidden">
-      <div className="flex w-full rounded-lg p-1 px-3 transition-all duration-300 ease-in-out">
+      <div className="flex w-full rounded-lg p-1 transition-all duration-300 ease-in-out">
         {tabs.map((tab) => (
-          <button
+          <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
             className={cn(
-              "flex-1 rounded-md py-2.5 text-center text-sm font-medium transition-colors",
+              "flex-1 cursor-pointer rounded-2xl py-2.5 text-center text-sm font-medium !text-black",
               activeSection === tab.id
-                ? "active-universe bg-[#4c2984] text-white"
-                : "bg-transparent text-[#A6A6A6]",
+                ? "bg-[#CC9DE7] text-[#313131] shadow-xl"
+                : "text-[#313131]",
             )}
           >
             {tab.label}
-          </button>
+          </div>
         ))}
       </div>
     </div>

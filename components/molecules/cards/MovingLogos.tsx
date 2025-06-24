@@ -1,63 +1,75 @@
+// components/molecules/cards/MovingLogos.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, forwardRef, useImperativeHandle } from "react";
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity/image";
 import { Partner } from "@/types/home";
+import useEmblaCarousel from "embla-carousel-react";
+
+export interface MovingLogosRef {
+  scrollPrev: () => void;
+  scrollNext: () => void;
+}
 
 interface MovingLogosProps {
   partners: Partner[];
+  onPrev?: () => void;
+  onNext?: () => void;
 }
 
-export function MovingLogos({ partners }: MovingLogosProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollerRef = useRef<HTMLDivElement>(null);
+export const MovingLogos = forwardRef<MovingLogosRef, MovingLogosProps>(
+  ({ partners, onPrev, onNext }, ref) => {
+    const [emblaRef, emblaApi] = useEmblaCarousel({
+      align: "start",
+      containScroll: "keepSnaps",
+      loop: false,
+      skipSnaps: false,
+    });
 
-  useEffect(() => {
-    if (!partners?.length || !scrollerRef.current) return;
+    const scrollBy = useCallback(
+      (direction: "prev" | "next") => {
+        if (!emblaApi) return;
 
-    // Duplicate the partners array to create seamless infinite scroll
-    const duplicatedPartners = [...partners, ...partners];
+        const currentIndex = emblaApi.selectedScrollSnap();
+        const scrollTo =
+          direction === "next"
+            ? Math.min(currentIndex + 3, partners.length - 1)
+            : Math.max(currentIndex - 3, 0);
 
-    // Set the width of the scroller to fit all duplicated items
-    if (scrollerRef.current) {
-      const itemWidth = 160; // Adjust based on your logo width + margin
-      scrollerRef.current.style.width = `${duplicatedPartners.length * itemWidth}px`;
-    }
-  }, [partners]);
+        emblaApi.scrollTo(scrollTo);
+      },
+      [emblaApi, partners.length],
+    );
 
-  if (!partners?.length) return null;
+    const scrollPrev = useCallback(() => {
+      scrollBy("prev");
+      onPrev?.();
+    }, [onPrev, scrollBy]);
 
-  return (
-    <div className="relative mt-3 w-full overflow-hidden">
-      <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-scroll {
-          animation: scroll 50s linear infinite;
-          display: flex;
-          gap: 1rem;
-        }
-        .animate-scroll:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
+    const scrollNext = useCallback(() => {
+      scrollBy("next");
+      onNext?.();
+    }, [onNext, scrollBy]);
 
-      <div ref={containerRef} className="relative h-6 w-full">
-        <div
-          ref={scrollerRef}
-          className="animate-scroll absolute top-0 left-0 flex h-full items-center"
-        >
-          {[...partners, ...partners].map((partner, index) => (
+    useImperativeHandle(
+      ref,
+      () => ({
+        scrollPrev,
+        scrollNext,
+      }),
+      [scrollPrev, scrollNext],
+    );
+
+    if (!partners?.length) return null;
+
+    return (
+      <div className="w-full overflow-hidden" ref={emblaRef}>
+        <div className="flex">
+          {partners.map((partner, index) => (
             <div
               key={`${partner._id}-${index}`}
-              className="flex h-auto w-16 items-center justify-center"
+              className="flex h-6 w-[calc(100%/3)] flex-shrink-0 items-center justify-center px-2"
             >
               {partner.logo && (
                 <Image
@@ -72,6 +84,8 @@ export function MovingLogos({ partners }: MovingLogosProps) {
           ))}
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  },
+);
+
+MovingLogos.displayName = "MovingLogos";
