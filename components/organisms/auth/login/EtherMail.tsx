@@ -131,7 +131,7 @@ const EtherMail = () => {
         type="wallet"
         permissions="write"
         on-mounted="setStyle"
-        label="Ethermail"
+        label="Continue With Ethermail "
       ></ethermail-login>
     </div>
   );
