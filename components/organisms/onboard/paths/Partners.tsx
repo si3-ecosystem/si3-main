@@ -1,7 +1,5 @@
 "use client";
 
-import { AspectRatio } from "@/components/atoms/aspect-ratio";
-import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
@@ -10,9 +8,7 @@ import { cn } from "@/lib/utils";
 import { setActiveSection } from "@/redux/slice/activeSectionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { OnboardMaterial } from "@/types/onboard";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 type Props = {
   data: OnboardMaterial;

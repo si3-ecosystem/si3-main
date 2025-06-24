@@ -1,10 +1,8 @@
 "use client";
 
-import { AspectRatio } from "@/components/atoms/aspect-ratio";
 import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
-import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { SiHerGuidesForm } from "@/components/molecules/forms/siHerGuidesForm";
 import { urlForImage } from "@/lib/sanity/image";
 import { cn } from "@/lib/utils";
@@ -90,7 +88,7 @@ export function Guides({
             </Button>
           )}
 
-          {isGuide && <SiHerGuidesForm title="INQUIRE NOW" />}
+          {isGuide && <SiHerGuidesForm title="APPLY NOW" />}
         </div>
       </Card>
       {showSvg && (
