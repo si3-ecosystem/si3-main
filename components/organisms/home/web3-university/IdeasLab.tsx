@@ -4,6 +4,7 @@ import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
 import { DemoSessionCard } from "@/components/molecules/cards/DemoSessionCard";
+import { ScholarsPartnerForm } from "@/components/molecules/forms/ScholarsPartnerForm";
 import { ScholarsData } from "@/types/home";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, CircleArrowRight } from "lucide-react";
@@ -70,18 +71,9 @@ export function IdeasLab({
             {description}
           </Text>
         )}
-        <Button
-          asChild
-          size={"md"}
-          className="mb-3 flex !h-[34px] w-fit items-center gap-4 border border-black bg-black !px-[0ox] !py-[6px] !pr-[5px] !pl-[24px] text-sm font-normal text-black max-lg:hidden"
-        >
-          <Link href={"#"} className="flex items-center gap-4 text-white">
-            <span>JOIN WAITLIST</span>{" "}
-            <div className="flex shrink-0 items-center justify-center">
-              <CircleArrowRight className="h-6 w-6 !shrink-0" />
-            </div>
-          </Link>
-        </Button>
+        <div className="max-lg:hidden">
+          <ScholarsPartnerForm fill={true} />
+        </div>
       </div>
       {data?.demoSessions && data.demoSessions.length > 0 && (
         <div className="mt-12 w-full">
@@ -120,18 +112,9 @@ export function IdeasLab({
         </div>
       )}
 
-      <Button
-        asChild
-        size={"md"}
-        className="mx-auto mt-8 mb-3 flex !h-[34px] w-fit items-center gap-4 border border-black bg-black !px-[0ox] !py-[6px] !pr-[5px] !pl-[24px] text-sm font-normal text-black lg:hidden"
-      >
-        <Link href={"#"} className="flex items-center gap-4 text-white">
-          <span>JOIN WAITLIST</span>{" "}
-          <div className="flex shrink-0 items-center justify-center">
-            <CircleArrowRight className="h-6 w-6 !shrink-0" />
-          </div>
-        </Link>
-      </Button>
+      <div className="mt-6 lg:hidden">
+        <ScholarsPartnerForm fill={true} />
+      </div>
     </div>
   );
 }

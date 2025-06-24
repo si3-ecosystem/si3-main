@@ -10,6 +10,7 @@ import { Button } from "@/components/atoms/button";
 import { Course, Community } from "@/types/home";
 import { useWindowSize } from "@/hooks/useWindowsSize";
 import Link from "next/link";
+import { ScholarsPartnerForm } from "../forms/ScholarsPartnerForm";
 
 export type RenderItemFunction = (
   item: Course | Community,
@@ -123,23 +124,9 @@ export function VideoCarousel({
                   {description}
                 </Text>
               )}
-              {joinWaitlist && (
-                <Button
-                  asChild
-                  size={"md"}
-                  className="mb-3 flex !h-[34px] w-fit items-center gap-4 border border-black bg-black !px-[0ox] !py-[6px] !pr-[5px] !pl-[24px] text-sm font-normal text-black max-lg:hidden"
-                >
-                  <Link
-                    href={"#"}
-                    className="flex items-center gap-4 text-white"
-                  >
-                    <span>JOIN WAITLIST</span>{" "}
-                    <div className="flex shrink-0 items-center justify-center">
-                      <CircleArrowRight className="h-6 w-6 !shrink-0" />
-                    </div>
-                  </Link>
-                </Button>
-              )}
+              <div className="max-lg:hidden">
+                {joinWaitlist && <ScholarsPartnerForm fill={true} />}
+              </div>
             </div>
           )}
           <div className="mt-16 flex w-full items-center justify-end gap-2 max-lg:hidden">
@@ -202,20 +189,9 @@ export function VideoCarousel({
             </div>
           </div>
         </div>
-        {joinWaitlist && (
-          <Button
-            asChild
-            size={"md"}
-            className="mx-auto mt-8 mb-3 flex !h-[34px] w-fit items-center gap-4 border border-black bg-black !px-[0ox] !py-[6px] !pr-[5px] !pl-[24px] text-sm font-normal text-black lg:hidden"
-          >
-            <Link href={"#"} className="flex items-center gap-4 text-white">
-              <span>JOIN WAITLIST</span>{" "}
-              <div className="flex shrink-0 items-center justify-center">
-                <CircleArrowRight className="h-6 w-6 !shrink-0" />
-              </div>
-            </Link>
-          </Button>
-        )}
+        <div className="lg:hidden">
+          {joinWaitlist && <ScholarsPartnerForm fill={true} />}
+        </div>
       </div>
     </section>
   );

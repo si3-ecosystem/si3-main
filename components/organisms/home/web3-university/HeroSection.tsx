@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity/image";
 import { SiHerGuidesForm } from "@/components/molecules/forms/siHerGuidesForm";
+import { ScholarsPartnerForm } from "@/components/molecules/forms/ScholarsPartnerForm";
 
 export default function HeroSection({
   data,
@@ -101,19 +102,7 @@ export default function HeroSection({
               ) : isGuides ? (
                 <SiHerGuidesForm title={data?.ctaText} className="" />
               ) : (
-                <Button
-                  asChild
-                  size={"md"}
-                  className="mb-3 flex h-[39px] w-fit items-center gap-4 border border-black bg-transparent !px-[18px] !py-[13px] text-sm font-normal text-black"
-                >
-                  <Link
-                    href={data?.ctaLink}
-                    className="flex items-center gap-4"
-                  >
-                    <span>{data?.ctaText}</span>{" "}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                <ScholarsPartnerForm />
               )}
             </div>
           </div>

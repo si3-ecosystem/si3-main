@@ -1,17 +1,14 @@
 "use client";
 
-import { AspectRatio } from "@/components/atoms/aspect-ratio";
-import { Button } from "@/components/atoms/button";
 import { Card } from "@/components/atoms/card";
 import { Text } from "@/components/atoms/text";
+import { ScholarsPartnerForm } from "@/components/molecules/forms/ScholarsPartnerForm";
 import { urlForImage } from "@/lib/sanity/image";
 import { cn } from "@/lib/utils";
 import { setActiveSection } from "@/redux/slice/activeSectionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { OnboardMaterial } from "@/types/onboard";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 type Props = {
   data: OnboardMaterial;
@@ -66,18 +63,8 @@ export function Scholars({ data, showSvg = false }: Props) {
               {data.description}
             </Text>
           </div>
-          <Button
-            asChild
-            size={"md"}
-            className="mb-3 flex h-[39px] w-fit items-center gap-4 border border-black bg-transparent !px-[18px] !py-[13px] text-sm font-normal text-black"
-          >
-            <Link
-              href={data?.ctaLink || "#"}
-              className="flex items-center gap-4"
-            >
-              <span>{data?.ctaText}</span> <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
+
+          <ScholarsPartnerForm />
         </div>
       </Card>
       {showSvg && (

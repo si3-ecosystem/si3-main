@@ -81,7 +81,7 @@ export function GuidesJourneyWrapper({
     },
     {
       id: "programming",
-      title: "SI HER SESSIONS",
+      title: "PROGRAMMING",
       content: (onClose: () => void) => (
         <div className="relative w-full rounded-[30px] border bg-white px-10 py-14 pb-8 max-lg:border-black max-lg:px-5">
           <CircleArrowUp

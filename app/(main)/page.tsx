@@ -95,5 +95,5 @@ export default async function HomePage() {
     </Suspense>
   );
 
-  return <InitialLoader>{pageContent}</InitialLoader>;
+  return <>{pageContent}</>;
 }
