@@ -29,7 +29,21 @@ export const homepageQuery = groq`
       alt,
     },
     growthData,
-    growthCarouselTitle,
+    growthCarousel[] {
+      _key,
+      title,
+      partners[]-> {
+        _id,
+        name,
+        type,
+        logo {
+          ...,
+          "blurDataURL": asset->metadata.lqip,
+          "ImageColor": asset->metadata.palette.dominant.background,
+          alt,
+        },
+      },
+    },
     growthTitle,
     growthContent,
     growthImage {

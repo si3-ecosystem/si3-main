@@ -263,6 +263,11 @@ export interface HomepageSchema {
   videoUrl: string;
   growthTitle: string;
   growthContent: string;
+  growthCarousel: {
+    _key: string;
+    title: string;
+    partners: Partner[];
+  }[];
   growthData: string;
   growthCarouselTitle: string;
   growthImage: HomepageImage;

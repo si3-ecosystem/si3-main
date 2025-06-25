@@ -10,8 +10,8 @@ import { MovingLogos } from "./MovingLogos";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { closeGrow3dgeModal } from "@/redux/slice/grow3dgeSlice";
 import { urlForImage } from "@/lib/sanity/image";
-import { useCallback, useRef } from "react";
-import { MovingLogosRef } from "./MovingLogos";
+import { useCallback, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Grow3dgePopupCard() {
   const isOpen = useAppSelector((state) => state.grow3dge.isOpen);
@@ -21,23 +21,29 @@ export function Grow3dgePopupCard() {
     queryFn: getHomePageData,
   });
 
-  const partners = data?.communityPartners || [];
-
   const handleDismiss = () => {
     dispatch(closeGrow3dgeModal());
-  };
+  }
 
-  const movingLogosRef = useRef<MovingLogosRef>(null);
+  const growthCarousel = data?.growthCarousel || [];
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = useCallback(() => {
-    movingLogosRef.current?.scrollPrev();
-  }, []);
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? growthCarousel.length - 1 : prevIndex - 1,
+    );
+  }, [growthCarousel.length]);
 
   const handleNext = useCallback(() => {
-    movingLogosRef.current?.scrollNext();
-  }, []);
+    setCurrentIndex((prevIndex) =>
+      prevIndex === growthCarousel.length - 1 ? 0 : prevIndex + 1,
+    );
+  }, [growthCarousel.length]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !growthCarousel || growthCarousel.length === 0) return null;
+
+  const currentModule = growthCarousel[currentIndex];
+  const partners = currentModule?.partners || [];
 
   return (
     <div className="fixed right-0 bottom-6 z-50 block w-full max-w-[497px] overflow-hidden rounded-none border-2 border-[#8963d6] bg-transparent p-0 outline-none lg:right-6 lg:rounded-md">
@@ -73,14 +79,23 @@ export function Grow3dgePopupCard() {
             </div>
 
             <div className="growth-card relative mx-auto w-full max-w-[270px] overflow-visible rounded-lg bg-[#FBACF8] p-1 max-sm:pt-2 sm:space-y-2">
-              <p className="text-center text-xs font-medium">
-                {data?.growthCarouselTitle}
-              </p>
-
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="h-4 text-center text-xs font-medium"
+                >
+                  {currentModule?.title}
+                </motion.p>
+              </AnimatePresence>
               <div className="relative flex items-center">
                 <button
                   onClick={handlePrev}
-                  className="absolute -top-2.5 -left-4 z-10 rounded-full p-1 shadow-md"
+                  disabled={growthCarousel.length <= 1}
+                  className="absolute -top-2.5 -left-4 z-10 rounded-full p-1 shadow-md disabled:opacity-50"
                   aria-label="Previous partner"
                 >
                   <svg
@@ -98,17 +113,23 @@ export function Grow3dgePopupCard() {
                 </button>
 
                 <div className="w-full">
-                  <MovingLogos
-                    ref={movingLogosRef}
-                    partners={partners}
-                    onPrev={handlePrev}
-                    onNext={handleNext}
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentIndex}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <MovingLogos partners={partners} />
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
 
                 <button
                   onClick={handleNext}
-                  className="absolute -top-2.5 -right-4 z-10 rounded-full p-1 shadow-md"
+                  disabled={growthCarousel.length <= 1}
+                  className="absolute -top-2.5 -right-4 z-10 rounded-full p-1 shadow-md disabled:opacity-50"
                   aria-label="Next partner"
                 >
                   <svg
