@@ -51,7 +51,6 @@ export function Partners({ data, showSvg = false, isPartner = false }: Props) {
             <div>
               <Text as={"h2"} variant="2xl" className="!text-2xl font-semibold">
                 {data.title}{" "}
-                <span className="text-sm font-normal"> {data.membership}</span>
               </Text>
             </div>
           </div>
@@ -67,7 +66,7 @@ export function Partners({ data, showSvg = false, isPartner = false }: Props) {
           {isPartner && (
             <PartnerProgramForm
               className="mx-auto lg:w-[265px]"
-              title={data?.ctaText}
+              title={"INQUIRE NOW"}
             />
           )}
         </div>

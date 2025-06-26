@@ -77,7 +77,9 @@ export default function HeroSection({
               <Title className="!text-xl font-bold lg:!text-[45px]">
                 {data?.title}
               </Title>
-              <Text className="text-[35px]">{data?.subtitle}</Text>
+              <Text className="text-[35px] !leading-[125%]">
+                {data?.subtitle}
+              </Text>
               <Text className="mt-6 max-w-[425px] text-xl font-medium max-lg:text-xs lg:mb-8 lg:leading-7">
                 {data?.description}
               </Text>

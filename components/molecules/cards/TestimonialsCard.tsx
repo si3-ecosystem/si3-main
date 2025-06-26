@@ -17,13 +17,13 @@ export function TestimonialsCard({ item, isCover = false }: Props) {
   return (
     <Card className="!h-full bg-[#F6F2F2] p-4">
       <div className="flex h-full flex-col items-start gap-8 @3xl:flex-row">
-        <div className="relative w-full overflow-hidden rounded-lg max-lg:h-[257px] max-sm:h-[244px] lg:aspect-square @3xl:w-full @3xl:max-w-[257.892px]">
+        <div className="relative w-full overflow-hidden rounded-lg max-lg:h-[257px] max-sm:h-[244px]">
           <Image
             src={imageUrl || "/icons/jpg/testimonial.jpg"}
             alt={item.name || "name"}
             fill
             className={cn(
-              "h-full w-full !rounded-lg max-lg:w-full max-sm:h-[244px] sm:max-h-[257.892px] sm:max-w-[257.892px] sm:object-contain",
+              "h-full w-full !rounded-lg max-lg:w-full max-sm:h-[244px] sm:h-[257.892px] sm:w-[257.892px] sm:object-contain",
               isCover ? "object-cover" : "object-contain",
             )}
           />

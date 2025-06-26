@@ -29,7 +29,7 @@ export function ExplorePartnersCard({ item }: Props) {
     >
       <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
         <div className="flex-1">
-          <Badge className="mb-6 bg-[#E8C1FF] text-base leading-5 font-medium tracking-[0.16px] text-black">
+          <Badge className="mb-6 bg-[#E8C1FF] text-base leading-5 font-medium tracking-[0.16px] break-words whitespace-pre-wrap text-black">
             {item.subTitle}
           </Badge>
           <Title className="mb-5 text-black">{item.title}</Title>

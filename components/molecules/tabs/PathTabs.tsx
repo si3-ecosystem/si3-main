@@ -19,7 +19,7 @@ export function PathTabs() {
 
   const tabs: Tab[] = [
     { id: "scholars", label: "SI U Scholars" },
-    { id: "guides", label: "SI Her Guides" },
+    { id: "guides", label: "Si Her Guides" },
     { id: "partners", label: "SI<3> Partners" },
   ];
 

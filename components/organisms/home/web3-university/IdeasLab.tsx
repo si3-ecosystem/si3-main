@@ -83,7 +83,7 @@ export function IdeasLab({
                 {data.demoSessions.map((session, index) => (
                   <div
                     key={session._key || index}
-                    className="relative flex-[0_0_calc(100%-1rem)] md:flex-[0_0_calc(50%-0.5rem)]"
+                    className="relative flex-[0_0_calc(100%-0rem)] md:flex-[0_0_calc(50%-.7rem)]"
                   >
                     <DemoSessionCard session={session} className="h-full" />
                   </div>

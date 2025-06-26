@@ -90,7 +90,7 @@ export function Web3UniversitySection({
           </p>
         </div>
 
-        <div className="z-0 max-lg:mb-4">
+        <div className="z-0 max-lg:mb-12">
           {/* Mobile Tabs */}
           <div className="w-full lg:hidden">
             <PathTabs />

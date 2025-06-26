@@ -18,7 +18,7 @@ export function SpotlightCard({ item }: Props) {
     : "/icons/jpg/pink-beauty.jpg";
 
   return (
-    <Card className="flex h-full w-full cursor-pointer flex-col justify-between gap-8 overflow-hidden rounded-2xl border border-[#D1D1D1] p-6 transition-all duration-300 !ease-in-out hover:shadow-lg sm:!w-[391px]">
+    <Card className="flex h-full w-full cursor-pointer flex-col justify-between gap-8 overflow-hidden rounded-2xl border border-[#D1D1D1] p-6 transition-all duration-300 !ease-in-out hover:shadow-lg">
       <div className="flex flex-col gap-4">
         <div className="group relative h-[303.924px] w-full overflow-hidden rounded-lg">
           <Image

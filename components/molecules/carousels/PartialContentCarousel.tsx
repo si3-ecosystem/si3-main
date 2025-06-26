@@ -41,9 +41,6 @@ export function PartialContentCarousel({
     slidesToScroll: 1,
     align: "start",
     containScroll: "trimSnaps",
-    breakpoints: {
-      "(max-width: 640px)": { slidesToScroll: 1, align: "start" },
-    },
   });
 
   const defaultRenderItem = (
@@ -74,7 +71,7 @@ export function PartialContentCarousel({
   }, [emblaApi]);
 
   const { width: windowWidth } = useWindowSize();
-  const isMobile = windowWidth < 768;
+  const isMobile = windowWidth < 640;
   const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -98,10 +95,9 @@ export function PartialContentCarousel({
     };
   }, [emblaApi, autoplay, autoplayInterval, isMobile]);
 
-  const slides: (Member | ProgrammingEvent)[][] = [];
-  for (let i = 0; i < items.length; i += 3) {
-    slides.push(items.slice(i, i + 3));
-  }
+  useEffect(() => {
+    if (emblaApi) emblaApi.reInit();
+  }, [emblaApi, items, windowWidth]);
 
   return (
     <section className="@container -mt-[86px] w-full">
@@ -151,53 +147,17 @@ export function PartialContentCarousel({
           </div>
         </div>
 
-        <div className="relative w-full overflow-hidden sm:hidden">
-          <div className="w-full" ref={emblaRef}>
-            <div className="mt-16 flex w-full lg:mt-0">
-              {slides.map((slideItems, slideIndex) => (
-                <div
-                  key={slideIndex}
-                  className={cn(
-                    "min-w-0 flex-[0_0_100%] sm:pl-6",
-                    "sm:basis-[100%] sm:flex-col sm:gap-6",
-                    "md:basis-1/4 md:flex-row md:gap-6",
-                  )}
-                >
-                  {slideItems.map((item, itemIndex) => (
-                    <div
-                      key={itemIndex}
-                      className={cn(
-                        "w-full transition-all duration-300 sm:pr-6",
-                        "sm:basis-full",
-                        "max-sm:mb-6 md:basis-1/3 lg:basis-1/3",
-                      )}
-                    >
-                      {renderFunction(item, slideIndex * 3 + itemIndex)}
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="relative w-full overflow-hidden max-sm:hidden">
-          <div className="w-full" ref={emblaRef}>
-            <div className="mt-16 flex w-full flex-col gap-6 sm:flex-row sm:gap-0 lg:mt-0">
-              {items.map((slideItems, slideIndex) => (
-                <div
-                  key={slideIndex}
-                  className={cn(
-                    "basis-[100%] pr-6 transition-all duration-300 sm:basis-[85%] md:basis-1/4",
-                  )}
-                >
-                  {renderFunction(slideItems, slideIndex)}
-                </div>
-              ))}
-            </div>
+        <div className="relative w-full overflow-hidden" ref={emblaRef}>
+          <div className="-mx-3 mt-16 grid auto-cols-[100%] grid-flow-col sm:auto-cols-[50%] lg:mt-0">
+            {items.map((item, index) => (
+              <div key={index} className="px-3">
+                {renderFunction(item, index)}
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="block lg:hidden">
+        <div className="mt-6 block lg:hidden">
           <SiHerGuidesForm title={"APPLY NOW"} className="" fill={true} />
         </div>
       </div>

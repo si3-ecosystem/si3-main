@@ -30,7 +30,7 @@ const Header = ({ data }: { data: HomepageSchema }) => {
 
       <div className="layout mt-[81px] flex items-center justify-center">
         <Button asChild className="bg-[#9F44D3]">
-          <Link href={"/#si-u"}>Explore SIU</Link>
+          <Link href={"/#si-u"}>Explore SI U </Link>
         </Button>
       </div>
     </div>
