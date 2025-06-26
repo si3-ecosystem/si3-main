@@ -1,7 +1,7 @@
 // components/molecules/cards/MovingLogos.tsx
 "use client";
 
-import { useCallback, forwardRef, useImperativeHandle } from "react";
+import { useCallback, forwardRef, useImperativeHandle, useMemo } from "react";
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity/image";
 import { Partner } from "@/types/home";
@@ -61,6 +61,12 @@ export const MovingLogos = forwardRef<MovingLogosRef, MovingLogosProps>(
       [scrollPrev, scrollNext],
     );
 
+    const slideWidthClass = useMemo(() => {
+      if (partners.length === 1) return "w-full";
+      if (partners.length === 2) return "w-1/2";
+      return "w-1/3";
+    }, [partners.length]);
+
     if (!partners?.length) return null;
 
     return (
@@ -69,7 +75,7 @@ export const MovingLogos = forwardRef<MovingLogosRef, MovingLogosProps>(
           {partners.map((partner, index) => (
             <div
               key={`${partner._id}-${index}`}
-              className="flex h-6 w-[calc(100%/3)] flex-shrink-0 items-center justify-center px-2"
+              className={`flex h-6 ${slideWidthClass} flex-shrink-0 items-center justify-center px-2`}
             >
               {partner.logo && (
                 <Image
