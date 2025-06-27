@@ -107,7 +107,6 @@ export function GuidesJourneyWrapper({
           />
           <Testimonials
             items={guidesData.testimonials}
-            isCover={true}
             title="Si Her Testimonials"
           />
         </div>

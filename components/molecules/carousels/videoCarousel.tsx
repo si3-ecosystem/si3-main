@@ -189,7 +189,7 @@ export function VideoCarousel({
             </div>
           </div>
         </div>
-        <div className="lg:hidden">
+        <div className="mt-6 lg:hidden">
           {joinWaitlist && <ScholarsPartnerForm fill={true} />}
         </div>
       </div>

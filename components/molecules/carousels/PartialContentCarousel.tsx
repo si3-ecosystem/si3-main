@@ -110,7 +110,7 @@ export function PartialContentCarousel({
         >
           <div className="space-y-2">
             {title && (
-              <Title className="!text-xl font-bold max-lg:mb-4 max-lg:text-center lg:!text-[45px]">
+              <Title className="!text-xl font-bold max-lg:mb-4 max-lg:text-center max-sm:max-w-[240px] lg:!text-[45px]">
                 {title}
               </Title>
             )}

@@ -1,7 +1,13 @@
 // components/molecules/cards/MovingLogos.tsx
 "use client";
 
-import { useCallback, forwardRef, useImperativeHandle, useMemo } from "react";
+import {
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+  useMemo,
+  useEffect,
+} from "react";
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity/image";
 import { Partner } from "@/types/home";
@@ -23,9 +29,19 @@ export const MovingLogos = forwardRef<MovingLogosRef, MovingLogosProps>(
     const [emblaRef, emblaApi] = useEmblaCarousel({
       align: "start",
       containScroll: "keepSnaps",
-      loop: false,
+      loop: true,
       skipSnaps: false,
     });
+
+    useEffect(() => {
+      if (!emblaApi || partners.length <= 3) return;
+
+      const timer = setInterval(() => {
+        emblaApi.scrollNext();
+      }, 3000);
+
+      return () => clearInterval(timer);
+    }, [emblaApi, partners.length]);
 
     const scrollBy = useCallback(
       (direction: "prev" | "next") => {

@@ -3,31 +3,16 @@ import { urlForImage } from "@/lib/sanity/image";
 import { Testimonial } from "@/types/home";
 import Image from "next/image";
 import { QuotIcon } from "../icons/Quot";
-import { cn } from "@/lib/utils";
 
 type Props = {
   item: Testimonial;
-  isCover?: boolean;
 };
 
-export function TestimonialsCard({ item, isCover = false }: Props) {
-  const imageUrl = item.image && urlForImage(item.image)?.src;
-
+export function TestimonialsCard({ item }: Props) {
   const companyLogo = item.companyLogo && urlForImage(item.companyLogo)?.src;
   return (
     <Card className="!h-full bg-[#F6F2F2] p-4">
       <div className="flex h-full flex-col items-start gap-8 @3xl:flex-row">
-        <div className="relative w-full overflow-hidden rounded-lg max-lg:h-[257px] max-sm:h-[244px]">
-          <Image
-            src={imageUrl || "/icons/jpg/testimonial.jpg"}
-            alt={item.name || "name"}
-            fill
-            className={cn(
-              "h-full w-full !rounded-lg max-lg:w-full max-sm:h-[244px] sm:h-[257.892px] sm:w-[257.892px] sm:object-contain",
-              isCover ? "object-cover" : "object-contain",
-            )}
-          />
-        </div>
         <div className="flex h-full w-full flex-col justify-between @3xl:flex-row">
           <div>
             <div className="mb-2 font-serif text-2xl leading-normal lg:text-4xl">

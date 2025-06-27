@@ -11,7 +11,6 @@ import { useWindowSize } from "@/hooks/useWindowsSize";
 interface TestimonialsProps {
   title: string;
   items: Testimonial[];
-  isCover: boolean;
 }
 
 const options = {
@@ -20,11 +19,7 @@ const options = {
   containScroll: "trimSnaps" as const,
 };
 
-export function Testimonials({
-  title,
-  items,
-  isCover = false,
-}: TestimonialsProps) {
+export function Testimonials({ title, items }: TestimonialsProps) {
   // Desktop carousel
   const [desktopEmblaRef, desktopEmblaApi] = useEmblaCarousel(options);
   // Mobile carousel
@@ -116,9 +111,9 @@ export function Testimonials({
   }, [desktopEmblaApi, mobileEmblaApi, onSelect, isMobile, autoPlay]);
 
   return (
-    <div className="mx-auto h-full w-full">
+    <div className="mx-auto mt-2 h-full w-full">
       <div className="mb-6 flex w-full items-center justify-between lg:items-start">
-        <Title className="w-full text-center !text-xl font-bold max-lg:mx-auto max-lg:max-w-[250px] lg:text-left lg:!text-3xl">
+        <Title className="w-full text-center !text-xl font-bold max-lg:mx-auto max-sm:max-w-[240px] sm:text-left lg:text-left lg:!text-3xl">
           {title}
         </Title>
       </div>
@@ -134,7 +129,7 @@ export function Testimonials({
               key={`desktop-${index}`}
               className="h-full w-full min-w-0 flex-[0_0_100%] pl-4"
             >
-              <TestimonialsCard item={item} isCover={isCover} />
+              <TestimonialsCard item={item} />
             </div>
           ))}
         </div>
@@ -146,9 +141,9 @@ export function Testimonials({
           {items.map((item, index) => (
             <div
               key={`mobile-${index}`}
-              className="h-full w-full min-w-0 flex-[0_0_100%] px-4"
+              className="h-full w-full min-w-0 flex-[0_0_100%] sm:px-4"
             >
-              <TestimonialsCard item={item} isCover={isCover} />
+              <TestimonialsCard item={item} />
             </div>
           ))}
         </div>

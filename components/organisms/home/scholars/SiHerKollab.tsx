@@ -1,7 +1,7 @@
 "use client";
 
 import { CollabCard } from "@/components/molecules/cards/collabCard";
-import { VideoCarousel } from "@/components/molecules/carousels/videoCarousel";
+import { PartialContentCarousel } from "@/components/molecules/carousels/PartialContentCarousel";
 import { Course, ScholarsData } from "@/types/home";
 
 type Props = {
@@ -11,8 +11,8 @@ type Props = {
 };
 export function SiHerKollab({ data, cardsData, joinWaitlist }: Props) {
   return (
-    <div id="si_u_scholars_kollab" className="h-full">
-      <VideoCarousel
+    <div id="si_u_scholars_kollab" className="mt-[5.7rem] h-full">
+      <PartialContentCarousel
         autoplay={true}
         autoplayInterval={3500}
         joinWaitlist={joinWaitlist}
@@ -21,7 +21,9 @@ export function SiHerKollab({ data, cardsData, joinWaitlist }: Props) {
           data?.community_description ||
           "Explore our growing collaborative of women & non-binary led Web3 communities."
         }
-        itemsPerSlide={3}
+        itemsPerSlide={2}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         items={cardsData}
         renderItem={(item, key) => (
           <CollabCard

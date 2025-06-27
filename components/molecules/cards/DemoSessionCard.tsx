@@ -33,16 +33,16 @@ export function DemoSessionCard({ session, className }: DemoSessionCardProps) {
           />
         )}
         {session.tag && (
-          <span className="absolute top-3 left-3 rounded-full bg-white px-3 py-1 text-base font-medium text-[#3F3F3F] lg:text-xl">
+          <span className="absolute top-3 left-3 rounded-full bg-white px-3 py-1 text-sm font-medium text-[#3F3F3F] lg:text-base">
             {session.tag}
           </span>
         )}
       </div>
       <div className="mt-5 lg:mt-8">
-        <h3 className="mb-2 text-base font-bold text-[#060606] lg:mb-3 lg:text-2xl">
+        <h3 className="mb-2 text-base font-semibold text-[#060606] lg:mb-3 lg:text-2xl">
           {session.title}
         </h3>
-        <p className="line-clamp-3 text-sm font-bold text-[#484848] lg:text-2xl">
+        <p className="line-clamp-3 text-sm text-[#484848] lg:text-base">
           {session.description}
         </p>
       </div>

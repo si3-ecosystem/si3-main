@@ -52,10 +52,10 @@ export function Web3Brand({ data }: Props) {
     : null;
 
   return (
-    <div className="@container">
+    <div className="@container mt-2">
       <div className="flex flex-col gap-10 @3xl:flex-row @3xl:gap-[60px]">
         <div className="flex-1">
-          <Title className="mb-4 !text-xl font-bold text-black max-lg:mx-auto max-lg:max-w-[250px] max-lg:text-center lg:!text-3xl">
+          <Title className="mb-4 !text-xl font-bold text-black max-lg:mx-auto max-lg:text-center max-sm:max-w-[170px] lg:!text-3xl">
             {data?.title}
           </Title>
           <Text className="mb-6 max-w-[535px] leading-7 text-black">

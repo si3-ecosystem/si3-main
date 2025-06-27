@@ -10,7 +10,7 @@ import { MovingLogos } from "./MovingLogos";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { closeGrow3dgeModal } from "@/redux/slice/grow3dgeSlice";
 import { urlForImage } from "@/lib/sanity/image";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Grow3dgePopupCard() {
@@ -23,7 +23,7 @@ export function Grow3dgePopupCard() {
 
   const handleDismiss = () => {
     dispatch(closeGrow3dgeModal());
-  }
+  };
 
   const growthCarousel = data?.growthCarousel || [];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,6 +39,16 @@ export function Grow3dgePopupCard() {
       prevIndex === growthCarousel.length - 1 ? 0 : prevIndex + 1,
     );
   }, [growthCarousel.length]);
+
+  useEffect(() => {
+    if (!isOpen || growthCarousel.length <= 1) return;
+
+    const timer = setInterval(() => {
+      handleNext();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [currentIndex, isOpen, growthCarousel.length, handleNext]);
 
   if (!isOpen || !growthCarousel || growthCarousel.length === 0) return null;
 

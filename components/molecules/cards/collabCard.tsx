@@ -19,7 +19,7 @@ export function CollabCard({ item }: { item: Community }) {
     : "/icons/jpg/collabcardbg.jpg";
 
   return (
-    <Card className="h-auto cursor-pointer overflow-hidden rounded-2xl border border-[#D1D1D1] !p-0 transition-all duration-300 !ease-in-out hover:shadow-lg">
+    <Card className="h-auto min-h-[450px] cursor-pointer overflow-hidden rounded-2xl border border-[#D1D1D1] !p-0 transition-all duration-300 !ease-in-out hover:shadow-lg">
       <CardContent className="flex h-full flex-col justify-between !p-0">
         <div className="flex h-fit flex-col">
           <div className="relative z-20 flex h-full w-full flex-col gap-6 px-5 pt-5">

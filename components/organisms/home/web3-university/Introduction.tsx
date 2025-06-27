@@ -4,29 +4,17 @@ import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
-import { Button } from "@/components/atoms/button";
-import Link from "next/link";
-import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import { DemoSessionCard } from "@/components/molecules/cards/DemoSessionCard";
-import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  CircleArrowRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { urlForImage } from "@/lib/sanity/image";
 import { Introduction as typeIntroduction } from "@/types/home";
 import { SiHerGuidesForm } from "@/components/molecules/forms/siHerGuidesForm";
 
 export function Introduction({
   data,
-  isForm = false,
   hideButton = false,
 }: {
   data: typeIntroduction;
-  isForm?: boolean;
   hideButton?: boolean;
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
