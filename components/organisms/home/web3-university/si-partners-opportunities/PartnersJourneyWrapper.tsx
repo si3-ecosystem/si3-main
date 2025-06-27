@@ -65,7 +65,6 @@ export function PartnersJourneyWrapper({
           />
           <Testimonials
             items={partnersData.testimonials}
-            isCover={false}
             title="Partner Testimonials"
           />
         </div>

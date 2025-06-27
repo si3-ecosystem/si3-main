@@ -426,6 +426,8 @@ export const partnersQuery = groq`
       alt
     },
     companyName,
+    "name":companyName,
+    title,
     link
   },
   video {

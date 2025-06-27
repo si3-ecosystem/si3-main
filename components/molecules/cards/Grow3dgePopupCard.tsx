@@ -45,7 +45,7 @@ export function Grow3dgePopupCard() {
 
     const timer = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 2500);
 
     return () => clearInterval(timer);
   }, [currentIndex, isOpen, growthCarousel.length, handleNext]);
