@@ -425,6 +425,12 @@ export const partnersQuery = groq`
       "ImageColor": asset->metadata.palette.dominant.background,
       alt
     },
+    companyLogo {
+      ...,
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
+      alt
+    },
     companyName,
     "name":companyName,
     title,
