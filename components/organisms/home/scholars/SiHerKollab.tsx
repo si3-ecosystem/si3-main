@@ -14,6 +14,7 @@ export function SiHerKollab({ data, cardsData, joinWaitlist }: Props) {
     <div id="si_u_scholars_kollab" className="mt-[5.7rem] h-full">
       <PartialContentCarousel
         autoplay={true}
+        ctaTitle="JOIN WAITLIST"
         autoplayInterval={3500}
         joinWaitlist={joinWaitlist}
         title={data?.community_title || "Si Her Kollab"}

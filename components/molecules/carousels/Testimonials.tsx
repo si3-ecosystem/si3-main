@@ -141,7 +141,7 @@ export function Testimonials({ title, items }: TestimonialsProps) {
           {items.map((item, index) => (
             <div
               key={`mobile-${index}`}
-              className="h-full w-full min-w-0 flex-[0_0_100%] sm:px-4"
+              className="h-full w-full min-w-0 flex-[0_0_100%] px-2 sm:px-4"
             >
               <TestimonialsCard item={item} />
             </div>

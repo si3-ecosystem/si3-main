@@ -26,10 +26,12 @@ export interface PartialContentCarouselProps {
   renderItem?: RenderItemFunction;
   className?: string;
   partialLastItem?: boolean;
+  ctaTitle?: string;
 }
 
 export function PartialContentCarousel({
   title,
+  ctaTitle = "APPLY NOW",
   description,
   items,
   autoplay = false,
@@ -124,7 +126,7 @@ export function PartialContentCarousel({
             )}
 
             <div className="mb-6 hidden lg:block">
-              <SiHerGuidesForm title={"APPLY NOW"} className="" fill={true} />
+              <SiHerGuidesForm title={ctaTitle} className="" fill={true} />
             </div>
           </div>
           <div className="mt-16 flex items-center justify-end gap-2 max-lg:hidden">
@@ -158,7 +160,7 @@ export function PartialContentCarousel({
         </div>
 
         <div className="mt-6 block lg:hidden">
-          <SiHerGuidesForm title={"APPLY NOW"} className="" fill={true} />
+          <SiHerGuidesForm title={ctaTitle} className="" fill={true} />
         </div>
       </div>
     </section>
