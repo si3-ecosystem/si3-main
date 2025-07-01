@@ -1,15 +1,13 @@
 "use client";
 
-import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
 import { DemoSessionCard } from "@/components/molecules/cards/DemoSessionCard";
 import { ScholarsPartnerForm } from "@/components/molecules/forms/ScholarsPartnerForm";
 import { ScholarsData } from "@/types/home";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight, CircleArrowRight } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useCallback } from "react";
 
 export function IdeasLab({
   title,
@@ -22,15 +20,14 @@ export function IdeasLab({
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
-    containScroll: "trimSnaps",
+    loop: true,
     dragFree: true,
+    containScroll: "trimSnaps",
+    slidesToScroll: 1,
     breakpoints: {
       "(min-width: 768px)": { slidesToScroll: 2 },
     },
   });
-
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -41,20 +38,6 @@ export function IdeasLab({
     [emblaApi],
   );
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi, onSelect]);
   return (
     <div>
       <div className="space-y-2">
@@ -80,38 +63,45 @@ export function IdeasLab({
           <div className="relative">
             <div className="overflow-hidden" ref={emblaRef}>
               <div className="flex gap-4 max-sm:p-1">
-                {data.demoSessions.map((session, index) => (
-                  <div
-                    key={session._key || index}
-                    className="relative flex-[0_0_calc(100%-0rem)] md:flex-[0_0_calc(50%-.7rem)]"
-                  >
-                    <DemoSessionCard session={session} className="h-full" />
-                  </div>
-                ))}
+                {(() => {
+                  // Embla's loop requires at least 3 slides for this configuration to work reliably on all screen sizes.
+                  const sessions =
+                    data.demoSessions.length < 3
+                      ? Array(Math.ceil(3 / data.demoSessions.length))
+                          .fill(data.demoSessions)
+                          .flat()
+                      : data.demoSessions;
+
+                  return sessions.map((session, index) => (
+                    <div
+                      key={`${session._key || "session"}-${index}`}
+                      className="relative min-w-0 flex-[0_0_100%] md:flex-[0_0_calc(50%-.7rem)]"
+                    >
+                      <DemoSessionCard session={session} className="h-full" />
+                    </div>
+                  ));
+                })()}
               </div>
             </div>
-            <>
-              <button
-                onClick={scrollPrev}
-                disabled={!canScrollPrev}
-                className="absolute top-1/2 -left-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={scrollNext}
-                disabled={!canScrollNext}
-                className="absolute top-1/2 -right-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </>
+            <button
+              onClick={scrollPrev}
+              disabled={!emblaApi}
+              className="absolute top-1/2 -left-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={scrollNext}
+              disabled={!emblaApi}
+              className="absolute top-1/2 -right-6 z-10 -translate-y-1/2 rounded-full bg-gray-100 p-2 shadow-md transition hover:bg-gray-200 disabled:opacity-50"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
         </div>
       )}
-
       <div className="mt-6 lg:hidden">
         <ScholarsPartnerForm fill={true} />
       </div>

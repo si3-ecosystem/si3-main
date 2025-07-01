@@ -56,7 +56,7 @@ export default async function HomePage() {
     <Suspense fallback={null}>
       <HeaderContainer HomePageData={HomePageData} />
 
-      <div id="si-u" className="@container max-lg:bg-white">
+      <div id="si-u" className="@container w-full max-lg:bg-white">
         <Web3UniversitySection
           data={onboardData}
           scholarsData={scholarsData}

@@ -94,7 +94,7 @@ export function Web3UniversitySection({
           {/* Mobile Tabs */}
           <div className="w-full lg:hidden">
             <PathTabs />
-            <div className="space-y-5 lg:hidden" id="mobile-tabs">
+            <div className="w-full space-y-5 lg:hidden" id="mobile-tabs">
               {renderActiveSection()}
               {activeSection === "scholars" && (
                 <p className="font-clesmont text-center text-[25px] leading-[125%] font-normal">

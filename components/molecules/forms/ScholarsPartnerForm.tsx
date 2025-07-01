@@ -87,11 +87,9 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
             formData: {
               name: data.name,
               email: data.email,
-              interests: Array.isArray(data.interests)
-                ? data.interests.join(", ")
-                : data.interests,
+              interests: data.interests,
               details: data.details || "",
-              newsletter: !!data.newsletter,
+              newsletter: data.newsletter,
             },
           }),
         },

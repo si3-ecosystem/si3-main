@@ -15,7 +15,7 @@ interface GalleryCarouselProps {
 }
 
 const options = {
-  loop: false,
+  loop: true,
   align: "center",
   containScroll: "trimSnaps",
 };

@@ -26,6 +26,7 @@ export function Testimonials({ title, items }: TestimonialsProps) {
   const [mobileEmblaRef, mobileEmblaApi] = useEmblaCarousel({
     ...options,
     dragFree: true,
+    loop: true,
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);

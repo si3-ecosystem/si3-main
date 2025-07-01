@@ -25,7 +25,7 @@ export function PathsContainer({
   );
 
   return (
-    <section id="si-u" className="layout relative w-full">
+    <section id="si-u" className="relative w-full">
       <div className="relative flex w-full flex-col gap-10 max-lg:-mt-8">
         <div className="relative flex w-full flex-col md:flex-row md:items-start">
           {/* Sticky Sidebar */}

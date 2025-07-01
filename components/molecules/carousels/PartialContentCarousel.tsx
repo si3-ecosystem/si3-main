@@ -42,6 +42,7 @@ export function PartialContentCarousel({
   const [emblaRef, emblaApi] = useEmblaCarousel({
     slidesToScroll: 1,
     align: "start",
+    loop: true,
     containScroll: "trimSnaps",
   });
 
