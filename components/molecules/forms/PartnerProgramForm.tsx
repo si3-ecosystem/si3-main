@@ -90,7 +90,7 @@ export function PartnerProgramForm({
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/mail/partners-program`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/mail/partners`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
