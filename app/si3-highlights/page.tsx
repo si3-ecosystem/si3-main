@@ -28,7 +28,7 @@ const NotificationsPage = () => {
         </div>
       </main>
 
-      <Footer />
+      <Footer utils={{ mediakit: "" }} />
     </div>
   );
 };
