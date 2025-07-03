@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from "@/components/atoms/form";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
-import { FormValues } from "@/validations/diversityTracker/schema";
 
 type FormProps = {
   form: UseFormReturn<any, any, any>;

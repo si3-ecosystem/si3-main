@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-
 "use client";
 
 import jwt from "jsonwebtoken";
@@ -17,7 +14,7 @@ const EtherMail = () => {
   useEffect(() => {
     // Event listener for successful signin
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    window.addEventListener("EtherMailSignInOnSuccess", (event: any) => {
+    window.addEventListener("EtherMailSignInOnSuccess", (event) => {
       const __loginEvent = event;
       const ethermailUser = jwt.decode(__loginEvent.detail.token);
 

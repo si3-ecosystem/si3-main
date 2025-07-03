@@ -9,7 +9,6 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { Input } from "@/components/atoms/input";
 import { Textarea } from "@/components/atoms/textarea";
-import { FormValues } from "@/validations/diversityTracker/schema";
 
 type FormProps = {
   form: UseFormReturn<any, any, any>;

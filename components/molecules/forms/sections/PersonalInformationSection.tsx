@@ -8,7 +8,6 @@ import {
 } from "@/components/atoms/form";
 import { Textarea } from "@/components/atoms/textarea";
 import { Slider } from "@/components/atoms/slider";
-import { FormValues } from "@/validations/diversityTracker/schema";
 import { CheckboxField, RadioField, SelectField } from "../FormFields";
 import { cn } from "@/lib/utils";
 

@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from "@/components/atoms/form";
 import { Textarea } from "@/components/atoms/textarea";
-import { FormValues } from "@/validations/diversityTracker/schema";
 
 type FormProps = {
   form: UseFormReturn<any, any, any>;

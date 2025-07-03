@@ -1,3 +1,5 @@
+"use client";
+
 import { FooterTwitter } from "@/components/molecules/icons/FooterTwitter";
 import { LinkedIcon } from "@/components/molecules/icons/linkedIn";
 import Link from "next/link";

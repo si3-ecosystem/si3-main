@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { navItems } from "@/constants/navLinks";
 import { trackEvent } from "@/utils/trackEvent";

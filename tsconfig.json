@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.mjs"
+    "next.config.mjs",
+    "components/organisms/auth/login/EtherMail.jsx"
   ],
   "exclude": ["node_modules"]
 }
