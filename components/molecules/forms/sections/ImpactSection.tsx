@@ -10,7 +10,7 @@ import { Textarea } from "@/components/atoms/textarea";
 import { FormValues } from "@/validations/diversityTracker/schema";
 
 type FormProps = {
-  form: UseFormReturn<FormValues, object, undefined | FormValues>;
+  form: UseFormReturn<any, any, any>;
 };
 export function ImpactSection({ form }: FormProps) {
   return (

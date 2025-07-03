@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { FormValues } from "@/validations/diversityTracker/schema";
 
 type FormProps = {
-  form: UseFormReturn<FormValues, object, undefined | FormValues>;
+  form: UseFormReturn<any, any, any>;
 };
 
 export function InclusivitySection({ form }: FormProps) {

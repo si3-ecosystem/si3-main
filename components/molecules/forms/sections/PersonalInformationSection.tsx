@@ -66,7 +66,7 @@ const sexualOrientationOptions = [
 ];
 
 type FormProps = {
-  form: UseFormReturn<FormValues, object, undefined | FormValues>;
+  form: UseFormReturn<any, any, any>;
 };
 
 export function PersonalInformationSection({ form }: FormProps) {
