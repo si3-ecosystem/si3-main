@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { trackEvent } from "@/utils/trackEvent";
 
 export const FooterNav = ({ mediakit }: { mediakit: string }) => {
   const navItems = [
@@ -29,6 +30,7 @@ export const FooterNav = ({ mediakit }: { mediakit: string }) => {
               href={href}
               target={target}
               className="hover:text-primary block w-fit cursor-pointer opacity-80 hover:underline hover:underline-offset-2"
+              onClick={() => trackEvent("SI Things Clicked", { label })}
             >
               {label}
             </Link>

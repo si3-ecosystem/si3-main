@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { FAQ } from "@/types/home";
+import { trackEvent } from "@/utils/trackEvent";
 
 type FaqAccordionProps = {
   faqs: FAQ[];
@@ -26,6 +27,23 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
 
   const handleValueChange = (value: string | string[]) => {
     setOpenValues(value);
+    // Track FAQ item open
+    if (Array.isArray(value)) {
+      // Multiple open (mobile)
+      const newlyOpened = value.filter(
+        (v) => !(Array.isArray(openValues) ? openValues : []).includes(v),
+      );
+      if (newlyOpened.length > 0) {
+        const openedFaq = faqs.find((faq) => faq._key === newlyOpened[0]);
+        if (openedFaq)
+          trackEvent("FAQ Item Clicked", { question: openedFaq.question });
+      }
+    } else {
+      // Single open (desktop)
+      const openedFaq = faqs.find((faq) => faq._key === value);
+      if (openedFaq)
+        trackEvent("FAQ Item Clicked", { question: openedFaq.question });
+    }
   };
 
   const isItemOpen = (_key: string) => {

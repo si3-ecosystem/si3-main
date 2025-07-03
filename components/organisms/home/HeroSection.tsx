@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Introduction } from "@/types/home";
 import Image from "next/image";
 import Link from "next/link";
+import { trackEvent } from "@/utils/trackEvent";
 
 type Props = {
   data: Introduction;
@@ -41,7 +42,14 @@ export function HeroSection({ data, isForm = false, extraClassName }: Props) {
             />
           ) : (
             <Button asChild showGradient={true} className="mb-3">
-              <Link href={data.ctaLink}>{data.ctaText}</Link>
+              <Link
+                href={data.ctaLink}
+                onClick={() =>
+                  trackEvent("Mission CTA Clicked", { ctaText: data.ctaText })
+                }
+              >
+                {data.ctaText}
+              </Link>
             </Button>
           )}
           {data?.memberShip && (

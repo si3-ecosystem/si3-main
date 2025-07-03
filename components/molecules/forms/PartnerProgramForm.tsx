@@ -33,6 +33,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { ArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import Image from "next/image";
+import { trackEvent } from "@/utils/trackEvent";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -68,9 +69,11 @@ export function PartnerProgramForm({
 
   useEffect(() => {
     if (open) {
+      trackEvent("Form Opened", { form: "Partners" });
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
+      trackEvent("Form Closed", { form: "Partners" });
     }
 
     return () => {
@@ -123,6 +126,7 @@ export function PartnerProgramForm({
   });
 
   const onSubmitHandler = (data: FormValues) => {
+    trackEvent("Form Submitted", { form: "Partners" });
     mutation.mutate(data);
   };
 

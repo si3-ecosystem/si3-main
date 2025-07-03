@@ -5,6 +5,7 @@ import {
   SectionType,
   setActiveSection,
 } from "@/redux/slice/activeSectionSlice";
+import { trackEvent } from "@/utils/trackEvent";
 
 export function Paths() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export function Paths() {
   );
 
   const handleSetActiveSection = (section: SectionType) => {
+    trackEvent("Path Option Clicked", { path: section });
     dispatch(setActiveSection(section));
   };
 

@@ -4,6 +4,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { trackEvent } from "@/utils/trackEvent";
 
 declare global {
   interface Window {
@@ -224,6 +225,9 @@ const EthermailSubscribe = () => {
         input="auto"
         wallet-connect-project-id="82b9193221afcff90a3e7b1d94e67505"
         rpc='{"http": "https://eth-mainnet.g.alchemy.com/v2/xrSkES28Vk2dzciw2ufA7ZE-UNjmnwpK"}'
+        onClick={() =>
+          trackEvent("Email Subscribe Clicked", { method: "Ethermail" })
+        }
       ></ethermail-subscribe>
     </div>
   );

@@ -30,6 +30,7 @@ import { Textarea } from "@/components/atoms/textarea";
 import { ArrowRight, CircleArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import Image from "next/image";
+import { trackEvent } from "@/utils/trackEvent";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -72,9 +73,11 @@ export function SiHerGuidesForm({
 
   useEffect(() => {
     if (open) {
+      trackEvent("Form Opened", { form: "Guides" });
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
+      trackEvent("Form Closed", { form: "Guides" });
     }
     return () => {
       document.body.classList.remove("no-scroll");
@@ -126,6 +129,7 @@ export function SiHerGuidesForm({
   });
 
   const onSubmitHandler = (data: FormValues) => {
+    trackEvent("Form Submitted", { form: "Guides" });
     mutation.mutate(data);
   };
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { navItems } from "@/constants/navLinks";
+import { trackEvent } from "@/utils/trackEvent";
 
 export function NavLinks() {
   return (
@@ -9,6 +10,12 @@ export function NavLinks() {
           <Link
             href={item.path}
             className="relative z-10 flex w-full items-center justify-center px-[22px] py-3 leading-6 font-medium whitespace-nowrap text-white transition-colors"
+            onClick={() => {
+              trackEvent("Nav Link Clicked", { name: item.name });
+              if (item.name === "MISSION") {
+                trackEvent("Mission CTA Clicked", { ctaText: item.name });
+              }
+            }}
           >
             {item.name}
           </Link>

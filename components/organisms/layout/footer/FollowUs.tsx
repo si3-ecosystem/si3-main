@@ -2,6 +2,7 @@ import { FooterTwitter } from "@/components/molecules/icons/FooterTwitter";
 import { LinkedIcon } from "@/components/molecules/icons/linkedIn";
 import Link from "next/link";
 import React from "react";
+import { trackEvent } from "@/utils/trackEvent";
 
 interface SocialItem {
   name: string;
@@ -33,6 +34,9 @@ export const FollowUs = () => {
             <Link
               href={social.url}
               className="hover:text-primary flex items-center gap-2 hover:underline"
+              onClick={() =>
+                trackEvent("Social Link Clicked", { platform: social.name })
+              }
             >
               {social.icon}
               <span>{social.name}</span>

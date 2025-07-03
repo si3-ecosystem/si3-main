@@ -31,6 +31,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { ArrowRight, CircleArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import Image from "next/image";
+import { trackEvent } from "@/utils/trackEvent";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -58,9 +59,11 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
 
   useEffect(() => {
     if (open) {
+      trackEvent("Form Opened", { form: "Scholars" });
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
+      trackEvent("Form Closed", { form: "Scholars" });
     }
 
     return () => {
@@ -112,6 +115,7 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
   });
 
   const onSubmitHandler = (data: FormValues) => {
+    trackEvent("Form Submitted", { form: "Scholars" });
     mutation.mutate(data);
   };
 

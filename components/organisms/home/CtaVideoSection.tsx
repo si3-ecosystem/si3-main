@@ -1,7 +1,10 @@
+"use client";
 import { Button } from "@/components/atoms/button";
 import { Title } from "@/components/atoms/title";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
 import Link from "next/link";
+import { trackEvent } from "@/utils/trackEvent";
+import { useEffect } from "react";
 
 interface Props {
   videoSrc: string;
@@ -19,6 +22,10 @@ export function CtaVideoSection({
   ctaLink,
   isLink = false,
 }: Props) {
+  useEffect(() => {
+    trackEvent("CTA Popup Shown", { popup: "CtaVideoSection" });
+  }, []);
+
   return (
     <section className="relative h-[445.62px] w-full overflow-hidden rounded-t-2xl lg:h-[486px] lg:rounded-t-4xl">
       <video
@@ -37,7 +44,12 @@ export function CtaVideoSection({
         </Title>
 
         {isLink && ctaTitle ? (
-          <Button asChild>
+          <Button
+            asChild
+            onClick={() =>
+              trackEvent("CTA Popup Clicked", { popup: "CtaVideoSection" })
+            }
+          >
             <Link href={ctaLink || "#"}>{ctaTitle}</Link>
           </Button>
         ) : ctaTitle ? (
