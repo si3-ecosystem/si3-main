@@ -4,7 +4,7 @@ import { FollowUs } from "./footer/FollowUs";
 import { Copyright } from "./footer/Copyright";
 
 export const Footer = ({ utils }: { utils: any }) => {
-  const { mediakit } = utils;
+  const mediakit = utils?.mediakit || "";
   return (
     <footer className="relative border-t border-gray-400 bg-white max-lg:pt-6 lg:-mt-4">
       <div id="stayConnected" className="layout mx-auto w-full lg:flex">
