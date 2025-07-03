@@ -21,6 +21,7 @@ export function Introduction({
     align: "start",
     containScroll: "trimSnaps",
     dragFree: true,
+    loop: true,
     breakpoints: {
       "(min-width: 768px)": { slidesToScroll: 2 },
     },

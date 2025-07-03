@@ -29,9 +29,7 @@ import { Title } from "@/components/atoms/title";
 import { Textarea } from "@/components/atoms/textarea";
 import { ArrowRight, CircleArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
-import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -51,8 +49,6 @@ type FormValues = z.infer<typeof formSchema>;
 
 export function SiHerGuidesForm({
   title,
-  showGradient = false,
-  className,
   fill = false,
 }: {
   title?: string;

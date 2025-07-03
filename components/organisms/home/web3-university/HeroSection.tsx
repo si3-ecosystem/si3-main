@@ -1,15 +1,9 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
 import { Text } from "@/components/atoms/text";
 import { Title } from "@/components/atoms/title";
-import { Button } from "@/components/atoms/button";
-import Link from "next/link";
 import { Introduction } from "@/types/home";
 import { PartnerProgramForm } from "@/components/molecules/forms/PartnerProgramForm";
-import { DemoSessionCard } from "@/components/molecules/cards/DemoSessionCard";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity/image";
@@ -27,41 +21,6 @@ export default function HeroSection({
   hideButton?: boolean;
   isGuides?: boolean;
 }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    containScroll: "trimSnaps",
-    dragFree: true,
-    breakpoints: {
-      "(min-width: 768px)": { slidesToScroll: 2 },
-    },
-  });
-
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
-
-  const scrollPrev = useCallback(
-    () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi],
-  );
-  const scrollNext = useCallback(
-    () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi],
-  );
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi, onSelect]);
   return (
     <div>
       <div className="@container overflow-hidden">

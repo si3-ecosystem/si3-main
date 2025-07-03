@@ -32,7 +32,6 @@ import { Textarea } from "@/components/atoms/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { ArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const formSchema = z.object({
@@ -48,8 +47,6 @@ type FormValues = z.infer<typeof formSchema>;
 
 export function PartnerProgramForm({
   title,
-  showGradient = false,
-  className,
 }: {
   title?: string;
   showGradient?: boolean;

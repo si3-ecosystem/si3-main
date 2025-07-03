@@ -5,11 +5,11 @@ import { Title } from "@/components/atoms/title";
 import { Text } from "@/components/atoms/text";
 import { EducationCard } from "../cards/educationCard";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight, CircleArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { Course, Community } from "@/types/home";
 import { useWindowSize } from "@/hooks/useWindowsSize";
-import Link from "next/link";
+// import Link from "next/link";
 import { ScholarsPartnerForm } from "../forms/ScholarsPartnerForm";
 
 export type RenderItemFunction = (

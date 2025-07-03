@@ -37,15 +37,15 @@ export function Testimonials({ title, items }: TestimonialsProps) {
   const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
 
   // Navigation functions
-  const scrollPrev = useCallback(() => {
-    desktopEmblaApi?.scrollPrev();
-    mobileEmblaApi?.scrollPrev();
-  }, [desktopEmblaApi, mobileEmblaApi]);
+  // const scrollPrev = useCallback(() => {
+  //   desktopEmblaApi?.scrollPrev();
+  //   mobileEmblaApi?.scrollPrev();
+  // }, [desktopEmblaApi, mobileEmblaApi]);
 
-  const scrollNext = useCallback(() => {
-    desktopEmblaApi?.scrollNext();
-    mobileEmblaApi?.scrollNext();
-  }, [desktopEmblaApi, mobileEmblaApi]);
+  // const scrollNext = useCallback(() => {
+  //   desktopEmblaApi?.scrollNext();
+  //   mobileEmblaApi?.scrollNext();
+  // }, [desktopEmblaApi, mobileEmblaApi]);
 
   // Handle carousel selection
   const onSelect = useCallback(() => {

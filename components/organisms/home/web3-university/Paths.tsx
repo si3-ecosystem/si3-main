@@ -1,6 +1,4 @@
-import { Button } from "@/components/atoms/button";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import {
