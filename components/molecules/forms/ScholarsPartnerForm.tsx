@@ -82,7 +82,7 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/mail/scholars`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/email/scholars`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
