@@ -84,7 +84,7 @@ export function SiHerGuidesForm({
     return () => {
       document.body.classList.remove("no-scroll");
     };
-  }, [open]);
+  }, [open, plausible]);
 
   const interestOptions = [
     "She/Her/Hers",
@@ -113,8 +113,13 @@ export function SiHerGuidesForm({
           }),
         },
       );
+
       if (!response.ok) {
-        throw new Error("Failed to submit inquiry");
+        const errorData = await response.json();
+
+        toast.error(errorData.error?.message || "Something went wrong");
+
+        throw new Error(errorData.error?.message || "Failed to submit inquiry");
       }
 
       return response.json();
@@ -124,9 +129,6 @@ export function SiHerGuidesForm({
       form.reset();
       setOpen(false);
       setShowSuccess(true);
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || "Something went wrong");
     },
   });
 

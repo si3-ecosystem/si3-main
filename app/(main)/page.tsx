@@ -1,6 +1,4 @@
-import { OurImpact } from "@/components/organisms/home/OurImpact";
-import HeaderContainer from "@/components/organisms/home/header/HeaderContainer";
-import { CreatingTheNewEconomy } from "@/components/organisms/home/CreatingTheNewEconomy";
+import { Metadata } from "next";
 import {
   getAboutIntroData,
   getAboutPageData,
@@ -8,88 +6,115 @@ import {
   getHomePageData,
   getPartnersData,
   getScholarsData,
+  getOnboardPageData,
 } from "@/lib/sanity/client";
-import { Suspense } from "react";
-import { Web3UniversitySection } from "@/components/organisms/home/web3-university/Web3UniversitySection";
-import { getOnboardPageData } from "@/lib/sanity/client";
-import { FaqSection } from "@/components/organisms/home/FaqSection";
-// import { CryptoTickerCarousel } from "@/components/organisms/home/CryptoTickerCarousel";
-import { InitialLoader } from "@/components/atoms/InitialLoader";
-import { WomenOfWeb3Banner } from "@/components/organisms/about/WomenOfWeb3Banner";
+import { HomePage } from "@/components/organisms/home/HomePage";
 import { urlForImage } from "@/lib/sanity/image";
+import { processMetadata } from "@/utils/sharedMetadata";
+import { FAQStructuredData } from "@/components/atoms/StructuredData";
+import { WebVitals, PageLoadTracker } from "@/components/atoms/WebVitals";
 
-export default async function HomePage() {
-  const [
-    HomePageData,
-    scholarsData,
-    guidesData,
-    partnersData,
-    aboutIntroData,
-    onboardData,
-    data,
-  ] = await Promise.all([
-    getHomePageData(),
-    getScholarsData(),
-    getGuidesData(),
-    getPartnersData(),
-    getAboutIntroData(),
-    getOnboardPageData(),
-    getAboutPageData(),
-  ]);
+// Generate metadata for the home page
+export async function generateMetadata(): Promise<Metadata> {
+  return await processMetadata({
+    title: "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3",
+    description:
+      "Co-activating growth and financial inclusion opportunities for women and non-binary web3 leaders through personal brand development, public speaking, partnerships, and DeFi.",
+    keywords: [
+      "si3",
+      "si/her",
+      "web3",
+      "blockchain",
+      "cryptocurrency",
+      "women in tech",
+      "diversity",
+      "inclusion",
+      "defi",
+      "personal branding",
+      "leadership",
+      "financial inclusion",
+      "web3 education",
+      "blockchain education",
+      "women empowerment",
+      "non-binary",
+      "tech diversity",
+      "crypto education",
+    ],
+  });
+}
 
-  const topRowTerms = data.educationPartners.map((partner) => partner.name);
-  const bottomRowTerms = data.communityPartners.map((partner) => partner.name);
+export default async function Home() {
+  try {
+    const [
+      HomePageData,
+      scholarsData,
+      guidesData,
+      partnersData,
+      aboutIntroData,
+      onboardData,
+      aboutPageData,
+    ] = await Promise.all([
+      getHomePageData(),
+      getScholarsData(),
+      getGuidesData(),
+      getPartnersData(),
+      getAboutIntroData(),
+      getOnboardPageData(),
+      getAboutPageData(),
+    ]);
 
-  const gifUrl = data?.tickerGif?.url || "";
-  const placeholderUrl =
-    data?.tickerGif?.placeholderImage &&
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    urlForImage(data?.tickerGif?.placeholderImage).src;
+    // Safely process placeholder image for ticker gif
+    if (aboutPageData?.tickerGif?.placeholderImage) {
+      try {
+        const processedImage = urlForImage(
+          aboutPageData.tickerGif.placeholderImage,
+        );
+        if (processedImage?.src) {
+          aboutPageData.tickerGif.placeholderImage = processedImage.src;
+        }
+      } catch (error) {
+        console.warn("Failed to process ticker gif placeholder image:", error);
+        // Remove the problematic image reference
+        delete aboutPageData.tickerGif.placeholderImage;
+      }
+    }
 
-  const purposeTexts = data.purpose_texts?.map((item) => item.text) || [];
+    // Generate FAQ structured data if available
+    const faqStructuredData =
+      HomePageData?.faqs?.length > 0 ? (
+        <FAQStructuredData
+          faqs={HomePageData.faqs.map((faq) => ({
+            question: faq.question || "",
+            answer: faq.answer || "",
+          }))}
+        />
+      ) : null;
 
-  const pageContent = (
-    <Suspense fallback={null}>
-      <HeaderContainer HomePageData={HomePageData} />
+    return (
+      <>
+        {/* Performance monitoring */}
+        <WebVitals />
+        <PageLoadTracker pageName="Home" />
 
-      <div id="si-u" className="@container w-full max-lg:bg-white">
-        <Web3UniversitySection
-          data={onboardData}
+        {/* Structured data for SEO */}
+        {faqStructuredData}
+
+        {/* Main content */}
+        <HomePage
+          HomePageData={HomePageData}
           scholarsData={scholarsData}
           guidesData={guidesData}
           partnersData={partnersData}
+          aboutIntroData={aboutIntroData}
+          onboardData={onboardData}
+          aboutPageData={aboutPageData}
         />
-      </div>
-      <section
-        id="impact"
-        style={{
-          background:
-            "linear-gradient(121deg, #211257 5.49%, #4C1192 48.19%, #790EB4 75.74%, #8A04C5 86.22%)",
-        }}
-        className="!z-0"
-      >
-        <OurImpact HomePageData={HomePageData} />
-        <WomenOfWeb3Banner
-          topRowTerms={topRowTerms}
-          bottomRowTerms={bottomRowTerms}
-          gifUrl={gifUrl}
-          purposeTexts={purposeTexts}
-          placeholderUrl={placeholderUrl}
-          textColor={"white"}
-        />
-        <FaqSection
-          faqTitle={HomePageData?.faqTitle}
-          faqs={HomePageData?.faqs}
-        />
-      </section>
-      <CreatingTheNewEconomy
-        aboutIntroData={aboutIntroData}
-        thoughtLeadership={HomePageData.thoughtLeadership}
-        thoughtLeadershipTitle={HomePageData.thoughtLeadershipTitle}
-      />
-    </Suspense>
-  );
+      </>
+    );
+  } catch (error) {
+    console.error("Error loading home page data:", error);
 
-  return <InitialLoader>{pageContent}</InitialLoader>;
+    // Return a fallback error page or redirect
+    throw new Error("Failed to load page data. Please try again later.");
+  }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { PortableText as PortableTextComponent } from "@portabletext/react";
 import Iframe from "react-iframe";
 import getVideoId from "get-video-id";
@@ -33,14 +34,16 @@ const ImageComponent = ({ value }) => {
   }
 
   return (
-    <img
+    <Image
       src={imageUrl.src}
       alt={value.alt || " "}
-      loading="lazy"
+      width={width}
+      height={height}
       style={{
         display: "inline-block",
         aspectRatio: width / height,
       }}
+      loading="lazy"
     />
   );
 };
