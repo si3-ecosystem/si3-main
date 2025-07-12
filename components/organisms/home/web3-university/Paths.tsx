@@ -8,10 +8,12 @@ import {
   setActiveSection,
 } from "@/redux/slice/activeSectionSlice";
 import { usePlausible } from "next-plausible";
+import { useRouter } from "next/navigation";
 
 export function Paths() {
   const plausible = usePlausible();
   const dispatch = useDispatch();
+  const router = useRouter();
   const { activeSection } = useSelector(
     (state: RootState) => state.activeSection,
   );
@@ -19,6 +21,7 @@ export function Paths() {
   const handleSetActiveSection = (section: SectionType) => {
     dispatch(setActiveSection(section));
     plausible("Path Option Clicked", { props: { path: section } });
+    router.push(`#${section}`);
   };
 
   const paths = [

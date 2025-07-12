@@ -21,6 +21,19 @@ export function InitialLoader({ children }: { children: React.ReactNode }) {
     return () => clearTimeout(timer);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        if (window.location.hash) {
+          const el = document.querySelector(window.location.hash);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      }, 100);
+    }
+  }, [isLoading]);
+
   if (isLoading) {
     return (
       <div className="fixed inset-0 z-[9999] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">

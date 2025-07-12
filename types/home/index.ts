@@ -84,11 +84,7 @@ export interface Web3Brand {
     images?: SanityImage[];
   }[];
   video?: {
-    _type: "file";
-    asset: {
-      _ref: string;
-      _type: "reference";
-    };
+    videoUrl?: string;
   };
 }
 
