@@ -1,54 +1,21 @@
 "use client";
 
-import React, { Suspense, useState, useEffect } from "react";
-
-import { Loader } from "@/components/atoms/Loader";
-import { HeroDiversityTracker } from "@/components/organisms/diversityTracker/HeroSection";
-import { DiversityTrackerFormSection } from "@/components/organisms/diversityTracker/DiversityTrackerFormSection";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getDiversityTrackerData } from "@/lib/sanity/client";
 import { DiversityTracker } from "@/types/diversity-tracker";
+import { Loader } from "@/components/atoms/Loader";
+import { TrackerPage } from "@/components/organisms/web3-tracker/TrackerPage";
 
-const Web3HealthTrackerPage: React.FC = () => {
-  const [showChart, setShowChart] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("diversityTrackerChartShown");
-      if (stored === "true") {
-        setShowChart(true);
-      }
-    }
-  }, []);
-
-  const queryClient = useQueryClient();
-
+const Web3HealthTrackerPage = () => {
   const { data, isLoading } = useQuery<DiversityTracker>({
     queryKey: ["getDiversityTracker"],
     queryFn: getDiversityTrackerData,
     refetchOnWindowFocus: false,
   });
 
-  useEffect(() => {
-    if (showChart) {
-      queryClient.invalidateQueries({
-        queryKey: ["diversityTrackerSummary"],
-      });
-    }
-  }, [queryClient, showChart]);
-
   if (isLoading) return <Loader />;
 
-  return (
-    <Suspense fallback={<Loader />}>
-      <HeroDiversityTracker {...data?.banner} />
-      <DiversityTrackerFormSection
-        showChart={showChart}
-        data={data}
-        setShowChart={setShowChart}
-      />
-    </Suspense>
-  );
+  return <TrackerPage trackerData={data} />;
 };
 
 export default Web3HealthTrackerPage;

@@ -15,8 +15,8 @@ export const FooterNav = ({ mediakit }: { mediakit: string }) => {
       target: "_blank",
     },
     {
-      href: "/about",
-      label: "About Us",
+      href: "/mission",
+      label: "Mission",
     },
   ];
 
