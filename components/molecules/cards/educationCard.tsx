@@ -109,7 +109,7 @@ export function EducationCard({
                 height={400}
                 loading="lazy"
                 decoding="async"
-                className="aspect-auto h-auto max-h-[40px] w-full max-w-[170px] object-contain"
+                className="h-auto max-h-[30px] w-full object-contain object-left"
               />
               <h3 className="line-clamp-2 h-[50px] overflow-hidden text-base leading-5 whitespace-pre-wrap text-[#4F4F4F]">
                 {item?.title}
