@@ -113,7 +113,7 @@ export function ScholarsJourneyWrapper({
             size={48}
             onClick={onClose}
             strokeWidth={0.5}
-            className="absolute top-5 right-5 z-10 cursor-pointer transition-transform duration-200 max-lg:size-[34px] lg:top-14 lg:right-14"
+            className="absolute top-5 right-5 z-30 cursor-pointer transition-transform duration-200 max-lg:size-[34px] lg:top-14 lg:right-14"
           />
           <IdeasLab
             data={scholarsData}
