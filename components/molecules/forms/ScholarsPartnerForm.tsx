@@ -4,14 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/atoms/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/atoms/dialog";
+
 import {
   Form,
   FormControl,
@@ -24,6 +17,7 @@ import { Input } from "@/components/atoms/input";
 import { Checkbox } from "@/components/atoms/checkbox";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { usePlausible } from "next-plausible";
 import { toast } from "sonner";
 import { Title } from "@/components/atoms/title";
 import { Textarea } from "@/components/atoms/textarea";
@@ -31,7 +25,14 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { ArrowRight, CircleArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import Image from "next/image";
-import { trackEvent } from "@/utils/trackEvent";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/atoms/animate-dialog";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -44,6 +45,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
+  const plausible = usePlausible();
   const [open, setOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const form = useForm<FormValues>({
@@ -59,11 +61,11 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
 
   useEffect(() => {
     if (open) {
-      trackEvent("Form Opened", { form: "Scholars" });
+      plausible("Form Opened", { props: { form: "Scholars" } });
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
-      trackEvent("Form Closed", { form: "Scholars" });
+      plausible("Form Closed", { props: { form: "Scholars" } });
     }
 
     return () => {
@@ -115,14 +117,19 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
   });
 
   const onSubmitHandler = (data: FormValues) => {
-    trackEvent("Form Submitted", { form: "Scholars" });
+    plausible("Form Submitted", { props: { form: "Scholars" } });
     mutation.mutate(data);
   };
 
   return (
     <div className="overflow-hidden">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
+        <DialogTrigger
+          asChild
+          onClick={() =>
+            plausible("Form Trigger Click", { props: { form: "Scholars" } })
+          }
+        >
           {fill ? (
             <Button
               asChild
@@ -325,9 +332,9 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
           open={showSuccess}
           onOpenChange={setShowSuccess}
           imageSrc="/icons/jpg/successGreen.jpg"
-          title="Application Submitted Successfully"
-          description="Thank you for your interest in joining SI U as a Scholar. We'll be in touch soon with more information!"
-          ctaLink="/"
+          title="Thank you, you have been added to the waitlist! Be in touch soon."
+          description=""
+          ctaLink="/#scholars"
           ctaTitle="Back to Home"
         />
       )}

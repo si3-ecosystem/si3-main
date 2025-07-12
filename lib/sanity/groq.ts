@@ -289,7 +289,12 @@ export const guidesQuery = groq`
       alt,
       caption
     },
-  web3brands->,
+  web3brands-> {
+    ...,
+    video {
+      "videoUrl": asset->url,
+    }
+  },
   members_title,
   members_description,
   members[]-> {
@@ -356,6 +361,7 @@ export const guidesQuery = groq`
   },
   video {
     "videoUrl": videoFile.asset->url,
+    ...,
     title,
     ctaLink,
     ctaTitle

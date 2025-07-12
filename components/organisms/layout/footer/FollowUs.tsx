@@ -4,7 +4,7 @@ import { FooterTwitter } from "@/components/molecules/icons/FooterTwitter";
 import { LinkedIcon } from "@/components/molecules/icons/linkedIn";
 import Link from "next/link";
 import React from "react";
-import { trackEvent } from "@/utils/trackEvent";
+import { usePlausible } from "next-plausible";
 
 interface SocialItem {
   name: string;
@@ -12,20 +12,22 @@ interface SocialItem {
   icon: React.ReactNode;
 }
 
-const socialList: SocialItem[] = [
-  {
-    name: "Twitter",
-    url: "http://x.com/si3_ecosystem",
-    icon: <FooterTwitter />,
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/company/si3ecosystem/",
-    icon: <LinkedIcon />,
-  },
-];
+export const FollowUs = ({ utils }: { utils: any }) => {
+  const plausible = usePlausible();
 
-export const FollowUs = () => {
+  const socialList: SocialItem[] = [
+    {
+      name: "Twitter",
+      url: utils?.twitter || "http://x.com/si3_ecosystem",
+      icon: <FooterTwitter />,
+    },
+    {
+      name: "LinkedIn",
+      url: utils?.linkedIn || "https://www.linkedin.com/company/si3ecosystem/",
+      icon: <LinkedIcon />,
+    },
+  ];
+
   return (
     <div className="border-gray-400 p-4 lg:justify-center lg:px-11 lg:pt-16">
       <p className="font-clesmont mb-2 text-2xl font-normal">Follow Us</p>
@@ -37,7 +39,9 @@ export const FollowUs = () => {
               href={social.url}
               className="hover:text-primary flex items-center gap-2 hover:underline"
               onClick={() =>
-                trackEvent("Social Link Clicked", { platform: social.name })
+                plausible("Social Link Clicked", {
+                  props: { platform: social.name },
+                })
               }
             >
               {social.icon}

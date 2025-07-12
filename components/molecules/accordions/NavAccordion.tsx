@@ -11,12 +11,14 @@ import {
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
+import { usePlausible } from "next-plausible";
 import { setActiveAccordionValue } from "@/redux/slice/communitySlice";
 import { openGrow3dgeModal } from "@/redux/slice/grow3dgeSlice";
 // import { Button } from "@/components/atoms/button";
 import { usePathname, useRouter } from "next/navigation";
 
 export function AccordionMenu() {
+  const plausible = usePlausible();
   const [openSection, setOpenSection] = useState<string>("");
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -122,6 +124,7 @@ export function AccordionMenu() {
     isGrow3dge = false,
   ) => {
     if (isGrow3dge) {
+      plausible("CTA Popup Opened");
       dispatch(openGrow3dgeModal());
       return;
     }

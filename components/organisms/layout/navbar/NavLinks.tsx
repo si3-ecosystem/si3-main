@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { navItems } from "@/constants/navLinks";
-import { trackEvent } from "@/utils/trackEvent";
+import { usePlausible } from "next-plausible";
 
 export function NavLinks() {
+  const plausible = usePlausible();
   return (
     <ul className="nav-gradient -ml-[5.5rem] flex h-full w-full max-w-[517px] items-center justify-center gap-[22px] rounded-[22px] !bg-[#4C1192] px-4 max-lg:hidden">
       {navItems.map((item, index) => (
@@ -13,9 +14,11 @@ export function NavLinks() {
             href={item.path}
             className="relative z-10 flex w-full items-center justify-center px-[22px] py-3 leading-6 font-medium whitespace-nowrap text-white transition-colors"
             onClick={() => {
-              trackEvent("Nav Link Clicked", { name: item.name });
+              plausible("Nav Link Clicked", { props: { name: item.name } });
               if (item.name === "MISSION") {
-                trackEvent("Mission CTA Clicked", { ctaText: item.name });
+                plausible("Mission CTA Clicked", {
+                  props: { ctaText: item.name },
+                });
               }
             }}
           >

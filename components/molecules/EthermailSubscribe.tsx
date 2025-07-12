@@ -4,7 +4,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { trackEvent } from "@/utils/trackEvent";
+import { usePlausible } from "next-plausible";
 
 declare global {
   interface Window {
@@ -13,6 +13,7 @@ declare global {
 }
 
 const EthermailSubscribe = () => {
+  const plausible = usePlausible();
   // useEffect(() => {
   //   window.setStyle = function () {
   //     const element = document.querySelector("ethermail-subscribe");
@@ -168,6 +169,7 @@ const EthermailSubscribe = () => {
               <span class="subscribe-emoji">🙌</span>
             </div>`;
           targetDiv.appendChild(newDiv);
+          plausible("Email Subscribed");
         }
       }
     };
@@ -226,7 +228,9 @@ const EthermailSubscribe = () => {
         wallet-connect-project-id="82b9193221afcff90a3e7b1d94e67505"
         rpc='{"http": "https://eth-mainnet.g.alchemy.com/v2/xrSkES28Vk2dzciw2ufA7ZE-UNjmnwpK"}'
         onClick={() =>
-          trackEvent("Email Subscribe Clicked", { method: "Ethermail" })
+          plausible("Email Subscribe Clicked", {
+            props: { method: "Ethermail" },
+          })
         }
       ></ethermail-subscribe>
     </div>

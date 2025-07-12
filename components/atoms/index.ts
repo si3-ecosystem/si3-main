@@ -16,6 +16,7 @@ import { Textarea } from "./textarea";
 import { RadioGroup } from "./radio-group";
 import { Loader } from "./Loader";
 import { Slider } from "./slider";
+import { Dialog as AnimateDialog } from "./animate-dialog";
 
 const components = {
   Title,
@@ -36,6 +37,7 @@ const components = {
   RadioGroup,
   Loader,
   Slider,
+  AnimateDialog,
 };
 
 export default components;

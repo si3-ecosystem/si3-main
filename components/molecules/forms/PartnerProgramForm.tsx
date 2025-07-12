@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/atoms/dialog";
+} from "@/components/atoms/animate-dialog";
 import {
   Form,
   FormControl,
@@ -33,7 +33,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { ArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import Image from "next/image";
-import { trackEvent } from "@/utils/trackEvent";
+import { usePlausible } from "next-plausible";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -67,13 +67,15 @@ export function PartnerProgramForm({
     },
   });
 
+  const plausible = usePlausible();
+
   useEffect(() => {
     if (open) {
-      trackEvent("Form Opened", { form: "Partners" });
+      plausible("Form Opened", { props: { form: "Partners" } });
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
-      trackEvent("Form Closed", { form: "Partners" });
+      plausible("Form Closed", { props: { form: "Partners" } });
     }
 
     return () => {
@@ -126,14 +128,19 @@ export function PartnerProgramForm({
   });
 
   const onSubmitHandler = (data: FormValues) => {
-    trackEvent("Form Submitted", { form: "Partners" });
+    plausible("Form Submitted", { props: { form: "Partners" } });
     mutation.mutate(data);
   };
 
   return (
     <div className="overflow-hidden">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
+        <DialogTrigger
+          asChild
+          onClick={() =>
+            plausible("Form Trigger Click", { props: { form: "Partners" } })
+          }
+        >
           <Button
             asChild
             size={"md"}

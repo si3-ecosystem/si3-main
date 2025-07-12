@@ -43,13 +43,9 @@ type Props = {
 };
 
 export function Web3Brand({ data }: Props) {
-  const videoUrl = data?.video?.asset?._ref
-    ? `https://cdn.sanity.io/files/${
-        process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-      }/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${data.video.asset._ref
-        .replace("file-", "")
-        .replace("-mp4", ".mp4")}`
-    : null;
+  const videoUrl = data.video?.videoUrl;
+
+  console.log("data", data.video?.videoUrl);
 
   return (
     <div className="@container mt-2">
@@ -71,13 +67,25 @@ export function Web3Brand({ data }: Props) {
             ))}
           </ul>
         </div>
-        <div className="w-full @max-3xl:h-[589.217px] @3xl:h-full @3xl:max-h-[589.217px] @3xl:max-w-[445px]">
-          <video
-            src={videoUrl || "/videos/SiUScholars.mp4"}
-            playsInline
-            controls
-            className="mx-auto h-full max-h-[589px] w-full max-w-[275px] object-cover object-center xl:h-full"
-          />
+        <div className="relative w-full @max-3xl:h-[589.217px] @3xl:h-[589.217px] @3xl:max-w-[445px]">
+          {videoUrl && videoUrl.endsWith(".gif") ? (
+            <Image
+              width={600}
+              height={600}
+              src={videoUrl}
+              alt="Web3 Brand GIF"
+              className="mx-auto h-full w-full max-w-full object-contain object-center lg:h-[589px] xl:h-full"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <video
+              src={videoUrl || "/videos/SiUScholars.mp4"}
+              playsInline
+              controls
+              className="mx-auto h-full max-h-[589px] w-full max-w-[275px] object-cover object-center xl:h-full"
+            />
+          )}
         </div>
 
         <div className="mb-6 block lg:hidden">

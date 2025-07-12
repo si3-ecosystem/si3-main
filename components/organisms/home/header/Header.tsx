@@ -21,7 +21,7 @@ const Header = ({ data }: { data: HomepageSchema }) => {
         web3 era
       </Title>
 
-      <p className="mx-auto max-w-[336.016px] text-center text-base font-normal text-white lg:max-w-[680px] lg:text-xl">
+      <p className="mx-auto max-w-[336.016px] text-center text-base font-normal text-white lg:max-w-[380px] lg:text-xl">
         {data.desc}
       </p>
       <h3 className="text-center text-[11px] leading-7 font-semibold tracking-[1.5px] text-white max-md:hidden md:hidden md:text-xl">

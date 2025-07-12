@@ -4,7 +4,6 @@ import { CreatingTheNewEconomy } from "@/components/organisms/home/CreatingTheNe
 import {
   getAboutIntroData,
   getAboutPageData,
-  getCardsData,
   getGuidesData,
   getHomePageData,
   getPartnersData,
@@ -22,7 +21,6 @@ import { urlForImage } from "@/lib/sanity/image";
 export default async function HomePage() {
   const [
     HomePageData,
-    cardsData,
     scholarsData,
     guidesData,
     partnersData,
@@ -31,7 +29,6 @@ export default async function HomePage() {
     data,
   ] = await Promise.all([
     getHomePageData(),
-    getCardsData(),
     getScholarsData(),
     getGuidesData(),
     getPartnersData(),
@@ -62,7 +59,6 @@ export default async function HomePage() {
           scholarsData={scholarsData}
           guidesData={guidesData}
           partnersData={partnersData}
-          cardsData={cardsData}
         />
       </div>
       <section

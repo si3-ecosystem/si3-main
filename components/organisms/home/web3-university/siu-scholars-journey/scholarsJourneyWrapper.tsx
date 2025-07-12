@@ -1,5 +1,5 @@
 "use client";
-import { Course, ScholarsData } from "@/types/home";
+import { ScholarsData } from "@/types/home";
 import HeroSection from "../HeroSection";
 import { SiHerKollab } from "../../scholars/SiHerKollab";
 import { IdeasLab } from "../IdeasLab";
@@ -13,16 +13,34 @@ import {
   AccordionItem,
 } from "@/components/atoms/accordion";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setContentSection } from "@/redux/slice/activeSectionSlice";
+import { usePlausible } from "next-plausible";
 
 export function ScholarsJourneyWrapper({
   scholarsData,
-  cardsData,
 }: {
   scholarsData: ScholarsData;
-  cardsData: Course[];
 }) {
+  const dispatch = useDispatch();
+  const plausible = usePlausible();
   const [openSections, setOpenSections] = useState<string[]>(["journey"]);
+
+  // Track content section changes
+  useEffect(() => {
+    const currentSection = openSections.length > 0 ? openSections[0] : null;
+    dispatch(setContentSection(currentSection));
+
+    if (currentSection) {
+      plausible("Section Click", {
+        props: {
+          path: "scholars",
+          section: currentSection,
+        },
+      });
+    }
+  }, [openSections, dispatch, plausible]);
 
   const handleClose = (id: string) => {
     setOpenSections((prev) => prev.filter((item) => item !== id));
@@ -82,11 +100,7 @@ export function ScholarsJourneyWrapper({
             strokeWidth={0.5}
             className="absolute top-5 right-5 z-10 cursor-pointer transition-transform duration-200 max-lg:size-[34px] lg:top-14 lg:right-14"
           />
-          <SiHerKollab
-            joinWaitlist={true}
-            data={scholarsData}
-            cardsData={cardsData}
-          />
+          <SiHerKollab joinWaitlist={true} data={scholarsData} />
         </div>
       ),
     },
@@ -99,7 +113,7 @@ export function ScholarsJourneyWrapper({
             size={48}
             onClick={onClose}
             strokeWidth={0.5}
-            className="absolute top-5 right-5 z-10 cursor-pointer transition-transform duration-200 max-lg:size-[34px] lg:top-14 lg:right-14"
+            className="absolute top-5 right-5 z-30 cursor-pointer transition-transform duration-200 max-lg:size-[34px] lg:top-14 lg:right-14"
           />
           <IdeasLab
             data={scholarsData}

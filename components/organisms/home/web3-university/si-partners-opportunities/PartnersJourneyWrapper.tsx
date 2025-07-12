@@ -10,7 +10,10 @@ import {
   AccordionItem,
 } from "@/components/atoms/accordion";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setContentSection } from "@/redux/slice/activeSectionSlice";
+import { usePlausible } from "next-plausible";
 import { ExplorePartnersCard } from "@/components/molecules/cards/ExplorePartnersCard";
 
 export function PartnersJourneyWrapper({
@@ -18,7 +21,24 @@ export function PartnersJourneyWrapper({
 }: {
   partnersData: PartnersData;
 }) {
+  const dispatch = useDispatch();
+  const plausible = usePlausible();
   const [openSections, setOpenSections] = useState<string[]>(["hero"]);
+
+  // Track content section changes
+  useEffect(() => {
+    const currentSection = openSections.length > 0 ? openSections[0] : null;
+    dispatch(setContentSection(currentSection));
+
+    if (currentSection) {
+      plausible("Section Click", {
+        props: {
+          path: "partners",
+          section: currentSection,
+        },
+      });
+    }
+  }, [openSections, dispatch, plausible]);
 
   const sponsorSections =
     partnersData.explore?.map((item, idx) => ({

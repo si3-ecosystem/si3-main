@@ -1,7 +1,11 @@
 "use client";
 
 import { Button } from "@/components/atoms/button";
-import { Dialog, DialogContent, DialogFooter } from "@/components/atoms/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+} from "@/components/atoms/animate-dialog";
 import { cn } from "@/lib/utils";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import Image from "next/image";

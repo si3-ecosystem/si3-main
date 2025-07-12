@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
-} from "@/components/atoms/dialog";
+} from "@/components/atoms/animate-dialog";
 import {
   Form,
   FormControl,
@@ -30,7 +30,7 @@ import { Textarea } from "@/components/atoms/textarea";
 import { ArrowRight, CircleArrowRight, LoaderCircleIcon } from "lucide-react";
 import { SuccessDialog } from "../dialogs/SuccessDialog";
 import Image from "next/image";
-import { trackEvent } from "@/utils/trackEvent";
+import { usePlausible } from "next-plausible";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -71,13 +71,15 @@ export function SiHerGuidesForm({
     },
   });
 
+  const plausible = usePlausible();
+
   useEffect(() => {
     if (open) {
-      trackEvent("Form Opened", { form: "Guides" });
+      plausible("Form Opened", { props: { form: "Guides" } });
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
-      trackEvent("Form Closed", { form: "Guides" });
+      plausible("Form Closed", { props: { form: "Guides" } });
     }
     return () => {
       document.body.classList.remove("no-scroll");
@@ -129,14 +131,20 @@ export function SiHerGuidesForm({
   });
 
   const onSubmitHandler = (data: FormValues) => {
-    trackEvent("Form Submitted", { form: "Guides" });
+    plausible("Form Submitted", { props: { form: "Guides" } });
     mutation.mutate(data);
   };
 
   return (
     <div className="overflow-hidden">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild className="w-full">
+        <DialogTrigger
+          asChild
+          className="w-full"
+          onClick={() =>
+            plausible("Form Trigger Click", { props: { form: "Guides" } })
+          }
+        >
           {fill ? (
             <Button
               asChild
