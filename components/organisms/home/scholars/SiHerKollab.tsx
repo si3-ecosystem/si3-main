@@ -2,7 +2,7 @@
 
 import { CollabCard } from "@/components/molecules/cards/collabCard";
 import { PartialContentCarousel } from "@/components/molecules/carousels/PartialContentCarousel";
-import { Course, ScholarsData } from "@/types/home";
+import { ScholarsData } from "@/types/home";
 
 type Props = {
   data: ScholarsData;

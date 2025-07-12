@@ -1,5 +1,5 @@
 "use client";
-import { Course, ScholarsData } from "@/types/home";
+import { ScholarsData } from "@/types/home";
 import HeroSection from "../HeroSection";
 import { SiHerKollab } from "../../scholars/SiHerKollab";
 import { IdeasLab } from "../IdeasLab";

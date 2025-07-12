@@ -22,7 +22,7 @@ export function SiUScholarsWrapper({ data }: SiUScholarsWrapperProps) {
           items={data.courses}
         />
       </div>
-      <SiHerKollab data={data} cardsData={data.courses} />
+      <SiHerKollab data={data} />
     </section>
   );
 }

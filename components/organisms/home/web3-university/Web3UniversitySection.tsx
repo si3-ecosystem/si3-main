@@ -10,7 +10,7 @@ import { PathTabs } from "@/components/molecules/tabs/PathTabs";
 import { useEffect } from "react";
 import { setActiveSection } from "@/redux/slice/activeSectionSlice";
 import { PathsContainer } from "./pathsContainer";
-import { Course, GuidesData, PartnersData, ScholarsData } from "@/types/home";
+import { GuidesData, PartnersData, ScholarsData } from "@/types/home";
 
 export function Web3UniversitySection({
   data,

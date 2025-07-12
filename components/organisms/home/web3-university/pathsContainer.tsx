@@ -1,5 +1,5 @@
 "use client";
-import { Course, GuidesData, PartnersData, ScholarsData } from "@/types/home";
+import { GuidesData, PartnersData, ScholarsData } from "@/types/home";
 import { Paths } from "./Paths";
 import { ScholarsJourneyWrapper } from "./siu-scholars-journey/scholarsJourneyWrapper";
 import { GuidesJourneyWrapper } from "./si-her-guides-experience/guidesJourneyWrapper";
