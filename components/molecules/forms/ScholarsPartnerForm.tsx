@@ -99,20 +99,24 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
           }),
         },
       );
+
       if (!response.ok) {
-        throw new Error("Failed to submit application");
+        const errorData = await response.json();
+
+        toast.error(errorData.error?.message || "Something went wrong");
+
+        throw new Error(
+          errorData.error?.message || "Failed to submit application",
+        );
       }
 
       return response.json();
     },
     onSuccess: () => {
-      toast.success("Application submitted successfully!");
+      toast.success("Successfully submitted!");
       form.reset();
       setOpen(false);
       setShowSuccess(true);
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || "Something went wrong");
     },
   });
 

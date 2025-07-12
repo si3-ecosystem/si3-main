@@ -142,8 +142,15 @@ export const PartnerProgramForm = memo<PartnerProgramFormProps>(
             }),
           },
         );
+
         if (!response.ok) {
-          throw new Error("Failed to submit inquiry");
+          const errorData = await response.json();
+
+          toast.error(errorData.error?.message || "Something went wrong");
+
+          throw new Error(
+            errorData.error?.message || "Failed to submit inquiry",
+          );
         }
 
         return response.json();
@@ -153,9 +160,6 @@ export const PartnerProgramForm = memo<PartnerProgramFormProps>(
         form.reset();
         setOpen(false);
         setShowSuccess(true);
-      },
-      onError: (error: Error) => {
-        toast.error(error.message || "Something went wrong");
       },
     });
 
