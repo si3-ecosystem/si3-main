@@ -3,6 +3,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
+import { usePlausible } from "next-plausible";
 import { useQuery } from "@tanstack/react-query";
 import { getHomePageData } from "@/lib/sanity/client";
 import { HomepageSchema } from "@/types/home";
@@ -14,6 +15,7 @@ import { useCallback, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Grow3dgePopupCard() {
+  const plausible = usePlausible();
   const isOpen = useAppSelector((state) => state.grow3dge.isOpen);
   const dispatch = useAppDispatch();
   const { data } = useQuery<HomepageSchema>({
@@ -22,6 +24,7 @@ export function Grow3dgePopupCard() {
   });
 
   const handleDismiss = () => {
+    plausible("CTA Popup Closed");
     dispatch(closeGrow3dgeModal());
   };
 
@@ -56,7 +59,10 @@ export function Grow3dgePopupCard() {
   const partners = currentModule?.partners || [];
 
   return (
-    <div className="fixed right-0 bottom-6 z-50 block w-full max-w-[497px] overflow-hidden rounded-none border-2 border-[#8963d6] bg-transparent p-0 outline-none lg:right-6 lg:rounded-md">
+    <div
+      className="fixed right-0 bottom-6 z-50 block w-full max-w-[497px] overflow-hidden rounded-none border-2 border-[#8963d6] bg-transparent p-0 outline-none lg:right-6 lg:rounded-md"
+      onClick={() => plausible("CTA Popup Clicked")}
+    >
       <div className="relative h-full w-full overflow-hidden bg-white/60 p-0 backdrop-blur-sm">
         <button
           onClick={handleDismiss}

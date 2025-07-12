@@ -12,7 +12,7 @@ declare global {
  * Usage: trackEvent('Event Name', { key: value })
  */
 export function trackEvent(event: string, props?: Record<string, any>) {
-  if (typeof window !== "undefined" && typeof window.plausible === "function") {
-    window.plausible(event, props ? { props } : undefined);
-  }
+  // if (typeof window !== "undefined" && typeof window.plausible === "function") {
+  //   window.plausible(event, props ? { props } : undefined);
+  // }
 }

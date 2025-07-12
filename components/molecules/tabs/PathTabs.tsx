@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { setActiveSection } from "@/redux/slice/activeSectionSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { usePlausible } from "next-plausible";
 
 type Tab = {
   id: "scholars" | "guides" | "partners";
@@ -26,6 +27,7 @@ export function PathTabs() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const plausible = usePlausible();
 
   // Sync tab with URL hash
   useEffect(() => {
@@ -36,6 +38,7 @@ export function PathTabs() {
   }, [pathname, searchParams, dispatch]);
 
   const handleTabClick = (tabId: "scholars" | "guides" | "partners") => {
+    plausible("Path Option Clicked", { props: { path: tabId } });
     dispatch(setActiveSection(tabId));
     // Update URL hash using Next.js router
     router.push(`#${tabId}`, { scroll: false });

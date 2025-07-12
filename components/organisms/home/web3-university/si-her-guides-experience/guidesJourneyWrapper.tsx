@@ -13,7 +13,9 @@ import {
   AccordionItem,
 } from "@/components/atoms/accordion";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setContentSection } from "@/redux/slice/activeSectionSlice";
 import { Introduction } from "../Introduction";
 
 export function GuidesJourneyWrapper({
@@ -21,7 +23,14 @@ export function GuidesJourneyWrapper({
 }: {
   guidesData: GuidesData;
 }) {
+  const dispatch = useDispatch();
   const [openSections, setOpenSections] = useState<string[]>(["hero"]);
+
+  // Track content section changes
+  useEffect(() => {
+    const currentSection = openSections.length > 0 ? openSections[0] : null;
+    dispatch(setContentSection(currentSection));
+  }, [openSections, dispatch]);
 
   const sections = [
     {

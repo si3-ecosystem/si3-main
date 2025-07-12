@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { FAQ } from "@/types/home";
-import { trackEvent } from "@/utils/trackEvent";
+import { usePlausible } from "next-plausible";
 
 type FaqAccordionProps = {
   faqs: FAQ[];
@@ -24,6 +24,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
   const [openValues, setOpenValues] = useState<string | string[]>(
     isMobile ? [] : "",
   );
+  const plausible = usePlausible();
 
   const handleValueChange = (value: string | string[]) => {
     setOpenValues(value);
@@ -36,13 +37,17 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
       if (newlyOpened.length > 0) {
         const openedFaq = faqs.find((faq) => faq._key === newlyOpened[0]);
         if (openedFaq)
-          trackEvent("FAQ Item Clicked", { question: openedFaq.question });
+          plausible("FAQ Item Clicked", {
+            props: { question: openedFaq.question },
+          });
       }
     } else {
       // Single open (desktop)
       const openedFaq = faqs.find((faq) => faq._key === value);
       if (openedFaq)
-        trackEvent("FAQ Item Clicked", { question: openedFaq.question });
+        plausible("FAQ Item Clicked", {
+          props: { question: openedFaq.question },
+        });
     }
   };
 
