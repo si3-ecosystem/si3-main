@@ -84,7 +84,7 @@ export function SiHerGuidesForm({
     return () => {
       document.body.classList.remove("no-scroll");
     };
-  }, [open]);
+  }, [open, plausible]);
 
   const interestOptions = [
     "She/Her/Hers",

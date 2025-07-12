@@ -71,7 +71,7 @@ export function ScholarsPartnerForm({ fill }: { fill?: boolean }) {
     return () => {
       document.body.classList.remove("no-scroll");
     };
-  }, [open]);
+  }, [open, plausible]);
 
   const interestOptions = [
     "Early stage emerging tech education",

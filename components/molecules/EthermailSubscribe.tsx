@@ -216,7 +216,7 @@ const EthermailSubscribe = () => {
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => observer.disconnect();
-  }, []);
+  }, [plausible]);
 
   return (
     <div className="flex w-full max-w-md items-center overflow-hidden">
