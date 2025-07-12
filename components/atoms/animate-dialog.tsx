@@ -110,8 +110,7 @@ function DialogContent({
 }: DialogContentProps) {
   const { isOpen } = useDialog();
 
-  const initialRotation =
-    from === "top" || from === "left" ? "20deg" : "-20deg";
+  const initialRotation = from === "top" || from === "left" ? "0deg" : "-0deg";
   const isVertical = from === "top" || from === "bottom";
   const rotateAxis = isVertical ? "rotateX" : "rotateY";
 
