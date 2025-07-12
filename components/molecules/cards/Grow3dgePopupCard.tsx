@@ -58,6 +58,8 @@ export function Grow3dgePopupCard() {
   const currentModule = growthCarousel[currentIndex];
   const partners = currentModule?.partners || [];
 
+  if (!open) return null;
+
   return (
     <div
       className="fixed right-0 bottom-6 z-50 block w-full max-w-[497px] overflow-hidden rounded-none border-2 border-[#8963d6] bg-transparent p-0 outline-none lg:right-6 lg:rounded-md"

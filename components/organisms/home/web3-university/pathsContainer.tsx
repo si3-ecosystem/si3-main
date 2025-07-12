@@ -11,14 +11,12 @@ type Props = {
   scholarsData: ScholarsData;
   guidesData: GuidesData;
   partnersData: PartnersData;
-  cardsData: Course[];
 };
 
 export function PathsContainer({
   scholarsData,
   guidesData,
   partnersData,
-  cardsData,
 }: Props) {
   const { activeSection } = useSelector(
     (state: RootState) => state.activeSection,
@@ -38,10 +36,7 @@ export function PathsContainer({
           {/* Main Content */}
           <div className="w-full flex-1 md:pl-8">
             {activeSection === "scholars" && (
-              <ScholarsJourneyWrapper
-                scholarsData={scholarsData}
-                cardsData={cardsData}
-              />
+              <ScholarsJourneyWrapper scholarsData={scholarsData} />
             )}
             {activeSection === "guides" && (
               <GuidesJourneyWrapper guidesData={guidesData} />

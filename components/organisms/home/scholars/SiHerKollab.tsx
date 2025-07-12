@@ -6,10 +6,9 @@ import { Course, ScholarsData } from "@/types/home";
 
 type Props = {
   data: ScholarsData;
-  cardsData: Course[];
   joinWaitlist?: boolean;
 };
-export function SiHerKollab({ data, cardsData, joinWaitlist }: Props) {
+export function SiHerKollab({ data, joinWaitlist }: Props) {
   return (
     <div id="si_u_scholars_kollab" className="mt-[5.7rem] h-full">
       <PartialContentCarousel
@@ -25,7 +24,7 @@ export function SiHerKollab({ data, cardsData, joinWaitlist }: Props) {
         itemsPerSlide={2}
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        items={cardsData}
+        items={data?.communities}
         renderItem={(item, key) => (
           <CollabCard
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

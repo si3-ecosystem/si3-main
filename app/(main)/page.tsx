@@ -62,7 +62,6 @@ export default async function HomePage() {
           scholarsData={scholarsData}
           guidesData={guidesData}
           partnersData={partnersData}
-          cardsData={cardsData}
         />
       </div>
       <section

@@ -10,7 +10,7 @@ export const Footer = ({ utils }: { utils: { mediakit: string } }) => {
       <div id="stayConnected" className="layout mx-auto w-full lg:flex">
         <FooterSignUp />
         <FooterNav mediakit={mediakit} />
-        <FollowUs />
+        <FollowUs utils={utils} />
       </div>
       <Copyright />
     </footer>

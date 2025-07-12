@@ -17,13 +17,11 @@ export function Web3UniversitySection({
   scholarsData,
   guidesData,
   partnersData,
-  cardsData,
 }: {
   data: OnboardSchema;
   scholarsData: ScholarsData;
   guidesData: GuidesData;
   partnersData: PartnersData;
-  cardsData: Course[];
 }) {
   const dispatch = useAppDispatch();
   const activeSection = useAppSelector(
@@ -118,7 +116,6 @@ export function Web3UniversitySection({
             scholarsData={scholarsData}
             guidesData={guidesData}
             partnersData={partnersData}
-            cardsData={cardsData}
           />
         </div>
       </div>

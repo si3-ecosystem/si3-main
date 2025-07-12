@@ -20,10 +20,8 @@ import { usePlausible } from "next-plausible";
 
 export function ScholarsJourneyWrapper({
   scholarsData,
-  cardsData,
 }: {
   scholarsData: ScholarsData;
-  cardsData: Course[];
 }) {
   const dispatch = useDispatch();
   const plausible = usePlausible();
@@ -102,11 +100,7 @@ export function ScholarsJourneyWrapper({
             strokeWidth={0.5}
             className="absolute top-5 right-5 z-10 cursor-pointer transition-transform duration-200 max-lg:size-[34px] lg:top-14 lg:right-14"
           />
-          <SiHerKollab
-            joinWaitlist={true}
-            data={scholarsData}
-            cardsData={cardsData}
-          />
+          <SiHerKollab joinWaitlist={true} data={scholarsData} />
         </div>
       ),
     },
