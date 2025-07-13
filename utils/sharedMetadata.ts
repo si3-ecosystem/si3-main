@@ -80,7 +80,7 @@ export async function processMetadata(
     keywords: keywords.join(", "),
     authors: [
       { name: "SI<3> Team" },
-      { name: "Asraful", url: "https://github.com/asraful" },
+      { name: "Asraful", url: "https://github.com/Asraful-code235" },
     ],
     creator: "SI<3> Ecosystem",
     publisher: "SI<3> Ecosystem",
@@ -92,10 +92,20 @@ export async function processMetadata(
           sizes: "32x32",
           type: "image/x-icon",
         },
-        { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-        { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+        {
+          url: faviconUrl || "/icons/icon-192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          url: faviconUrl || "/icons/icon-512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
       ],
-      apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+      apple: [
+        { url: faviconUrl || "/icons/apple-touch-icon.png", sizes: "180x180" },
+      ],
       shortcut: faviconUrl || "/favicon.ico",
     },
 
@@ -128,7 +138,7 @@ export async function processMetadata(
 
     twitter: {
       card: "summary_large_image",
-      site: "@si3_ecosystem", // Update with actual Twitter handle
+      site: "@si3_ecosystem",
       creator: "@si3_ecosystem",
       title,
       description,
@@ -180,29 +190,46 @@ export async function processMetadata(
   };
 }
 
-// Generate structured data for organization
-export function generateOrganizationSchema() {
+export async function generateOrganizationSchema() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.si3.space";
+  const settings = await getSeoData();
+
+  const seoLogoUrl = settings?.seoLogo
+    ? urlForImage(settings.seoLogo)
+    : "/icons/logo.webp";
+
+  const getImageUrl = (
+    imageSource: ReturnType<typeof urlForImage> | string | null,
+  ): string => {
+    if (!imageSource) return "";
+    return typeof imageSource === "string" ? imageSource : imageSource.src;
+  };
+
+  const title =
+    settings?.seoTitle ||
+    "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3";
+  const description =
+    settings?.overview ||
+    "Co-activating growth and financial inclusion opportunities for women and non-binary web3 leaders";
+
+  const twitterUrl = settings?.twitter || "http://x.com/si3_ecosystem";
+  const linkedInUrl =
+    settings?.linkedIn || "https://www.linkedin.com/company/si3ecosystem/";
 
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "SI<3> Ecosystem",
+    name: title,
     alternateName: "SI/HER",
     url: baseUrl,
-    logo: `${baseUrl}/icons/logo.webp`,
-    description:
-      "Co-activating growth and financial inclusion opportunities for women and non-binary web3 leaders",
+    logo: getImageUrl(seoLogoUrl) || `${baseUrl}/icons/logo.webp`,
+    description,
     foundingDate: "2021",
-    sameAs: [
-      "https://twitter.com/si3_ecosystem", // Update with actual social links
-      "https://linkedin.com/company/si3-ecosystem",
-      "https://github.com/si3-ecosystem",
-    ],
+    sameAs: [twitterUrl, linkedInUrl, "https://github.com/si3-ecosystem"],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Service",
-      email: "hello@si3.space", // Update with actual email
+      email: "hello@si3.space",
     },
     address: {
       "@type": "PostalAddress",
@@ -211,20 +238,26 @@ export function generateOrganizationSchema() {
   };
 }
 
-// Generate website schema
-export function generateWebsiteSchema() {
+export async function generateWebsiteSchema() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.si3.space";
+  const settings = await getSeoData();
+
+  const title =
+    settings?.seoTitle ||
+    "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3";
+  const description =
+    settings?.overview ||
+    "Empowering women and non-binary leaders in Web3 through education, partnerships, and financial inclusion";
 
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "SI<3> Ecosystem",
+    name: title,
     url: baseUrl,
-    description:
-      "Empowering women and non-binary leaders in Web3 through education, partnerships, and financial inclusion",
+    description,
     publisher: {
       "@type": "Organization",
-      name: "SI<3> Ecosystem",
+      name: title,
     },
     potentialAction: {
       "@type": "SearchAction",

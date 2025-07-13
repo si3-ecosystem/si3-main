@@ -37,6 +37,7 @@ export const FollowUs = ({ utils }: { utils: any }) => {
           <li key={social.name} className="list-none">
             <Link
               href={social.url}
+              target="_blank"
               className="hover:text-primary flex items-center gap-2 hover:underline"
               onClick={() =>
                 plausible("Social Link Clicked", {

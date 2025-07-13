@@ -13,7 +13,6 @@ import {
 import { OnboardSchema } from "@/types/onboard";
 import { AboutIntroData } from "@/types/home";
 
-// Lazy load heavy components for better performance
 const Web3UniversitySection = lazy(() =>
   import(
     "@/components/organisms/home/web3-university/Web3UniversitySection"
@@ -89,7 +88,6 @@ interface HomePageProps {
   readonly aboutPageData: AboutPageData;
 }
 
-// Loading component for better UX
 const SectionLoader = memo(() => (
   <div className="flex h-32 items-center justify-center">
     <div className="border-t-primary h-8 w-8 animate-spin rounded-full border-4 border-gray-300"></div>
@@ -97,7 +95,6 @@ const SectionLoader = memo(() => (
 ));
 SectionLoader.displayName = "SectionLoader";
 
-// Memoized HomePage component for better performance
 export const HomePage = memo<HomePageProps>(function HomePage({
   HomePageData,
   scholarsData,
@@ -107,7 +104,6 @@ export const HomePage = memo<HomePageProps>(function HomePage({
   onboardData,
   aboutPageData,
 }) {
-  // Memoized computed values to prevent unnecessary recalculations
   const topRowTerms = React.useMemo(
     () => aboutPageData.educationPartners.map((partner) => partner.name),
     [aboutPageData.educationPartners],
@@ -131,12 +127,10 @@ export const HomePage = memo<HomePageProps>(function HomePage({
 
   const pageContent = (
     <>
-      {/* Header Section - Always visible */}
       <ErrorBoundary fallback={<div className="h-20 bg-gray-100" />}>
         <HeaderContainer HomePageData={HomePageData} />
       </ErrorBoundary>
 
-      {/* Web3 University Section */}
       <ErrorBoundary fallback={<SectionLoader />}>
         <div id="si-u" className="@container w-full max-lg:bg-white">
           <Suspense fallback={<SectionLoader />}>
@@ -150,7 +144,6 @@ export const HomePage = memo<HomePageProps>(function HomePage({
         </div>
       </ErrorBoundary>
 
-      {/* Impact Section with gradient background */}
       <ErrorBoundary fallback={<SectionLoader />}>
         <section
           id="impact"
@@ -185,7 +178,6 @@ export const HomePage = memo<HomePageProps>(function HomePage({
         </section>
       </ErrorBoundary>
 
-      {/* Creating The New Economy Section */}
       <ErrorBoundary fallback={<SectionLoader />}>
         <Suspense fallback={<SectionLoader />}>
           <CreatingTheNewEconomy
@@ -198,5 +190,5 @@ export const HomePage = memo<HomePageProps>(function HomePage({
     </>
   );
 
-  return <InitialLoader>{pageContent}</InitialLoader>;
+  return <>{pageContent}</>;
 });

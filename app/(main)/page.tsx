@@ -14,33 +14,8 @@ import { processMetadata } from "@/utils/sharedMetadata";
 import { FAQStructuredData } from "@/components/atoms/StructuredData";
 import { WebVitals, PageLoadTracker } from "@/components/atoms/WebVitals";
 
-// Generate metadata for the home page
 export async function generateMetadata(): Promise<Metadata> {
-  return await processMetadata({
-    title: "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3",
-    description:
-      "Co-activating growth and financial inclusion opportunities for women and non-binary web3 leaders through personal brand development, public speaking, partnerships, and DeFi.",
-    keywords: [
-      "si3",
-      "si/her",
-      "web3",
-      "blockchain",
-      "cryptocurrency",
-      "women in tech",
-      "diversity",
-      "inclusion",
-      "defi",
-      "personal branding",
-      "leadership",
-      "financial inclusion",
-      "web3 education",
-      "blockchain education",
-      "women empowerment",
-      "non-binary",
-      "tech diversity",
-      "crypto education",
-    ],
-  });
+  return await processMetadata();
 }
 
 export default async function Home() {
@@ -63,7 +38,6 @@ export default async function Home() {
       getAboutPageData(),
     ]);
 
-    // Safely process placeholder image for ticker gif
     if (aboutPageData?.tickerGif?.placeholderImage) {
       try {
         const processedImage = urlForImage(
@@ -74,12 +48,10 @@ export default async function Home() {
         }
       } catch (error) {
         console.warn("Failed to process ticker gif placeholder image:", error);
-        // Remove the problematic image reference
         delete aboutPageData.tickerGif.placeholderImage;
       }
     }
 
-    // Generate FAQ structured data if available
     const faqStructuredData =
       HomePageData?.faqs?.length > 0 ? (
         <FAQStructuredData
@@ -92,14 +64,11 @@ export default async function Home() {
 
     return (
       <>
-        {/* Performance monitoring */}
         <WebVitals />
         <PageLoadTracker pageName="Home" />
 
-        {/* Structured data for SEO */}
         {faqStructuredData}
 
-        {/* Main content */}
         <HomePage
           HomePageData={HomePageData}
           scholarsData={scholarsData}
@@ -114,7 +83,6 @@ export default async function Home() {
   } catch (error) {
     console.error("Error loading home page data:", error);
 
-    // Return a fallback error page or redirect
     throw new Error("Failed to load page data. Please try again later.");
   }
 }

@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
-} from "@/components/atoms/animate-dialog";
+} from "@/components/atoms/dialog";
 import {
   Form,
   FormControl,

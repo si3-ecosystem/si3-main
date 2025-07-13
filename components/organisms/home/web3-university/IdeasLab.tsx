@@ -41,7 +41,7 @@ export function IdeasLab({
 
   return (
     <div>
-      <div className="@container h-full">
+      <div className="@container relative h-full">
         <div className="flex flex-col gap-4 sm:gap-10 @3xl:flex-row @3xl:gap-[60px]">
           <div className="relative z-20 flex h-full w-full flex-1 flex-col justify-between gap-5">
             <div className="">
@@ -61,16 +61,22 @@ export function IdeasLab({
           </div>
         </div>
 
-        <div>
+        <div className="">
           {data?.demoSessions && data.demoSessions.length > 0 && (
             <div className="mt-12 w-full">
               <div className="relative">
                 <div className="overflow-hidden" ref={emblaRef}>
-                  <div className="flex gap-4 max-sm:p-1">
+                  <div className="flex gap-5 sm:gap-4">
                     {data.demoSessions.map((session, index) => (
                       <div
                         key={session._key || index}
-                        className="relative flex-[0_0_calc(100%-1rem)] md:flex-[0_0_calc(50%-0.5rem)]"
+                        className={cn(
+                          "relative flex-[0_0_calc(100%-1rem)] md:flex-[0_0_calc(50%-0.5rem)]",
+                          index % 2 === 0
+                            ? "sm:ml-1 sm:pl-4"
+                            : "sm:mr-1 sm:pr-4",
+                          "max-sm:ml-2",
+                        )}
                       >
                         <DemoSessionCard session={session} className="h-full" />
                       </div>
