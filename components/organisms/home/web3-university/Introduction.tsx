@@ -97,11 +97,17 @@ export function Introduction({
             <div className="mt-12 w-full">
               <div className="relative">
                 <div className="overflow-hidden" ref={emblaRef}>
-                  <div className="flex gap-4 max-sm:p-1">
+                  <div className="flex gap-5 sm:gap-4">
                     {data.demoSessions.map((session, index) => (
                       <div
                         key={session._key || index}
-                        className="relative flex-[0_0_calc(100%-1rem)] md:flex-[0_0_calc(50%-0.5rem)]"
+                        className={cn(
+                          "relative flex-[0_0_calc(100%-1rem)] md:flex-[0_0_calc(50%-0.5rem)]",
+                          index % 2 === 0
+                            ? "sm:ml-1 sm:pl-4"
+                            : "sm:mr-1 sm:pr-4",
+                          "max-sm:ml-2",
+                        )}
                       >
                         <DemoSessionCard session={session} className="h-full" />
                       </div>

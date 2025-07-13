@@ -28,7 +28,6 @@ export function Web3UniversitySection({
     (state) => state.activeSection.activeSection,
   );
 
-  // Handle URL hash changes
   useEffect(() => {
     const hash = window.location.hash.substring(1);
     if (hash && ["scholars", "guides", "partners"].includes(hash)) {

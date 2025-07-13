@@ -54,7 +54,7 @@ export function CollabCard({ item }: { item: Community }) {
               </span>
             </div>
             <div className="flex flex-col gap-2 pb-3">
-              <h4 className="line-clamp-2 text-xl leading-normal font-semibold tracking-tight whitespace-pre-wrap text-black uppercase">
+              <h4 className="line-clamp-2 text-xl leading-normal font-semibold tracking-tight whitespace-pre-wrap text-white uppercase">
                 {item?.communityName}
               </h4>
               <ul className="flex flex-wrap gap-3.5">
@@ -63,10 +63,10 @@ export function CollabCard({ item }: { item: Community }) {
                     <Badge
                       key={index}
                       variant="outline"
-                      className="gap-1.5 border-none bg-none text-[#404040] outline-none"
+                      className="gap-1.5 border-none bg-none text-white outline-none"
                     >
                       <span
-                        className="size-1.5 rounded-full bg-[#404040]"
+                        className="size-1.5 rounded-full bg-white"
                         aria-hidden="true"
                       ></span>
                       {type}

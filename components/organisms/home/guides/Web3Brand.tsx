@@ -67,14 +67,14 @@ export function Web3Brand({ data }: Props) {
             ))}
           </ul>
         </div>
-        <div className="relative w-full @max-3xl:h-[589.217px] @3xl:h-[589.217px] @3xl:max-w-[445px]">
+        <div className="relative w-full @xl:h-auto @3xl:h-[589.217px] @3xl:max-w-[445px]">
           {videoUrl && videoUrl.endsWith(".gif") ? (
             <Image
               width={600}
               height={600}
               src={videoUrl}
               alt="Web3 Brand GIF"
-              className="mx-auto h-full w-full max-w-full object-contain object-center lg:h-[589px] xl:h-full"
+              className="mx-auto w-full max-w-full object-contain object-center lg:h-[589px] xl:h-full"
               loading="lazy"
               decoding="async"
             />
