@@ -32,7 +32,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/atoms/dialog";
+} from "@/components/atoms/animate-dialog";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
