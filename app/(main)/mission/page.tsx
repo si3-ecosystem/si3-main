@@ -5,18 +5,15 @@ import { MissionPage } from "@/components/organisms/mission/MissionPage";
 import { processMetadata } from "@/utils/sharedMetadata";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.si3.space";
+  const baseUrl = "https://www.si3.space";
   const settings = await getSeoData();
 
-  const title =
-    settings?.seoTitle ||
-    "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3";
   const description =
     settings?.overview ||
     "Co-activating growth and financial inclusion opportunities for women and non-binary web3 leaders";
 
   return await processMetadata({
-    title: "Our Mission" + title,
+    title: "Our Mission",
     description:
       description ||
       "Discover our mission to co-activate growth and financial inclusion opportunities for women and non-binary web3 leaders.",
