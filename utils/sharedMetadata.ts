@@ -33,11 +33,8 @@ export async function processMetadata(
     ? urlForImage(settings.favicon)?.src
     : "/favicon.ico";
 
-  // Enhanced title and description with better fallbacks
-  const title =
-    config.title ||
-    settings?.seoTitle ||
-    "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3";
+  const title = config.title || settings?.seoTitle;
+
   const description =
     config.description ||
     settings?.overview ||
@@ -73,7 +70,7 @@ export async function processMetadata(
     metadataBase: new URL(baseUrl),
     title: {
       default: title,
-      template: `%s | SI<3> Ecosystem`,
+      template: `%s`,
     },
     description,
 
