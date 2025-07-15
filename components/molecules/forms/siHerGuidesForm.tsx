@@ -32,19 +32,36 @@ import { SuccessDialog } from "../dialogs/SuccessDialog";
 import Image from "next/image";
 import { usePlausible } from "next-plausible";
 
-const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
-  daoInterests: z
-    .string()
-    .min(1, "Please share your interests in joining our DAO"),
-  interests: z.array(z.string()).min(1, "Select at least one interest"),
-  personalValues: z.string().min(1, "Personal values are required"),
-  digitalLink: z
-    .string()
-    .url("Please enter a valid URL")
-    .min(1, "Digital link is required"),
-});
+const formSchema = z
+  .object({
+    name: z.string().min(1, "Name is required"),
+    email: z
+      .string()
+      .email("Invalid email address")
+      .min(1, "Email is required"),
+    daoInterests: z
+      .string()
+      .min(1, "Please share your interests in joining our DAO"),
+    interests: z.array(z.string()).min(1, "Select at least one interest"),
+    customPronoun: z.string().optional(),
+    personalValues: z.string().min(1, "Personal values are required"),
+    digitalLink: z
+      .string()
+      .url("Please enter a valid URL")
+      .min(1, "Digital link is required"),
+  })
+  .refine(
+    (data) => {
+      if (data.interests.includes("Other")) {
+        return data.customPronoun && data.customPronoun.trim().length > 0;
+      }
+      return true;
+    },
+    {
+      message: "Please specify your pronouns when selecting 'Other'",
+      path: ["customPronoun"],
+    },
+  );
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -66,6 +83,7 @@ export function SiHerGuidesForm({
       email: "",
       daoInterests: "",
       interests: [],
+      customPronoun: "",
       personalValues: "",
       digitalLink: "",
     },
@@ -86,11 +104,7 @@ export function SiHerGuidesForm({
     };
   }, [open, plausible]);
 
-  const interestOptions = [
-    "She/Her/Hers",
-    "They/Them/Theirs",
-    "Other (please specify in personal values)",
-  ];
+  const interestOptions = ["She/Her/Hers", "They/Them/Theirs", "Other"];
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
@@ -107,6 +121,7 @@ export function SiHerGuidesForm({
               interests: Array.isArray(data.interests)
                 ? data.interests
                 : [data.interests],
+              customPronoun: data.customPronoun || "",
               personalValues: data.personalValues,
               digitalLink: data.digitalLink,
             },
@@ -291,6 +306,27 @@ export function SiHerGuidesForm({
                     </FormItem>
                   )}
                 />
+                {form.watch("interests").includes("Other") && (
+                  <FormField
+                    control={form.control}
+                    name="customPronoun"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-base font-medium">
+                          Please specify your pronouns{" "}
+                          <span className="text-red-500">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="e.g., Ze/Zir/Zirs, Xe/Xem/Xyr, etc."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
                 <FormField
                   control={form.control}
                   name="personalValues"

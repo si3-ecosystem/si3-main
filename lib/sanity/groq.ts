@@ -293,6 +293,9 @@ export const guidesQuery = groq`
     ...,
     video {
       "videoUrl": asset->url,
+      ..., 
+      "blurDataURL": asset->metadata.lqip,
+      "ImageColor": asset->metadata.palette.dominant.background,
     }
   },
   members_title,

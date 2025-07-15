@@ -73,16 +73,18 @@ export function Web3Brand({ data }: Props) {
               width={600}
               height={600}
               src={videoUrl}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt="Web3 Brand GIF"
               className="mx-auto w-full max-w-full object-contain object-center lg:h-[589px] xl:h-full"
-              loading="lazy"
-              decoding="async"
+              priority
+              unoptimized
             />
           ) : (
             <video
               src={videoUrl || "/videos/SiUScholars.mp4"}
               playsInline
               controls
+              preload="metadata"
               className="mx-auto h-full max-h-[589px] w-full max-w-[275px] object-cover object-center xl:h-full"
             />
           )}

@@ -190,5 +190,5 @@ export const HomePage = memo<HomePageProps>(function HomePage({
     </>
   );
 
-  return <>{pageContent}</>;
+  return <InitialLoader>{pageContent}</InitialLoader>;
 });

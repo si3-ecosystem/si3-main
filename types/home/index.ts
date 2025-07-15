@@ -85,6 +85,8 @@ export interface Web3Brand {
   }[];
   video?: {
     videoUrl?: string;
+    blurDataURL?: string;
+    ImageColor?: string;
   };
 }
 
