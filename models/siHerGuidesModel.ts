@@ -6,6 +6,7 @@ export interface ISiHerGuides extends Document {
   email: string;
   companyAffiliation: string;
   interests: string[];
+  customPronoun?: string;
   personalValues?: string;
   digitalLink: "yes" | "no";
   createdAt: Date;
@@ -33,6 +34,11 @@ const SiHerGuidesSchema: Schema = new Schema(
       type: [String],
       trim: true,
       required: true,
+    },
+    customPronoun: {
+      type: String,
+      trim: true,
+      default: "",
     },
     personalValues: {
       type: String,
