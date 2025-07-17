@@ -295,9 +295,27 @@ export function SiHerGuidesForm({
                                       );
                                 }}
                               />
-                              <label className="text-base" htmlFor={option}>
-                                {option}
-                              </label>
+                              <div className="flex flex-1 items-center">
+                                <label className="text-base" htmlFor={option}>
+                                  {option}
+                                </label>
+                                {option === "Other" &&
+                                  form.watch("interests").includes("Other") && (
+                                    <FormField
+                                      control={form.control}
+                                      name="customPronoun"
+                                      render={({ field: customField }) => (
+                                        <FormControl>
+                                          <input
+                                            placeholder="specify your pronouns"
+                                            className="ml-4 flex-1 !rounded-none border-t-0 border-r-0 border-b border-l-0 border-gray-300 bg-transparent px-2 py-1 pb-1 text-base outline-none focus:border-black focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                            {...customField}
+                                          />
+                                        </FormControl>
+                                      )}
+                                    />
+                                  )}
+                              </div>
                             </div>
                           </FormControl>
                         ))}
@@ -306,27 +324,6 @@ export function SiHerGuidesForm({
                     </FormItem>
                   )}
                 />
-                {form.watch("interests").includes("Other") && (
-                  <FormField
-                    control={form.control}
-                    name="customPronoun"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base font-medium">
-                          Please specify your pronouns{" "}
-                          <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e.g., Ze/Zir/Zirs, Xe/Xem/Xyr, etc."
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                )}
                 <FormField
                   control={form.control}
                   name="personalValues"

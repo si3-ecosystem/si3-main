@@ -15,7 +15,7 @@ interface SEOConfig {
 export async function processMetadata(
   config: SEOConfig = {},
 ): Promise<Metadata> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.si3.space";
+  const baseUrl = "https://www.si3.space";
   const settings = await getSeoData();
 
   const seoLogoUrl = settings?.seoLogo
@@ -188,7 +188,7 @@ export async function processMetadata(
 }
 
 export async function generateOrganizationSchema() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.si3.space";
+  const baseUrl = "https://www.si3.space";
   const settings = await getSeoData();
 
   const seoLogoUrl = settings?.seoLogo
@@ -236,7 +236,7 @@ export async function generateOrganizationSchema() {
 }
 
 export async function generateWebsiteSchema() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.si3.space";
+  const baseUrl = "https://www.si3.space";
   const settings = await getSeoData();
 
   const title =
