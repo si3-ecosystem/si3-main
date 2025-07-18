@@ -5,8 +5,8 @@ function PlausibleWrapper({ children }: { children: React.ReactNode }) {
     <PlausibleProvider
       taggedEvents={true}
       trackOutboundLinks={true}
-      enabled={true}
-      trackLocalhost={true}
+      // enabled={true}
+      // trackLocalhost={true}
       domain="si3.space"
     >
       {children}
