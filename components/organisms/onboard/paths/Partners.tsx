@@ -54,7 +54,7 @@ export function Partners({ data, showSvg = false, isPartner = false }: Props) {
               </Text>
             </div>
           </div>
-          <div className="mb-8 flex max-w-[235px] flex-col gap-2">
+          <div className="mb-8 flex max-w-[435px] flex-col gap-2">
             <Text
               variant="xl"
               as={"p"}

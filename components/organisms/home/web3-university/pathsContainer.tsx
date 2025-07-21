@@ -25,16 +25,16 @@ export function PathsContainer({
   return (
     <section id="si-u" className="relative w-full">
       <div className="relative flex w-full flex-col gap-10 max-lg:-mt-8">
-        <div className="relative flex w-full flex-col md:flex-row md:items-start">
+        <div className="relative flex w-full flex-col lg:flex-row lg:items-start lg:gap-8">
           {/* Sticky Sidebar */}
-          <div className="relative z-10 w-full md:!sticky md:!top-[500px] md:h-[calc(100vh-120px)] md:max-w-[289px]">
+          <div className="relative z-10 w-full max-lg:hidden md:!sticky md:!top-[500px] md:h-[calc(100vh-120px)] md:max-w-[289px]">
             <div className="h-full overflow-y-auto">
               <Paths />
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="w-full flex-1 md:pl-8">
+          <div className="w-full flex-1 transition-all duration-500 ease-in-out lg:pl-8">
             {activeSection === "scholars" && (
               <ScholarsJourneyWrapper scholarsData={scholarsData} />
             )}

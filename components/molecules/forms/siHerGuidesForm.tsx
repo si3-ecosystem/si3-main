@@ -305,10 +305,10 @@ export function SiHerGuidesForm({
                                       control={form.control}
                                       name="customPronoun"
                                       render={({ field: customField }) => (
-                                        <FormControl>
+                                        <FormControl className="w-fit !max-w-[230px]">
                                           <input
                                             placeholder="specify your pronouns"
-                                            className="ml-4 flex-1 !rounded-none border-t-0 border-r-0 border-b border-l-0 border-gray-300 bg-transparent px-2 py-1 pb-1 text-base outline-none focus:border-black focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                            className="ml-4 !max-w-[230px] flex-1 !rounded-none border-t-0 border-r-0 border-b border-l-0 border-gray-300 bg-transparent px-2 py-1 pb-1 text-base outline-none focus:border-black focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                                             {...customField}
                                           />
                                         </FormControl>
