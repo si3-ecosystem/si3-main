@@ -46,18 +46,20 @@ export function Paths() {
       </h2>
       <div className="flex flex-col gap-7 transition-all duration-300 ease-in-out">
         {paths.map((path) => (
-          <button
-            key={path.slug}
-            onClick={() => handleSetActiveSection(path.slug)}
-            className={cn(
-              "font-clesmont w-full cursor-pointer rounded-lg px-5 py-2.5 text-center text-2xl",
-              activeSection === path.slug
-                ? "bg-[#9F44D34F]"
-                : "border border-[#9F44D3] bg-[#9F44D30D]",
-            )}
-          >
-            {path.title}
-          </button>
+          <div key={path.slug} className="relative overflow-hidden rounded-lg">
+            <button
+              onClick={() => handleSetActiveSection(path.slug)}
+              className={cn(
+                "group font-clesmont relative w-full cursor-pointer rounded-lg px-5 py-2.5 text-center text-2xl transition-all duration-300",
+                activeSection === path.slug
+                  ? "bg-[#9F44D34F]"
+                  : "border border-[#9F44D3] bg-[#9F44D30D]",
+              )}
+            >
+              <span className="relative z-10">{path.title}</span>
+              <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-[#9F44D3] to-[#D939CD] transition-transform duration-500 ease-out group-hover:translate-x-0 group-active:translate-x-0"></div>
+            </button>
+          </div>
         ))}
       </div>
     </div>

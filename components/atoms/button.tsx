@@ -64,8 +64,8 @@ function Button({
       {...props}
     >
       <div className="">
-        <span className="relative z-10">{children}</span>
-        <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-[#9F44D3] to-[#D939CD] transition-transform duration-500 ease-out group-hover:translate-x-0 group-active:translate-x-0"></div>
+        <span className="relative z-30">{children}</span>
+        <div className="absolute inset-0 z-20 translate-x-[-100%] bg-gradient-to-r from-[#9F44D3] to-[#D939CD] transition-transform duration-500 ease-out group-hover:translate-x-0 group-active:translate-x-0"></div>
       </div>
     </Comp>
   );
