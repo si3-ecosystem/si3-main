@@ -75,10 +75,7 @@ export async function processMetadata(
     description,
 
     keywords: keywords.join(", "),
-    authors: [
-      { name: "SI<3> Team" },
-      { name: "Asraful", url: "https://github.com/Asraful-code235" },
-    ],
+    authors: [{ name: "SI<3> Team" }],
     creator: "SI<3> Ecosystem",
     publisher: "SI<3> Ecosystem",
 
