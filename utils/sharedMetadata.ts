@@ -75,7 +75,6 @@ export async function processMetadata(
     description,
 
     keywords: keywords.join(", "),
-    authors: [{ name: "SI<3> Team" }],
     creator: "SI<3> Ecosystem",
     publisher: "SI<3> Ecosystem",
 
