@@ -8,6 +8,7 @@ import {
 import {
   getAll,
   seoData,
+  seoSettingsData,
   scholarsQuery,
   guidesQuery,
   partnersQuery,
@@ -77,6 +78,13 @@ export const fetcher = async <T = unknown>([query, params]: [
 export async function getSeoData() {
   if (client) {
     return (await client.fetch(seoData)) || {};
+  }
+  return {};
+}
+
+export async function getSeoSettingsData() {
+  if (client) {
+    return (await client.fetch(seoSettingsData)) || {};
   }
   return {};
 }

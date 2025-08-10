@@ -4,6 +4,8 @@ export const getAll = groq`*[]`;
 
 export const seoData = groq`*[_type == 'utils'][0]`;
 
+export const seoSettingsData = groq`*[_type == 'seoSettings'][0]`;
+
 export const homepageQuery = groq`
   *[_type == "homepageSchema"][0] {
     _id,

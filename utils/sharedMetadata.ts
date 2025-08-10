@@ -1,4 +1,4 @@
-import { getSeoData } from "@/lib/sanity/client";
+import { getSeoData, getSeoSettingsData } from "@/lib/sanity/client";
 import { urlForImage } from "@/lib/sanity/image";
 import type { Metadata } from "next";
 
@@ -16,7 +16,10 @@ export async function processMetadata(
   config: SEOConfig = {},
 ): Promise<Metadata> {
   const baseUrl = "https://www.si3.space";
-  const settings = await getSeoData();
+  // Try to get SEO settings first, fallback to utils
+  const seoSettings = await getSeoSettingsData();
+  const utilsSettings = await getSeoData();
+  const settings = { ...utilsSettings, ...seoSettings };
 
   const seoLogoUrl = settings?.seoLogo
     ? urlForImage(settings.seoLogo)
@@ -35,10 +38,7 @@ export async function processMetadata(
 
   const title = config.title || settings?.seoTitle;
 
-  const description =
-    config.description ||
-    settings?.overview ||
-    "Co-activating growth and financial inclusion opportunities for women and non-binary web3 leaders through personal brand development, public speaking, partnerships, and DeFi.";
+  const description = config.description || settings?.overview;
 
   // Enhanced keywords with web3 and diversity focus
   const keywords = config.keywords || [
@@ -185,7 +185,7 @@ export async function processMetadata(
 
 export async function generateOrganizationSchema() {
   const baseUrl = "https://www.si3.space";
-  const settings = await getSeoData();
+  const settings = await getSeoSettingsData();
 
   const seoLogoUrl = settings?.seoLogo
     ? urlForImage(settings.seoLogo)
@@ -198,64 +198,118 @@ export async function generateOrganizationSchema() {
     return typeof imageSource === "string" ? imageSource : imageSource.src;
   };
 
-  const title =
-    settings?.seoTitle ||
-    "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3";
+  // Use new structured fields with fallbacks to legacy fields and defaults
+  const organizationName =
+    settings?.organizationName || settings?.seoTitle || "";
+
+  const alternateName = settings?.alternateName || "";
+
   const description =
-    settings?.overview ||
-    "Co-activating growth and financial inclusion opportunities for women and non-binary web3 leaders";
+    settings?.organizationDescription || settings?.overview || "";
 
-  const twitterUrl = settings?.twitter || "http://x.com/si3_ecosystem";
-  const linkedInUrl =
-    settings?.linkedIn || "https://www.linkedin.com/company/si3ecosystem/";
+  const foundingDate = settings?.foundingDate || "";
+  const contactEmail = settings?.contactEmail || "kara@si3.space";
+  const addressCountry = settings?.addressCountry || "";
 
-  return {
+  // Build social media links array
+  const socialLinks: string[] = [];
+
+  if (settings?.twitter) {
+    socialLinks.push(settings.twitter);
+  }
+
+  if (settings?.linkedIn) {
+    socialLinks.push(settings.linkedIn);
+  }
+
+  if (settings?.github) {
+    socialLinks.push(settings.github);
+  }
+
+  // Add additional social links if they exist
+  if (
+    settings?.additionalSocialLinks &&
+    Array.isArray(settings.additionalSocialLinks)
+  ) {
+    settings.additionalSocialLinks.forEach((link: any) => {
+      if (link.url) {
+        socialLinks.push(link.url);
+      }
+    });
+  }
+
+  // Build the schema object conditionally
+  const schema: any = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: title,
-    alternateName: "SI/HER",
     url: baseUrl,
     logo: getImageUrl(seoLogoUrl) || `${baseUrl}/icons/logo.webp`,
-    description,
-    foundingDate: "2021",
-    sameAs: [twitterUrl, linkedInUrl, "https://github.com/si3-ecosystem"],
-    contactPoint: {
+  };
+
+  // Only add fields if they have values
+  if (organizationName) schema.name = organizationName;
+  if (alternateName) schema.alternateName = alternateName;
+  if (description) schema.description = description;
+  if (foundingDate) schema.foundingDate = foundingDate;
+  if (socialLinks.length > 0) schema.sameAs = socialLinks;
+
+  // Add contact point if email is available
+  if (contactEmail) {
+    schema.contactPoint = {
       "@type": "ContactPoint",
       contactType: "Customer Service",
-      email: "hello@si3.space",
-    },
-    address: {
+      email: contactEmail,
+    };
+  }
+
+  // Add address if country is available
+  if (addressCountry) {
+    schema.address = {
       "@type": "PostalAddress",
-      addressCountry: "US",
-    },
-  };
+      addressCountry,
+    };
+  }
+
+  return schema;
 }
 
 export async function generateWebsiteSchema() {
   const baseUrl = "https://www.si3.space";
-  const settings = await getSeoData();
+  const settings = await getSeoSettingsData();
 
-  const title =
-    settings?.seoTitle ||
-    "SI<3> Ecosystem - Empowering Women & Non-Binary Leaders in Web3";
-  const description =
-    settings?.overview ||
-    "Empowering women and non-binary leaders in Web3 through education, partnerships, and financial inclusion";
+  // Use new structured fields from seoSettings
+  const websiteName = settings?.websiteName || settings?.seoTitle;
+  const description = settings?.websiteDescription || settings?.overview;
+  const organizationName =
+    settings?.organizationName || settings?.seoTitle || websiteName;
 
-  return {
+  // Build the base schema
+  const schema: any = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: title,
     url: baseUrl,
-    description,
-    publisher: {
-      "@type": "Organization",
-      name: title,
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${baseUrl}/search?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
+
+  // Only add fields if they have values
+  if (websiteName) schema.name = websiteName;
+  if (description) schema.description = description;
+
+  // Add publisher if organization name is available
+  if (organizationName) {
+    schema.publisher = {
+      "@type": "Organization",
+      name: organizationName,
+    };
+  }
+
+  // Add search action if enabled and search URL is provided
+  if (settings?.searchEnabled && settings?.searchUrl) {
+    schema.potentialAction = {
+      "@type": "SearchAction",
+      target: `${baseUrl}${settings.searchUrl}`,
+      "query-input": "required name=search_term_string",
+    };
+  }
+
+  return schema;
 }
