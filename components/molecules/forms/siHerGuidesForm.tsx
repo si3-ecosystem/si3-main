@@ -45,6 +45,7 @@ const formSchema = z
     interests: z.array(z.string()).min(1, "Select at least one interest"),
     customPronoun: z.string().optional(),
     personalValues: z.string().min(1, "Personal values are required"),
+    howDidYouHear: z.string().trim(),
     socialHandles: z
       .object({
         linkedin: z.string().optional(),
@@ -54,7 +55,6 @@ const formSchema = z
       .refine((data) => data.linkedin || data.x || data.farcaster, {
         message: "Please provide at least one social media handle",
       }),
-    howDidYouHear: z.string().trim(),
   })
   .refine(
     (data) => {
@@ -286,7 +286,7 @@ export function SiHerGuidesForm({
                   control={form.control}
                   name="interests"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col gap-8">
+                    <FormItem className="flex flex-col gap-3">
                       <FormLabel htmlFor="" className="text-base font-medium">
                         How do you identify? (select all that apply){" "}
                         <span className="text-red-500">*</span>
@@ -368,7 +368,6 @@ export function SiHerGuidesForm({
                       <FormControl>
                         <Input
                           placeholder="Please tell us how you discovered our DAO"
-                          className="h-32 resize-none p-4 lg:h-40"
                           {...field}
                         />
                       </FormControl>

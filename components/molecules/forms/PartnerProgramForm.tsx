@@ -65,11 +65,6 @@ const formSchema = z.object({
     .string()
     .max(1000, "Details must be less than 1000 characters")
     .optional(),
-  howDidYouHear: z
-    .string()
-    .min(1, "Please tell us how you heard about our DAO")
-    .max(500, "Response must be less than 500 characters")
-    .trim(),
   newsletter: z.enum(["yes", "no"], {
     required_error:
       "Please select whether you'd like to receive our newsletter",
@@ -100,7 +95,6 @@ export const PartnerProgramForm = memo<PartnerProgramFormProps>(
         companyName: "",
         interests: [],
         details: "",
-        howDidYouHear: "",
         newsletter: "yes",
       },
     });
@@ -143,7 +137,6 @@ export const PartnerProgramForm = memo<PartnerProgramFormProps>(
                   ? data.interests.join(", ")
                   : data.interests,
                 details: data.details || "",
-                howDidYouHear: data.howDidYouHear,
                 newsletter: !!data.newsletter,
               },
             }),
@@ -329,26 +322,7 @@ export const PartnerProgramForm = memo<PartnerProgramFormProps>(
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="howDidYouHear"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-base font-medium">
-                          How did you hear about our DAO?{" "}
-                          <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Please tell us how you discovered our DAO"
-                            className="h-32 resize-none p-4 lg:h-40"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+
                   <FormField
                     control={form.control}
                     name="newsletter"
