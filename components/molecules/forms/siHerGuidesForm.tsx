@@ -45,10 +45,16 @@ const formSchema = z
     interests: z.array(z.string()).min(1, "Select at least one interest"),
     customPronoun: z.string().optional(),
     personalValues: z.string().min(1, "Personal values are required"),
-    digitalLink: z
-      .string()
-      .url("Please enter a valid URL")
-      .min(1, "Digital link is required"),
+    socialHandles: z
+      .object({
+        linkedin: z.string().optional(),
+        x: z.string().optional(),
+        farcaster: z.string().optional(),
+      })
+      .refine((data) => data.linkedin || data.x || data.farcaster, {
+        message: "Please provide at least one social media handle",
+      }),
+    howDidYouHear: z.string().trim(),
   })
   .refine(
     (data) => {
@@ -85,7 +91,12 @@ export function SiHerGuidesForm({
       interests: [],
       customPronoun: "",
       personalValues: "",
-      digitalLink: "",
+      socialHandles: {
+        linkedin: "",
+        x: "",
+        farcaster: "",
+      },
+      howDidYouHear: "",
     },
   });
 
@@ -123,7 +134,8 @@ export function SiHerGuidesForm({
                 : [data.interests],
               customPronoun: data.customPronoun || "",
               personalValues: data.personalValues,
-              digitalLink: data.digitalLink,
+              socialHandles: data.socialHandles,
+              howDidYouHear: data.howDidYouHear,
             },
           }),
         },
@@ -346,21 +358,94 @@ export function SiHerGuidesForm({
                 />
                 <FormField
                   control={form.control}
-                  name="digitalLink"
+                  name="howDidYouHear"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-base font-medium">
-                        Please share a digital link that identifies you
-                        (LinkedIn, X, website, etc.)
+                        How did you hear about our DAO?{" "}
                         <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="https://" type="url" {...field} />
+                        <Input
+                          placeholder="Please tell us how you discovered our DAO"
+                          className="h-32 resize-none p-4 lg:h-40"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="socialHandles"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-base font-medium">
+                        Please share your handle of one or more of the
+                        following: <span className="text-red-500">*</span>
+                      </FormLabel>
+                      <div className="space-y-4">
+                        <div className="flex items-center space-x-2">
+                          <span className="min-w-[80px] text-base font-medium">
+                            LinkedIn:
+                          </span>
+                          <span className="text-base">@</span>
+                          <FormControl>
+                            <Input
+                              placeholder="your-linkedin-handle"
+                              value={field.value.linkedin || ""}
+                              onChange={(e) =>
+                                field.onChange({
+                                  ...field.value,
+                                  linkedin: e.target.value,
+                                })
+                              }
+                            />
+                          </FormControl>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="min-w-[80px] text-base font-medium">
+                            X:
+                          </span>
+                          <span className="text-base">@</span>
+                          <FormControl>
+                            <Input
+                              placeholder="your-x-handle"
+                              value={field.value.x || ""}
+                              onChange={(e) =>
+                                field.onChange({
+                                  ...field.value,
+                                  x: e.target.value,
+                                })
+                              }
+                            />
+                          </FormControl>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="min-w-[80px] text-base font-medium">
+                            Farcaster:
+                          </span>
+                          <span className="text-base">@</span>
+                          <FormControl>
+                            <Input
+                              placeholder="your-farcaster-handle"
+                              value={field.value.farcaster || ""}
+                              onChange={(e) =>
+                                field.onChange({
+                                  ...field.value,
+                                  farcaster: e.target.value,
+                                })
+                              }
+                            />
+                          </FormControl>
+                        </div>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <Button
                   type="submit"
                   disabled={mutation.isPending}
