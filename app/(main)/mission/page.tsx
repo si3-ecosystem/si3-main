@@ -1,5 +1,3 @@
-"use client";
-
 import { getAboutPageData, getSeoSettingsData } from "@/lib/sanity/client";
 import { AboutQuery } from "@/types/about";
 import { Metadata } from "next";
@@ -8,6 +6,7 @@ import { processMetadata } from "@/utils/sharedMetadata";
 import { useAccount } from "wagmi";
 import { useFormo } from "@formo/analytics";
 import { useEffect } from "react";
+import { AnalyticsWrapper } from "@/components/AnalyticsWrapper";
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = "https://www.si3.space";
@@ -34,15 +33,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Mission() {
-  const { address } = useAccount();
-  const analytics = useFormo();
-
-  useEffect(() => {
-    if (address && analytics) {
-      analytics.identify({ address });
-    }
-  }, [address, analytics]);
-
   const data: AboutQuery = await getAboutPageData();
-  return <MissionPage data={data} />;
+  return (
+    <>
+      <AnalyticsWrapper />
+      <MissionPage data={data} />
+    </>
+  );
 }

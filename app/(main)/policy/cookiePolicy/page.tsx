@@ -1,5 +1,4 @@
-"use client";
-
+import { AnalyticsWrapper } from "@/components/AnalyticsWrapper";
 import { PolicyPage } from "@/components/organisms/policy/PolicyPage";
 import { useFormo } from "@formo/analytics";
 import { Metadata } from "next";
@@ -33,16 +32,12 @@ export const metadata: Metadata = {
 };
 
 const CookiePolicyPage = () => {
-  const { address } = useAccount();
-  const analytics = useFormo();
-
-  useEffect(() => {
-    if (address && analytics) {
-      analytics.identify({ address });
-    }
-  }, [address, analytics]);
-
-  return <PolicyPage initialPolicyType="cookiePolicy" />;
+  return (
+    <>
+      <AnalyticsWrapper />
+      <PolicyPage initialPolicyType="cookiePolicy" />
+    </>
+  );
 };
 
 export default CookiePolicyPage;

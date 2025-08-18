@@ -1,5 +1,4 @@
-"use client";
-
+import { AnalyticsWrapper } from "@/components/AnalyticsWrapper";
 import { PolicyPage } from "@/components/organisms/policy/PolicyPage";
 import { useFormo } from "@formo/analytics";
 
@@ -34,16 +33,12 @@ export const metadata: Metadata = {
 };
 
 const MembersPolicyPage = () => {
-  const { address } = useAccount();
-  const analytics = useFormo();
-
-  useEffect(() => {
-    if (address && analytics) {
-      analytics.identify({ address });
-    }
-  }, [address, analytics]);
-
-  return <PolicyPage initialPolicyType="membersPolicy" />;
+  return (
+    <>
+      <AnalyticsWrapper />
+      <PolicyPage initialPolicyType="membersPolicy" />;
+    </>
+  );
 };
 
 export default MembersPolicyPage;
