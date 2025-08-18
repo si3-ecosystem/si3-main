@@ -1,5 +1,10 @@
+"use client";
+
 import { PolicyPage } from "@/components/organisms/policy/PolicyPage";
+import { useFormo } from "@formo/analytics";
 import { Metadata } from "next";
+import { useEffect } from "react";
+import { useAccount } from "wagmi";
 
 export const metadata: Metadata = {
   title: "Cookie Policy | SI<3> Ecosystem",
@@ -28,6 +33,15 @@ export const metadata: Metadata = {
 };
 
 const CookiePolicyPage = () => {
+  const { address } = useAccount();
+  const analytics = useFormo();
+
+  useEffect(() => {
+    if (address && analytics) {
+      analytics.identify({ address });
+    }
+  }, [address, analytics]);
+
   return <PolicyPage initialPolicyType="cookiePolicy" />;
 };
 

@@ -8,6 +8,7 @@ import WalletProvider from "@/providers/WagmiProvider";
 import PlausibleWrapper from "@/providers/PlausibleWrapper";
 import { TanstackQueryClientProvider } from "@/providers/TanstackQueryClientProvider";
 import { StructuredData } from "@/components/atoms/StructuredData";
+import AnalyticsProvider from "@/components/AnalyticsProvider";
 
 import {
   processMetadata,
@@ -52,22 +53,26 @@ export default async function RootLayout({
         <PlausibleWrapper>
           <WalletProvider>
             <ReduxProvider>
-              <TanstackQueryClientProvider>
-                <Suspense fallback={<div className="min-h-screen bg-white" />}>
-                  {children}
-                </Suspense>
+              <AnalyticsProvider writeKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnaW4iOiJodHRwczovL3d3dy5zaTMuc3BhY2UvIiwicHJvamVjdF9pZCI6IjZFZ2o0SUFfTmhLSlNoU3dzdTBTViIsImlhdCI6MTc1NTUzNDY0M30.bCvmlPa31kSvV43NY5xVHILSMYhPbgU3e-aNiQicNbU">
+                <TanstackQueryClientProvider>
+                  <Suspense
+                    fallback={<div className="min-h-screen bg-white" />}
+                  >
+                    {children}
+                  </Suspense>
 
-                <Toaster
-                  position="top-right"
-                  toastOptions={{
-                    duration: 4000,
-                    style: {
-                      background: "#363636",
-                      color: "#fff",
-                    },
-                  }}
-                />
-              </TanstackQueryClientProvider>
+                  <Toaster
+                    position="top-right"
+                    toastOptions={{
+                      duration: 4000,
+                      style: {
+                        background: "#363636",
+                        color: "#fff",
+                      },
+                    }}
+                  />
+                </TanstackQueryClientProvider>
+              </AnalyticsProvider>
             </ReduxProvider>
           </WalletProvider>
         </PlausibleWrapper>

@@ -1,3 +1,5 @@
+"use client";
+
 import { Metadata } from "next";
 import {
   getAboutIntroData,
@@ -13,6 +15,9 @@ import { urlForImage } from "@/lib/sanity/image";
 import { processMetadata } from "@/utils/sharedMetadata";
 import { FAQStructuredData } from "@/components/atoms/StructuredData";
 import { WebVitals, PageLoadTracker } from "@/components/atoms/WebVitals";
+import { useAccount } from "wagmi";
+import { useEffect } from "react";
+import { useFormo } from "@formo/analytics";
 
 export async function generateMetadata(): Promise<Metadata> {
   return await processMetadata();
@@ -37,6 +42,15 @@ export default async function Home() {
       getOnboardPageData(),
       getAboutPageData(),
     ]);
+
+    const { address } = useAccount();
+    const analytics = useFormo();
+
+    useEffect(() => {
+      if (address && analytics) {
+        analytics.identify({ address });
+      }
+    }, [address, analytics]);
 
     if (aboutPageData?.tickerGif?.placeholderImage) {
       try {
