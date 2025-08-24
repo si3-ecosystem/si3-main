@@ -119,24 +119,27 @@ export function SiHerGuidesForm({
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await fetch(`http://localhost:8080/api/email/guides`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formData: {
-            name: data.name,
-            email: data.email,
-            daoInterests: data.daoInterests,
-            interests: Array.isArray(data.interests)
-              ? data.interests
-              : [data.interests],
-            customPronoun: data.customPronoun || "",
-            personalValues: data.personalValues,
-            socialHandles: data.socialHandles,
-            howDidYouHear: data.howDidYouHear,
-          },
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/email/guides`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            formData: {
+              name: data.name,
+              email: data.email,
+              daoInterests: data.daoInterests,
+              interests: Array.isArray(data.interests)
+                ? data.interests
+                : [data.interests],
+              customPronoun: data.customPronoun || "",
+              personalValues: data.personalValues,
+              socialHandles: data.socialHandles,
+              howDidYouHear: data.howDidYouHear,
+            },
+          }),
+        },
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
