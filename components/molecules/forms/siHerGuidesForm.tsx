@@ -368,7 +368,12 @@ export function SiHerGuidesForm({
                       <FormControl>
                         <Input
                           placeholder="Please tell us how you discovered our DAO"
-                          {...field}
+                          value={
+                            typeof field.value === "string" ? field.value : ""
+                          }
+                          onChange={field.onChange}
+                          onBlur={field.onBlur}
+                          name={field.name}
                         />
                       </FormControl>
                       <FormMessage />

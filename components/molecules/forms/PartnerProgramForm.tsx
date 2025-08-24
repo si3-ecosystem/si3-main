@@ -116,9 +116,9 @@ export const PartnerProgramForm = memo<PartnerProgramFormProps>(
     }, [open, plausible]);
 
     const interestOptions = [
-      "Well-Being in the Web3 Workplace Training ",
-      "Cybersecurity for Web3 Teams Training",
-      "Education & Community Growth Partnerships ",
+      "Grow3ge Growth & Partnerships Program  ",
+      "Grow3dge Education-Driven Growth Campaigns & Certifications ",
+      "Well-Being for Web3 Teams Training ",
     ];
 
     const mutation = useMutation({
