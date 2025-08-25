@@ -288,7 +288,7 @@ export function SiHerGuidesForm({
                   render={({ field }) => (
                     <FormItem className="flex flex-col gap-3">
                       <FormLabel htmlFor="" className="text-base font-medium">
-                        How do you identify? (select all that apply){" "}
+                        Which pronouns do you most identify?{" "}
                         <span className="text-red-500">*</span>
                       </FormLabel>
                       <ul className="flex flex-col gap-2.5">
