@@ -116,7 +116,7 @@ export const PartnerProgramForm = memo<PartnerProgramFormProps>(
     }, [open, plausible]);
 
     const interestOptions = [
-      "Grow3ge Growth & Partnerships Program  ",
+      "Grow3ge growth & partnerships program",
       "Grow3dge Education-Driven Growth Campaigns & Certifications ",
       "Well-Being for Web3 Teams Training ",
     ];
